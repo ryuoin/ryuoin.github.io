@@ -149,15 +149,23 @@ function showResult() {
     const combinedDescDiv = document.getElementById('res-desc-combined');
     if (combinedDescDiv && pastData && presentData && futureData) {
         combinedDescDiv.innerHTML = `
-            <p><strong>[과거의 흐름] ${pastData.name}</strong><br>${pastData.past}</p>
-            <p><strong>[현재의 상황] ${presentData.name}</strong><br>${presentData.present}</p>
-            <p><strong>[미래의 조언] ${futureData.name}</strong><br>${futureData.future}</p>
-            <p style="text-align:center; color:var(--gold); margin-top:2rem; font-size:1.1rem; line-height:1.6; font-family:'Hahmlet', serif;">
-                "과거는 당신의 기초를 다졌고, 현재는 당신이 선택할 수 있는 기회의 시간입니다.<br>위의 조언을 바탕으로 당신만의 찬란한 미래를 그려나가시길 바랍니다."
-            </p>
+            <div class="reading-section">
+                <p><strong>[과거의 흐름] <span class="card-name-highlight">${pastData.name}</span></strong><br>${pastData.past}</p>
+            </div>
+            <div class="reading-section">
+                <p><strong>[현재의 상황] <span class="card-name-highlight">${presentData.name}</span></strong><br>${presentData.present}</p>
+            </div>
+            <div class="reading-section" style="border-bottom:none;">
+                <p><strong>[미래의 조언] <span class="card-name-highlight">${futureData.name}</span></strong><br>${futureData.future}</p>
+            </div>
+            
             <div class="conclusion-image-wrapper">
                 <img src="images/conclusion.png" alt="Mystical Tarot Conclusion" class="conclusion-image">
             </div>
+
+            <p class="conclusion-text">
+                "과거는 당신의 기초를 다졌고, 현재는 당신이 선택할 수 있는 기회의 시간입니다.<br>위의 조언을 바탕으로 당신만의 찬란한 미래를 그려나가시길 바랍니다."
+            </p>
         `;
     }
     
