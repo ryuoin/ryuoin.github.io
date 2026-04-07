@@ -155,6 +155,9 @@ function showResult() {
             <p style="text-align:center; color:var(--gold); margin-top:2rem; font-size:1.1rem; line-height:1.6; font-family:'Hahmlet', serif;">
                 "과거는 당신의 기초를 다졌고, 현재는 당신이 선택할 수 있는 기회의 시간입니다.<br>위의 조언을 바탕으로 당신만의 찬란한 미래를 그려나가시길 바랍니다."
             </p>
+            <div class="conclusion-image-wrapper">
+                <img src="images/conclusion.png" alt="Mystical Tarot Conclusion" class="conclusion-image">
+            </div>
         `;
     }
     
