@@ -300,6 +300,28 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     text-align: left;
 }
 
+.conclusion-image-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+.conclusion-image {
+    max-width: 100%;
+    width: 300px;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 5px 20px rgba(147, 51, 234, 0.6);   
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.conclusion-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.8);
+}
+
 .res-card-wrapper {
     width: 120px;
     height: 192px; /* 1:1.6 비율 */
