@@ -157,22 +157,16 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
 /* 카드 덮개 (뒷면 무늬) */
 .card-cover {
-    background: linear-gradient(135deg, #1e0b2e, #4b0082);
-    /* 멋진 패턴을 넣을 수 있습니다 */
-    background-image: radial-gradient(circle, rgba(212,175,55,0.15) 10%, transparent 10%), 
-                      radial-gradient(circle, rgba(212,175,55,0.15) 10%, transparent 10%);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
+    background-image: url('../images/card-back.png');
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card-cover::after {
-    content: "✧";
-    color: var(--gold);
-    font-size: 2rem;
-    opacity: 0.7;
+    content: ""; /* 이미지 자체가 완성형이므로 텍스트 제거 */
 }
 
 /* 카드 공개면 (타로 이미지) */
