@@ -300,6 +300,29 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     text-align: left;
 }
 
+.reading-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+}
+
+.reading-section p {
+    margin: 0;
+}
+
+.card-name-highlight {
+    color: var(--gold-light);
+}
+
+.conclusion-text {
+    text-align: center;
+    color: var(--gold);
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-family: 'Hahmlet', serif;
+}
+
 .conclusion-image-wrapper {
     display: flex;
     justify-content: center;
