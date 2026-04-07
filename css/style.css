@@ -254,38 +254,50 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .reading-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
+.cards-display {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 @media (min-width: 768px) {
-    .reading-container {
-        flex-direction: row;
-        justify-content: space-between;
+    .cards-display {
+        gap: 2rem;
     }
 }
 
-.reading-slot {
-    flex: 1;
+.reading-slot-mini {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1.5rem 1rem;
-    border-radius: 12px;
-    border-top: 2px solid rgba(212, 175, 55, 0.2);
+    flex: 1;
 }
 
-.slot-title {
+.slot-title-mini {
     color: var(--gold-light);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'Hahmlet', serif;
 }
 
-.slot-title span {
-    font-size: 1rem;
+.slot-title-mini span {
+    font-size: 0.85rem;
     color: #aaa;
     font-weight: normal;
+}
+
+.combined-desc-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-top: 2px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    text-align: left;
 }
 
 .res-card-wrapper {
