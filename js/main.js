@@ -118,13 +118,14 @@ function showResult() {
     const presentId = selectedCards[1];
     const futureId = selectedCards[2];
     
-    // 데이터 매핑 함수 (HTML 렌더링)
-    const setSlot = (slotName, id, contentKey) => {
-        const data = tarotDataList.find(item => item.id === id);
-        if (!data) return;
-        
-        // 카드 이미지 복제
+    const pastData = tarotDataList.find(item => item.id === pastId);
+    const presentData = tarotDataList.find(item => item.id === presentId);
+    const futureData = tarotDataList.find(item => item.id === futureId);
+
+    // 카드 이미지 세팅 함수
+    const setCardImg = (slotName, id, data) => {
         const wrapper = document.getElementById(`res-card-${slotName}`);
+        if (!wrapper) return;
         wrapper.innerHTML = '';
         
         const img = document.createElement('img');
@@ -133,20 +134,29 @@ function showResult() {
             img.style.display = 'none';
             const fallbackText = document.createElement('div');
             fallbackText.className = 'fallback-title';
-            fallbackText.innerHTML = data.name;
+            fallbackText.innerHTML = data && data.name ? data.name : `Card ${id}`;
             wrapper.appendChild(fallbackText);
             fallbackText.style.display = 'flex';
         };
         wrapper.appendChild(img);
-        
-        // 텍스트 설명
-        const descDiv = document.getElementById(`res-desc-${slotName}`);
-        descDiv.innerHTML = `<strong>${data.name}</strong>${data[contentKey]}`;
     };
-    
-    setSlot('past', pastId, 'past');
-    setSlot('present', presentId, 'present');
-    setSlot('future', futureId, 'future');
+
+    if (pastData) setCardImg('past', pastId, pastData);
+    if (presentData) setCardImg('present', presentId, presentData);
+    if (futureData) setCardImg('future', futureId, futureData);
+
+    // 묶어서 하나로 설명하는 통합 텍스트
+    const combinedDescDiv = document.getElementById('res-desc-combined');
+    if (combinedDescDiv && pastData && presentData && futureData) {
+        combinedDescDiv.innerHTML = `
+            <p><strong>[과거의 흐름] ${pastData.name}</strong><br>${pastData.past}</p>
+            <p><strong>[현재의 상황] ${presentData.name}</strong><br>${presentData.present}</p>
+            <p><strong>[미래의 조언] ${futureData.name}</strong><br>${futureData.future}</p>
+            <p style="text-align:center; color:var(--gold); margin-top:2rem; font-size:1.1rem; line-height:1.6; font-family:'Hahmlet', serif;">
+                "과거는 당신의 기초를 다졌고, 현재는 당신이 선택할 수 있는 기회의 시간입니다.<br>위의 조언을 바탕으로 당신만의 찬란한 미래를 그려나가시길 바랍니다."
+            </p>
+        `;
+    }
     
     // 모달 표시
     modal.classList.add('active');
