@@ -69,6 +69,13 @@ function renderCards() {
 
         cardReveal.appendChild(img);
         
+        // 영문 이름 라벨 추가 (SF 홀로그램 느낌)
+        const labelText = tarotDataList.find(c => c.id === cardId)?.enName || `CARD ${cardId}`;
+        const nameLabel = document.createElement('div');
+        nameLabel.className = 'card-name-label';
+        nameLabel.innerHTML = labelText;
+        cardReveal.appendChild(nameLabel);
+        
         cardInner.appendChild(cardCover);
         cardInner.appendChild(cardReveal);
         cardElem.appendChild(cardInner);
@@ -139,6 +146,13 @@ function showResult() {
             fallbackText.style.display = 'flex';
         };
         wrapper.appendChild(img);
+        
+        // 영문 이름 라벨 추가 (SF 홀로그램 느낌)
+        const labelText = data ? (data.enName || data.name) : `CARD ${id}`;
+        const nameLabel = document.createElement('div');
+        nameLabel.className = 'card-name-label';
+        nameLabel.innerHTML = labelText;
+        wrapper.appendChild(nameLabel);
     };
 
     if (pastData) setCardImg('past', pastId, pastData);
