@@ -96,17 +96,18 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
 .card-container {
     display: grid;
-    /* 모바일에서는 4열, 태블릿 이상에서는 8열, 11열 등 유동적으로 */
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    gap: 10px;
-    max-width: 1000px;
+    /* 모바일에서 카드 크기를 조금 키움 */
+    grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+    gap: 12px;
+    max-width: 1200px;
     width: 100%;
 }
 
 @media (min-width: 768px) {
     .card-container {
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-        gap: 15px;
+        /* 테블릿/데스크탑에서 카드 크기를 조금 더 키움 */
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 20px;
     }
 }
 
@@ -340,8 +341,8 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 .res-card-wrapper {
-    width: 120px;
-    height: 192px; /* 1:1.6 비율 */
+    width: 160px;
+    height: 256px; /* 1:1.6 비율 유지하면서 크기 키움 */
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 1.5rem;
