@@ -96,17 +96,17 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
 .card-container {
     display: grid;
-    /* 모바일에서 카드 크기를 조금 키움 */
-    grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+    /* 모바일에서 카드 크기를 더 키움 */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 12px;
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
 }
 
 @media (min-width: 768px) {
     .card-container {
-        /* 테블릿/데스크탑에서 카드 크기를 조금 더 키움 */
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        /* 테블릿/데스크탑에서 카드 크기를 더 키움 */
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         gap: 20px;
     }
 }
