@@ -187,6 +187,29 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     object-fit: cover;
 }
 
+/* SF 홀로그램 네임 라벨 */
+.card-name-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 5, 20, 0.85); /* 짙은 반투명 배경 */
+    color: #00f3ff; /* 네온 블루 텍스트 */
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 8px 5px;
+    text-align: center;
+    text-shadow: 0 0 5px #00f3ff;
+    border-top: 1px solid rgba(212, 175, 55, 0.6); /* 금색 테두리 포인트 */
+    box-shadow: 0 -5px 15px rgba(0, 243, 255, 0.3);
+    z-index: 10;
+    letter-spacing: 1px;
+    box-sizing: border-box;
+}
+
+
+
 /* 이미지 로드 실패 시 나타나는 Fallback UI */
 .fallback-title {
     font-family: 'Hahmlet', serif;
@@ -341,6 +364,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 .res-card-wrapper {
+    position: relative;
     width: 160px;
     height: 256px; /* 1:1.6 비율 유지하면서 크기 키움 */
     border-radius: 8px;
