@@ -34,25 +34,25 @@
             <h2 class="modal-title">당신의 타로 리딩</h2>
             
             <div class="reading-container">
-                <!-- 과거 카드 -->
-                <div class="reading-slot">
-                    <h3 class="slot-title">과거 <span>(원인)</span></h3>
-                    <div id="res-card-past" class="res-card-wrapper"></div>
-                    <div id="res-desc-past" class="res-desc"></div>
+                <!-- 카드 3장 가로 정렬 -->
+                <div class="cards-display">
+                    <div class="reading-slot-mini">
+                        <div class="slot-title-mini">과거 <span>(원인)</span></div>
+                        <div id="res-card-past" class="res-card-wrapper"></div>
+                    </div>
+                    <div class="reading-slot-mini">
+                        <div class="slot-title-mini">현재 <span>(상황)</span></div>
+                        <div id="res-card-present" class="res-card-wrapper"></div>
+                    </div>
+                    <div class="reading-slot-mini">
+                        <div class="slot-title-mini">미래 <span>(조언)</span></div>
+                        <div id="res-card-future" class="res-card-wrapper"></div>
+                    </div>
                 </div>
-                
-                <!-- 현재 카드 -->
-                <div class="reading-slot">
-                    <h3 class="slot-title">현재 <span>(상황)</span></h3>
-                    <div id="res-card-present" class="res-card-wrapper"></div>
-                    <div id="res-desc-present" class="res-desc"></div>
-                </div>
-                
-                <!-- 미래 카드 -->
-                <div class="reading-slot">
-                    <h3 class="slot-title">미래 <span>(조언)</span></h3>
-                    <div id="res-card-future" class="res-card-wrapper"></div>
-                    <div id="res-desc-future" class="res-desc"></div>
+
+                <!-- 하나로 묶여진 해석 텍스트 -->
+                <div class="combined-desc-box">
+                    <div id="res-desc-combined" class="res-desc combined-desc"></div>
                 </div>
             </div>
 
