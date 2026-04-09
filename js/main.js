@@ -1,144 +1,88 @@
-document.addEventListener('DOMContentLoaded', () => {
-        initApp();
-});
-
+// Tarot App Main Logic
 let selectedCards = [];
-let deck = [];
+const deck = Object.keys(tarotData);
 
-// Fisher-Yates shuffle algorithm
+function init() {
+            shuffleArray(deck);
+            renderCards();
+            document.getElementById('btn-restart').onclick = restartGame;
+}
+
 function shuffleArray(array) {
-        let curId = array.length;
-        while (0 !== curId) {
-                    let randId = Math.floor(Math.random() * curId);
-                    curId -= 1;
-                    let tmp = array[curId];
-                    array[curId] = array[randId];
-                    array[randId] = tmp;
-        }
-        return array;
+            for (let i = array.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [array[i], array[j]] = [array[j], array[i]];
+            }
 }
 
-function initApp() {
-        // MAJOR ARCANA (0-21)
-    deck = Array.from({ length: 22 }, (_, i) => i);
-        shuffleArray(deck);
-        renderCards();
-        document.getElementById('btn-restart').addEventListener('click', restartGame);
-}
 function renderCards() {
-        const container = document.getElementById('card-container');
-        container.innerHTML = '';
-
-    deck.forEach((cardId, index) => {
-                const cardElem = document.createElement('div');
-                cardElem.className = 'tarot-card';
-                cardElem.dataset.id = cardId;
-                cardElem.dataset.index = index;
-
-                         const cardInner = document.createElement('div');
-                cardInner.className = 'card-inner';
-
-                         const cardCover = document.createElement('div');
-                cardCover.className = 'card-cover';
-
-                         const cardReveal = document.createElement('div');
-                cardReveal.className = 'card-reveal';
-
-                         const img = document.createElement('img');
-                // PNG first, fallback to JPG
-                         img.src = `images/${cardId}.png`;
-
-                         img.onerror = () => {
-                                         if (img.src.includes('.png')) {
-                                                             img.src = `images/${cardId}.jpg`;
-                                         } else {
-                                                             img.style.display = 'none';
-                                                             const fallbackText = document.createElement('div');
-                                                             fallbackText.className = 'card-fallback-text';
-                                                             fallbackText.innerText = tarotData[cardId].name;
-                                                             cardReveal.appendChild(fallbackText);
-                                         }
-                         };
-
-                         cardReveal.appendChild(img);
-                cardInner.appendChild(cardCover);
-                cardInner.appendChild(cardReveal);
-                cardElem.appendChild(cardInner);
-
-                         cardElem.addEventListener('click', handleCardClick);
-                container.appendChild(cardElem);
-    });
+            const container = document.getElementById('card-container');
+            container.innerHTML = '';
+            deck.forEach(cardId => {
+                            const cardEl = document.createElement('div');
+                            cardEl.className = 'tarot-card';
+                            cardEl.innerHTML = `
+                                        <div class="card-inner">
+                                                        <div class="card-cover"></div>
+                                                                        <div class="card-reveal">
+                                                                                            <img src="images/${cardId}.png" alt="${tarotData[cardId].name}" onerror="handleImageError(this, '${cardId}')">
+                                                                                                                <div class="fallback-title">${tarotData[cardId].name}</div>
+                                                                                                                                    <div class="card-name-label">${tarotData[cardId].name}</div>
+                                                                                                                                                    </div>
+                                                                                                                                                                </div>
+                                                                                                                                                                        `;
+                            cardEl.onclick = () => flipCard(cardId, cardEl);
+                            container.appendChild(cardEl);
+            });
 }
-function handleCardClick(e) {
-        const cardElem = e.currentTarget;
-        if (selectedCards.length >= 3 || cardElem.classList.contains('flipped')) return;
 
-    cardElem.classList.add('flipped');
-        const cardId = parseInt(cardElem.dataset.id);
-        selectedCards.push(cardId);
+function handleImageError(img, cardId) {
+            if (img.src.includes('.png')) {
+                            img.src = "images/" + cardId + ".jpg";
+            } else {
+                            img.style.display = 'none';
+                            img.nextElementSibling.style.display = 'flex';
+            }
+}
 
-    if (selectedCards.length === 3) {
-                setTimeout(showResult, 600);
-    }
+function flipCard(cardId, element) {
+            if (selectedCards.length >= 3 || element.classList.contains('flipped')) return;
+            element.classList.add('flipped');
+            selectedCards.push(cardId);
+            document.getElementById('select-count').innerText = selectedCards.length;
+            if (selectedCards.length === 3) setTimeout(showResult, 800);
 }
 
 function showResult() {
-        const resultArea = document.getElementById('result-area');
-        const cardsInfo = document.getElementById('cards-info');
-        const conclusion = document.getElementById('conclusion-text');
-
-    cardsInfo.innerHTML = '';
-
-    selectedCards.forEach((id, i) => {
-                const item = document.createElement('div');
-                item.className = 'result-item';
-
-                                  const titleText = ['Present/Cause', 'Process/Advice', 'Result/Future'][i];
-                const card = tarotData[id];
-
-                                  item.innerHTML = `
-                                              <h3>${titleText}: ${card.name}</h3>
-                                                          <div class="result-card-img"></div>
-                                                                      <p><strong>Keywords:</strong> ${card.keywords.join(', ')}</p>
-                                                                                  <p>${card.description}</p>
-                                                                                          `;
-
-                                  const imgContainer = item.querySelector('.result-card-img');
-                setCardImg(imgContainer, id);
-
-                                  cardsInfo.appendChild(item);
-    });
-
-    conclusion.innerText = "The cards you selected represent your current situation and future possibilities. Trust your intuition and move forward.";
-        resultArea.classList.remove('hidden');
-
-    window.scrollTo({
-                top: resultArea.offsetTop - 20,
-                behavior: 'smooth'
-    });
-}
-function setCardImg(container, cardId) {
-        const img = document.createElement('img');
-        img.src = `images/${cardId}.png`;
-        img.onerror = () => {
-                    if (img.src.includes('.png')) {
-                                    img.src = `images/${cardId}.jpg`;
-                    } else {
-                                    container.innerText = tarotData[cardId].name;
-                    }
-        };
-        container.appendChild(img);
+            const modal = document.getElementById('result-modal');
+            const slots = ['res-card-past', 'res-card-present', 'res-card-future'];
+            const descBox = document.getElementById('res-desc-combined');
+            const labels = ['Past (Cause)', 'Present (Situation)', 'Future (Advice)'];
+            let combinedHtml = '';
+            selectedCards.forEach((id, i) => {
+                            const card = tarotData[id];
+                            document.getElementById(slots[i]).innerHTML =
+                                                '<div class="res-card-wrapper">' +
+                                                '<img src="images/' + id + '.png" alt="' + card.name + '" onerror="handleImageError(this, \'' + id + '\')">' +
+                                                '<div class="fallback-title">' + card.name + '</div>' +
+                                                '</div>';
+                            combinedHtml +=
+                                                '<div class="reading-section">' +
+                                                '<h3><span class="card-name-highlight">' + labels[i] + ': ' + card.name + '</span></h3>' +
+                                                '<p><strong>Keywords:</strong> ' + card.keyword + '</p>' +
+                                                '<p>' + card.description + '</p>' +
+                                                '</div>';
+            });
+            descBox.innerHTML = combinedHtml;
+            modal.classList.add('active');
 }
 
 function restartGame() {
-        selectedCards = [];
-        document.getElementById('result-area').classList.add('hidden');
-
-    const cards = document.querySelectorAll('.tarot-card');
-        cards.forEach(card => card.classList.remove('flipped'));
-
-    setTimeout(() => {
-                shuffleArray(deck);
-                renderCards();
-    }, 400);
+            selectedCards = [];
+            document.getElementById('result-modal').classList.remove('active');
+            document.getElementById('select-count').innerText = '0';
+            document.querySelectorAll('.tarot-card').forEach(card => card.classList.remove('flipped'));
+            setTimeout(() => { shuffleArray(deck); renderCards(); }, 500);
 }
+
+window.onload = init;
