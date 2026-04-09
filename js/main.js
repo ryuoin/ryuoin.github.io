@@ -109,12 +109,6 @@ function showResult() {
             '<div class="reading-section"><p><strong>[\uD604\uC7AC\uC758 \uC0C1\uD669] <span class="card-name-highlight">' + presentData.name + '</span></strong><br>' + presentData.present + '</p></div>' +
             '<div class="reading-section" style="border-bottom:none;"><p><strong>[\uBBF8\uB798\uC758 \uC870\uC5B8] <span class="card-name-highlight">' + futureData.name + '</span></strong><br>' + futureData.future + '</p></div>' +
             '<div class="conclusion-image-wrapper"><img src="images/conclusion.png" alt="Tarot Conclusion" class="conclusion-image"></div>' +
-            '<p class="conclusion-text">
-                당신이 걸어온 모든 길은,<br>오늘의 당신을 빚어낸 소중한 기적이었습니다.<br><br>
-                지금 이 순간, 두려워하지 마세요.<br>
-                당신은 이미 충분히 용감하고, 충분히 아름답습니다.<br><br>
-                우주는 언제나 당신의 편에서 — 조용히, 그러나 단단히 — 당신을 응원하고 있습니다.
-            </p>' +
             '<p class="conclusion-text">&ldquo;\uACFC\uAC70\uB294 \uB2F9\uC2E0\uC758 \uAE30\uCD08\uB97C \uB2E4\uC84C\uACE0, \uD604\uC7AC\uB294 \uB2F9\uC2E0\uC774 \uC120\uD0DD\uD560 \uC218 \uC788\uB294 \uAE30\uD68C\uC758 \uC2DC\uAC04\uC785\uB2C8\uB2E4.&rdquo;</p>';
     }
     modal.classList.add('active');
