@@ -1,6 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initApp();
-});
+document.addEventListener('DOMContentLoaded', () => { initApp(); });
 let selectedCards = [];
 let deck = [];
 function shuffleArray(array) {
@@ -34,23 +32,22 @@ function renderCards() {
         const cardReveal = document.createElement('div');
         cardReveal.className = 'card-reveal';
         const img = document.createElement('img');
-        const tryLoadImage = (ext) => { img.src = `images/${cardId}.${ext}`; };
         img.onerror = () => {
             if (img.src.endsWith('.png')) {
-                tryLoadImage('jpg');
+                img.src = 'images/' + cardId + '.jpg';
             } else {
                 img.style.display = 'none';
                 const fallbackInfo = tarotDataList.find(c => c.id === cardId);
                 const fallbackText = document.createElement('div');
                 fallbackText.className = 'fallback-title';
-                fallbackText.innerHTML = fallbackInfo ? fallbackInfo.name : `Card ${cardId}`;
+                fallbackText.innerHTML = fallbackInfo ? fallbackInfo.name : 'Card ' + cardId;
                 cardReveal.appendChild(fallbackText);
                 fallbackText.style.display = 'flex';
             }
         };
-        tryLoadImage('png');
+        img.src = 'images/' + cardId + '.png';
         cardReveal.appendChild(img);
-        const labelText = tarotDataList.find(c => c.id === cardId)?.enName || `CARD ${cardId}`;
+        const labelText = (tarotDataList.find(c => c.id === cardId) || {}).enName || ('CARD ' + cardId);
         const nameLabel = document.createElement('div');
         nameLabel.className = 'card-name-label';
         nameLabel.innerHTML = labelText;
@@ -79,27 +76,27 @@ function showResult() {
     const presentData = tarotDataList.find(item => item.id === selectedCards[1]);
     const futureData = tarotDataList.find(item => item.id === selectedCards[2]);
     const setCardImg = (slotName, id, data) => {
-        const wrapper = document.getElementById(`res-card-${slotName}`);
+        const wrapper = document.getElementById('res-card-' + slotName);
         if (!wrapper) return;
         wrapper.innerHTML = '';
         const img = document.createElement('img');
         img.onerror = () => {
             if (img.src.endsWith('.png')) {
-                img.src = `images/${id}.jpg`;
+                img.src = 'images/' + id + '.jpg';
             } else {
                 img.style.display = 'none';
                 const ft = document.createElement('div');
                 ft.className = 'fallback-title';
-                ft.innerHTML = data && data.name ? data.name : `Card ${id}`;
+                ft.innerHTML = data && data.name ? data.name : 'Card ' + id;
                 wrapper.appendChild(ft);
                 ft.style.display = 'flex';
             }
         };
-        img.src = `images/${id}.png`;
+        img.src = 'images/' + id + '.png';
         wrapper.appendChild(img);
         const nameLabel = document.createElement('div');
         nameLabel.className = 'card-name-label';
-        nameLabel.innerHTML = data ? (data.enName || data.name) : `CARD ${id}`;
+        nameLabel.innerHTML = data ? (data.enName || data.name) : 'CARD ' + id;
         wrapper.appendChild(nameLabel);
     };
     if (pastData) setCardImg('past', selectedCards[0], pastData);
@@ -107,23 +104,12 @@ function showResult() {
     if (futureData) setCardImg('future', selectedCards[2], futureData);
     const combinedDescDiv = document.getElementById('res-desc-combined');
     if (combinedDescDiv && pastData && presentData && futureData) {
-        combinedDescDiv.innerHTML = `
-            <div class="reading-section">
-                <p><strong>[과거의 흐름] <span class="card-name-highlight">${pastData.name}</span></strong><br>${pastData.past}</p>
-            </div>
-            <div class="reading-section">
-                <p><strong>[현재의 상황] <span class="card-name-highlight">${presentData.name}</span></strong><br>${presentData.present}</p>
-            </div>
-            <div class="reading-section" style="border-bottom:none;">
-                <p><strong>[미래의 조언] <span class="card-name-highlight">${futureData.name}</span></strong><br>${futureData.future}</p>
-            </div>
-            <div class="conclusion-image-wrapper">
-                <img src="images/conclusion.png" alt="Mystical Tarot Conclusion" class="conclusion-image">
-            </div>
-            <p class="conclusion-text">
-                "과거는 당신의 기초를 다졌고, 현재는 당신이 선택할 수 있는 기회의 시간입니다.<br>위의 조언을 바탕으로 당신만의 찬란한 미래를 그려나가시길 바랍니다."
-            </p>
-        `;
+        combinedDescDiv.innerHTML =
+            '<div class="reading-section"><p><strong>[' + '\uACFC\uAC70\uC758 \uD758\uB984] <span class="card-name-highlight">' + pastData.name + '</span></strong><br>' + pastData.past + '</p></div>' +
+            '<div class="reading-section"><p><strong>[\uD604\uC7AC\uC758 \uC0C1\uD669] <span class="card-name-highlight">' + presentData.name + '</span></strong><br>' + presentData.present + '</p></div>' +
+            '<div class="reading-section" style="border-bottom:none;"><p><strong>[\uBBF8\uB798\uC758 \uC870\uC5B8] <span class="card-name-highlight">' + futureData.name + '</span></strong><br>' + futureData.future + '</p></div>' +
+            '<div class="conclusion-image-wrapper"><img src="images/conclusion.png" alt="Tarot Conclusion" class="conclusion-image"></div>' +
+            '<p class="conclusion-text">&ldquo;\uACFC\uAC70\uB294 \uB2F9\uC2E0\uC758 \uAE30\uCD08\uB97C; \uB2E4\uC84C\uACE0, \uD604\uC7AC\uB294 \uB2F9\uC2E0\uC774 \uC120\uD0DD\uD560 \uC218 \uC788\uB294 \uAE30\uD68C\uC758 \uC2DC\uAC04\uC785\uB2C8\uB2E4.&rdquo;</p>';
     }
     modal.classList.add('active');
 }
@@ -133,5 +119,3 @@ function restartGame() {
     document.getElementById('select-count').innerText = 0;
     setTimeout(() => { initApp(); }, 500);
 }
-
-window.onload = init;
