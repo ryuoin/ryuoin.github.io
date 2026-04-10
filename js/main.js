@@ -30,6 +30,7 @@ function initModeSelect() {
 
     document.getElementById('btn-mode-weekly').addEventListener('click', () => startMode('weekly'));
     document.getElementById('btn-mode-love').addEventListener('click', () => startMode('love'));
+    document.getElementById('btn-mode-money').addEventListener('click', () => startMode('money'));
 }
 
 function startMode(mode) {
@@ -44,9 +45,13 @@ function startMode(mode) {
         document.getElementById('header-title').textContent = '당신의 이번주 운세';
         document.getElementById('header-desc').textContent = '당신의 운명을 이끌어줄 3장의 카드를 선택하세요.';
         document.getElementById('max-count').textContent = '3';
-    } else {
+    } else if (mode === 'love') {
         document.getElementById('header-title').textContent = '당신의 연애운';
         document.getElementById('header-desc').textContent = '당신의 사랑을 비추어줄 1장의 카드를 선택하세요.';
+        document.getElementById('max-count').textContent = '1';
+    } else {
+        document.getElementById('header-title').textContent = '당신의 금전운';
+        document.getElementById('header-desc').textContent = '당신의 재물을 비추어줄 1장의 카드를 선택하세요.';
         document.getElementById('max-count').textContent = '1';
     }
     document.getElementById('select-count').textContent = '0';
@@ -67,6 +72,7 @@ function initDeck() {
     // 다시하기 버튼 등록
     document.getElementById('btn-restart').addEventListener('click', restartGame);
     document.getElementById('btn-love-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-money-restart').addEventListener('click', restartGame);
 }
 
 function renderCards() {
@@ -129,7 +135,7 @@ function renderCards() {
 }
 
 function getMaxCards() {
-    return currentMode === 'love' ? 1 : 3;
+    return currentMode === 'weekly' ? 3 : 1;
 }
 
 function handleCardClick(cardElem, cardId) {
@@ -152,8 +158,10 @@ function handleCardClick(cardElem, cardId) {
         setTimeout(() => {
             if (currentMode === 'weekly') {
                 showWeeklyResult();
-            } else {
+            } else if (currentMode === 'love') {
                 showLoveResult();
+            } else {
+                showMoneyResult();
             }
         }, 1000);
     }
@@ -229,7 +237,7 @@ function showWeeklyResult() {
                 당신이 걸어온 모든 길은,<br>오늘의 당신을 빚어낸 소중한 기적이었습니다.<br><br>
                 지금 이 순간, 두려워하지 마세요.<br>
                 당신은 이미 충분히 용감하고, 충분히 아름답습니다.<br><br>
-                우주는 언제나 당신의 편에서 당신을 응원하고 있습니다.
+                우주는 언제나 당신의 편에서 — 조용히, 그러나 단단히 — 당신을 응원하고 있습니다.
             </p>
         `;
     }
@@ -326,6 +334,7 @@ function restartGame() {
     // 모달 닫기
     document.getElementById('result-modal').classList.remove('active');
     document.getElementById('love-result-modal').classList.remove('active');
+    document.getElementById('money-result-modal').classList.remove('active');
 
     // 데이터 초기화
     selectedCards = [];
@@ -334,4 +343,88 @@ function restartGame() {
     // 카드 화면 숨기기, 모드 선택 화면 보이기
     document.getElementById('reading-screen').classList.add('hidden');
     document.getElementById('mode-select-screen').classList.remove('hidden');
+}
+
+// ========== 금전운 결과 ==========
+function showMoneyResult() {
+    const modal = document.getElementById('money-result-modal');
+    const cardId = selectedCards[0];
+    const cardData = tarotDataList.find(item => item.id === cardId);
+
+    if (!cardData) return;
+
+    // 등급 정보
+    const ratingInfo = getMoneyRatingInfo(cardData.moneyRating);
+
+    // 등급 배지
+    const badge = document.getElementById('money-rating-badge');
+    badge.className = `money-rating-badge rating-${cardData.moneyRating}`;
+    badge.innerHTML = `<span>${ratingInfo.emoji}</span> <span>${ratingInfo.label}</span>`;
+
+    // 카드 이미지
+    const cardWrapper = document.getElementById('money-res-card');
+    cardWrapper.innerHTML = '';
+    const img = document.createElement('img');
+    const tryLoadImage = (ext) => { img.src = `images/${cardId}.${ext}`; };
+    img.onerror = () => {
+        if (img.src.endsWith('.png')) {
+            tryLoadImage('jpg');
+        } else {
+            img.style.display = 'none';
+            const fallbackText = document.createElement('div');
+            fallbackText.className = 'fallback-title';
+            fallbackText.innerHTML = cardData.name;
+            cardWrapper.appendChild(fallbackText);
+            fallbackText.style.display = 'flex';
+        }
+    };
+    tryLoadImage('png');
+    cardWrapper.appendChild(img);
+
+    const nameLabel = document.createElement('div');
+    nameLabel.className = 'card-name-label';
+    nameLabel.innerHTML = cardData.enName || cardData.name;
+    cardWrapper.appendChild(nameLabel);
+
+    // 텍스트 채우기
+    document.getElementById('money-card-name').textContent = cardData.name;
+    document.getElementById('money-meaning').textContent = cardData.moneyMeaning;
+    document.getElementById('money-advice').textContent = cardData.moneyAdvice;
+
+    // 결론 메시지 (등급별)
+    const conclusionEl = document.getElementById('money-conclusion');
+    conclusionEl.innerHTML = ratingInfo.conclusion;
+
+    modal.classList.add('active');
+}
+
+function getMoneyRatingInfo(rating) {
+    const ratings = {
+        1: {
+            emoji: '💰',
+            label: '풍요로움 (Very Good)',
+            conclusion: '금전적으로 최고의 흐름입니다!<br>뿌린 대로 거두는 풍성한 결실이 기다립니다.<br>우주의 풍요가 당신의 금고로 향하고 있습니다. ✨'
+        },
+        2: {
+            emoji: '💵',
+            label: '안정적 (Good)',
+            conclusion: '원활한 자금 흐름이 예상됩니다.<br>계획적인 소비와 투자가 있다면<br>자산은 꾸준히 늘어날 것입니다. 💫'
+        },
+        3: {
+            emoji: '⚖️',
+            label: '보통 (Average)',
+            conclusion: '수입과 지출의 균형이 필요한 때입니다.<br>충동적인 지출을 줄이고<br>현재의 재정 상태를 유지하는 데 집중하세요. 🌙'
+        },
+        4: {
+            emoji: '🚫',
+            label: '주의 (Caution)',
+            conclusion: '불필요한 지출이 발생할 수 있습니다.<br>금전 거래나 새로운 투자는 신중히 검토하고<br>자산 보호에 힘써야 할 시기입니다. 🛡️'
+        },
+        5: {
+            emoji: '⚠️',
+            label: '위험 (Warning)',
+            conclusion: '재정적 손실에 대비해야 합니다.<br>무리한 확장은 피하고 비상금을 확보하세요.<br>소나기를 피하면 다시 맑은 날이 올 것입니다. 🔥'
+        }
+    };
+    return ratings[rating] || ratings[3];
 }
