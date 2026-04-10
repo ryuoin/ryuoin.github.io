@@ -33,6 +33,11 @@
                     <span class="mode-btn-title">당신의 연애운</span>
                     <span class="mode-btn-desc">1장의 카드로 사랑의 주파수를 감지합니다</span>
                 </button>
+                <button id="btn-mode-money" class="mode-btn" data-mode="money">
+                    <span class="mode-btn-icon">💰</span>
+                    <span class="mode-btn-title">당신의 금전운</span>
+                    <span class="mode-btn-desc">1장의 카드로 재물과 풍요의 흐름을 읽습니다</span>
+                </button>
             </div>
         </div>
     </div>
@@ -81,7 +86,8 @@
                 </div>
             </div>
 
-            <button id="btn-restart" class="btn-primary">처음으로</button>
+            <button id="btn-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
 
@@ -107,14 +113,48 @@
                         <div class="love-advice-label">💌 우주의 조언</div>
                         <div id="love-advice" class="love-advice"></div>
                     </div>
-                    <div class="love-period-notice"><br>🕰 이 연애운은 약 2~3개월의 흐름에 적용됩니다</div>
+                    <div class="love-period-notice">🕰 이 연애운은 약 2~3개월의 흐름에 적용됩니다</div>
                 </div>
 
                 <!-- 결론 메시지 -->
                 <p id="love-conclusion" class="love-conclusion-text"></p>
             </div>
 
-            <button id="btn-love-restart" class="btn-primary">처음으로</button>
+            <button id="btn-love-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
+        </div>
+    </div>
+
+    <!-- ========== 금전운 결과 모달 ========== -->
+    <div id="money-result-modal" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <h2 class="modal-title money-modal-title">당신의 금전운</h2>
+            
+            <div class="money-reading-container">
+                <!-- 등급 배지 -->
+                <div id="money-rating-badge" class="money-rating-badge"></div>
+
+                <!-- 카드 1장 -->
+                <div class="money-card-display">
+                    <div id="money-res-card" class="res-card-wrapper money-card-large"></div>
+                </div>
+
+                <!-- 금전 해석 -->
+                <div class="money-desc-box">
+                    <div id="money-card-name" class="money-card-name"></div>
+                    <div id="money-meaning" class="money-meaning"></div>
+                    <div class="money-advice-box">
+                        <div class="money-advice-label">💰 우주의 재물 조언</div>
+                        <div id="money-advice" class="money-advice"></div>
+                    </div>
+                </div>
+
+                <!-- 결론 메시지 -->
+                <p id="money-conclusion" class="money-conclusion-text"></p>
+            </div>
+
+            <button id="btn-money-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
 
