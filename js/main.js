@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initApp();
+    initModeSelect();
 });
+
 let selectedCards = [];
 let deck = [];
+let currentMode = null; // 'weekly' or 'love'
+
 // Fisher-Yates 셔플 알고리즘
 function shuffleArray(array) {
     let curId = array.length;
@@ -15,35 +18,81 @@ function shuffleArray(array) {
     }
     return array;
 }
-function initApp() {
+
+// ========== 모드 선택 화면 ==========
+function initModeSelect() {
+    const modeScreen = document.getElementById('mode-select-screen');
+    const readingScreen = document.getElementById('reading-screen');
+
+    // 모드 선택 화면 보이기, 카드 화면 숨기기
+    modeScreen.classList.remove('hidden');
+    readingScreen.classList.add('hidden');
+
+    document.getElementById('btn-mode-weekly').addEventListener('click', () => startMode('weekly'));
+    document.getElementById('btn-mode-love').addEventListener('click', () => startMode('love'));
+}
+
+function startMode(mode) {
+    currentMode = mode;
+    selectedCards = [];
+
+    const modeScreen = document.getElementById('mode-select-screen');
+    const readingScreen = document.getElementById('reading-screen');
+
+    // 모드에 따른 텍스트 변경
+    if (mode === 'weekly') {
+        document.getElementById('header-title').textContent = '당신의 이번주 운세';
+        document.getElementById('header-desc').textContent = '당신의 운명을 이끌어줄 3장의 카드를 선택하세요.';
+        document.getElementById('max-count').textContent = '3';
+    } else {
+        document.getElementById('header-title').textContent = '당신의 연애운';
+        document.getElementById('header-desc').textContent = '당신의 사랑을 비추어줄 1장의 카드를 선택하세요.';
+        document.getElementById('max-count').textContent = '1';
+    }
+    document.getElementById('select-count').textContent = '0';
+
+    // 화면 전환
+    modeScreen.classList.add('hidden');
+    readingScreen.classList.remove('hidden');
+
+    // 덱 초기화 및 카드 렌더링
+    initDeck();
+}
+
+function initDeck() {
     deck = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deck);
     renderCards();
+
+    // 다시하기 버튼 등록
     document.getElementById('btn-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-love-restart').addEventListener('click', restartGame);
 }
+
 function renderCards() {
     const container = document.getElementById('card-container');
     container.innerHTML = '';
-    
+
     deck.forEach((cardId, index) => {
         const cardElem = document.createElement('div');
         cardElem.className = 'tarot-card';
         cardElem.dataset.id = cardId;
         cardElem.dataset.index = index;
-        
+
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
-        
+
         const cardCover = document.createElement('div');
         cardCover.className = 'card-cover';
-        
+
         const cardReveal = document.createElement('div');
         cardReveal.className = 'card-reveal';
-        
+
         const img = document.createElement('img');
         const tryLoadImage = (ext) => {
             img.src = `images/${cardId}.${ext}`;
         };
+
         img.onerror = () => {
             if (img.src.endsWith('.png')) {
                 tryLoadImage('jpg');
@@ -57,65 +106,81 @@ function renderCards() {
                 fallbackText.style.display = 'flex';
             }
         };
+
         tryLoadImage('png');
         cardReveal.appendChild(img);
-        
+
         const labelText = tarotDataList.find(c => c.id === cardId)?.enName || `CARD ${cardId}`;
         const nameLabel = document.createElement('div');
         nameLabel.className = 'card-name-label';
         nameLabel.innerHTML = labelText;
         cardReveal.appendChild(nameLabel);
-        
+
         cardInner.appendChild(cardCover);
         cardInner.appendChild(cardReveal);
         cardElem.appendChild(cardInner);
-        
+
         cardElem.addEventListener('click', () => handleCardClick(cardElem, cardId));
-        
+
         setTimeout(() => {
             container.appendChild(cardElem);
         }, index * 30);
     });
 }
+
+function getMaxCards() {
+    return currentMode === 'love' ? 1 : 3;
+}
+
 function handleCardClick(cardElem, cardId) {
-    if (selectedCards.length >= 3 || cardElem.classList.contains('flipped')) {
+    const maxCards = getMaxCards();
+    if (selectedCards.length >= maxCards || cardElem.classList.contains('flipped')) {
         return;
     }
-    
+
     cardElem.classList.add('flipped');
     cardElem.classList.add('disabled');
+
     selectedCards.push(cardId);
-    
+
     document.getElementById('select-count').innerText = selectedCards.length;
-    
-    if (selectedCards.length === 3) {
+
+    if (selectedCards.length === maxCards) {
         const allCards = document.querySelectorAll('.tarot-card');
         allCards.forEach(card => card.classList.add('disabled'));
-        
+
         setTimeout(() => {
-            showResult();
+            if (currentMode === 'weekly') {
+                showWeeklyResult();
+            } else {
+                showLoveResult();
+            }
         }, 1000);
     }
 }
-function showResult() {
+
+// ========== 이번주 운세 결과 ==========
+function showWeeklyResult() {
     const modal = document.getElementById('result-modal');
-    
+
     const pastId = selectedCards[0];
     const presentId = selectedCards[1];
     const futureId = selectedCards[2];
-    
+
     const pastData = tarotDataList.find(item => item.id === pastId);
     const presentData = tarotDataList.find(item => item.id === presentId);
     const futureData = tarotDataList.find(item => item.id === futureId);
+
     const setCardImg = (slotName, id, data) => {
         const wrapper = document.getElementById(`res-card-${slotName}`);
         if (!wrapper) return;
         wrapper.innerHTML = '';
-        
+
         const img = document.createElement('img');
         const tryLoadImage = (ext) => {
             img.src = `images/${id}.${ext}`;
         };
+
         img.onerror = () => {
             if (img.src.endsWith('.png')) {
                 tryLoadImage('jpg');
@@ -128,19 +193,21 @@ function showResult() {
                 fallbackText.style.display = 'flex';
             }
         };
-        
+
         tryLoadImage('png');
         wrapper.appendChild(img);
-        
+
         const labelText = data ? (data.enName || data.name) : `CARD ${id}`;
         const nameLabel = document.createElement('div');
         nameLabel.className = 'card-name-label';
         nameLabel.innerHTML = labelText;
         wrapper.appendChild(nameLabel);
     };
+
     if (pastData) setCardImg('past', pastId, pastData);
     if (presentData) setCardImg('present', presentId, presentData);
     if (futureData) setCardImg('future', futureId, futureData);
+
     const combinedDescDiv = document.getElementById('res-desc-combined');
     if (combinedDescDiv && pastData && presentData && futureData) {
         combinedDescDiv.innerHTML = `
@@ -157,24 +224,114 @@ function showResult() {
             <div class="conclusion-image-wrapper">
                 <img src="images/conclusion.png" alt="Mystical Tarot Conclusion" class="conclusion-image">
             </div>
+
             <p class="conclusion-text">
                 당신이 걸어온 모든 길은,<br>오늘의 당신을 빚어낸 소중한 기적이었습니다.<br><br>
                 지금 이 순간, 두려워하지 마세요.<br>
                 당신은 이미 충분히 용감하고, 충분히 아름답습니다.<br><br>
-                우주는 언제나 당신의 편에서 당신을 응원하고 있습니다.
+                우주는 언제나 당신의 편에서 — 조용히, 그러나 단단히 — 당신을 응원하고 있습니다.
             </p>
         `;
     }
-    
+
     modal.classList.add('active');
 }
+
+// ========== 연애운 결과 ==========
+function showLoveResult() {
+    const modal = document.getElementById('love-result-modal');
+    const cardId = selectedCards[0];
+    const cardData = tarotDataList.find(item => item.id === cardId);
+
+    if (!cardData) return;
+
+    // 등급 정보
+    const ratingInfo = getLoveRatingInfo(cardData.loveRating);
+
+    // 등급 배지
+    const badge = document.getElementById('love-rating-badge');
+    badge.className = `love-rating-badge rating-${cardData.loveRating}`;
+    badge.innerHTML = `<span>${ratingInfo.emoji}</span> <span>${ratingInfo.label}</span>`;
+
+    // 카드 이미지
+    const cardWrapper = document.getElementById('love-res-card');
+    cardWrapper.innerHTML = '';
+    const img = document.createElement('img');
+    const tryLoadImage = (ext) => { img.src = `images/${cardId}.${ext}`; };
+    img.onerror = () => {
+        if (img.src.endsWith('.png')) {
+            tryLoadImage('jpg');
+        } else {
+            img.style.display = 'none';
+            const fallbackText = document.createElement('div');
+            fallbackText.className = 'fallback-title';
+            fallbackText.innerHTML = cardData.name;
+            cardWrapper.appendChild(fallbackText);
+            fallbackText.style.display = 'flex';
+        }
+    };
+    tryLoadImage('png');
+    cardWrapper.appendChild(img);
+
+    const nameLabel = document.createElement('div');
+    nameLabel.className = 'card-name-label';
+    nameLabel.innerHTML = cardData.enName || cardData.name;
+    cardWrapper.appendChild(nameLabel);
+
+    // 텍스트 채우기
+    document.getElementById('love-card-name').textContent = cardData.name;
+    document.getElementById('love-meaning').textContent = cardData.loveMeaning;
+    document.getElementById('love-advice').textContent = cardData.loveAdvice;
+
+    // 결론 메시지 (등급별)
+    const conclusionEl = document.getElementById('love-conclusion');
+    conclusionEl.innerHTML = ratingInfo.conclusion;
+
+    modal.classList.add('active');
+}
+
+function getLoveRatingInfo(rating) {
+    const ratings = {
+        1: {
+            emoji: '🟢',
+            label: '아주 좋다 (Very Good)',
+            conclusion: '최고의 연애운입니다!<br>지금의 행복한 에너지를 만끽하세요.<br>우주가 두 사람의 궤도를 축복하고 있습니다. ✨'
+        },
+        2: {
+            emoji: '🔵',
+            label: '좋다 (Good)',
+            conclusion: '긍정적인 에너지가 흐르고 있습니다.<br>조금만 더 용기를 내면<br>당신의 별은 반드시 빛날 것입니다. 💫'
+        },
+        3: {
+            emoji: '🟡',
+            label: '보통 (Average)',
+            conclusion: '차분한 관리가 필요한 시기입니다.<br>서두르지 말고 천천히,<br>두 사람의 주파수를 조율해 보세요. 🌙'
+        },
+        4: {
+            emoji: '🟠',
+            label: '주의 (Caution)',
+            conclusion: '주의가 필요한 시기입니다.<br>잠시 멈춰서 자신의 마음에 귀를 기울여 보세요.<br>코어 시스템 점검의 시간이 필요합니다. 🛡️'
+        },
+        5: {
+            emoji: '🔴',
+            label: '위험 (Warning)',
+            conclusion: '마음의 방어 시스템을 가동할 때입니다.<br>자신을 가장 먼저 지켜주세요.<br>폭풍이 지나면, 더 단단한 내가 기다립니다. 🔥'
+        }
+    };
+    return ratings[rating] || ratings[3];
+}
+
+// ========== 초기화 ==========
 function restartGame() {
-    const modal = document.getElementById('result-modal');
-    modal.classList.remove('active');
+    // 모달 닫기
+    document.getElementById('result-modal').classList.remove('active');
+    document.getElementById('love-result-modal').classList.remove('active');
+
+    // 데이터 초기화
     selectedCards = [];
-    document.getElementById('select-count').innerText = 0;
-    
-    setTimeout(() => {
-        initApp();
-    }, 500);
+    currentMode = null;
+
+    // 카드 화면 숨기기, 모드 선택 화면 보이기
+    document.getElementById('reading-screen').classList.add('hidden');
+    document.getElementById('mode-select-screen').classList.remove('hidden');
 }
