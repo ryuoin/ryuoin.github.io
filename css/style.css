@@ -849,3 +849,123 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     max-width: 500px;
 }
 
+/* =============================================
+   Yes or No 결과 모달
+   ============================================= */
+.yesno-modal-title {
+    font-family: 'Hahmlet', serif;
+}
+
+.yesno-reading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.yesno-rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 2rem;
+    border-radius: 30px;
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.05rem;
+    border: 2px solid;
+    animation: badgePulseYesNo 2s ease-in-out infinite;
+}
+
+@keyframes badgePulseYesNo {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.3); }
+}
+
+.yesno-rating-badge.rating-yes { 
+    background: rgba(0, 230, 118, 0.15); 
+    color: #00e676; 
+    border-color: #00e676; 
+}
+
+.yesno-rating-badge.rating-no { 
+    background: rgba(239, 83, 80, 0.15); 
+    color: #ef5350; 
+    border-color: #ef5350; 
+}
+
+.yesno-card-large {
+    width: 200px;
+    height: 320px;
+}
+
+.yesno-rating-badge.rating-yes ~ .yesno-card-display .yesno-card-large {
+    border-color: #00e676;
+}
+
+.yesno-rating-badge.rating-no ~ .yesno-card-display .yesno-card-large {
+    border-color: #ef5350;
+}
+
+.yesno-card-display {
+    display: flex;
+    justify-content: center;
+}
+
+.yesno-desc-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.8rem;
+    border-radius: 12px;
+    border-top: 2px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.yesno-card-name {
+    font-family: 'Hahmlet', serif;
+    color: var(--gold-light);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.yesno-meaning {
+    color: #e0e0e0;
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.yesno-advice-box {
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    padding: 1.2rem;
+}
+
+.yesno-advice-label {
+    font-family: 'Hahmlet', serif;
+    color: var(--gold);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.yesno-advice {
+    color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.yesno-conclusion-text {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-family: 'Hahmlet', serif;
+    max-width: 500px;
+}
