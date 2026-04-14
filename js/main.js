@@ -40,6 +40,7 @@ function initModeSelect() {
     document.getElementById('btn-money-restart').addEventListener('click', restartGame);
     document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
     document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-lotto-home').addEventListener('click', restartGame);
     document.getElementById('btn-back-to-mode').addEventListener('click', restartGame);
 
     // 로또 시작 버튼 이벤트 등록
@@ -533,8 +534,10 @@ function initLotto() {
     document.getElementById('btn-lotto-restart').classList.add('hidden');
     
     const startBtn = document.getElementById('btn-lotto-start');
+    const homeBtn = document.getElementById('btn-lotto-home');
     startBtn.classList.remove('hidden');
     startBtn.disabled = false;
+    homeBtn.classList.remove('hidden');
     
     // 원통 내부에 초기 공 45개 랜덤 배치 (시각적 효과용)
     const spinner = document.getElementById('lotto-balls-spinner');
@@ -568,6 +571,7 @@ function createLottoBall(num) {
 function startLottoDraw() {
     document.getElementById('btn-lotto-start').disabled = true;
     document.getElementById('btn-lotto-start').classList.add('hidden');
+    document.getElementById('btn-lotto-home').classList.add('hidden');
     
     // 1~45 난수 생성 (중복 없이 6개)
     let nums = [];
