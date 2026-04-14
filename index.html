@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,12 @@
     <!-- 폰트 로드: Cinzel(영문/숫자, 신비로운 느낌), Noto Sans KR(한글 본문) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Hahmlet:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Hahmlet:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <!-- 배경을 위한 파티클/안개 효과 요소 -->
     <div class="stars"></div>
@@ -43,6 +47,11 @@
                     <span class="mode-btn-title">당신의 금전운</span>
                     <span class="mode-btn-desc">1장의 카드로 재물과 풍요의 흐름을 읽습니다</span>
                 </button>
+                <button id="btn-mode-lotto" class="mode-btn" data-mode="lotto">
+                    <span class="mode-btn-icon">🍀</span>
+                    <span class="mode-btn-title">이번주 행운 번호~!!</span>
+                    <span class="mode-btn-desc">우주의 기운이 담긴 행운의 번호 6개를 뽑습니다</span>
+                </button>
             </div>
         </div>
     </div>
@@ -67,7 +76,7 @@
     <div id="result-modal" class="modal-overlay">
         <div class="modal-content glass-panel">
             <h2 class="modal-title">당신의 이번주 운세</h2>
-            
+
             <div class="reading-container">
                 <!-- 카드 3장 가로 정렬 -->
                 <div class="cards-display">
@@ -92,15 +101,15 @@
             </div>
 
             <button id="btn-restart" class="btn-primary">다시 하기</button>
-            <p class="restart-caution"><br><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 선택에 집중하는 것이 좋습니다.</p>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
 
-        <!-- ========== Yes or No 결과 모달 ========== -->
+    <!-- ========== Yes or No 결과 모달 ========== -->
     <div id="yesno-result-modal" class="modal-overlay">
         <div class="modal-content glass-panel">
             <h2 class="modal-title yesno-modal-title">그래 결심했어~!</h2>
-            
+
             <div class="yesno-reading-container">
                 <!-- 결과 배지 (Yes/No) -->
                 <div id="yesno-rating-badge" class="yesno-rating-badge"></div>
@@ -125,7 +134,7 @@
             </div>
 
             <button id="btn-yesno-restart" class="btn-primary">다시 하기</button>
-            <p class="restart-caution"><br><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 선택에 집중하는 것이 좋습니다.</p>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
 
@@ -134,7 +143,7 @@
     <div id="love-result-modal" class="modal-overlay">
         <div class="modal-content glass-panel">
             <h2 class="modal-title love-modal-title">당신의 연애운</h2>
-            
+
             <div class="love-reading-container">
                 <!-- 등급 배지 -->
                 <div id="love-rating-badge" class="love-rating-badge"></div>
@@ -160,7 +169,7 @@
             </div>
 
             <button id="btn-love-restart" class="btn-primary">다시 하기</button>
-            <p class="restart-caution"><br><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 선택에 집중하는 것이 좋습니다.</p>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
 
@@ -168,7 +177,7 @@
     <div id="money-result-modal" class="modal-overlay">
         <div class="modal-content glass-panel">
             <h2 class="modal-title money-modal-title">당신의 금전운</h2>
-            
+
             <div class="money-reading-container">
                 <!-- 등급 배지 -->
                 <div id="money-rating-badge" class="money-rating-badge"></div>
@@ -193,13 +202,46 @@
             </div>
 
             <button id="btn-money-restart" class="btn-primary">다시 하기</button>
-            <p class="restart-caution"><br><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 선택에 집중하는 것이 좋습니다.</p>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
+    <!-- ========== 로또 추첨 모달 ========== -->
+    <div id="lotto-result-modal" class="modal-overlay">
+        <div class="modal-content glass-panel lotto-panel">
+            <h2 class="modal-title lotto-modal-title">이번주 행운 번호~!!</h2>
+            
+            <div class="lotto-container">
+                <!-- 원통 머신 영역 -->
+                <div class="lotto-machine">
+                    <div class="lotto-cylinder">
+                        <div class="lotto-balls-spinner" id="lotto-balls-spinner">
+                            <!-- JS를 통해 회전하는 공 이미지가 들어갑니다 -->
+                        </div>
+                        <div class="lotto-glass-reflection"></div>
+                    </div>
+                    <div class="lotto-dispenser"></div>
+                </div>
 
+                <!-- 추출된 결과 공이 나오는 곳 -->
+                <div class="lotto-draw-results" id="lotto-draw-results">
+                    <!-- JS에서 삽입 (최대 6개) -->
+                </div>
+
+                <!-- 결론 메시지 -->
+                <p class="lotto-conclusion-text" id="lotto-conclusion-text" style="opacity: 0;">
+                    당신의 주파수와 공명하는 숫자들이 모두 모였습니다.<br>이 번호들이 이번주 작지만 선명한 행운을 가져다주길 바랍니다. ✨
+                </p>
+                
+                <button id="btn-lotto-start" class="btn-primary lotto-start-btn">추첨 시작</button>
+            </div>
+
+            <button id="btn-lotto-restart" class="btn-primary hidden">처음으로</button>
+        </div>
+    </div>
 
     <!-- 스크립트 로드 -->
     <script src="js/tarotData.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
