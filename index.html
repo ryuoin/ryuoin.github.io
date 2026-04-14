@@ -28,6 +28,11 @@
                     <span class="mode-btn-title">당신의 이번주 운세</span>
                     <span class="mode-btn-desc">3장의 카드로 과거·현재·미래를 읽습니다</span>
                 </button>
+                <button id="btn-mode-yesno" class="mode-btn" data-mode="yesno">
+                    <span class="mode-btn-icon">⚖️</span>
+                    <span class="mode-btn-title">그래 결심했어~!</span>
+                    <span class="mode-btn-desc">1장의 카드로 명쾌한 Yes or No 해답을 얻습니다</span>
+                </button>
                 <button id="btn-mode-love" class="mode-btn" data-mode="love">
                     <span class="mode-btn-icon">💫</span>
                     <span class="mode-btn-title">당신의 연애운</span>
@@ -67,15 +72,15 @@
                 <!-- 카드 3장 가로 정렬 -->
                 <div class="cards-display">
                     <div class="reading-slot-mini">
-                        <div class="slot-title-mini">과거 <span>(원인:저번주 운세)</span></div>
+                        <div class="slot-title-mini">과거 <span>(원인)</span></div>
                         <div id="res-card-past" class="res-card-wrapper"></div>
                     </div>
                     <div class="reading-slot-mini">
-                        <div class="slot-title-mini">현재 <span>(상황:이번주 운세)</span></div>
+                        <div class="slot-title-mini">현재 <span>(상황)</span></div>
                         <div id="res-card-present" class="res-card-wrapper"></div>
                     </div>
                     <div class="reading-slot-mini">
-                        <div class="slot-title-mini">미래 <span>(조언:다음주 운세)</span></div>
+                        <div class="slot-title-mini">미래 <span>(조언)</span></div>
                         <div id="res-card-future" class="res-card-wrapper"></div>
                     </div>
                 </div>
@@ -84,13 +89,46 @@
                 <div class="combined-desc-box">
                     <div id="res-desc-combined" class="res-desc combined-desc"></div>
                 </div>
-                <div class="love-period-notice">🕰 이 주간 운세는 이번 주 토요일까지 적용됩니다</div>
             </div>
 
-            <button id="btn-restart" class="btn-primary">처음으로</button>
-            <p class="restart-caution"><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
+            <button id="btn-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
+
+        <!-- ========== Yes or No 결과 모달 ========== -->
+    <div id="yesno-result-modal" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <h2 class="modal-title yesno-modal-title">그래 결심했어~!</h2>
+            
+            <div class="yesno-reading-container">
+                <!-- 결과 배지 (Yes/No) -->
+                <div id="yesno-rating-badge" class="yesno-rating-badge"></div>
+
+                <!-- 카드 1장 -->
+                <div class="yesno-card-display">
+                    <div id="yesno-res-card" class="res-card-wrapper yesno-card-large"></div>
+                </div>
+
+                <!-- 해석 -->
+                <div class="yesno-desc-box">
+                    <div id="yesno-card-name" class="yesno-card-name"></div>
+                    <div id="yesno-meaning" class="yesno-meaning"></div>
+                    <div class="yesno-advice-box">
+                        <div class="yesno-advice-label">🌌 우주의 단호한 조언</div>
+                        <div id="yesno-advice" class="yesno-advice"></div>
+                    </div>
+                </div>
+
+                <!-- 결론 메시지 -->
+                <p id="yesno-conclusion" class="yesno-conclusion-text"></p>
+            </div>
+
+            <button id="btn-yesno-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
+        </div>
+    </div>
+
 
     <!-- ========== 연애운 결과 모달 ========== -->
     <div id="love-result-modal" class="modal-overlay">
@@ -121,8 +159,8 @@
                 <p id="love-conclusion" class="love-conclusion-text"></p>
             </div>
 
-            <button id="btn-love-restart" class="btn-primary">처음으로</button>            
-            <p class="restart-caution"><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
+            <button id="btn-love-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
 
@@ -148,17 +186,17 @@
                         <div class="money-advice-label">💰 우주의 재물 조언</div>
                         <div id="money-advice" class="money-advice"></div>
                     </div>
-                    <div class="love-period-notice">🕰 이 금전운은 약 2~3개월의 흐름에 적용됩니다</div>
                 </div>
 
                 <!-- 결론 메시지 -->
                 <p id="money-conclusion" class="money-conclusion-text"></p>
             </div>
 
-            <button id="btn-money-restart" class="btn-primary">처음으로</button>
-            <p class="restart-caution"><br>타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
+            <button id="btn-money-restart" class="btn-primary">다시 하기</button>
+            <p class="restart-caution">타로 카드는 동일한 질문을 여러번 반복하는 것보다<br>최초 한번의 카드 결과가 중요합니다.</p>
         </div>
     </div>
+
 
     <!-- 스크립트 로드 -->
     <script src="js/tarotData.js"></script>
