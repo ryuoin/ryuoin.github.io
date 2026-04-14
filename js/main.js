@@ -40,6 +40,7 @@ function initModeSelect() {
     document.getElementById('btn-money-restart').addEventListener('click', restartGame);
     document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
     document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-back-to-mode').addEventListener('click', restartGame);
 
     // 로또 시작 버튼 이벤트 등록
     const loccoBtn = document.getElementById('btn-lotto-start');
