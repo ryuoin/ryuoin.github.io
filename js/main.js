@@ -34,6 +34,13 @@ function initModeSelect() {
     document.getElementById('btn-mode-yesno').addEventListener('click', () => startMode('yesno'));
     document.getElementById('btn-mode-lotto').addEventListener('click', () => startMode('lotto'));
 
+    // 다시하기 버튼 이벤트 일괄 등록 (최초 1회)
+    document.getElementById('btn-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-love-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-money-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
+
     // 로또 시작 버튼 이벤트 등록
     const loccoBtn = document.getElementById('btn-lotto-start');
     if (loccoBtn) loccoBtn.addEventListener('click', startLottoDraw);
@@ -86,13 +93,6 @@ function initDeck() {
     deck = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deck);
     renderCards();
-
-    // 다시하기 버튼 등록
-    document.getElementById('btn-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-love-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-money-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
 }
 
 function renderCards() {
