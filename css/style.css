@@ -237,7 +237,9 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 .status-bar {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
     padding: 0.5rem 1.5rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(212, 175, 55, 0.3);
@@ -245,6 +247,24 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     font-weight: bold;
     color: var(--gold-light);
     box-shadow: 0 0 10px var(--purple-glow);
+}
+
+.btn-back-mode {
+    background: transparent;
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-family: 'Hahmlet', serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-back-mode:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
 }
 
 /* 카드 컨테이너 */
