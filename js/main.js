@@ -32,6 +32,11 @@ function initModeSelect() {
     document.getElementById('btn-mode-love').addEventListener('click', () => startMode('love'));
     document.getElementById('btn-mode-money').addEventListener('click', () => startMode('money'));
     document.getElementById('btn-mode-yesno').addEventListener('click', () => startMode('yesno'));
+    document.getElementById('btn-mode-lotto').addEventListener('click', () => startMode('lotto'));
+
+    // 로또 시작 버튼 이벤트 등록
+    const loccoBtn = document.getElementById('btn-lotto-start');
+    if (loccoBtn) loccoBtn.addEventListener('click', startLottoDraw);
 }
 
 function startMode(mode) {
@@ -40,6 +45,14 @@ function startMode(mode) {
 
     const modeScreen = document.getElementById('mode-select-screen');
     const readingScreen = document.getElementById('reading-screen');
+
+    // 로또 모드는 카드 뽑기 없이 바로 전용 모달 띄우기
+    if (mode === 'lotto') {
+        modeScreen.classList.add('hidden');
+        document.getElementById('lotto-result-modal').classList.add('active');
+        initLotto();
+        return;
+    }
 
     // 모드에 따른 텍스트 변경
     if (mode === 'weekly') {
@@ -79,6 +92,7 @@ function initDeck() {
     document.getElementById('btn-love-restart').addEventListener('click', restartGame);
     document.getElementById('btn-money-restart').addEventListener('click', restartGame);
     document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
 }
 
 function renderCards() {
@@ -245,7 +259,7 @@ function showWeeklyResult() {
                 당신이 걸어온 모든 길은,<br>오늘의 당신을 빚어낸 소중한 기적이었습니다.<br><br>
                 지금 이 순간, 두려워하지 마세요.<br>
                 당신은 이미 충분히 용감하고, 충분히 아름답습니다.<br><br>
-                우주는 언제나 당신의 편에서 당신을 응원하고 있습니다.
+                우주는 언제나 당신의 편에서 — 조용히, 그러나 단단히 — 당신을 응원하고 있습니다.
             </p>
         `;
     }
@@ -344,10 +358,14 @@ function restartGame() {
     document.getElementById('love-result-modal').classList.remove('active');
     document.getElementById('money-result-modal').classList.remove('active');
     document.getElementById('yesno-result-modal').classList.remove('active');
+    document.getElementById('lotto-result-modal').classList.remove('active');
 
     // 데이터 초기화
     selectedCards = [];
     currentMode = null;
+    if (typeof lottoInterval !== 'undefined' && lottoInterval) {
+        clearInterval(lottoInterval);
+    }
 
     // 카드 화면 숨기기, 모드 선택 화면 보이기
     document.getElementById('reading-screen').classList.add('hidden');
@@ -497,4 +515,86 @@ function showYesNoResult() {
     }
 
     modal.classList.add('active');
+}
+
+// ========== 이번주 행운 번호 (로또) 추첨 로직 ==========
+let lottoNumbers = [];
+let lottoInterval = null;
+
+function initLotto() {
+    lottoNumbers = [];
+    const drawResults = document.getElementById('lotto-draw-results');
+    if (drawResults) drawResults.innerHTML = '';
+    
+    const conclusion = document.getElementById('lotto-conclusion-text');
+    if (conclusion) conclusion.style.opacity = '0';
+    
+    document.getElementById('btn-lotto-restart').classList.add('hidden');
+    
+    const startBtn = document.getElementById('btn-lotto-start');
+    startBtn.classList.remove('hidden');
+    startBtn.disabled = false;
+    
+    // 원통 내부에 초기 공 45개 랜덤 배치 (시각적 효과용)
+    const spinner = document.getElementById('lotto-balls-spinner');
+    if (spinner) {
+        spinner.innerHTML = '';
+        spinner.classList.remove('spinning');
+        for(let i = 1; i <= 45; i++) {
+            const ball = createLottoBall(i);
+            // 원통 내부에 무작위 위치로 흩뿌림
+            ball.style.position = 'absolute';
+            ball.style.left = (Math.random() * 80 + 10) + '%';
+            ball.style.top = (Math.random() * 80 + 10) + '%';
+            spinner.appendChild(ball);
+        }
+    }
+}
+
+function createLottoBall(num) {
+    const ball = document.createElement('div');
+    // 로또 공 색상 분류 (10단위)
+    let group = Math.floor((num - 1) / 10);
+    ball.className = 'lotto-ball num-group-' + group;
+    
+    const numText = document.createElement('span');
+    numText.textContent = num;
+    ball.appendChild(numText);
+    
+    return ball;
+}
+
+function startLottoDraw() {
+    document.getElementById('btn-lotto-start').disabled = true;
+    document.getElementById('btn-lotto-start').classList.add('hidden');
+    
+    // 1~45 난수 생성 (중복 없이 6개)
+    let nums = [];
+    for(let i=1; i<=45; i++) nums.push(i);
+    shuffleArray(nums);
+    lottoNumbers = nums.slice(0, 6).sort((a,b) => a - b);
+    
+    // 원통 회전 효과 가동
+    const spinner = document.getElementById('lotto-balls-spinner');
+    if (spinner) spinner.classList.add('spinning');
+    
+    let drawCount = 0;
+    const drawResults = document.getElementById('lotto-draw-results');
+    
+    lottoInterval = setInterval(() => {
+        if(drawCount >= 6) {
+            clearInterval(lottoInterval);
+            if(spinner) spinner.classList.remove('spinning');
+            document.getElementById('lotto-conclusion-text').style.opacity = '1';
+            document.getElementById('btn-lotto-restart').classList.remove('hidden');
+            return;
+        }
+        
+        const num = lottoNumbers[drawCount];
+        const ball = createLottoBall(num);
+        ball.classList.add('pop-out');
+        drawResults.appendChild(ball);
+        
+        drawCount++;
+    }, 1200); // 1.2초마다 1개씩 배출
 }
