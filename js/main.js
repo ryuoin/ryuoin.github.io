@@ -31,6 +31,7 @@ function initModeSelect() {
     document.getElementById('btn-mode-weekly').addEventListener('click', () => startMode('weekly'));
     document.getElementById('btn-mode-love').addEventListener('click', () => startMode('love'));
     document.getElementById('btn-mode-money').addEventListener('click', () => startMode('money'));
+    document.getElementById('btn-mode-yesno').addEventListener('click', () => startMode('yesno'));
 }
 
 function startMode(mode) {
@@ -48,6 +49,10 @@ function startMode(mode) {
     } else if (mode === 'love') {
         document.getElementById('header-title').textContent = '당신의 연애운';
         document.getElementById('header-desc').textContent = '당신의 사랑을 비추어줄 1장의 카드를 선택하세요.';
+        document.getElementById('max-count').textContent = '1';
+    } else if (mode === 'yesno') {
+        document.getElementById('header-title').textContent = '그래 결심했어~!';
+        document.getElementById('header-desc').textContent = '명쾌한 해답이 필요한가요? 당신의 결정을 비추어줄 1장의 카드를 선택하세요.';
         document.getElementById('max-count').textContent = '1';
     } else {
         document.getElementById('header-title').textContent = '당신의 금전운';
@@ -73,6 +78,7 @@ function initDeck() {
     document.getElementById('btn-restart').addEventListener('click', restartGame);
     document.getElementById('btn-love-restart').addEventListener('click', restartGame);
     document.getElementById('btn-money-restart').addEventListener('click', restartGame);
+    document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
 }
 
 function renderCards() {
@@ -160,6 +166,8 @@ function handleCardClick(cardElem, cardId) {
                 showWeeklyResult();
             } else if (currentMode === 'love') {
                 showLoveResult();
+            } else if (currentMode === 'yesno') {
+                showYesNoResult();
             } else {
                 showMoneyResult();
             }
@@ -237,7 +245,7 @@ function showWeeklyResult() {
                 당신이 걸어온 모든 길은,<br>오늘의 당신을 빚어낸 소중한 기적이었습니다.<br><br>
                 지금 이 순간, 두려워하지 마세요.<br>
                 당신은 이미 충분히 용감하고, 충분히 아름답습니다.<br><br>
-                우주는 언제나 당신의 편에서 당신을 응원하고 있습니다.
+                우주는 언제나 당신의 편에서 — 조용히, 그러나 단단히 — 당신을 응원하고 있습니다.
             </p>
         `;
     }
@@ -335,6 +343,7 @@ function restartGame() {
     document.getElementById('result-modal').classList.remove('active');
     document.getElementById('love-result-modal').classList.remove('active');
     document.getElementById('money-result-modal').classList.remove('active');
+    document.getElementById('yesno-result-modal').classList.remove('active');
 
     // 데이터 초기화
     selectedCards = [];
@@ -427,4 +436,65 @@ function getMoneyRatingInfo(rating) {
         }
     };
     return ratings[rating] || ratings[3];
+}
+
+// ========== Yes or No 운세 결과 ==========
+const yesCardsList = [0, 1, 3, 4, 6, 7, 8, 10, 17, 19, 21];
+
+function showYesNoResult() {
+    const modal = document.getElementById('yesno-result-modal');
+    const cardId = selectedCards[0];
+    const cardData = tarotDataList.find(item => item.id === cardId);
+
+    if (!cardData) return;
+
+    const isYes = yesCardsList.includes(cardId);
+    
+    // 등급 배지 
+    const badge = document.getElementById('yesno-rating-badge');
+    badge.className = 'yesno-rating-badge rating-' + (isYes ? 'yes' : 'no');
+    badge.innerHTML = '<span>' + (isYes ? '⭕' : '❌') + '</span> <span>' + (isYes ? '하자~!!' : '하지마~!!') + '</span>';
+
+    // 카드 이미지
+    const cardWrapper = document.getElementById('yesno-res-card');
+    cardWrapper.innerHTML = '';
+    const img = document.createElement('img');
+    const tryLoadImage = (ext) => { img.src = 'images/' + cardId + '.' + ext; };
+    img.onerror = () => {
+        if (img.src.endsWith('.png')) {
+            tryLoadImage('jpg');
+        } else {
+            img.style.display = 'none';
+            const fallbackText = document.createElement('div');
+            fallbackText.className = 'fallback-title';
+            fallbackText.innerHTML = cardData.name;
+            cardWrapper.appendChild(fallbackText);
+            fallbackText.style.display = 'flex';
+        }
+    };
+    tryLoadImage('png');
+    cardWrapper.appendChild(img);
+
+    const nameLabel = document.createElement('div');
+    nameLabel.className = 'card-name-label';
+    nameLabel.innerHTML = cardData.enName || cardData.name;
+    cardWrapper.appendChild(nameLabel);
+
+    // 텍스트 채우기
+    document.getElementById('yesno-card-name').textContent = cardData.name;
+    document.getElementById('yesno-meaning').textContent = cardData.keyword;
+    
+    // Yes or No 운세 결론
+    const adviceEl = document.getElementById('yesno-advice');
+    const conclusionEl = document.getElementById('yesno-conclusion');
+
+    if (isYes) {
+        adviceEl.innerHTML = '이 카드는 <strong>강력한 긍정의 힘</strong>을 품고 있습니다.<br>당신의 선택은 올바른 궤도에 올랐으며, 주저하지 말고 나아가야 할 때입니다.';
+        conclusionEl.innerHTML = '우주가 당신의 에너지를 지지합니다.<br>용기를 내어 과감하게 실행하세요! ✨';
+    } else {
+        adviceEl.innerHTML = '이 카드는 <strong>신중함과 재고의 메시지</strong>를 전하고 있습니다.<br>지금은 잠시 멈추어 상황을 되돌아보고 냉정하게 판단해야 할 때입니다.';
+        conclusionEl.innerHTML = '무리한 진행은 피하는 것이 좋습니다.<br>쉬어가는 것도 하나의 훌륭한 선택입니다. 🛡️';
+    }
+
+    modal.classList.add('active');
 }
