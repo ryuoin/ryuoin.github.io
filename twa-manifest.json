@@ -1,0 +1,24 @@
+{
+    "packageId": "com.ryu.tarot.major",
+    "host": "ryuoin.github.io",
+    "name": "Major Tarot Reading",
+    "shortName": "Major Tarot",
+    "themeColor": "#0d0f1b",
+    "navigationColor": "#0d0f1b",
+    "backgroundColor": "#0d0f1b",
+    "startUrl": "/",
+    "iconUrl": "https://ryuoin.github.io/images/app-icon-512.png",
+    "maskableIconUrl": "https://ryuoin.github.io/images/app-icon-512.png",
+    "splashScreenFadeOutDuration": 300,
+    "signingKey": {
+          "path": "./tarot-key.keystore",
+          "alias": "tarot-key-alias"
+    },
+    "appVersionCode": 1,
+    "appVersionName": "1.0.0",
+    "generatorApp": "bubblewrap-cli",
+    "webManifestUrl": "https://ryuoin.github.io/manifest.json",
+    "fallbackType": "customtabs",
+    "display": "standalone",
+    "orientation": "portrait"
+}
