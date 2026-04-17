@@ -2,7 +2,7 @@
     "name": "Major Tarot Reading",
     "short_name": "Major Tarot",
     "description": "Premium Major Tarot",
-    "start_url": "index.html",
+    "start_url": "index.html",,
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#0d0f1b",
