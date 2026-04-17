@@ -1,24 +1,24 @@
 {
-  "name": "메이저 타로 리딩",
-  "short_name": "메이저 타로",
-  "description": "SF-고대 문명 테마가 결합된 나만의 프리미엄 메이저 타로 운세 앱",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0d0f1b",
-  "theme_color": "#0d0f1b",
-  "icons": [
-    {
-      "src": "./images/app-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./images/app-icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+    "name": "Major Tarot Reading",
+    "short_name": "Major Tarot",
+    "description": "Premium Major Tarot",
+    "start_url": "index.html",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0d0f1b",
+    "theme_color": "#0d0f1b",
+    "icons": [
+          {
+                  "src": "./images/app-icon-192.png",
+                  "sizes": "192x192",
+                  "type": "image/png",
+                  "purpose": "any"
+          },
+          {
+                  "src": "./images/app-icon-512.png",
+                  "sizes": "512x512",
+                  "type": "image/png",
+                  "purpose": "maskable"
+          }
+    ]
 }
