@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tarot-app-v1';
+const CACHE_NAME = 'tarot-app-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -6,8 +6,8 @@ const ASSETS_TO_CACHE = [
   './js/main.js',
   './js/tarotData.js',
   './manifest.json',
-  './images/app-icon-192.png',
-  './images/app-icon-512.png'
+  './images/icon-192.png',
+  './images/icon-512.png'
   // 기타 22장의 타로 카드 이미지는 용량이 크므로 앱 설치 후 첫 실행 시점이나 뽑힐 때 동적으로 캐시됩니다.
 ];
 
