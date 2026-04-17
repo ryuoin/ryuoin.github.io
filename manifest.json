@@ -10,26 +10,14 @@
   "id": "/?source=pwa",
   "icons": [
     {
-      "src": "./images/app-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any"
-    },
-    {
-      "src": "./images/app-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "maskable"
-    },
-    {
       "src": "./images/app-icon-512.png",
-      "sizes": "512x512",
+      "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "any"
     },
     {
       "src": "./images/app-icon-512.png",
-      "sizes": "512x512",
+      "sizes": "1024x1024",
       "type": "image/jpeg",
       "purpose": "maskable"
     }
@@ -37,7 +25,7 @@
   "screenshots": [
     {
       "src": "./images/screenshot1.png",
-      "sizes": "1920x1080",
+      "sizes": "1618x917",
       "type": "image/png",
       "form_factor": "wide",
       "label": "메인 화면"
