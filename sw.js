@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tarot-app-v6';
+const CACHE_NAME = 'tarot-app-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -7,8 +7,18 @@ const ASSETS_TO_CACHE = [
   './js/tarotData.js',
   './manifest.json',
   './images/icon-192.png',
-  './images/icon-512.png'
-  // 기타 22장의 타로 카드 이미지는 용량이 크므로 앱 설치 후 첫 실행 시점이나 뽑힐 때 동적으로 캐시됩니다.
+  './images/icon-512.png',
+  './images/card-back.png',
+  './images/tarot-cloth.png',
+  './images/lotto-bg.png',
+  './images/conclusion.png',
+  // 카드 22장 사전 캐시 (0~21)
+  './images/0.png','./images/1.png','./images/2.png','./images/3.png',
+  './images/4.png','./images/5.png','./images/6.png','./images/7.png',
+  './images/8.png','./images/9.png','./images/10.png','./images/11.png',
+  './images/12.png','./images/13.png','./images/14.png','./images/15.png',
+  './images/16.png','./images/17.png','./images/18.png','./images/19.png',
+  './images/20.png','./images/21.png'
 ];
 
 // 1. Install Event (캐시 초기화)
