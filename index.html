@@ -353,7 +353,7 @@
         </div>
     </div>
 
-    <!-- ========== "그 사람 지금 내 생각 할까?" 프리미엄 모달 ========== -->
+    <!-- ========== "그 사람 지금 내 생각 할까?" 프리미엄 진입 모달 ========== -->
     <div id="thinking-modal" class="modal-overlay" style="z-index: 150;">
         <div class="thinking-panel glass-panel">
             <!-- STEP 1: 관계 유형 선택 -->
@@ -377,49 +377,42 @@
                     <div id="countdown-number">3</div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- STEP 3: 카드 선택 및 공개 -->
-            <div id="thinking-step-3" class="thinking-step">
-                <h2 id="thinking-step-title" class="modal-title">카드를 4장 선택하세요</h2>
-                
-                <!-- 22장 카드 펼침 영역 -->
-                <div id="thinking-selection-area" class="thinking-selection-area">
-                    <div id="thinking-spread-container" class="thinking-spread-container"></div>
-                    <div class="selection-status">
-                        선택됨: <span id="thinking-select-count">0</span> / 4
+    <!-- ========== "그 사람 지금 내 생각 할까?" 프리미엄 결과 모달 ========== -->
+    <div id="thinking-result-modal" class="modal-overlay">
+        <div class="modal-content glass-panel" style="max-height: 90vh; overflow-y: auto;">
+            <h2 id="thinking-modal-main-title" class="modal-title">카드를 하나씩 선택하세요</h2>
+
+            <!-- 1. 하나씩 까보기 영역 -->
+            <div id="thinking-reveal-area">
+                <div class="thinking-card-grid">
+                    <div class="thinking-card-wrapper" data-pos="1" onclick="revealThinkingCard(1)">
+                        <div class="thinking-card" id="tc-1"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">그 사람의 현재</div>
+                    </div>
+                    <div class="thinking-card-wrapper" data-pos="2" onclick="revealThinkingCard(2)">
+                        <div class="thinking-card" id="tc-2"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">나를 향한 마음</div>
+                    </div>
+                    <div class="thinking-card-wrapper" data-pos="3" onclick="revealThinkingCard(3)">
+                        <div class="thinking-card" id="tc-3"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">둘 사이의 온도</div>
+                    </div>
+                    <div class="thinking-card-wrapper" data-pos="4" onclick="revealThinkingCard(4)">
+                        <div class="thinking-card" id="tc-4"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">7일 내 신호</div>
                     </div>
                 </div>
-
-                <!-- 고른 4장 배치 및 순차 공개 영역 (초기 숨김) -->
-                <div id="thinking-result-area" class="thinking-result-area hidden">
-                    <div class="thinking-card-grid">
-                        <div class="thinking-card-wrapper" data-pos="1" onclick="revealThinkingCard(1)">
-                            <div class="thinking-card" id="tc-1"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                            <div class="tc-label">그 사람의 현재</div>
-                        </div>
-                        <div class="thinking-card-wrapper" data-pos="2" onclick="revealThinkingCard(2)">
-                            <div class="thinking-card" id="tc-2"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                            <div class="tc-label">나를 향한 마음</div>
-                        </div>
-                        <div class="thinking-card-wrapper" data-pos="3" onclick="revealThinkingCard(3)">
-                            <div class="thinking-card" id="tc-3"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                            <div class="tc-label">둘 사이의 온도</div>
-                        </div>
-                        <div class="thinking-card-wrapper" data-pos="4" onclick="revealThinkingCard(4)">
-                            <div class="thinking-card" id="tc-4"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                            <div class="tc-label">7일 내 신호</div>
-                        </div>
-                    </div>
-                    <!-- 슬롯별 텍스트 박스 -->
-                    <div id="thinking-reading-box" class="reading-box" style="display:none;"></div>
-                </div>
-                
+                <!-- 슬롯별 텍스트 박스 -->
+                <div id="thinking-reading-box" class="reading-box" style="display:none; margin-top:20px;"></div>
                 <button id="btn-thinking-next" class="btn-primary" style="opacity:0; pointer-events:none; margin-top:15px;" onclick="showThinkingSummary()">종합 분석 보기</button>
             </div>
 
-            <!-- STEP 4: 종합 분석 화면 -->
-            <div id="thinking-step-5" class="thinking-step step-summary">
-                <h2 class="modal-title">그 사람의 심층 분석</h2>
+            <!-- 2. 종합 분석 화면 영역 -->
+            <div id="thinking-summary-area" class="thinking-step step-summary" style="display:none; margin-top: 20px;">
+                <h2 class="modal-title" style="font-size: 1.2rem; margin-top: 10px;">심층 분석</h2>
                 <div class="viz-container">
                     <div class="viz-title">온도계: 나를 향한 마음</div>
                     <div class="temperature-gauge">
@@ -452,9 +445,10 @@
                     </div>
                 </div>
                 <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:0.85rem; margin-top:20px;">에너지는 매일 바뀝니다. 내일 다시 읽어보세요.</p>
+                
                 <div style="display:flex; gap:10px; margin-top:20px; width:100%;">
                     <button class="btn-primary" style="flex:1;" onclick="shareThinkingResult()">공유하기</button>
-                    <button class="btn-back-mode" style="flex:1;" onclick="closeThinkingMode()">닫기</button>
+                    <button id="btn-thinking-restart" class="btn-back-mode" style="flex:1;">처음으로</button>
                 </div>
             </div>
         </div>
