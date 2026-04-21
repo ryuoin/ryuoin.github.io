@@ -241,11 +241,22 @@ function initSpread(mode) {
             card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
             rowEl.appendChild(card);
 
-            // 카드 딜링 애니메이션: 순차적으로 촤라락 펼쳐지기
-            const baseDelay = rowIdx * 550; // 두 번째 줄은 첫 번째 줄 끝난 뒤 시작
-            const cardDelay = baseDelay + (i * 40); // 카드마다 40ms 간격
+            // 카드 딜링 애니메이션: deal-init(중앙 스택) → deal-animate(부채꼴)
+            // rAF 이중 중첩으로 브라우저가 초기 상태를 먼저 페인트한 뒤 트랜지션 시작
+            const baseDelay = rowIdx * 600; // 두 번째 줄은 첫 줄 끝난 뒤 시작
+            const cardDelay = baseDelay + (i * 45); // 카드마다 45ms 간격
+
+            // 즉시 deal-init 클래스 추가 (DOM 삽입 직후 opacity:0, 중앙 위치)
+            card.classList.add('deal-init');
+
             setTimeout(() => {
-                card.classList.add('deal-animate');
+                // rAF 두 번 중첩: 첫 번째 rAF에서 레이아웃 계산, 두 번째 rAF에서 클래스 교체
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        card.classList.remove('deal-init');
+                        card.classList.add('deal-animate');
+                    });
+                });
             }, cardDelay);
         });
 
