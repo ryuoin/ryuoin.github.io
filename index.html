@@ -78,6 +78,12 @@
                     <span class="mode-btn-title">이번주 행운 번호~!!</span>
                     <span class="mode-btn-desc">우주의 기운이 담긴 6개의 번호를 뽑습니다</span>
                 </button>
+                <button id="btn-mode-thinking" class="mode-btn premium-only-btn" onclick="startThinkingMode()">
+                    <span class="mode-btn-icon">💭</span>
+                    <span class="mode-btn-title">그 사람 지금 내 생각 할까?</span>
+                    <span class="mode-btn-desc">그 사람의 마음과 연락 타이밍을 해독합니다</span>
+                    <span class="premium-badge">PREMIUM</span>
+                </button>
             </div>
         </div>
     </div>
@@ -344,6 +350,100 @@
 
             <button id="btn-daily-restart" class="btn-primary">처음으로</button>
             <p class="restart-caution"><br>오늘의 카드는 하루 한 번만 뽑을 수 있습니다.<br>오늘의 에너지에 집중해 보세요.</p>
+        </div>
+    </div>
+
+    <!-- ========== "그 사람 지금 내 생각 할까?" 프리미엄 모달 ========== -->
+    <div id="thinking-modal" class="modal-overlay" style="z-index: 150;">
+        <div class="thinking-panel glass-panel">
+            <!-- STEP 1: 관계 유형 선택 -->
+            <div id="thinking-step-1" class="thinking-step active">
+                <h2 class="modal-title">그 사람과의 관계는 어떤가요?</h2>
+                <div class="relation-grid">
+                    <button class="relation-btn" onclick="selectRelationship('love')">💘 짝사랑<br><small>먼저 다가가도 될까?</small></button>
+                    <button class="relation-btn" onclick="selectRelationship('some')">💫 썸 중<br><small>연락 올 확률은?</small></button>
+                    <button class="relation-btn" onclick="selectRelationship('couple')">💑 연인<br><small>지금 우리 사이 온도</small></button>
+                    <button class="relation-btn" onclick="selectRelationship('ex')">💔 전 연인<br><small>다시 시작될까?</small></button>
+                    <button class="relation-btn" onclick="selectRelationship('friend')">👥 특별한 친구<br><small>그 이상의 감정이 있을까?</small></button>
+                </div>
+                <button class="btn-back-mode" style="margin-top:20px; width:100%;" onclick="document.getElementById('thinking-modal').classList.remove('active')">취소</button>
+            </div>
+
+            <!-- STEP 2: 집중 의식 -->
+            <div id="thinking-step-2" class="thinking-step">
+                <h2 class="modal-title">눈을 감고<br>그 사람을 떠올려보세요</h2>
+                <div class="countdown-container">
+                    <svg class="countdown-svg"><circle class="countdown-circle" cx="60" cy="60" r="54"></circle></svg>
+                    <div id="countdown-number">3</div>
+                </div>
+            </div>
+
+            <!-- STEP 3: 카드 순차 공개 -->
+            <div id="thinking-step-3" class="thinking-step">
+                <h2 class="modal-title">카드를 순서대로 선택하세요</h2>
+                <div class="thinking-card-grid">
+                    <div class="thinking-card-wrapper" data-pos="1" onclick="revealThinkingCard(1)">
+                        <div class="thinking-card" id="tc-1"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">그 사람의 현재</div>
+                    </div>
+                    <div class="thinking-card-wrapper locked" data-pos="2" onclick="revealThinkingCard(2)">
+                        <div class="thinking-card" id="tc-2"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">나를 향한 마음</div>
+                    </div>
+                    <div class="thinking-card-wrapper locked" data-pos="3" onclick="revealThinkingCard(3)">
+                        <div class="thinking-card" id="tc-3"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">둘 사이의 온도</div>
+                    </div>
+                    <div class="thinking-card-wrapper locked" data-pos="4" onclick="revealThinkingCard(4)">
+                        <div class="thinking-card" id="tc-4"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                        <div class="tc-label">7일 내 신호</div>
+                    </div>
+                </div>
+                <!-- 슬롯별 텍스트 박스 -->
+                <div id="thinking-reading-box" class="reading-box" style="display:none;"></div>
+                <button id="btn-thinking-next" class="btn-primary" style="opacity:0; pointer-events:none; margin-top:15px;" onclick="showThinkingSummary()">종합 분석 보기</button>
+            </div>
+
+            <!-- STEP 4: 종합 분석 화면 -->
+            <div id="thinking-step-5" class="thinking-step step-summary">
+                <h2 class="modal-title">그 사람의 심층 분석</h2>
+                <div class="viz-container">
+                    <div class="viz-title">온도계: 나를 향한 마음</div>
+                    <div class="temperature-gauge">
+                        <div class="temp-bar"><div id="temp-marker" class="temp-marker"></div></div>
+                        <div class="temp-labels"><span>차가움</span><span>뜨거움</span></div>
+                        <div id="temp-text" class="viz-desc"></div>
+                    </div>
+                </div>
+                <div class="viz-container">
+                    <div class="viz-title">연락 에너지 게이지</div>
+                    <div class="energy-gauge">
+                        <div class="energy-bar"><div id="energy-fill" class="energy-fill"></div></div>
+                        <div class="energy-text"><span id="energy-value">0</span>%</div>
+                        <div id="energy-desc" class="viz-desc"></div>
+                    </div>
+                </div>
+                <div class="viz-container">
+                    <div class="viz-title">7일 내 변화 신호</div>
+                    <div class="timeline-bar">
+                        <div class="day" id="day-0">월</div><div class="day" id="day-1">화</div><div class="day" id="day-2">수</div><div class="day" id="day-3">목</div><div class="day" id="day-4">금</div><div class="day" id="day-5">토</div><div class="day" id="day-6">일</div>
+                    </div>
+                    <div id="timeline-text" class="viz-desc"></div>
+                </div>
+                <div class="viz-container">
+                    <div class="viz-title">우주가 당신에게 보내는 신호</div>
+                    <div class="action-buttons">
+                        <div id="action-wait" class="action-btn">기다리세요</div>
+                        <div id="action-contact" class="action-btn">먼저 연락하세요</div>
+                        <div id="action-focus" class="action-btn">자신에게 집중하세요</div>
+                    </div>
+                </div>
+                <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:0.85rem; margin-top:20px;">에너지는 매일 바뀝니다. 내일 다시 읽어보세요.</p>
+                <div style="display:flex; gap:10px; margin-top:20px; width:100%;">
+                    <button class="btn-primary" style="flex:1;" onclick="shareThinkingResult()">공유하기</button>
+                    <button class="btn-back-mode" style="flex:1;" onclick="closeThinkingMode()">닫기</button>
+                </div>
+            </div>
         </div>
     </div>
 
