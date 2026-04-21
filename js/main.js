@@ -57,6 +57,13 @@ function toggleTestPremium() {
 }
 
 function updatePremiumTestButton() {
+    const isPrem = isPremium();
+    if (isPrem) {
+        document.body.classList.add('premium-mode');
+    } else {
+        document.body.classList.remove('premium-mode');
+    }
+
     const btn = document.getElementById('test-premium-toggle');
     if (btn) {
         const isPrem = localStorage.getItem('isPremium') === 'true';
@@ -199,6 +206,13 @@ function startMode(mode) {
 function initSpread(mode) {
     const container = document.getElementById('daily-spread-container');
     container.innerHTML = '';
+    
+    // 프리미엄 상태에 따라 클래스 토글 (프리미엄 전용 뒷면 이미지 적용을 위함)
+    if (isPremium()) {
+        document.body.classList.add('premium-mode');
+    } else {
+        document.body.classList.remove('premium-mode');
+    }
 
     const deckAll = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deckAll);
