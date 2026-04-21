@@ -119,6 +119,9 @@ function initModeSelect() {
     document.getElementById('btn-lotto-home').addEventListener('click', restartGame);
     document.getElementById('btn-back-to-mode').addEventListener('click', restartGame);
     document.getElementById('btn-daily-restart').addEventListener('click', restartGame);
+    
+    const thinkingRestartBtn = document.getElementById('btn-thinking-restart');
+    if (thinkingRestartBtn) thinkingRestartBtn.addEventListener('click', restartGame);
 
     const lottoBtn = document.getElementById('btn-lotto-start');
     if (lottoBtn) lottoBtn.addEventListener('click', startLottoDraw);
@@ -187,6 +190,7 @@ function startMode(mode) {
         love:   { title: '당신의 연애운',      desc: '당신의 사랑을 비추어줄 카드 한 장이 당신을 기다립니다.',                  max: 1 },
         yesno:  { title: '그래 결심했어~!',    desc: '명쾌한 해답을 원하나요? 마음이 이끌리는 카드 한 장을 선택하세요.',         max: 1 },
         money:  { title: '당신의 금전운',      desc: '재물과 풍요의 흐름을 비추어줄 카드를 한 장 선택하세요.',                  max: 1 },
+        thinking: { title: '그 사람 지금 내 생각 할까?', desc: '당신과 그 사람을 이어줄 4장의 카드를 선택하세요.', max: 4 }
     };
     const cfg = modeConfig[mode];
     document.getElementById('header-title').textContent = cfg.title;
@@ -281,7 +285,7 @@ function initSpread(mode) {
 function handleSpreadCardClick(cardEl, cardId, mode) {
     if (cardEl.classList.contains('selected') || cardEl.classList.contains('disabled')) return;
 
-    const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : 1);
+    const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : (mode === 'thinking' ? 4 : 1));
 
     // daily: localStorage 저장
     if (mode === 'daily') {
@@ -320,6 +324,7 @@ function handleSpreadCardClick(cardEl, cardId, mode) {
         else if (mode === 'weekly') { showWeeklyResult();   }
         else if (mode === 'love')   { showLoveResult();     }
         else if (mode === 'yesno')  { showYesNoResult();    }
+        else if (mode === 'thinking') { showThinkingResultSummary(); }
         else                        { showMoneyResult();    }
 
         incrementReadingCount();
@@ -676,7 +681,7 @@ function showYesNoResult() {
 
 // ========== 초기화 ==========
 function restartGame() {
-    ['result-modal','love-result-modal','money-result-modal','yesno-result-modal','lotto-result-modal','daily-result-modal'].forEach(id => {
+    ['result-modal','love-result-modal','money-result-modal','yesno-result-modal','lotto-result-modal','daily-result-modal','thinking-result-modal'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.remove('active');
     });
@@ -841,156 +846,56 @@ function startFocusRitual() {
             numEl.innerText = count;
         } else {
             clearInterval(intv);
-            initThinkingCards();
+            closeThinkingMode();
+            startMode('thinking');
         }
     }, 1000);
 }
 
-function initThinkingCards() {
-    // 이제 직접 선택하므로, 이 함수는 22장 카드를 펼쳐주는 역할을 합니다.
-    renderThinkingSpread();
-}
-
-function renderThinkingSpread() {
-    const container = document.getElementById('thinking-spread-container');
-    container.innerHTML = '';
+// ========== 그 사람 지금 내 생각 할까? 결과 (1장씩 까보기) ==========
+function showThinkingResultSummary() {
+    const modal = document.getElementById('thinking-result-modal');
+    document.getElementById('thinking-modal-main-title').innerText = '카드를 하나씩 선택하세요';
     
-    // UI 초기화
-    document.getElementById('thinking-selection-area').classList.remove('hidden');
-    document.getElementById('thinking-result-area').classList.add('hidden');
-    document.getElementById('thinking-step-title').innerText = '카드를 4장 선택하세요';
-    document.getElementById('thinking-select-count').innerText = '0';
-    thinkingSelectedIds = [];
+    document.getElementById('thinking-reveal-area').style.display = 'block';
+    document.getElementById('thinking-summary-area').style.display = 'none';
+    
     thinkingCurrentPos = 1;
-
-    // 프리미엄 상태 반영 (무조건 프리미엄 뒷면 우선 적용)
-    document.body.classList.add('premium-mode');
-
-    // 22장 카드 2줄로 배치 (일반 모드와 동일한 딜링 방식)
-    const deckAll = Array.from({length: 22}, (_, i) => i);
-    shuffleArray(deckAll);
-
-    const row1 = deckAll.slice(0, 11);
-    const row2 = deckAll.slice(11, 22);
-
-    [row1, row2].forEach((rowCards, rowIdx) => {
-        const rowEl = document.createElement('div');
-        rowEl.className = 'daily-spread-row';
-
-        rowCards.forEach((cardId, i) => {
-            const card = document.createElement('div');
-            card.className = 'daily-spread-card deal-init';
-            card.dataset.id = cardId;
-
-            const cover = document.createElement('div');
-            cover.className = 'daily-spread-cover';
-            const num = document.createElement('span');
-            num.className = 'daily-spread-num';
-            num.textContent = rowIdx * 11 + i + 1;
-            cover.appendChild(num);
-            card.appendChild(cover);
-
-            card.addEventListener('mouseenter', () => {
-                if (!card.classList.contains('selected') && !card.classList.contains('disabled')) {
-                    card.classList.add('hovered');
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('hovered');
-            });
-            card.addEventListener('touchstart', () => {
-                if (!card.classList.contains('disabled')) card.classList.add('hovered');
-            }, {passive: true});
-            card.addEventListener('touchend', () => {
-                card.classList.remove('hovered');
-            }, {passive: true});
-
-            card.addEventListener('click', () => handleThinkingCardSelect(card, cardId));
-            rowEl.appendChild(card);
-
-            const baseDelay = rowIdx * 500; 
-            const cardDelay = baseDelay + (i * 45) + 300; // 300ms 화면 전환 후 등장
-
-            setTimeout(() => {
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        card.classList.remove('deal-init');
-                        card.classList.add('deal-animate');
-                    });
-                });
-            }, cardDelay);
-        });
-
-        container.appendChild(rowEl);
-    });
-
-    switchThinkingStep(3);
-}
-
-let thinkingSelectedIds = [];
-
-function handleThinkingCardSelect(cardElement, cardId) {
-    if (cardElement.classList.contains('selected') || cardElement.classList.contains('disabled')) return;
-    if (thinkingSelectedIds.length >= 4) return;
-    if (thinkingSelectedIds.includes(cardId)) return;
-
-    // 선택 상태 반영
-    thinkingSelectedIds.push(cardId);
-    cardElement.classList.add('selected', 'flipping');
-    cardElement.classList.remove('hovered');
     
-    document.getElementById('thinking-select-count').innerText = thinkingSelectedIds.length;
-
-    // 4장 선택 완료를 위한 처리
-    if (thinkingSelectedIds.length < 4) {
-        setTimeout(() => { cardElement.classList.remove('flipping'); }, 800);
-        return;
-    }
-
-    // 4장 완료! 나머지 disabled 처리
-    document.querySelectorAll('#thinking-spread-container .daily-spread-card').forEach(c => {
-        if (!c.classList.contains('selected')) {
-            c.classList.add('disabled');
-            c.classList.remove('hovered');
-        }
-    });
-
-    setTimeout(() => {
-        moveToThinkingResult();
-    }, 1000);
-}
-
-function moveToThinkingResult() {
-    // 단계 제목 및 화면 전환
-    document.getElementById('thinking-step-title').innerText = '카드를 하나씩 선택하세요';
-    document.getElementById('thinking-selection-area').classList.add('hidden');
-    document.getElementById('thinking-result-area').classList.remove('hidden');
+    const readingBox = document.getElementById('thinking-reading-box');
+    readingBox.style.display = 'none';
+    readingBox.innerHTML = '';
+    const btnNext = document.getElementById('btn-thinking-next');
+    btnNext.style.opacity = '0';
+    btnNext.style.pointerEvents = 'none';
     
-    // 결과 그리드의 카드 뒷면 이미지 초기화 (선택된 카드 정보 매핑)
     for(let i=1; i<=4; i++) {
+        const cardId = selectedCards[i-1];
         const back = document.querySelector(`#tc-${i} .thinking-card-back`);
-        const cardId = thinkingSelectedIds[i-1];
-        back.style.backgroundImage = `url('images/${cardId}.png')`;
+        if (back) back.style.backgroundImage = `url('images/${cardId}.png')`;
         
-        // 애니메이션 초기화 (다시 할 경우 대비)
         const wrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${i}"]`);
         const card = document.getElementById(`tc-${i}`);
-        card.classList.remove('flipped');
+        if(card) card.classList.remove('flipped');
         
-        // 첫 번째 카드를 제외하고는 아직 못 누르게 (또는 자유 선택?)
-        // 기획상 '순서대로'이므로 1번만 활성화 상태로 둡니다.
-        if (i === 1) wrapper.classList.remove('locked');
-        else wrapper.classList.add('locked');
+        if (wrapper) {
+            if (i === 1) wrapper.classList.remove('locked');
+            else wrapper.classList.add('locked');
+        }
     }
+    
+    incrementReadingCount();
+    modal.classList.add('active');
 }
 
 function revealThinkingCard(pos) {
     if (pos !== thinkingCurrentPos) return;
     
-    const cardId = thinkingSelectedIds[pos-1]; // 기존 thinkingCards 대신 선택된 ID 배열 사용
+    const cardId = selectedCards[pos-1]; 
     const data = thinkingData[cardId];
     
-    document.getElementById(`tc-${pos}`).classList.add('flipped');
+    const cardEl = document.getElementById(`tc-${pos}`);
+    if(cardEl) cardEl.classList.add('flipped');
     
     const readingBox = document.getElementById('thinking-reading-box');
     readingBox.style.display = 'block';
@@ -1013,22 +918,29 @@ function revealThinkingCard(pos) {
     
     thinkingCurrentPos++;
     if (thinkingCurrentPos <= 4) {
-        document.querySelector(`.thinking-card-wrapper[data-pos="${thinkingCurrentPos}"]`).classList.remove('locked');
+        const nextWrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${thinkingCurrentPos}"]`);
+        if(nextWrapper) nextWrapper.classList.remove('locked');
     } else {
         const btnNext = document.getElementById('btn-thinking-next');
-        btnNext.style.opacity = '1';
-        btnNext.style.pointerEvents = 'auto';
-        localStorage.setItem('thinkingLastUsed', new Date().toDateString());
+        if(btnNext) {
+            btnNext.style.opacity = '1';
+            btnNext.style.pointerEvents = 'auto';
+        }
     }
 }
 
 function showThinkingSummary() {
-    switchThinkingStep(5);
-    incrementReadingCount();
+    document.getElementById('thinking-reveal-area').style.display = 'none';
+    const summaryArea = document.getElementById('thinking-summary-area');
+    summaryArea.style.display = 'block';
     
-    const card2 = thinkingSelectedIds[1];
-    const card3 = thinkingSelectedIds[2];
-    const card4 = thinkingSelectedIds[3];
+    document.getElementById('thinking-modal-main-title').innerText = '심층 분석 종합 결과';
+    
+    const cardIds = [selectedCards[0], selectedCards[1], selectedCards[2], selectedCards[3]];
+    
+    const card2 = cardIds[1];
+    const card3 = cardIds[2];
+    const card4 = cardIds[3];
     
     const d2 = thinkingData[card2].pos2;
     const d3 = thinkingData[card3].pos3;
@@ -1037,49 +949,66 @@ function showThinkingSummary() {
     // 감정 온도계 애니메이션
     setTimeout(() => {
         const tempObj = document.getElementById('temp-marker');
-        tempObj.style.left = d2.temperature + '%';
-        document.getElementById('temp-text').innerText = `현재 감정 온도 ${d2.temperature}° : ${d2.state}`;
+        if(tempObj) tempObj.style.left = d2.temperature + '%';
+        const tempText = document.getElementById('temp-text');
+        if(tempText) tempText.innerText = `현재 감정 온도 ${d2.temperature}° : ${d2.state}`;
     }, 300);
 
     // 에너지 게이지 애니메이션
     const gaugeObj = document.getElementById('energy-fill');
     const valObj = document.getElementById('energy-value');
-    const targetVal = Math.floor(Math.random() * (d3.gaugeMax - d3.gaugeMin + 1)) + d3.gaugeMin;
-    setTimeout(() => {
-        gaugeObj.style.width = targetVal + '%';
-        document.getElementById('energy-desc').innerText = d3.flow;
-        let curr = 0;
-        const intv = setInterval(() => {
-            curr += 2;
-            if(curr >= targetVal) { curr = targetVal; clearInterval(intv); }
-            valObj.innerText = curr;
-        }, 30);
-    }, 600);
+    if (d3 && gaugeObj && valObj) {
+        const targetVal = Math.floor(Math.random() * (d3.gaugeMax - d3.gaugeMin + 1)) + d3.gaugeMin;
+        setTimeout(() => {
+            gaugeObj.style.width = targetVal + '%';
+            const desc = document.getElementById('energy-desc');
+            if(desc) desc.innerText = d3.flow;
+            let curr = 0;
+            const intv = setInterval(() => {
+                curr += 2;
+                if(curr >= targetVal) { curr = targetVal; clearInterval(intv); }
+                valObj.innerText = curr;
+            }, 30);
+        }, 600);
+    }
 
     // 타임라인 설정
-    setTimeout(() => {
-        document.querySelectorAll('.timeline-bar .day').forEach(el => el.classList.remove('active'));
-        d4.focusDays.forEach(dayIndex => {
-            document.getElementById('day-' + dayIndex).classList.add('active');
-        });
-        document.getElementById('timeline-text').innerText = d4.signal;
-    }, 900);
+    if (d4) {
+        setTimeout(() => {
+            document.querySelectorAll('.timeline-bar .day').forEach(el => el.classList.remove('active'));
+            if(d4.focusDays) {
+                d4.focusDays.forEach(dayIndex => {
+                    const el = document.getElementById('day-' + dayIndex);
+                    if(el) el.classList.add('active');
+                });
+            }
+            const tl = document.getElementById('timeline-text');
+            if(tl) tl.innerText = d4.signal;
+        }, 900);
 
-    // 조언 버튼 활성화
-    setTimeout(() => {
-        document.querySelectorAll('.action-btn').forEach(el => el.classList.remove('active'));
-        if (d4.action === 'wait') {
-            document.getElementById('action-wait').classList.add('active');
-        } else if (d4.action === 'contact') {
-            document.getElementById('action-contact').classList.add('active');
-        } else {
-            document.getElementById('action-focus').classList.add('active');
-        }
-    }, 1200);
+        // 조언 버튼 활성화
+        setTimeout(() => {
+            document.querySelectorAll('.action-btn').forEach(el => el.classList.remove('active'));
+            if (d4.action === 'wait') {
+                const el = document.getElementById('action-wait');
+                if(el) el.classList.add('active');
+            } else if (d4.action === 'contact') {
+                const el = document.getElementById('action-contact');
+                if(el) el.classList.add('active');
+            } else {
+                const el = document.getElementById('action-focus');
+                if(el) el.classList.add('active');
+            }
+        }, 1200);
+    }
+    
+    // 하루 1번 카운트 기능 (옵션)
+    localStorage.setItem('thinkingLastUsed', new Date().toDateString());
 }
 
 function shareThinkingResult() {
-    const textTarget = document.getElementById('energy-value').innerText;
+    const el = document.getElementById('energy-value');
+    const textTarget = el ? el.innerText : '0';
     const text = `오늘 타로가 감지한 우리 사이 연락 에너지: ${textTarget}%\n과연 그 사람도 내 생각을 하고 있을까? 지금 확인해보세요.`;
     
     if (navigator.share) {
