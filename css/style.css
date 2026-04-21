@@ -2439,5 +2439,9 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     border-color: rgba(255, 100, 150, 0.8);
     color: white;
     font-weight: bold;
-    box-shadow: 0 0 15px rgba(255, 100, 150, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
