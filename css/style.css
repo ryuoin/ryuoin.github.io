@@ -1832,3 +1832,45 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     opacity: 0.95;
     border: 1px solid rgba(212, 175, 55, 0.3);
 }
+
+/* =============================================
+   Mobile Scroll Flicker Fix
+   ============================================= */
+.stars, .twinkling {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    will-change: auto;
+}
+
+.twinkling {
+    will-change: auto;
+    animation: move-twink-back 300s linear infinite;
+}
+
+@media (max-width: 768px) {
+    .twinkling {
+        animation: none;
+        opacity: 0.15;
+    }
+    
+    .stars {
+        background-attachment: scroll;
+    }
+
+    .app-main::before {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-overlay .modal-content {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+}
