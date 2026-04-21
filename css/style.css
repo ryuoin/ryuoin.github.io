@@ -1,4 +1,4 @@
-/* 湲곕낯 ?ㅼ젙 */
+/* 기본 설정 */
 :root {
     --bg-dark: #0a0514;
     --gold: #d4af37;
@@ -7,19 +7,19 @@
     --purple-deep: #1e0b2e;
     --purple-glow: rgba(147, 51, 234, 0.4);
     
-    /* ?곗븷???깃툒蹂??됱긽 */
-    --love-1: #00e676; /* ?꾩＜ 醫뗫떎 */
-    --love-2: #42a5f5; /* 醫뗫떎 */
-    --love-3: #fdd835; /* 蹂댄넻 */
-    --love-4: #ff9800; /* ?섏걯??*/
-    --love-5: #ef5350; /* ?꾩＜ ?섏걯??*/
+    /* 연애운 등급별 색상 */
+    --love-1: #00e676; /* 아주 좋다 */
+    --love-2: #42a5f5; /* 좋다 */
+    --love-3: #fdd835; /* 보통 */
+    --love-4: #ff9800; /* 나쁘다 */
+    --love-5: #ef5350; /* 아주 나쁘다 */
 
-    /* 湲덉쟾???깃툒蹂??됱긽 (怨⑤뱶/?곕쾭 ?뚮쭏) */
-    --money-1: #ffea00; /* ?꾩＜ 醫뗫떎 */
-    --money-2: #ffd600; /* 醫뗫떎 */
-    --money-3: #ffc400; /* 蹂댄넻 */
-    --money-4: #ffab00; /* 二쇱쓽 */
-    --money-5: #ff9100; /* ?꾪뿕 */
+    /* 금전운 등급별 색상 (골드/앰버 테마) */
+    --money-1: #ffea00; /* 아주 좋다 */
+    --money-2: #ffd600; /* 좋다 */
+    --money-3: #ffc400; /* 보통 */
+    --money-4: #ffab00; /* 주의 */
+    --money-5: #ff9100; /* 위험 */
 
     font-family: 'Noto Sans KR', sans-serif;
 }
@@ -35,18 +35,18 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
-    overscroll-behavior-y: none; /* ?덈뱶濡쒖씠???밴꺼???덈줈怨좎묠 諛⑹? 諛??붾㈃ 源쒕묀???⑤┝ 媛쒖꽑 */
-    -webkit-tap-highlight-color: transparent; /* 紐⑤컮???곗튂 ???뚮????뚮몢由?源쒕묀???쒓굅 */
+    overscroll-behavior-y: none; /* 안드로이드 당겨서 새로고침 방지 및 화면 깜빡임/떨림 개선 */
+    -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 파란색 테두리 깜빡임 제거 */
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-/* ?띿뒪???고듃 吏??*/
+/* 텍스트 폰트 지정 */
 h1, h2, .cinzel { font-family: 'Cinzel', serif; }
 h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
-/* ?좊퉬濡쒖슫 ?곗＜/蹂?諛곌꼍 ?좊땲硫붿씠??*/
+/* 신비로운 우주/별 배경 애니메이션 */
 .stars, .twinkling {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -57,15 +57,15 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .stars {
     background: #000 url('https://www.transparenttextures.com/patterns/stardust.png') repeat top center;
     z-index: -2;
-    transform: translateZ(0); /* GPU 媛???쒖꽦?붾줈 源쒕묀??諛⑹? */
+    transform: translateZ(0); /* GPU 가속 활성화로 깜빡임 방지 */
 }
 .twinkling {
     background: transparent url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png') repeat top center;
     z-index: -1;
     animation: move-twink-back 200s linear infinite;
     opacity: 0.3;
-    will-change: background-position; /* ?뚮뜑留??깅뒫 理쒖쟻??*/
-    transform: translateZ(0); /* GPU 媛??媛뺤젣 ?쒖꽦??諛⑹? 源쒕묀??媛쒖꽑 */
+    will-change: background-position; /* 렌더링 성능 최적화 */
+    transform: translateZ(0); /* GPU 가속 강제 활성화 방지 깜빡임 개선 */
 }
 
 @keyframes move-twink-back {
@@ -74,7 +74,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   紐⑤뱶 ?좏깮 ?붾㈃
+   모드 선택 화면
    ============================================= */
 .mode-select-screen {
     display: flex;
@@ -197,7 +197,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   移대뱶 ?좏깮 ?붾㈃
+   카드 선택 화면
    ============================================= */
 .reading-screen {
     position: relative;
@@ -211,7 +211,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     display: none;
 }
 
-/* ?ㅻ뜑 ?곸뿭 */
+/* 헤더 영역 */
 .app-header {
     text-align: center;
     padding: 2rem 1rem 1rem;
@@ -262,7 +262,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
 }
 
-/* 移대뱶 而⑦뀒?대꼫 */
+/* 카드 컨테이너 */
 .app-main {
     flex: 1;
     display: flex;
@@ -286,7 +286,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     }
 }
 
-/* 媛쒕퀎 移대뱶 媛앹껜 (3D Flip ?곸슜) */
+/* 개별 카드 객체 (3D Flip 적용) */
 .tarot-card {
     background-color: transparent;
     aspect-ratio: 1 / 1.6;
@@ -318,7 +318,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     transform: rotateY(180deg);
 }
 
-/* 移대뱶???욌뮮硫?怨듯넻 */
+/* 카드의 앞뒷면 공통 */
 .card-cover, .card-reveal {
     position: absolute;
     width: 100%;
@@ -331,7 +331,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
-/* 移대뱶 ??컻 (?룸㈃ 臾대뒳) */
+/* 카드 덮개 (뒷면 무늬) */
 .card-cover {
     background-image: url('../images/card-back.png');
     background-size: cover;
@@ -345,7 +345,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     content: "";
 }
 
-/* 移대뱶 怨듦컻硫?(?濡??대?吏) */
+/* 카드 공개면 (타로 이미지) */
 .card-reveal {
     background-color: #fcebd5;
     color: #333;
@@ -362,7 +362,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     object-fit: cover;
 }
 
-/* SF ?濡쒓렇???ㅼ엫 ?쇰꺼 */
+/* SF 홀로그램 네임 라벨 */
 .card-name-label {
     position: absolute;
     bottom: 0;
@@ -383,7 +383,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     box-sizing: border-box;
 }
 
-/* ?대?吏 濡쒕뱶 ?ㅽ뙣 ???섑??섎뒗 Fallback UI */
+/* 이미지 로드 실패 시 나타나는 Fallback UI */
 .fallback-title {
     font-family: 'Hahmlet', serif;
     font-weight: bold;
@@ -395,7 +395,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   紐⑤떖 怨듯넻 ?ㅽ???(Glassmorphism)
+   모달 공통 스타일 (Glassmorphism)
    ============================================= */
 .modal-overlay {
     position: fixed;
@@ -412,7 +412,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     pointer-events: none;
     transition: opacity 0.5s ease;
     overflow-y: auto;
-    transform: translateZ(0); /* 源쒕묀???꾪솕 */
+    transform: translateZ(0); /* 깜빡임 완화 */
 }
 
 .modal-overlay.active {
@@ -431,7 +431,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     width: 100%;
     max-width: 900px;
     text-align: center;
-    transform: translateY(20px) translateZ(0); /* 源쒕묀???꾪솕瑜??꾪빐 Z異?媛??異붽? */
+    transform: translateY(20px) translateZ(0); /* 깜빡임 완화를 위해 Z축 가속 추가 */
     will-change: transform, opacity;
     transition: transform 0.5s ease;
     margin: auto;
@@ -449,7 +449,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   ?대쾲二??댁꽭 寃곌낵 紐⑤떖
+   이번주 운세 결과 모달
    ============================================= */
 .reading-container {
     display: flex;
@@ -554,8 +554,8 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     border: 1px solid var(--gold);
-    transform: translateZ(0); /* ?대?吏 ?뚮뜑留?源쒕묀??諛⑹? */
-    backface-visibility: hidden; /* ?대?吏 ?뚮뜑留?源쒕묀??諛⑹? */
+    transform: translateZ(0); /* 이미지 렌더링 깜빡임 방지 */
+    backface-visibility: hidden; /* 이미지 렌더링 깜빡임 방지 */
     -webkit-backface-visibility: hidden;
 }
 
@@ -594,7 +594,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   ?곗븷??寃곌낵 紐⑤떖
+   연애운 결과 모달
    ============================================= */
 .love-modal-title {
     font-family: 'Hahmlet', serif;
@@ -608,7 +608,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     margin-bottom: 2rem;
 }
 
-/* ?곗븷???깃툒 諛곗? */
+/* 연애운 등급 배지 */
 .love-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -654,7 +654,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     border-color: var(--love-5);
 }
 
-/* ?곗븷??移대뱶 (?ш쾶) */
+/* 연애운 카드 (크게) */
 .love-card-large {
     width: 200px;
     height: 320px;
@@ -665,7 +665,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     justify-content: center;
 }
 
-/* ?곗븷 ?댁꽍 諛뺤뒪 */
+/* 연애 해석 박스 */
 .love-desc-box {
     background: rgba(0, 0, 0, 0.4);
     padding: 1.8rem;
@@ -733,7 +733,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   怨듯넻 踰꾪듉
+   공통 버튼
    ============================================= */
 .btn-primary {
     background: linear-gradient(135deg, #d4af37, #9b7d22);
@@ -754,14 +754,14 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   ?좏떥由ы떚
+   유틸리티
    ============================================= */
 .hidden {
     display: none !important;
 }
 
 /* =============================================
-   紐⑤컮??諛섏쓳??(??댄? ??以??쒖떆)
+   모바일 반응형 (타이틀 한 줄 표시)
    ============================================= */
 @media (max-width: 480px) {
     .mode-title {
@@ -784,7 +784,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   湲덉쟾??寃곌낵 紐⑤떖
+   금전운 결과 모달
    ============================================= */
 .money-modal-title {
     font-family: 'Hahmlet', serif;
@@ -798,7 +798,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     margin-bottom: 2rem;
 }
 
-/* 湲덉쟾???깃툒 諛곗? */
+/* 금전운 등급 배지 */
 .money-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -824,7 +824,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .money-rating-badge.rating-4 { background: rgba(255, 171, 0, 0.15); color: var(--money-4); border-color: var(--money-4); }
 .money-rating-badge.rating-5 { background: rgba(255, 145, 0, 0.15); color: var(--money-5); border-color: var(--money-5); }
 
-/* 湲덉쟾??移대뱶 (?ш쾶) */
+/* 금전운 카드 (크게) */
 .money-card-large {
     width: 200px;
     height: 320px;
@@ -836,7 +836,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     justify-content: center;
 }
 
-/* 湲덉쟾 ?댁꽍 諛뺤뒪 */
+/* 금전 해석 박스 */
 .money-desc-box {
     background: rgba(0, 0, 0, 0.4);
     padding: 1.8rem;
@@ -895,7 +895,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   Yes or No 寃곌낵 紐⑤떖
+   Yes or No 결과 모달
    ============================================= */
 .yesno-modal-title {
     font-family: 'Hahmlet', serif;
@@ -1016,7 +1016,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   濡쒕삉 寃곌낵 紐⑤떖 諛??먰넻 ?좊땲硫붿씠??(SF ?뚮쭏)
+   로또 결과 모달 및 원통 애니메이션 (SF 테마)
    ============================================= */
 .lotto-panel {
     max-width: 800px;
@@ -1035,7 +1035,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     gap: 2rem;
 }
 
-/* ?먰넻 癒몄떊 */
+/* 원통 머신 */
 .lotto-machine {
     position: relative;
     width: 250px;
@@ -1085,7 +1085,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     100% { transform: rotateZ(360deg) rotateX(10deg); }
 }
 
-/* 媛쒕퀎 怨??ㅽ???(?먰넻 ?덉뿉???⑸퓣?ㅼ쭊 怨듬뱾) */
+/* 개별 공 스타일 (원통 안에서 흩뿌려진 공들) */
 .lotto-balls-spinner .lotto-ball {
     width: 30px;
     height: 30px;
@@ -1114,7 +1114,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     z-index: 5;
 }
 
-/* 異붿텧 寃곌낵 而⑦뀒?대꼫 */
+/* 추출 결과 컨테이너 */
 .lotto-draw-results {
     display: flex;
     justify-content: center;
@@ -1124,7 +1124,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     padding: 10px;
 }
 
-/* 踰붿슜 ?꾩튂 怨??ㅽ???(SF ?濡쒓렇??猷? */
+/* 범용 위치 공 스타일 (SF 홀로그램 룩) */
 .lotto-ball {
     display: flex;
     justify-content: center;
@@ -1142,14 +1142,14 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     box-shadow: 0 0 15px currentColor, inset 0 0 10px rgba(255,255,255,0.3);
 }
 
-/* 怨??됱긽 洹몃９ (10?⑥쐞) - ?ㅼ삩 ?④낵 媛誘?*/
+/* 공 색상 그룹 (10단위) - 네온 효과 가미 */
 .num-group-0 { color: #f1c40f; } /* 1~10: Yellow */
 .num-group-1 { color: #3498db; } /* 11~20: Blue */
 .num-group-2 { color: #e74c3c; } /* 21~30: Red */
 .num-group-3 { color: #aaaaaa; } /* 31~40: Gray/White */
 .num-group-4 { color: #2ecc71; } /* 41~45: Green */
 
-/* 異붿텧?섏뼱 ?섑????????좊땲硫붿씠??*/
+/* 추출되어 나타날 때 팝 애니메이션 */
 .pop-out {
     animation: ballPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transform: scale(0);
@@ -1209,7 +1209,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   ?ㅻ뒛??移대뱶 ?밸퀎 踰꾪듉 (硫붿씤 ?붾㈃ 理쒖긽??
+   오늘의 카드 특별 버튼 (메인 화면 최상단)
    ============================================= */
 .daily-btn-special {
     display: flex;
@@ -1308,8 +1308,8 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
 
 /* =============================================
-   ?ㅻ뒛??移대뱶 ??移대뱶 ?좏깮 ?붾㈃ ?ㅽ봽?덈뱶 UI
-   (2以? 媛?以?11?μ씠 寃뱀퀜??遺梨꾧섦泥섎읆 蹂댁엫)
+   오늘의 카드 — 카드 선택 화면 스프레드 UI
+   (2줄; 각 줄 11장이 겹쳐서 부채꼴처럼 보임)
    ============================================= */
 .daily-spread-container {
     display: flex;
@@ -1342,7 +1342,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     will-change: transform;
 }
 
-/* 11?μ쓣 遺梨꾧섦濡?諛곗튂 ??nth-child ?꾩튂 怨꾩궛 */
+/* 11장을 부채꼴로 배치 — nth-child 위치 계산 */
 .daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 325px); transform: rotate(-20deg); }
 .daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 275px); transform: rotate(-16deg); }
 .daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 225px); transform: rotate(-12deg); }
@@ -1355,7 +1355,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 165px); transform: rotate(16deg); }
 .daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 215px); transform: rotate(20deg); }
 
-/* ?몃쾭??移대뱶媛 ?꾨줈 ???щ씪?ㅻ뒗 ?④낵 */
+/* 호버시 카드가 위로 쏙 올라오는 효과 */
 .daily-spread-card.hovered {
     transform: translateY(-35px) rotate(0deg) scale(1.1);
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
@@ -1370,7 +1370,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     cursor: default;
 }
 
-/* ?대쾲二??댁꽭?먯꽌 ?щ윭 ???좏깮 以묒씪 ?????대? ?좏깮??移대뱶 ?쒖떆 */
+/* 이번주 운세에서 여러 장 선택 중일 때 — 이미 선택된 카드 표시 */
 .daily-spread-card.selected .daily-spread-cover {
     border-color: var(--gold);
     box-shadow: 0 0 18px rgba(212, 175, 55, 0.7), inset 0 0 8px rgba(212, 175, 55, 0.3);
@@ -1391,7 +1391,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     100% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
 }
 
-/* 移대뱶 ??컻 (?룸㈃) */
+/* 카드 덮개 (뒷면) */
 .daily-spread-cover {
     width: 100%;
     height: 100%;
@@ -1432,7 +1432,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   ?ㅻ뒛??移대뱶 寃곌낵 紐⑤떖
+   오늘의 카드 결과 모달
    ============================================= */
 .daily-modal-title {
     font-family: 'Hahmlet', serif;
@@ -1450,7 +1450,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     margin-bottom: 2rem;
 }
 
-/* ?ㅻ뒛??移대뱶 ?깃툒 諛곗? */
+/* 오늘의 카드 등급 배지 */
 .daily-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -1537,7 +1537,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   ?꾨━誘몄뾼 ?곸꽭 ?댁꽍 ?뱀뀡
+   프리미엄 상세 해석 섹션
    ============================================= */
 .premium-section {
     width: 100%;
@@ -1649,7 +1649,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .premium-sub-section:last-child { border-bottom: none; }
 
 /* =============================================
-   愿묎퀬 ?앹뾽 ?⑤꼸
+   광고 팝업 패널
    ============================================= */
 .ad-panel {
     max-width: 360px;
@@ -1685,7 +1685,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .ad-placeholder-text { color: #666; font-size: 0.85rem; }
 
 /* =============================================
-   ?꾨━誘몄뾼 ?덈궡 ?앹뾽 ?⑤꼸
+   프리미엄 안내 팝업 패널
    ============================================= */
 .premium-info-panel {
     max-width: 380px;
@@ -1791,7 +1791,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     box-shadow: 0 4px 15px rgba(212,175,55,0.4);
 }
 
-/* 프리미엄 전용 텍스트 스타일 (황금빛 이펙트) */
+/* �����̾� ���� �ؽ�Ʈ ��Ÿ�� (Ȳ�ݺ� ����Ʈ) */
 .premium-text-glow {
     color: #e6e6e6;
     border-left: 3px solid var(--gold);
@@ -1887,22 +1887,22 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 /* =============================================
-   Card Spread Animation - 珥ㅻ씪???쇱퀜吏???④낵
+   Card Spread Animation - 촤라락 펼쳐지는 효과
    ============================================= */
 
-/* 珥덇린 ?곹깭: 移대뱶媛 以묒븰???볦뿬 ?덉쓬 */
+/* 초기 상태: 카드가 중앙에 쌓여 있음 */
 .daily-spread-card {
     opacity: 0;
     transform: translateX(0) rotate(0deg) scale(0.9) !important;
 }
 
-/* ?쇱묠 ?좊땲硫붿씠???곸슜 ?대옒??*/
+/* 펼침 애니메이션 적용 클래스 */
 .daily-spread-card.deal-animate {
     opacity: 1;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* 媛?移대뱶媛 ???꾩튂濡??뚯븘媛??寃껋? nth-child 湲곕낯 transform???곸슜??*/
+/* 각 카드가 제 위치로 돌아가는 것은 nth-child 기본 transform이 적용됨 */
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(1)  { transform: rotate(-20deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(2)  { transform: rotate(-16deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(3)  { transform: rotate(-12deg); }
@@ -1915,7 +1915,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(10) { transform: rotate(16deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(11) { transform: rotate(20deg); }
 
-/* ?몃쾭/?좏깮 ?쒖뿉??deal-animate??transform???ㅻ쾭?쇱씠??*/
+/* 호버/선택 시에는 deal-animate의 transform을 오버라이드 */
 .daily-spread-row .daily-spread-card.deal-animate.hovered {
     transform: translateY(-35px) rotate(0deg) scale(1.1);
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
@@ -2026,6 +2026,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     }
 }
 
+
 /* =============================================
    Premium Card Back Image
    ============================================= */
@@ -2043,6 +2044,3 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     border-color: #fff8d6 !important;
     box-shadow: 0 0 25px rgba(255, 230, 150, 0.9), inset 0 0 15px rgba(255, 230, 150, 0.6) !important;
 }
-
-
-
