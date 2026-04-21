@@ -378,29 +378,42 @@
                 </div>
             </div>
 
-            <!-- STEP 3: 카드 순차 공개 -->
+            <!-- STEP 3: 카드 선택 및 공개 -->
             <div id="thinking-step-3" class="thinking-step">
-                <h2 class="modal-title">카드를 순서대로 선택하세요</h2>
-                <div class="thinking-card-grid">
-                    <div class="thinking-card-wrapper" data-pos="1" onclick="revealThinkingCard(1)">
-                        <div class="thinking-card" id="tc-1"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                        <div class="tc-label">그 사람의 현재</div>
-                    </div>
-                    <div class="thinking-card-wrapper locked" data-pos="2" onclick="revealThinkingCard(2)">
-                        <div class="thinking-card" id="tc-2"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                        <div class="tc-label">나를 향한 마음</div>
-                    </div>
-                    <div class="thinking-card-wrapper locked" data-pos="3" onclick="revealThinkingCard(3)">
-                        <div class="thinking-card" id="tc-3"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                        <div class="tc-label">둘 사이의 온도</div>
-                    </div>
-                    <div class="thinking-card-wrapper locked" data-pos="4" onclick="revealThinkingCard(4)">
-                        <div class="thinking-card" id="tc-4"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
-                        <div class="tc-label">7일 내 신호</div>
+                <h2 id="thinking-step-title" class="modal-title">카드를 4장 선택하세요</h2>
+                
+                <!-- 22장 카드 펼침 영역 -->
+                <div id="thinking-selection-area" class="thinking-selection-area">
+                    <div id="thinking-spread-container" class="thinking-spread-container"></div>
+                    <div class="selection-status">
+                        선택됨: <span id="thinking-select-count">0</span> / 4
                     </div>
                 </div>
-                <!-- 슬롯별 텍스트 박스 -->
-                <div id="thinking-reading-box" class="reading-box" style="display:none;"></div>
+
+                <!-- 고른 4장 배치 및 순차 공개 영역 (초기 숨김) -->
+                <div id="thinking-result-area" class="thinking-result-area hidden">
+                    <div class="thinking-card-grid">
+                        <div class="thinking-card-wrapper" data-pos="1" onclick="revealThinkingCard(1)">
+                            <div class="thinking-card" id="tc-1"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                            <div class="tc-label">그 사람의 현재</div>
+                        </div>
+                        <div class="thinking-card-wrapper" data-pos="2" onclick="revealThinkingCard(2)">
+                            <div class="thinking-card" id="tc-2"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                            <div class="tc-label">나를 향한 마음</div>
+                        </div>
+                        <div class="thinking-card-wrapper" data-pos="3" onclick="revealThinkingCard(3)">
+                            <div class="thinking-card" id="tc-3"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                            <div class="tc-label">둘 사이의 온도</div>
+                        </div>
+                        <div class="thinking-card-wrapper" data-pos="4" onclick="revealThinkingCard(4)">
+                            <div class="thinking-card" id="tc-4"><div class="thinking-card-front"></div><div class="thinking-card-back"></div></div>
+                            <div class="tc-label">7일 내 신호</div>
+                        </div>
+                    </div>
+                    <!-- 슬롯별 텍스트 박스 -->
+                    <div id="thinking-reading-box" class="reading-box" style="display:none;"></div>
+                </div>
+                
                 <button id="btn-thinking-next" class="btn-primary" style="opacity:0; pointer-events:none; margin-top:15px;" onclick="showThinkingSummary()">종합 분석 보기</button>
             </div>
 
