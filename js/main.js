@@ -847,25 +847,100 @@ function startFocusRitual() {
 }
 
 function initThinkingCards() {
-    // 22장 중 4장 뽑기
+    // 이제 직접 선택하므로, 이 함수는 22장 카드를 펼쳐주는 역할을 합니다.
+    renderThinkingSpread();
+}
+
+function renderThinkingSpread() {
+    const container = document.getElementById('thinking-spread-container');
+    container.innerHTML = '';
+    
+    // UI 초기화
+    document.getElementById('thinking-selection-area').classList.remove('hidden');
+    document.getElementById('thinking-result-area').classList.add('hidden');
+    document.getElementById('thinking-step-title').innerText = '카드를 4장 선택하세요';
+    document.getElementById('thinking-select-count').innerText = '0';
+    thinkingSelectedIds = [];
+    thinkingCurrentPos = 1;
+
+    // 22장 메이저 카드 인덱스 생성 및 셔플
     const deck = [];
     for(let i=0; i<22; i++) deck.push(i);
     shuffleArray(deck);
-    thinkingCards = deck.slice(0,4);
+
+    // 부채꼴 배치를 위한 계산
+    const totalCards = 22;
+    const angleStep = 6; // 각 카드 간의 각도 차이
+    const startAngle = -(totalCards - 1) * angleStep / 2;
+
+    deck.forEach((cardId, index) => {
+        const card = document.createElement('div');
+        card.className = 'selectable-card';
+        
+        // 부채꼴 좌표 계산
+        const angle = startAngle + (index * angleStep);
+        const radius = 250; 
+        const x = Math.sin(angle * Math.PI / 180) * radius;
+        const y = Math.cos(angle * Math.PI / 180) * radius * 0.2; // 약간 둥글게
+
+        card.style.left = `calc(50% + ${x}px - 30px)`;
+        card.style.transform = `rotate(${angle}deg)`;
+        card.style.zIndex = index;
+
+        card.onclick = () => handleThinkingCardSelect(card, cardId);
+        container.appendChild(card);
+    });
+
+    switchThinkingStep(3);
+}
+
+let thinkingSelectedIds = [];
+
+function handleThinkingCardSelect(cardElement, cardId) {
+    if (thinkingSelectedIds.length >= 4) return;
+    if (thinkingSelectedIds.includes(cardId)) return;
+
+    // 선택 상태 반영
+    thinkingSelectedIds.push(cardId);
+    cardElement.classList.add('selected');
+    document.getElementById('thinking-select-count').innerText = thinkingSelectedIds.length;
+
+    // 4장 선택 완료 시
+    if (thinkingSelectedIds.length === 4) {
+        setTimeout(() => {
+            moveToThinkingResult();
+        }, 600);
+    }
+}
+
+function moveToThinkingResult() {
+    // 단계 제목 및 화면 전환
+    document.getElementById('thinking-step-title').innerText = '카드를 하나씩 선택하세요';
+    document.getElementById('thinking-selection-area').classList.add('hidden');
+    document.getElementById('thinking-result-area').classList.remove('hidden');
     
-    // 카드 뒷면(결과 이미지) 세팅
+    // 결과 그리드의 카드 뒷면 이미지 초기화 (선택된 카드 정보 매핑)
     for(let i=1; i<=4; i++) {
         const back = document.querySelector(`#tc-${i} .thinking-card-back`);
-        back.style.backgroundImage = `url('images/${thinkingCards[i-1]}.png')`; // 경로 및 확장자 수정
+        const cardId = thinkingSelectedIds[i-1];
+        back.style.backgroundImage = `url('images/${cardId}.png')`;
+        
+        // 애니메이션 초기화 (다시 할 경우 대비)
+        const wrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${i}"]`);
+        const card = document.getElementById(`tc-${i}`);
+        card.classList.remove('flipped');
+        
+        // 첫 번째 카드를 제외하고는 아직 못 누르게 (또는 자유 선택?)
+        // 기획상 '순서대로'이므로 1번만 활성화 상태로 둡니다.
+        if (i === 1) wrapper.classList.remove('locked');
+        else wrapper.classList.add('locked');
     }
-    
-    switchThinkingStep(3);
 }
 
 function revealThinkingCard(pos) {
     if (pos !== thinkingCurrentPos) return;
     
-    const cardId = thinkingCards[pos-1];
+    const cardId = thinkingSelectedIds[pos-1]; // 기존 thinkingCards 대신 선택된 ID 배열 사용
     const data = thinkingData[cardId];
     
     document.getElementById(`tc-${pos}`).classList.add('flipped');
@@ -904,9 +979,9 @@ function showThinkingSummary() {
     switchThinkingStep(5);
     incrementReadingCount();
     
-    const card2 = thinkingCards[1];
-    const card3 = thinkingCards[2];
-    const card4 = thinkingCards[3];
+    const card2 = thinkingSelectedIds[1];
+    const card3 = thinkingSelectedIds[2];
+    const card4 = thinkingSelectedIds[3];
     
     const d2 = thinkingData[card2].pos2;
     const d3 = thinkingData[card3].pos3;
