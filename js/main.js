@@ -839,8 +839,6 @@ function startFocusRitual() {
         count--;
         if (count > 0) {
             numEl.innerText = count;
-        } else if (count === 0) {
-            numEl.innerText = '눈을 뜨세요';
         } else {
             clearInterval(intv);
             initThinkingCards();
@@ -858,7 +856,7 @@ function initThinkingCards() {
     // 카드 뒷면(결과 이미지) 세팅
     for(let i=1; i<=4; i++) {
         const back = document.querySelector(`#tc-${i} .thinking-card-back`);
-        back.style.backgroundImage = `url('media/cards/${thinkingCards[i-1]}.jpg')`;
+        back.style.backgroundImage = `url('images/${thinkingCards[i-1]}.png')`; // 경로 및 확장자 수정
     }
     
     switchThinkingStep(3);
