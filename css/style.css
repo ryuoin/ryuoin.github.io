@@ -2044,3 +2044,114 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     border-color: #fff8d6 !important;
     box-shadow: 0 0 25px rgba(255, 230, 150, 0.9), inset 0 0 15px rgba(255, 230, 150, 0.6) !important;
 }
+
+
+/* =============================================
+   모바일/태블릿 깜빡임 완전 제거 (결과 페이지 포함)
+   - backdrop-filter 제거 (모바일 GPU 과부하의 #1 원인)
+   - 무한 box-shadow 애니메이션 정지
+   - 결과 카드 이미지 GPU 레이어 고정
+   ============================================= */
+@media (max-width: 1024px) {
+
+    /* 1. backdrop-filter 완전 제거 — 모바일/태블릿 깜빡임의 최대 원인 */
+    .modal-overlay {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(0, 0, 0, 0.92) !important;
+    }
+
+    .glass-panel {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(30, 11, 46, 0.95) !important;
+    }
+
+    .mode-btn {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(30, 11, 46, 0.8) !important;
+    }
+
+    /* 2. 무한 box-shadow 애니메이션 모두 정지 — repaint 원인 제거 */
+    .love-rating-badge,
+    .money-rating-badge,
+    .yesno-rating-badge {
+        animation: none !important;
+    }
+
+    /* 3. 메인 화면 글로우/회전 애니메이션 정지 */
+    .daily-btn-glow {
+        animation: none !important;
+        opacity: 0.7 !important;
+    }
+
+    .daily-btn-special .daily-icon {
+        animation: none !important;
+    }
+
+    /* 4. 결과 페이지 카드 이미지 — GPU 레이어 고정으로 깜빡임 방지 */
+    .res-card-wrapper,
+    .res-card-wrapper img,
+    .love-card-large,
+    .love-card-large img,
+    .money-card-large,
+    .money-card-large img,
+    .yesno-card-large,
+    .yesno-card-large img {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        will-change: auto;
+    }
+
+    /* 5. 결과 해석 박스 — 불필요한 transition 제거 */
+    .combined-desc-box,
+    .love-desc-box,
+    .money-desc-box,
+    .yesno-desc-box,
+    .love-advice-box,
+    .money-advice-box,
+    .yesno-advice-box {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    /* 6. 등급 배지 — 정적 그림자로 고정 (애니메이션 대신) */
+    .love-rating-badge {
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.15) !important;
+    }
+    .money-rating-badge {
+        box-shadow: 0 0 12px rgba(255, 215, 0, 0.25) !important;
+    }
+    .yesno-rating-badge {
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.15) !important;
+    }
+
+    /* 7. 결론 이미지 hover transition 제거 */
+    .conclusion-image {
+        transition: none !important;
+    }
+
+    /* 8. 모달 열기/닫기 transition 가볍게 */
+    .modal-overlay {
+        transition: opacity 0.25s ease !important;
+    }
+
+    .glass-panel {
+        transition: transform 0.25s ease !important;
+        will-change: auto !important;
+    }
+
+    /* 9. 프리미엄 텍스트 글로우 — text-shadow 축소 */
+    .premium-text-glow {
+        text-shadow: none !important;
+    }
+
+    /* 10. 오늘의 카드 결과 — 배지 애니메이션 정지 */
+    .daily-rating-badge {
+        animation: none !important;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.2) !important;
+    }
+}
