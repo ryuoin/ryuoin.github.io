@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tarot-app-v9';
+﻿const CACHE_NAME = 'tarot-app-v9';
 const STATIC_ASSETS = [
   './',
   './index.html',
