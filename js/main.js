@@ -12,7 +12,9 @@ function incrementReadingCount() {
     let count = parseInt(localStorage.getItem('readingCount') || '0') + 1;
     localStorage.setItem('readingCount', count);
     if (count % 3 === 0) {
-        setTimeout(() => showAdOverlay(), 800);
+        if (!isPremium()) {
+            setTimeout(() => showAdOverlay(), 800);
+        }
     }
 }
 
