@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드 - 메이저 타로 리딩</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Hahmlet:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1 class="admin-title">ADMIN DASHBOARD</h1>
+            <p class="admin-subtitle">프로젝트 통합 관리 및 개발 로드맵</p>
+            <div class="admin-divider"></div>
+        </header>
+
+        <main class="admin-content">
+            <!-- 1. 메뉴 상태 테이블 -->
+            <section class="admin-section">
+                <h2 class="section-title">📊 메뉴 작동 상태 (Menu Status)</h2>
+                <div class="glass-panel admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>메뉴명</th>
+                                <th>최신 업데이트</th>
+                                <th>상태</th>
+                                <th>구분</th>
+                            </tr>
+                        </thead>
+                        <tbody id="menu-status-body">
+                            <!-- JS에서 데이터 삽입 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 2. 향후 개발 로드맵 -->
+            <section class="admin-section">
+                <h2 class="section-title">🚀 향후 개발 로드맵 (Roadmap)</h2>
+                <div class="glass-panel roadmap-container">
+                    <ul class="roadmap-list" id="roadmap-list">
+                        <!-- JS에서 데이터 삽입 -->
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. 프로젝트 인수인계 문서 -->
+            <section class="admin-section">
+                <h2 class="section-title">📝 프로젝트 인수인계 문서 (Handover)</h2>
+                <div class="handover-tabs">
+                    <button class="tab-btn active" onclick="loadHandover('v2')">Handover V2 (최신)</button>
+                    <button class="tab-btn" onclick="loadHandover('v1')">Handover V1</button>
+                </div>
+                <div class="glass-panel handover-viewer">
+                    <pre id="handover-content" class="handover-text">문서를 불러오는 중...</pre>
+                </div>
+            </section>
+
+            <div class="admin-actions">
+                <a href="index.html" class="btn-back-mode">메인 화면으로 돌아가기</a>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js" defer></script>
+</body>
+</html>
