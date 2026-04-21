@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tarot-app-v8';
+const CACHE_NAME = 'tarot-app-v9';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -81,3 +81,4 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
