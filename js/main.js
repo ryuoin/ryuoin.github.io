@@ -853,21 +853,25 @@ function startFocusRitual() {
 }
 
 // ========== 그 사람 지금 내 생각 할까? 결과 (1장씩 까보기) ==========
+let thinkingRevealedCount = 0;
+
 function showThinkingResultSummary() {
     const modal = document.getElementById('thinking-result-modal');
-    document.getElementById('thinking-modal-main-title').innerText = '카드를 하나씩 선택하세요';
+    document.getElementById('thinking-modal-main-title').innerText = '카드를 선택하여 결과를 확인하세요';
     
     document.getElementById('thinking-reveal-area').style.display = 'block';
     document.getElementById('thinking-summary-area').style.display = 'none';
     
-    thinkingCurrentPos = 1;
+    thinkingRevealedCount = 0;
     
     const readingBox = document.getElementById('thinking-reading-box');
     readingBox.style.display = 'none';
     readingBox.innerHTML = '';
     const btnNext = document.getElementById('btn-thinking-next');
-    btnNext.style.opacity = '0';
-    btnNext.style.pointerEvents = 'none';
+    if(btnNext) {
+        btnNext.style.opacity = '0';
+        btnNext.style.pointerEvents = 'none';
+    }
     
     for(let i=1; i<=4; i++) {
         const cardId = selectedCards[i-1];
@@ -877,11 +881,7 @@ function showThinkingResultSummary() {
         const wrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${i}"]`);
         const card = document.getElementById(`tc-${i}`);
         if(card) card.classList.remove('flipped');
-        
-        if (wrapper) {
-            if (i === 1) wrapper.classList.remove('locked');
-            else wrapper.classList.add('locked');
-        }
+        if(wrapper) wrapper.classList.remove('locked');
     }
     
     incrementReadingCount();
@@ -889,13 +889,14 @@ function showThinkingResultSummary() {
 }
 
 function revealThinkingCard(pos) {
-    if (pos !== thinkingCurrentPos) return;
+    const cardEl = document.getElementById(`tc-${pos}`);
+    if(!cardEl || cardEl.classList.contains('flipped')) return;
     
     const cardId = selectedCards[pos-1]; 
     const data = thinkingData[cardId];
     
-    const cardEl = document.getElementById(`tc-${pos}`);
-    if(cardEl) cardEl.classList.add('flipped');
+    cardEl.classList.add('flipped');
+    thinkingRevealedCount++;
     
     const readingBox = document.getElementById('thinking-reading-box');
     readingBox.style.display = 'block';
@@ -911,16 +912,12 @@ function revealThinkingCard(pos) {
     newP.style.animation = 'fadeIn 0.5s ease';
     newP.style.borderTop = '1px solid rgba(255,255,255,0.1)';
     newP.style.paddingTop = '10px';
-    if(pos === 1) newP.style.borderTop = 'none';
+    if(thinkingRevealedCount === 1) newP.style.borderTop = 'none';
     
     readingBox.appendChild(newP);
     readingBox.scrollTop = readingBox.scrollHeight;
     
-    thinkingCurrentPos++;
-    if (thinkingCurrentPos <= 4) {
-        const nextWrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${thinkingCurrentPos}"]`);
-        if(nextWrapper) nextWrapper.classList.remove('locked');
-    } else {
+    if (thinkingRevealedCount >= 4) {
         const btnNext = document.getElementById('btn-thinking-next');
         if(btnNext) {
             btnNext.style.opacity = '1';
