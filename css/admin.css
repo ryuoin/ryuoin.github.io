@@ -1,0 +1,201 @@
+/* 
+    관리자 페이지 전용 스타일 
+    메인 디자인 시스템(Glassmorphism) 계승 
+*/
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    z-index: 10;
+    position: relative;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #fff;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.admin-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    background: linear-gradient(to right, #d4af37, #f9f295, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.admin-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.admin-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    margin: 20px auto;
+}
+
+.admin-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f9f295;
+    border-left: 4px solid #d4af37;
+    padding-left: 15px;
+}
+
+/* 테이블 스타일 */
+.admin-table-container {
+    overflow-x: auto;
+    padding: 0 !important; /* 글래스 패널 내부 패딩 제거 */
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.admin-table th, .admin-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-table th {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.admin-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.status-ok { background: rgba(40, 167, 69, 0.2); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+.status-build { background: rgba(255, 193, 7, 0.2); color: #f1c40f; border: 1px solid rgba(241, 196, 15, 0.3); }
+
+.type-premium { color: #d4af37; font-weight: bold; }
+.type-standard { color: rgba(255, 255, 255, 0.5); }
+
+/* 로드맵 스타일 */
+.roadmap-list {
+    list-style: none;
+    padding: 20px;
+}
+
+.roadmap-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.roadmap-item:last-child {
+    border-bottom: none;
+}
+
+.roadmap-check {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.roadmap-text {
+    flex: 1;
+    font-size: 1rem;
+}
+
+.roadmap-tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #d4af37;
+    border-radius: 4px;
+}
+
+/* 인수인계 문서 뷰어 */
+.handover-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.4);
+    color: #d4af37;
+}
+
+.handover-viewer {
+    padding: 25px !important;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.handover-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: pre-wrap; /* 줄바꿈 유지 */
+}
+
+/* 액션 버튼 */
+.admin-actions {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.btn-back-mode {
+    display: inline-block;
+    padding: 15px 40px;
+    background: rgba(46, 50, 71, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s;
+}
+
+.btn-back-mode:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: #d4af37;
+    transform: translateY(-2px);
+}
