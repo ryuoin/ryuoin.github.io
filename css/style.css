@@ -1791,7 +1791,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     box-shadow: 0 4px 15px rgba(212,175,55,0.4);
 }
 
-/* ÇÁ¸®¹Ì¾ö Àü¿ë ÅØ½ºÆ® ½ºÅ¸ÀÏ (È²±Ýºû ÀÌÆåÆ®) */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½Å¸ï¿½ï¿½ (È²ï¿½Ýºï¿½ ï¿½ï¿½ï¿½ï¿½Æ®) */
 .premium-text-glow {
     color: #e6e6e6;
     border-left: 3px solid var(--gold);
@@ -1812,3 +1812,23 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     text-transform: uppercase;
 }
 
+.app-main {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.app-main::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('../images/tarot-cloth.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.5);
+    z-index: -1;
+    opacity: 0.95;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
