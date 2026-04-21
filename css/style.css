@@ -2113,3 +2113,318 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
         transition: none !important;
     }
 }
+
+/* ========== "그 사람 지금 내 생각 할까?" 프리미엄 모달 스타일 ========== */
+#thinking-modal .thinking-panel {
+    width: 90%;
+    max-width: 480px;
+    background: linear-gradient(135deg, rgba(20, 10, 30, 0.95), rgba(40, 20, 50, 0.95));
+    border: 1px solid rgba(255, 180, 200, 0.3);
+    box-shadow: 0 10px 40px rgba(255, 100, 150, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.thinking-step {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.thinking-step.active {
+    display: flex;
+}
+
+/* STEP 1: 관계 선택 */
+.relation-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.relation-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 180, 200, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: auto;
+    text-align: center;
+}
+
+.relation-btn:hover {
+    background: rgba(255, 180, 200, 0.15);
+    border-color: rgba(255, 180, 200, 0.6);
+    box-shadow: 0 0 15px rgba(255, 180, 200, 0.3);
+    transform: translateY(-2px);
+}
+
+.relation-btn small {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 5px;
+}
+
+/* STEP 2: 인트로 (카운트다운) */
+.countdown-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.countdown-circle {
+    fill: none;
+    stroke: rgba(255, 180, 200, 0.8);
+    stroke-width: 4;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+}
+
+#countdown-number {
+    font-size: 3rem;
+    color: var(--text-light);
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 180, 200, 0.5);
+}
+
+/* STEP 3: 카드 4장 2x2 그리드 */
+.thinking-card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    margin-top: 20px;
+    perspective: 1000px;
+}
+
+@media (max-width: 360px) {
+    .thinking-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.thinking-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.thinking-card-wrapper.locked {
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(0.8);
+}
+
+.thinking-card {
+    width: 80px;
+    height: 140px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.thinking-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.thinking-card-front, .thinking-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.thinking-card-front {
+    background-image: url('../media/premium_card_back.png'); /* 프리미엄 뒷면 우선 표시 */
+}
+
+.thinking-card-back {
+    transform: rotateY(180deg);
+    background-color: #222;
+}
+
+.tc-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 시각화 요소 컨테이너 */
+.viz-container {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.viz-title {
+    font-size: 0.95rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.viz-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* 감정 온도계 */
+.temperature-gauge {
+    width: 100%;
+}
+
+.temp-bar {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, #4A90E2, #50E3C2, #F8E71C, #F5A623, #D0021B);
+    border-radius: 6px;
+    position: relative;
+    margin: 15px 0;
+}
+
+.temp-marker {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 3px solid #333;
+    border-radius: 50%;
+    position: absolute;
+    top: -3px;
+    left: 0%;
+    transform: translateX(-50%);
+    transition: left 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.temp-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.6);
+}
+
+/* 연락 에너지 게이지 */
+.energy-gauge {
+    width: 100%;
+    position: relative;
+}
+
+.energy-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.energy-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, rgba(255, 100, 150, 0.6), rgba(255, 50, 100, 1));
+    transition: width 1.5s ease-out;
+}
+
+.energy-text {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* 7일 타임라인 */
+.timeline-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.day {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    transition: all 0.5s;
+}
+
+.day.active {
+    background: var(--gold);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(212,175,55,0.8);
+    transform: scale(1.1);
+}
+
+/* 행동 조언 */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.action-btn {
+    padding: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    transition: all 0.3s;
+}
+
+.action-btn.active {
+    background: rgba(255, 100, 150, 0.2);
+    border-color: rgba(255, 100, 150, 0.8);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 100, 150, 0.3);
+}
