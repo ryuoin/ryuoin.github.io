@@ -11,6 +11,7 @@ const STATIC_ASSETS = [
   './images/icon-192.png',
   './images/icon-512.png',
   './images/card-back.png',
+  './images/card-back-premium.png',
   './images/tarot-cloth.png',
   './images/lotto-bg.png',
   './images/conclusion.png',
