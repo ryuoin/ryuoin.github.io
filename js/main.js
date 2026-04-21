@@ -760,3 +760,215 @@ function startLottoDraw() {
         drawCount++;
     }, 1200);
 }
+
+// ========== 프리미엄 모드: 그 사람 지금 내 생각 할까? ==========
+let thinkingRelation = '';
+let thinkingCards = []; // 4장의 뽑힌 카드 ID 저장
+let thinkingCurrentPos = 1;
+
+function checkPremiumAccess() {
+    if (!isPremium()) {
+        showPremiumInfo();
+        return false;
+    }
+    return true;
+}
+
+function startThinkingMode() {
+    if (!checkPremiumAccess()) return;
+    
+    // const today = new Date().toDateString();
+    // if (localStorage.getItem('thinkingLastUsed') === today) {
+    //     alert('이 집중 리딩은 하루 한 번만 에너지를 정확히 읽어낼 수 있습니다.\n내일 다시 찾아와 주세요.');
+    //     return; // 실서비스 배포 시 주석 해제하여 활성화
+    // }
+
+    thinkingRelation = '';
+    thinkingCards = [];
+    thinkingCurrentPos = 1;
+    
+    // 모달 및 스텝1 초기화
+    document.getElementById('thinking-modal').classList.add('active');
+    switchThinkingStep(1);
+    
+    // STEP 3 초기화
+    const readingBox = document.getElementById('thinking-reading-box');
+    readingBox.style.display = 'none';
+    readingBox.innerHTML = '';
+    const btnNext = document.getElementById('btn-thinking-next');
+    btnNext.style.opacity = '0';
+    btnNext.style.pointerEvents = 'none';
+    
+    for (let i = 1; i <= 4; i++) {
+        const wrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${i}"]`);
+        const card = document.getElementById(`tc-${i}`);
+        card.classList.remove('flipped');
+        if(i === 1) wrapper.classList.remove('locked');
+        else wrapper.classList.add('locked');
+    }
+}
+
+function closeThinkingMode() {
+    document.getElementById('thinking-modal').classList.remove('active');
+}
+
+function switchThinkingStep(stepNum) {
+    document.querySelectorAll('.thinking-step').forEach(step => step.classList.remove('active'));
+    document.getElementById('thinking-step-'+stepNum).classList.add('active');
+}
+
+function selectRelationship(type) {
+    thinkingRelation = type;
+    switchThinkingStep(2);
+    startFocusRitual();
+}
+
+function startFocusRitual() {
+    let count = 3;
+    const numEl = document.getElementById('countdown-number');
+    const circle = document.querySelector('.countdown-circle');
+    
+    numEl.innerText = count;
+    circle.style.strokeDashoffset = '0';
+    
+    setTimeout(() => {
+        circle.style.strokeDashoffset = '339.292'; // 원형 줄어드는 애니메이션 기준 길이
+    }, 50);
+
+    const intv = setInterval(() => {
+        count--;
+        if (count > 0) {
+            numEl.innerText = count;
+        } else if (count === 0) {
+            numEl.innerText = '눈을 뜨세요';
+        } else {
+            clearInterval(intv);
+            initThinkingCards();
+        }
+    }, 1000);
+}
+
+function initThinkingCards() {
+    // 22장 중 4장 뽑기
+    const deck = [];
+    for(let i=0; i<22; i++) deck.push(i);
+    shuffleArray(deck);
+    thinkingCards = deck.slice(0,4);
+    
+    // 카드 뒷면(결과 이미지) 세팅
+    for(let i=1; i<=4; i++) {
+        const back = document.querySelector(`#tc-${i} .thinking-card-back`);
+        back.style.backgroundImage = `url('media/cards/${thinkingCards[i-1]}.jpg')`;
+    }
+    
+    switchThinkingStep(3);
+}
+
+function revealThinkingCard(pos) {
+    if (pos !== thinkingCurrentPos) return;
+    
+    const cardId = thinkingCards[pos-1];
+    const data = thinkingData[cardId];
+    
+    document.getElementById(`tc-${pos}`).classList.add('flipped');
+    
+    const readingBox = document.getElementById('thinking-reading-box');
+    readingBox.style.display = 'block';
+    
+    let textHTML = '';
+    if (pos === 1) textHTML = `<strong style="color:var(--gold);">[그 사람의 현재]</strong><br>${data.pos1.text}`;
+    else if (pos === 2) textHTML = `<strong style="color:var(--gold);">[나를 향한 마음]</strong><br>${data.pos2.text}`;
+    else if (pos === 3) textHTML = `<strong style="color:var(--gold);">[둘 사이의 에너지 온도]</strong><br>${data.pos3.text}`;
+    else if (pos === 4) textHTML = `<strong style="color:var(--gold);">[앞으로 7일 내 변화 신호]</strong><br>${data.pos4.text}`;
+    
+    const newP = document.createElement('p');
+    newP.innerHTML = textHTML;
+    newP.style.animation = 'fadeIn 0.5s ease';
+    newP.style.borderTop = '1px solid rgba(255,255,255,0.1)';
+    newP.style.paddingTop = '10px';
+    if(pos === 1) newP.style.borderTop = 'none';
+    
+    readingBox.appendChild(newP);
+    readingBox.scrollTop = readingBox.scrollHeight;
+    
+    thinkingCurrentPos++;
+    if (thinkingCurrentPos <= 4) {
+        document.querySelector(`.thinking-card-wrapper[data-pos="${thinkingCurrentPos}"]`).classList.remove('locked');
+    } else {
+        const btnNext = document.getElementById('btn-thinking-next');
+        btnNext.style.opacity = '1';
+        btnNext.style.pointerEvents = 'auto';
+        localStorage.setItem('thinkingLastUsed', new Date().toDateString());
+    }
+}
+
+function showThinkingSummary() {
+    switchThinkingStep(5);
+    incrementReadingCount();
+    
+    const card2 = thinkingCards[1];
+    const card3 = thinkingCards[2];
+    const card4 = thinkingCards[3];
+    
+    const d2 = thinkingData[card2].pos2;
+    const d3 = thinkingData[card3].pos3;
+    const d4 = thinkingData[card4].pos4;
+
+    // 감정 온도계 애니메이션
+    setTimeout(() => {
+        const tempObj = document.getElementById('temp-marker');
+        tempObj.style.left = d2.temperature + '%';
+        document.getElementById('temp-text').innerText = `현재 감정 온도 ${d2.temperature}° : ${d2.state}`;
+    }, 300);
+
+    // 에너지 게이지 애니메이션
+    const gaugeObj = document.getElementById('energy-fill');
+    const valObj = document.getElementById('energy-value');
+    const targetVal = Math.floor(Math.random() * (d3.gaugeMax - d3.gaugeMin + 1)) + d3.gaugeMin;
+    setTimeout(() => {
+        gaugeObj.style.width = targetVal + '%';
+        document.getElementById('energy-desc').innerText = d3.flow;
+        let curr = 0;
+        const intv = setInterval(() => {
+            curr += 2;
+            if(curr >= targetVal) { curr = targetVal; clearInterval(intv); }
+            valObj.innerText = curr;
+        }, 30);
+    }, 600);
+
+    // 타임라인 설정
+    setTimeout(() => {
+        document.querySelectorAll('.timeline-bar .day').forEach(el => el.classList.remove('active'));
+        d4.focusDays.forEach(dayIndex => {
+            document.getElementById('day-' + dayIndex).classList.add('active');
+        });
+        document.getElementById('timeline-text').innerText = d4.signal;
+    }, 900);
+
+    // 조언 버튼 활성화
+    setTimeout(() => {
+        document.querySelectorAll('.action-btn').forEach(el => el.classList.remove('active'));
+        if (d4.action === 'wait') {
+            document.getElementById('action-wait').classList.add('active');
+        } else if (d4.action === 'contact') {
+            document.getElementById('action-contact').classList.add('active');
+        } else {
+            document.getElementById('action-focus').classList.add('active');
+        }
+    }, 1200);
+}
+
+function shareThinkingResult() {
+    const textTarget = document.getElementById('energy-value').innerText;
+    const text = `오늘 타로가 감지한 우리 사이 연락 에너지: ${textTarget}%\n과연 그 사람도 내 생각을 하고 있을까? 지금 확인해보세요.`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: '타로 - 그 사람 지금 내 생각 할까?',
+            text: text,
+            url: window.location.href,
+        }).catch(err => console.error('공유 실패:', err));
+    } else {
+        alert('현재 브라우저에서는 공유 기능을 지원하지 않습니다.\n\n' + text);
+    }
+}
