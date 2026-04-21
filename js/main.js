@@ -240,6 +240,13 @@ function initSpread(mode) {
 
             card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
             rowEl.appendChild(card);
+
+            // 카드 딜링 애니메이션: 순차적으로 촤라락 펼쳐지기
+            const baseDelay = rowIdx * 550; // 두 번째 줄은 첫 번째 줄 끝난 뒤 시작
+            const cardDelay = baseDelay + (i * 40); // 카드마다 40ms 간격
+            setTimeout(() => {
+                card.classList.add('deal-animate');
+            }, cardDelay);
         });
 
         container.appendChild(rowEl);
