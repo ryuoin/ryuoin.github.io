@@ -286,6 +286,7 @@ function initSpread(mode) {
 
 function handleSpreadCardClick(cardEl, cardId, mode) {
     if (cardEl.classList.contains('selected') || cardEl.classList.contains('disabled')) return;
+    if (navigator.vibrate) navigator.vibrate(20);
 
     const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : (mode === 'thinking' ? 4 : 1));
 
@@ -891,6 +892,8 @@ function showThinkingResultSummary() {
 }
 
 function revealThinkingCard(pos) {
+    if (navigator.vibrate) navigator.vibrate(50); // 프리미엄 모드 진동 피드백
+    
     const cardEl = document.getElementById(`tc-${pos}`);
     if(!cardEl || cardEl.classList.contains('flipped')) return;
     
