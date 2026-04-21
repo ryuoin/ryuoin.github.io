@@ -884,7 +884,12 @@ function showThinkingResultSummary() {
         const wrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${i}"]`);
         const card = document.getElementById(`tc-${i}`);
         if(card) card.classList.remove('flipped');
-        if(wrapper) wrapper.classList.remove('locked');
+        
+        // 순차적 공개를 위해 1번 외에는 모두 잠금(locked) 처리
+        if(wrapper) {
+            if(i === 1) wrapper.classList.remove('locked');
+            else wrapper.classList.add('locked');
+        }
     }
     
     incrementReadingCount();
@@ -892,36 +897,58 @@ function showThinkingResultSummary() {
 }
 
 function revealThinkingCard(pos) {
+    // 1. 순차적 공개 검증: 현재 차례가 아닌 카드를 클릭하면 무시
+    if (pos !== thinkingRevealedCount + 1) return;
+
     if (navigator.vibrate) navigator.vibrate(50); // 프리미엄 모드 진동 피드백
     
     const cardEl = document.getElementById(`tc-${pos}`);
     if(!cardEl || cardEl.classList.contains('flipped')) return;
     
+    // 2. 데이터 유효성 체크
+    if (!selectedCards || selectedCards.length < pos) {
+        console.error("선택된 카드 데이터가 부족합니다.");
+        return;
+    }
+
     const cardId = selectedCards[pos-1]; 
     const data = thinkingData[cardId];
+    if (!data) {
+        console.error("해당 카드의 프리미엄 데이터가 없습니다:", cardId);
+        return;
+    }
     
     cardEl.classList.add('flipped');
     thinkingRevealedCount++;
     
+    // 3. 결과 텍스트 박스 노출 및 초기화
     const readingBox = document.getElementById('thinking-reading-box');
-    readingBox.style.display = 'block';
+    if (readingBox) {
+        readingBox.style.display = 'block';
+        
+        let textHTML = '';
+        if (pos === 1) textHTML = `<strong style="color:var(--gold);">[그 사람의 현재]</strong><br>${data.pos1.text}`;
+        else if (pos === 2) textHTML = `<strong style="color:var(--gold);">[나를 향한 마음]</strong><br>${data.pos2.text}`;
+        else if (pos === 3) textHTML = `<strong style="color:var(--gold);">[둘 사이의 에너지 온도]</strong><br>${data.pos3.text}`;
+        else if (pos === 4) textHTML = `<strong style="color:var(--gold);">[앞으로 7일 내 변화 신호]</strong><br>${data.pos4.text}`;
+        
+        const newP = document.createElement('p');
+        newP.innerHTML = textHTML;
+        newP.style.animation = 'fadeIn 0.5s ease';
+        newP.style.borderTop = '1px solid rgba(255,255,255,0.1)';
+        newP.style.paddingTop = '10px';
+        if(thinkingRevealedCount === 1) newP.style.borderTop = 'none';
+        
+        readingBox.appendChild(newP);
+        readingBox.scrollTop = readingBox.scrollHeight;
+    }
     
-    let textHTML = '';
-    if (pos === 1) textHTML = `<strong style="color:var(--gold);">[그 사람의 현재]</strong><br>${data.pos1.text}`;
-    else if (pos === 2) textHTML = `<strong style="color:var(--gold);">[나를 향한 마음]</strong><br>${data.pos2.text}`;
-    else if (pos === 3) textHTML = `<strong style="color:var(--gold);">[둘 사이의 에너지 온도]</strong><br>${data.pos3.text}`;
-    else if (pos === 4) textHTML = `<strong style="color:var(--gold);">[앞으로 7일 내 변화 신호]</strong><br>${data.pos4.text}`;
-    
-    const newP = document.createElement('p');
-    newP.innerHTML = textHTML;
-    newP.style.animation = 'fadeIn 0.5s ease';
-    newP.style.borderTop = '1px solid rgba(255,255,255,0.1)';
-    newP.style.paddingTop = '10px';
-    if(thinkingRevealedCount === 1) newP.style.borderTop = 'none';
-    
-    readingBox.appendChild(newP);
-    readingBox.scrollTop = readingBox.scrollHeight;
-    
+    // 4. 다음 카드 활성화 (잠금 해제)
+    if (pos < 4) {
+        const nextWrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${pos + 1}"]`);
+        if (nextWrapper) nextWrapper.classList.remove('locked');
+    }
+
     if (thinkingRevealedCount >= 4) {
         const btnNext = document.getElementById('btn-thinking-next');
         if(btnNext) {
