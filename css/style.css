@@ -134,33 +134,23 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     margin: 0 auto;
 }
 
-/* 5개의 버튼 중 마지막 버튼은 하단 중앙에 배치 (홀수 개수로 인한 빈 공간 방지) */
-.mode-btn:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: 300px;
-    margin: 0 auto;
-    width: 100%;
-}
 
 @media (max-width: 480px) {
     .mode-buttons {
         grid-template-columns: 1fr;
     }
-    .mode-btn:nth-child(5) {
-        grid-column: auto;
-        max-width: 100%;
-    }
+
 }
 
 .mode-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
-    padding: 1.8rem 1.5rem;
+    gap: 0.25rem;
+    padding: 1.1rem 1.2rem;
     background: rgba(30, 11, 46, 0.6);
     border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 16px;
+    border-radius: 14px;
     cursor: pointer;
     transition: all 0.4s ease;
     backdrop-filter: blur(8px);
@@ -188,22 +178,22 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 
 .mode-btn-icon {
-    font-size: 2.2rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.15rem;
 }
 
 .mode-btn-title {
     font-family: 'Hahmlet', serif;
     color: var(--gold-light);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: 0.05rem;
+    letter-spacing: 0.04rem;
 }
 
 .mode-btn-desc {
     color: #999;
-    font-size: 0.85rem;
-    letter-spacing: 0.02rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.01rem;
 }
 
 /* =============================================
@@ -1217,3 +1207,608 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
         gap: 0.8rem;
     }
 }
+
+/* =============================================
+   오늘의 카드 특별 버튼 (메인 화면 최상단)
+   ============================================= */
+.daily-btn-special {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 1.4rem;
+    padding: 1.4rem 1.8rem;
+    background: linear-gradient(135deg, rgba(20, 8, 40, 0.85), rgba(40, 12, 70, 0.85));
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    transition: all 0.4s ease;
+}
+
+.daily-btn-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255, 220, 40, 0.12), transparent 70%);
+    pointer-events: none;
+    animation: dailyGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes dailyGlowPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.daily-btn-special:hover {
+    border-color: #ffd700;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.25), 0 0 20px var(--purple-glow);
+}
+
+.daily-btn-special .daily-icon {
+    font-size: 2.8rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(255, 220, 40, 0.8));
+    animation: starSpin 4s ease-in-out infinite;
+}
+
+@keyframes starSpin {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.1); }
+}
+
+.daily-btn-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+}
+
+.daily-title {
+    font-size: 1.5rem !important;
+    background: linear-gradient(90deg, #ffd700, #ffe97a, #ffd700);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.08rem;
+}
+
+.daily-desc {
+    color: #c0c0c0 !important;
+    font-size: 0.88rem !important;
+}
+
+.daily-badge {
+    background: linear-gradient(135deg, #d4af37, #9b7d22);
+    color: #000;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    letter-spacing: 0.1rem;
+    flex-shrink: 0;
+}
+
+.daily-btn-special.daily-done {
+    border-color: rgba(150, 150, 150, 0.3);
+    opacity: 0.75;
+}
+.daily-btn-special.daily-done .daily-btn-glow {
+    background: radial-gradient(ellipse at 50% 50%, rgba(150, 150, 150, 0.08), transparent 70%);
+}
+.daily-btn-special.daily-done .daily-icon {
+    animation: none;
+    filter: grayscale(0.5);
+}
+
+
+/* =============================================
+   오늘의 카드 — 카드 선택 화면 스프레드 UI
+   (2줄; 각 줄 11장이 겹쳐서 부채꼴처럼 보임)
+   ============================================= */
+.daily-spread-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem 1rem 3rem;
+}
+
+.daily-spread-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    width: 100%;
+    height: 140px;
+}
+
+.daily-spread-card {
+    position: absolute;
+    width: 70px;
+    height: 112px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: bottom center;
+    will-change: transform;
+}
+
+/* 11장을 부채꼴로 배치 — nth-child 위치 계산 */
+.daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 325px); transform: rotate(-20deg); }
+.daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 275px); transform: rotate(-16deg); }
+.daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 225px); transform: rotate(-12deg); }
+.daily-spread-row .daily-spread-card:nth-child(4)  { left: calc(50% - 175px); transform: rotate(-8deg); }
+.daily-spread-row .daily-spread-card:nth-child(5)  { left: calc(50% - 125px); transform: rotate(-4deg); }
+.daily-spread-row .daily-spread-card:nth-child(6)  { left: calc(50% - 35px);  transform: rotate(0deg); }
+.daily-spread-row .daily-spread-card:nth-child(7)  { left: calc(50% + 15px);  transform: rotate(4deg); }
+.daily-spread-row .daily-spread-card:nth-child(8)  { left: calc(50% + 65px);  transform: rotate(8deg); }
+.daily-spread-row .daily-spread-card:nth-child(9)  { left: calc(50% + 115px); transform: rotate(12deg); }
+.daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 165px); transform: rotate(16deg); }
+.daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 215px); transform: rotate(20deg); }
+
+/* 호버시 카드가 위로 쏙 올라오는 효과 */
+.daily-spread-card.hovered {
+    transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
+    filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
+    z-index: 50 !important;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+.daily-spread-card.selected {
+    transform: translateY(-40px) rotate(0deg) scale(1.15) !important;
+    filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
+    z-index: 60 !important;
+    cursor: default;
+}
+
+/* 이번주 운세에서 여러 장 선택 중일 때 — 이미 선택된 카드 표시 */
+.daily-spread-card.selected .daily-spread-cover {
+    border-color: var(--gold);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.7), inset 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.daily-spread-card.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.daily-spread-card.flipping {
+    animation: cardFlip 0.8s ease forwards;
+}
+
+@keyframes cardFlip {
+    0% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
+    50% { transform: translateY(-50px) rotateY(90deg) scale(1.2); }
+    100% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
+}
+
+/* 카드 덮개 (뒷면) */
+.daily-spread-cover {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-image: url('../images/card-back.png');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 6px;
+}
+
+.daily-spread-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    color: rgba(212, 175, 55, 0.7);
+    text-shadow: 0 0 4px rgba(212, 175, 55, 0.5);
+}
+
+@media (max-width: 480px) {
+    .daily-spread-row { height: 100px; }
+    .daily-spread-card { width: 50px; height: 80px; }
+    .daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 230px); transform: rotate(-20deg); }
+    .daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 195px); transform: rotate(-16deg); }
+    .daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 160px); transform: rotate(-12deg); }
+    .daily-spread-row .daily-spread-card:nth-child(4)  { left: calc(50% - 125px); transform: rotate(-8deg); }
+    .daily-spread-row .daily-spread-card:nth-child(5)  { left: calc(50% - 90px);  transform: rotate(-4deg); }
+    .daily-spread-row .daily-spread-card:nth-child(6)  { left: calc(50% - 25px);  transform: rotate(0deg); }
+    .daily-spread-row .daily-spread-card:nth-child(7)  { left: calc(50% + 10px);  transform: rotate(4deg); }
+    .daily-spread-row .daily-spread-card:nth-child(8)  { left: calc(50% + 45px);  transform: rotate(8deg); }
+    .daily-spread-row .daily-spread-card:nth-child(9)  { left: calc(50% + 80px);  transform: rotate(12deg); }
+    .daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 115px); transform: rotate(16deg); }
+    .daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 150px); transform: rotate(20deg); }
+    .daily-spread-card.hovered { transform: translateY(-25px) rotate(0deg) scale(1.1) !important; }
+}
+
+/* =============================================
+   오늘의 카드 결과 모달
+   ============================================= */
+.daily-modal-title {
+    font-family: 'Hahmlet', serif;
+    background: linear-gradient(90deg, #ffd700, #fff8d6, #ffd700);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.daily-reading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* 오늘의 카드 등급 배지 */
+.daily-rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 2.2rem;
+    border-radius: 30px;
+    font-family: 'Hahmlet', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.03rem;
+    border: 2px solid;
+    animation: badgePulseDaily 2.5s ease-in-out infinite;
+}
+
+@keyframes badgePulseDaily {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 0 28px rgba(255,255,255,0.25); }
+}
+
+.daily-rating-badge.rating-1 { background: rgba(0, 230, 118, 0.12);  color: #00e676; border-color: #00e676; }
+.daily-rating-badge.rating-2 { background: rgba(66, 165, 245, 0.12);  color: #42a5f5; border-color: #42a5f5; }
+.daily-rating-badge.rating-3 { background: rgba(253, 216, 53, 0.12);  color: #fdd835; border-color: #fdd835; }
+.daily-rating-badge.rating-4 { background: rgba(255, 152, 0, 0.12);   color: #ff9800; border-color: #ff9800; }
+.daily-rating-badge.rating-5 { background: rgba(239, 83, 80, 0.12);   color: #ef5350; border-color: #ef5350; }
+
+.daily-card-large { width: 200px; height: 320px; }
+.daily-card-display { display: flex; justify-content: center; }
+
+.daily-desc-box {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.8rem;
+    border-radius: 12px;
+    border-top: 2px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.daily-card-name {
+    font-family: 'Hahmlet', serif;
+    color: var(--gold-light);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.daily-message {
+    color: #e0e0e0;
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.daily-advice-box {
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    padding: 1.2rem;
+}
+
+.daily-advice-label {
+    font-family: 'Hahmlet', serif;
+    color: var(--gold);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.daily-advice {
+    color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.daily-conclusion-text {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-family: 'Hahmlet', serif;
+    max-width: 500px;
+}
+
+/* =============================================
+   프리미엄 상세 해석 섹션
+   ============================================= */
+.premium-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem auto;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.premium-lock-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.8rem 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    text-align: center;
+}
+
+.premium-lock-icon {
+    font-size: 2rem;
+    animation: lockPulse 2s ease-in-out infinite;
+}
+
+@keyframes lockPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.premium-lock-title {
+    font-family: 'Hahmlet', serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.premium-lock-desc {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+.btn-premium-unlock {
+    background: linear-gradient(135deg, #d4af37, #9b7d22);
+    color: #000;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-family: 'Hahmlet', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.4rem;
+}
+
+.btn-premium-unlock:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.premium-content {
+    padding: 1.5rem;
+    background: rgba(20, 8, 40, 0.8);
+}
+
+.premium-detail-box {
+    text-align: left;
+}
+
+.premium-detail-title {
+    font-family: 'Hahmlet', serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 0.8rem;
+}
+
+.premium-detail-text {
+    color: #ddd;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.premium-detail-advice {
+    background: rgba(212, 175, 55, 0.08);
+    border-left: 3px solid var(--gold);
+    padding: 0.8rem 1rem;
+    border-radius: 0 8px 8px 0;
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.premium-sub-section {
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
+    color: var(--gold-light);
+    font-size: 0.95rem;
+}
+
+.premium-sub-section:last-child { border-bottom: none; }
+
+/* =============================================
+   광고 팝업 패널
+   ============================================= */
+.ad-panel {
+    max-width: 360px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.ad-label {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaa;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1rem;
+}
+
+.ad-placeholder {
+    width: 100%;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ad-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+.ad-placeholder-text { color: #666; font-size: 0.85rem; }
+
+/* =============================================
+   프리미엄 안내 팝업 패널
+   ============================================= */
+.premium-info-panel {
+    max-width: 380px;
+    text-align: center;
+}
+
+.premium-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.premium-feature-item {
+    color: #ddd;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    border-left: 2px solid var(--gold);
+}
+
+.premium-coming-soon-badge {
+    display: inline-block;
+    background: rgba(255, 152, 0, 0.15);
+    color: #ff9800;
+    border: 1px solid rgba(255, 152, 0, 0.4);
+    font-family: 'Hahmlet', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05rem;
+}
+
+/* ========== 2-Tier Premium Styles ========== */
+.premium-upgrade-banner {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(30,30,40,0.8), rgba(20,20,30,0.95));
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-upgrade-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 50%);
+    opacity: 0.5;
+    animation: rotate 10s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.premium-lock-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.premium-lock-title {
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Hahmlet', serif;
+}
+
+.premium-lock-desc {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.btn-premium-unlock {
+    background: linear-gradient(90deg, #d4af37, #f3e5ab);
+    color: #1a1a2e;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.btn-premium-unlock:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+}
+
+/* �����̾� ���� �ؽ�Ʈ ��Ÿ�� (Ȳ�ݺ� ����Ʈ) */
+.premium-text-glow {
+    color: #e6e6e6;
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    background: linear-gradient(90deg, rgba(212,175,55,0.1), transparent);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.7;
+}
+
+.premium-label {
+    display: inline-block;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+}
+
