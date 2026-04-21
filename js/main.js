@@ -104,21 +104,27 @@ function initModeSelect() {
     readingScreen.classList.add('hidden');
     updatePremiumTestButton();
 
-    document.getElementById('btn-mode-daily').addEventListener('click', () => startMode('daily'));
-    document.getElementById('btn-mode-weekly').addEventListener('click', () => startMode('weekly'));
-    document.getElementById('btn-mode-love').addEventListener('click', () => startMode('love'));
-    document.getElementById('btn-mode-money').addEventListener('click', () => startMode('money'));
-    document.getElementById('btn-mode-yesno').addEventListener('click', () => startMode('yesno'));
-    document.getElementById('btn-mode-lotto').addEventListener('click', () => startMode('lotto'));
+    const addMenuListener = (id, handler) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('click', handler);
+    };
 
-    document.getElementById('btn-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-love-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-money-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-lotto-home').addEventListener('click', restartGame);
-    document.getElementById('btn-back-to-mode').addEventListener('click', restartGame);
-    document.getElementById('btn-daily-restart').addEventListener('click', restartGame);
+    addMenuListener('btn-mode-daily', () => startMode('daily'));
+    addMenuListener('btn-mode-weekly', () => startMode('weekly'));
+    addMenuListener('btn-mode-love', () => startMode('love'));
+    addMenuListener('btn-mode-money', () => startMode('money'));
+    addMenuListener('btn-mode-yesno', () => startMode('yesno'));
+    addMenuListener('btn-mode-lotto', () => startMode('lotto'));
+    addMenuListener('btn-mode-thinking', startThinkingMode);
+
+    addMenuListener('btn-restart', restartGame);
+    addMenuListener('btn-love-restart', restartGame);
+    addMenuListener('btn-money-restart', restartGame);
+    addMenuListener('btn-yesno-restart', restartGame);
+    addMenuListener('btn-lotto-restart', restartGame);
+    addMenuListener('btn-lotto-home', restartGame);
+    addMenuListener('btn-back-to-mode', restartGame);
+    addMenuListener('btn-daily-restart', restartGame);
 
     const lottoBtn = document.getElementById('btn-lotto-start');
     if (lottoBtn) lottoBtn.addEventListener('click', startLottoDraw);
@@ -281,7 +287,7 @@ function initSpread(mode) {
 function handleSpreadCardClick(cardEl, cardId, mode) {
     if (cardEl.classList.contains('selected') || cardEl.classList.contains('disabled')) return;
 
-    const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : (mode === 'thinking' ? 4 : 1));
+    const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : 1);
 
     // daily: localStorage 저장
     if (mode === 'daily') {
@@ -320,7 +326,6 @@ function handleSpreadCardClick(cardEl, cardId, mode) {
         else if (mode === 'weekly') { showWeeklyResult();   }
         else if (mode === 'love')   { showLoveResult();     }
         else if (mode === 'yesno')  { showYesNoResult();    }
-        else if (mode === 'thinking') { showThinkingResultSummary(); }
         else                        { showMoneyResult();    }
 
         incrementReadingCount();
@@ -898,7 +903,7 @@ function revealThinkingCard(pos) {
         
         const newP = document.createElement('p');
         newP.innerHTML = textHTML;
-        newP.style.animation = 'fadeIn 0.5s ease';
+        newP.style.animation = 'fadeIn 1.2s ease'; // 가독성을 위해 살짝 느리게
         if(thinkingRevealedCount > 1) {
             newP.style.borderTop = '1px solid rgba(255,255,255,0.1)';
             newP.style.paddingTop = '10px';
