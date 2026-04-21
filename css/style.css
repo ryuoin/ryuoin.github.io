@@ -2025,3 +2025,19 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
         transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.23, 1, 0.32, 1) !important;
     }
 }
+
+/* =============================================
+   Premium Card Back Image
+   ============================================= */
+.premium-mode .daily-spread-cover {
+    background-image: url('../images/card-back-premium.png') !important;
+    border: 1px solid rgba(255, 230, 150, 0.6) !important;
+    box-shadow: 0 4px 15px rgba(255, 230, 150, 0.3) !important;
+}
+.premium-mode .daily-spread-card.hovered .daily-spread-cover {
+    box-shadow: 0 0 25px rgba(255, 230, 150, 0.7), inset 0 0 10px rgba(255, 230, 150, 0.4) !important;
+}
+.premium-mode .daily-spread-card.selected .daily-spread-cover {
+    border-color: #fff8d6 !important;
+    box-shadow: 0 0 25px rgba(255, 230, 150, 0.9), inset 0 0 15px rgba(255, 230, 150, 0.6) !important;
+}
