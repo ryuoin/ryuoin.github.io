@@ -2264,11 +2264,15 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     border-radius: 8px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    background-color: #2a2a2a; /* 기본 배경색 (이미지 로딩 전 방어) */
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .thinking-card-front {
-    background-image: url('../media/premium_card_back.png'); /* 프리미엄 뒷면 우선 표시 */
+    background-image: url('../images/card-back-premium.png'); /* 경로 수정: media -> images, 파일명 수정 */
+    background-size: 240%; /* 딱 카드 뒷모습만 나오도록 크롭 */
+    background-position: center;
 }
 
 .thinking-card-back {
