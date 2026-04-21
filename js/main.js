@@ -863,32 +863,65 @@ function renderThinkingSpread() {
     thinkingSelectedIds = [];
     thinkingCurrentPos = 1;
 
-    // 22장 메이저 카드 인덱스 생성 및 셔플
-    const deck = [];
-    for(let i=0; i<22; i++) deck.push(i);
-    shuffleArray(deck);
+    // 프리미엄 상태 반영 (무조건 프리미엄 뒷면 우선 적용)
+    document.body.classList.add('premium-mode');
 
-    // 부채꼴 배치를 위한 계산
-    const totalCards = 22;
-    const angleStep = 6; // 각 카드 간의 각도 차이
-    const startAngle = -(totalCards - 1) * angleStep / 2;
+    // 22장 카드 2줄로 배치 (일반 모드와 동일한 딜링 방식)
+    const deckAll = Array.from({length: 22}, (_, i) => i);
+    shuffleArray(deckAll);
 
-    deck.forEach((cardId, index) => {
-        const card = document.createElement('div');
-        card.className = 'selectable-card';
-        
-        // 부채꼴 좌표 계산
-        const angle = startAngle + (index * angleStep);
-        const radius = 250; 
-        const x = Math.sin(angle * Math.PI / 180) * radius;
-        const y = Math.cos(angle * Math.PI / 180) * radius * 0.2; // 약간 둥글게
+    const row1 = deckAll.slice(0, 11);
+    const row2 = deckAll.slice(11, 22);
 
-        card.style.left = `calc(50% + ${x}px - 30px)`;
-        card.style.transform = `rotate(${angle}deg)`;
-        card.style.zIndex = index;
+    [row1, row2].forEach((rowCards, rowIdx) => {
+        const rowEl = document.createElement('div');
+        rowEl.className = 'daily-spread-row';
 
-        card.onclick = () => handleThinkingCardSelect(card, cardId);
-        container.appendChild(card);
+        rowCards.forEach((cardId, i) => {
+            const card = document.createElement('div');
+            card.className = 'daily-spread-card deal-init';
+            card.dataset.id = cardId;
+
+            const cover = document.createElement('div');
+            cover.className = 'daily-spread-cover';
+            const num = document.createElement('span');
+            num.className = 'daily-spread-num';
+            num.textContent = rowIdx * 11 + i + 1;
+            cover.appendChild(num);
+            card.appendChild(cover);
+
+            card.addEventListener('mouseenter', () => {
+                if (!card.classList.contains('selected') && !card.classList.contains('disabled')) {
+                    card.classList.add('hovered');
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('hovered');
+            });
+            card.addEventListener('touchstart', () => {
+                if (!card.classList.contains('disabled')) card.classList.add('hovered');
+            }, {passive: true});
+            card.addEventListener('touchend', () => {
+                card.classList.remove('hovered');
+            }, {passive: true});
+
+            card.addEventListener('click', () => handleThinkingCardSelect(card, cardId));
+            rowEl.appendChild(card);
+
+            const baseDelay = rowIdx * 500; 
+            const cardDelay = baseDelay + (i * 45) + 300; // 300ms 화면 전환 후 등장
+
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        card.classList.remove('deal-init');
+                        card.classList.add('deal-animate');
+                    });
+                });
+            }, cardDelay);
+        });
+
+        container.appendChild(rowEl);
     });
 
     switchThinkingStep(3);
@@ -897,20 +930,34 @@ function renderThinkingSpread() {
 let thinkingSelectedIds = [];
 
 function handleThinkingCardSelect(cardElement, cardId) {
+    if (cardElement.classList.contains('selected') || cardElement.classList.contains('disabled')) return;
     if (thinkingSelectedIds.length >= 4) return;
     if (thinkingSelectedIds.includes(cardId)) return;
 
     // 선택 상태 반영
     thinkingSelectedIds.push(cardId);
-    cardElement.classList.add('selected');
+    cardElement.classList.add('selected', 'flipping');
+    cardElement.classList.remove('hovered');
+    
     document.getElementById('thinking-select-count').innerText = thinkingSelectedIds.length;
 
-    // 4장 선택 완료 시
-    if (thinkingSelectedIds.length === 4) {
-        setTimeout(() => {
-            moveToThinkingResult();
-        }, 600);
+    // 4장 선택 완료를 위한 처리
+    if (thinkingSelectedIds.length < 4) {
+        setTimeout(() => { cardElement.classList.remove('flipping'); }, 800);
+        return;
     }
+
+    // 4장 완료! 나머지 disabled 처리
+    document.querySelectorAll('#thinking-spread-container .daily-spread-card').forEach(c => {
+        if (!c.classList.contains('selected')) {
+            c.classList.add('disabled');
+            c.classList.remove('hovered');
+        }
+    });
+
+    setTimeout(() => {
+        moveToThinkingResult();
+    }, 1000);
 }
 
 function moveToThinkingResult() {
