@@ -52,23 +52,32 @@
                 </div>
             </section>
 
-            <!-- 3. 방문자 분석 (Visitor Analytics) - NEW -->
+            <!-- 3. 방문자 분석 (Visitor Analytics) -->
             <section class="admin-section">
-                <h2 class="section-title">👥 방문자 분석 (Analytics)</h2>
+                <h2 class="section-title">👥 방문자 접속 로그 (Access Log)</h2>
                 <div class="glass-panel analytics-container">
-                    <div class="analytics-grid">
-                        <div class="analytics-item">
+                    <div class="analytics-header">
+                        <div class="analytics-item main-stat">
                             <span class="analytics-label">전체 누적 방문자 수</span>
                             <span class="analytics-value" id="hit-counter">0</span>
                         </div>
-                        <div class="analytics-item">
-                            <span class="analytics-label">현재 접속 IP</span>
-                            <span class="analytics-value" id="visitor-ip">로드 중...</span>
-                        </div>
-                        <div class="analytics-item">
-                            <span class="analytics-label">최종 접속 일시</span>
-                            <span class="analytics-value" id="visitor-time">-</span>
-                        </div>
+                    </div>
+                    <div class="admin-table-container log-table-wrapper">
+                        <table class="admin-table log-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>IP Address</th>
+                                    <th>접속 시간</th>
+                                    <th>상태</th>
+                                </tr>
+                            </thead>
+                            <tbody id="access-log-body">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">접속 로그를 불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
