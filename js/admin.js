@@ -129,7 +129,6 @@ function displayLogs() {
             <td>${cachedLogs.length - index}</td>
             <td><code style="color: #f9f295;">${log.ip}</code></td>
             <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
-            <td><span class="status-badge status-ok" style="font-size: 0.7rem; opacity: 0.8;">Visit</span></td>
         </tr>
     `).join('');
 }
