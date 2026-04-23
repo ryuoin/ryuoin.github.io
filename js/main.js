@@ -1,7 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     initModeSelect();
     updateDailyBtnStatus();
+    logVisit(); // 접속 로그 기록 호출
 });
+
+// ========== 접속 로그 기록 (Google Sheets API) ==========
+async function logVisit() {
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxbHEkng8MTzisIyM4CZOrCXC90XWTE402Vi6tqWAft_2A1ePtG9SqBflvY6LGktBnL/exec';
+    
+    // 단순 방문 기록 필터 (어드민 페이지는 제외하고 싶을 경우 조건 추가 가능)
+    if (window.location.pathname.includes('admin.html')) return;
+
+    try {
+        // 1. IP 가져오기
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        const visitorIp = ipData.ip;
+
+        // 2. 구글 시트로 전송 (no-cors 모드 사용 - 응답은 못 받지만 기록은 됨)
+        const targetUrl = `${GAS_URL}?ip=${encodeURIComponent(visitorIp)}&ua=${encodeURIComponent(navigator.userAgent)}`;
+        
+        // fetch (no-cors 는 보안상 기록만 가능하고 결과값 확인은 제한적이지만 시트에 기록은 잘 됨)
+        fetch(targetUrl, { mode: 'no-cors' });
+    } catch (err) {
+        console.log('Logging failed:', err);
+    }
+}
 
 let selectedCards = [];
 let deck = [];
