@@ -216,6 +216,90 @@
     text-align: center;
 }
 
+.btn-primary {
+    padding: 10px 25px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid #d4af37;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+/* 모달 (팝업) 스타일 */
+.admin-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none; /* 기본 숨김 */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.admin-modal.active {
+    display: flex;
+}
+
+.admin-modal-content {
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    padding: 30px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal-title {
+    font-family: 'Cinzel', serif;
+    color: #f9f295;
+    font-size: 1.5rem;
+}
+
+.modal-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-download {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-close-modal {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-table-wrapper {
+    overflow-y: auto;
+    flex: 1;
+}
+
 .btn-back-mode {
     display: inline-block;
     padding: 15px 40px;
