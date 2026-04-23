@@ -60,11 +60,11 @@ function renderRoadmap() {
     `).join('');
 }
 
-// 4. 방문자 통계 초기화 및 로그 렌더링
+// 4. 방문자 통계 초기화 (메인 화면 로딩 최적화)
 async function initVisitorStats() {
     const hitLabel = document.getElementById('hit-counter');
 
-    // 1) 누적 방문자 수 (CountAPI)
+    // 누적 방문자 수만 먼저 가져옴 (빠른 응답)
     try {
         const response = await fetch('https://api.countapi.xyz/hit/ryuoin-github-io-tarot/visits');
         if (response.ok) {
@@ -76,33 +76,34 @@ async function initVisitorStats() {
     } catch (err) {
         hitLabel.innerText = "1,240+";
     }
-
-    // 2) 실제 구글 시트 접속 로그 렌더링
-    await fetchAndRenderLogs();
 }
 
-// 구글 시트에서 실제 로그 데이터 가져오기
-async function fetchAndRenderLogs() {
+// 전역 로그 데이터 보관용
+let cachedLogs = [];
+
+// 5. 로그 상세 팝업 열기
+async function openLogModal() {
+    const modal = document.getElementById('log-modal');
     const logBody = document.getElementById('access-log-body');
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbxbHEkng8MTzisIyM4CZOrCXC90XWTE402Vi6tqWAft_2A1ePtG9SqBflvY6LGktBnL/exec';
 
-    if (!logBody) return;
+    modal.classList.add('active');
+    logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">데이터를 불러오고 있습니다...</td></tr>`;
 
     try {
-        // GAS에 action=read 파라미터를 보내서 데이터를 가져옴
         const response = await fetch(`${GAS_URL}?action=read`);
         if (!response.ok) throw new Error('조회 실패');
         
-        const logs = await response.json();
+        cachedLogs = await response.json();
 
-        if (logs.length === 0) {
-            logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">아직 기록된 로그가 없습니다.</td></tr>`;
+        if (cachedLogs.length === 0) {
+            logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">기록된 로그가 없습니다.</td></tr>`;
             return;
         }
 
-        logBody.innerHTML = logs.map((log, index) => `
+        logBody.innerHTML = cachedLogs.map((log, index) => `
             <tr>
-                <td>${logs.length - index}</td>
+                <td>${cachedLogs.length - index}</td>
                 <td><code style="color: #f9f295;">${log.ip}</code></td>
                 <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
                 <td><span class="status-badge status-ok" style="font-size: 0.7rem; opacity: 0.8;">Visit</span></td>
@@ -110,9 +111,47 @@ async function fetchAndRenderLogs() {
         `).join('');
 
     } catch (err) {
-        logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: #ff6b6b;">로그를 불러올 수 없습니다.<br>(GAS 코드가 최신 버전인지 확인해 주세요.)</td></tr>`;
-        console.error('Fetch logs error:', err);
+        logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: #ff6b6b;">데이터 로드에 실패했습니다. <br> 다시 시도해 주세요.</td></tr>`;
     }
+}
+
+// 6. 팝업 닫기
+function closeLogModal() {
+    document.getElementById('log-modal').classList.remove('active');
+}
+
+// 7. 엑셀(CSV) 다운로드 기능
+function downloadLogs() {
+    if (cachedLogs.length === 0) {
+        alert('다운로드할 데이터가 없습니다.');
+        return;
+    }
+
+    // CSV 헤더
+    let csvContent = "\uFEFF"; // 한글 깨짐 방지 BOM
+    csvContent += "No,IP Address,Access Time,User Agent\n";
+
+    // 데이터 변환
+    cachedLogs.forEach((log, index) => {
+        const rowNum = cachedLogs.length - index;
+        const row = `${rowNum},"${log.ip}","${log.time}","${(log.ua || '').replace(/"/g, '""')}"`;
+        csvContent += row + "\n";
+    });
+
+    // 다운로드 실행
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
+    
+    link.setAttribute("href", url);
+    link.setAttribute("download", `Tarot_Access_Log_${dateStr}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // 5. 인수인계 문서 로드 (V2 고정)
