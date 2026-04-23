@@ -384,9 +384,18 @@ function renderCards() {
         cardReveal.className = 'card-reveal';
 
         const img = document.createElement('img');
-        const tryLoadImage = (ext) => { img.src = `images/${cardId}.${ext}`; };
+        const tryLoadImage = (ext) => { 
+            const folder = (isPremium() && cardId <= 21) ? 'images/premium' : 'images';
+            img.src = `${folder}/${cardId}.${ext}`; 
+        };
         img.onerror = () => {
-            if (img.src.endsWith('.png')) {
+            if (img.src.includes('images/premium/') && img.src.endsWith('.png')) {
+                // 프리미엄 경로에서 png 실패 시 jpg 시도
+                img.src = img.src.replace('.png', '.jpg');
+            } else if (img.src.includes('images/premium/')) {
+                // 프리미엄 경로에서 모두 실패 시 일반 경로 시도
+                img.src = `images/${cardId}.png`;
+            } else if (img.src.endsWith('.png')) {
                 tryLoadImage('jpg');
             } else {
                 img.style.display = 'none';
@@ -440,9 +449,16 @@ function handleCardClick(cardElem, cardId) {
 function renderCardImg(wrapper, cardId, data) {
     wrapper.innerHTML = '';
     const img = document.createElement('img');
-    const tryLoad = (ext) => { img.src = `images/${cardId}.${ext}`; };
+    const tryLoad = (ext) => { 
+        const folder = (isPremium() && cardId <= 21) ? 'images/premium' : 'images';
+        img.src = `${folder}/${cardId}.${ext}`; 
+    };
     img.onerror = () => {
-        if (img.src.endsWith('.png')) { tryLoad('jpg'); }
+        if (img.src.includes('images/premium/') && img.src.endsWith('.png')) {
+            img.src = img.src.replace('.png', '.jpg');
+        } else if (img.src.includes('images/premium/')) {
+            img.src = `images/${cardId}.png`;
+        } else if (img.src.endsWith('.png')) { tryLoad('jpg'); }
         else {
             img.style.display = 'none';
             const fb = document.createElement('div');
