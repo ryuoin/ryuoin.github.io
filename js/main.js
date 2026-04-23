@@ -1067,6 +1067,38 @@ function showThinkingSummary() {
             }
         }, 1200);
     }
+
+    // 종합 분석 리포트 (4가지 상세 내용 다시 표시)
+    const recapContainer = document.getElementById('thinking-summary-recap');
+    const recapList = document.getElementById('recap-content-list');
+    if (recapContainer && recapList) {
+        recapList.innerHTML = '';
+        const positions = [
+            { title: '그 사람의 현재 상태', id: cardIds[0], data: thinkingData[cardIds[0]].pos1 },
+            { title: '나를 향한 속마음', id: cardIds[1], data: thinkingData[cardIds[1]].pos2 },
+            { title: '둘 사이의 에너지', id: cardIds[2], data: thinkingData[cardIds[2]].pos3 },
+            { title: '미래 변화 신호', id: cardIds[3], data: thinkingData[cardIds[3]].pos4 }
+        ];
+
+        positions.forEach((pos, idx) => {
+            const cardData = tarotDataList.find(c => c.id === pos.id);
+            const cardName = cardData ? cardData.name : `카드 ${pos.id}`;
+            
+            const item = document.createElement('div');
+            item.className = 'recap-item';
+            item.innerHTML = `
+                <div class="recap-header">
+                    <span class="recap-pos-label">STEP 0${idx+1}</span>
+                    <span class="recap-card-name">${cardName}</span>
+                </div>
+                <div class="recap-title">${pos.title}</div>
+                <div class="recap-text">${pos.data.text.replace(/\n/g, '<br>')}</div>
+            `;
+            recapList.appendChild(item);
+        });
+        
+        recapContainer.style.display = 'block';
+    }
     
     // 하루 1번 카운트 기능 (옵션)
     localStorage.setItem('thinkingLastUsed', new Date().toDateString());
