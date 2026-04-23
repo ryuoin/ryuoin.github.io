@@ -918,7 +918,34 @@ function showThinkingResultSummary() {
     for(let i=1; i<=4; i++) {
         const cardId = selectedCards[i-1];
         const back = document.querySelector(`#tc-${i} .thinking-card-back`);
-        if (back) back.style.backgroundImage = `url('images/${cardId}.png')`;
+        if (back) {
+            back.innerHTML = ''; // 기존 이미지나 텍스트 클리어
+            const img = document.createElement('img');
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '8px';
+            
+            const tryLoad = (ext) => {
+                const folder = (isPremium() && cardId <= 21) ? 'images/premium' : 'images';
+                img.src = `${folder}/${cardId}.${ext}`;
+            };
+            
+            img.onerror = () => {
+                if (img.src.includes('images/premium/') && img.src.endsWith('.png')) {
+                    img.src = img.src.replace('.png', '.jpg');
+                } else if (img.src.includes('images/premium/')) {
+                    img.src = `images/${cardId}.png`;
+                } else if (img.src.endsWith('.png')) {
+                    tryLoad('jpg');
+                }
+            };
+            
+            tryLoad('png');
+            back.appendChild(img);
+            // 기존 backgroundImage는 제거
+            back.style.backgroundImage = 'none';
+        }
         
         const wrapper = document.querySelector(`.thinking-card-wrapper[data-pos="${i}"]`);
         const card = document.getElementById(`tc-${i}`);
