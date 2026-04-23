@@ -52,14 +52,31 @@
                 </div>
             </section>
 
-            <!-- 3. 프로젝트 인수인계 문서 -->
+            <!-- 3. 방문자 분석 (Visitor Analytics) - NEW -->
             <section class="admin-section">
-                <h2 class="section-title">📝 프로젝트 인수인계 문서 (Handover)</h2>
-                <div class="handover-tabs">
-                    <button class="tab-btn active" onclick="loadHandover('v2')">Handover V2 (최신)</button>
-                    <button class="tab-btn" onclick="loadHandover('v1')">Handover V1</button>
+                <h2 class="section-title">👥 방문자 분석 (Analytics)</h2>
+                <div class="glass-panel analytics-container">
+                    <div class="analytics-grid">
+                        <div class="analytics-item">
+                            <span class="analytics-label">전체 누적 방문자 수</span>
+                            <span class="analytics-value" id="hit-counter">0</span>
+                        </div>
+                        <div class="analytics-item">
+                            <span class="analytics-label">현재 접속 IP</span>
+                            <span class="analytics-value" id="visitor-ip">로드 중...</span>
+                        </div>
+                        <div class="analytics-item">
+                            <span class="analytics-label">최종 접속 일시</span>
+                            <span class="analytics-value" id="visitor-time">-</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="glass-panel handover-viewer">
+            </section>
+
+            <!-- 4. 프로젝트 인수인계 문서 -->
+            <section class="admin-section">
+                <h2 class="section-title">📝 프로젝트 인수인계 문서 (Handover V2)</h2>
+                <div class="glass-panel handover-viewer" style="margin-top: 15px;">
                     <pre id="handover-content" class="handover-text">문서를 불러오는 중...</pre>
                 </div>
             </section>
