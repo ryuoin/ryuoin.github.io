@@ -24,6 +24,7 @@
     letter-spacing: 4px;
     background: linear-gradient(to right, #d4af37, #f9f295, #d4af37);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
 }
@@ -315,4 +316,71 @@
     background: rgba(212, 175, 55, 0.2);
     border-color: #d4af37;
     transform: translateY(-2px);
+}
+
+/* 프리미엄 모드 (어드민 페이지 대응) */
+body.premium-mode {
+    background-color: #fbf9f4; /* 아이보리 베이스 */
+}
+
+body.premium-mode .admin-container {
+    color: #3d3b38;
+}
+
+body.premium-mode .admin-title {
+    background: linear-gradient(to right, #c5a028, #8b6b10, #c5a028);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+body.premium-mode .admin-subtitle {
+    color: #666;
+}
+
+body.premium-mode .section-title {
+    color: #8b6b10;
+    border-color: #c5a028;
+}
+
+body.premium-mode .admin-table th {
+    background: rgba(0, 0, 0, 0.03);
+    color: #444;
+}
+
+body.premium-mode .admin-table td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #3d3b38;
+}
+
+body.premium-mode .analytics-item {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+body.premium-mode .analytics-label {
+    color: #888;
+}
+
+body.premium-mode .analytics-value {
+    color: #8b6b10;
+}
+
+body.premium-mode .roadmap-text {
+    color: #3d3b38;
+}
+
+body.premium-mode .roadmap-text.text-dim {
+    color: #aaa;
+}
+
+body.premium-mode .handover-text {
+    color: #444;
+}
+
+body.premium-mode .glass-panel,
+body.premium-mode .handover-viewer {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(197, 160, 40, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
