@@ -2141,10 +2141,16 @@ body.premium-mode .modal-title {
         -webkit-backdrop-filter: none !important;
         background: rgba(30, 11, 46, 0.95) !important;
     }
+    body.premium-mode .glass-panel {
+        background: rgba(255, 255, 255, 0.98) !important;
+    }
     .mode-btn {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         background: rgba(30, 11, 46, 0.8) !important;
+    }
+    body.premium-mode .mode-btn {
+        background: rgba(255, 255, 255, 0.9) !important;
     }
     .love-rating-badge,
     .money-rating-badge,
@@ -2195,6 +2201,12 @@ body.premium-mode .modal-title {
     align-items: center;
     position: relative;
     overflow: hidden;
+}
+
+body.premium-mode #thinking-modal .thinking-panel {
+    background: linear-gradient(135deg, #ffffff, #fdfaf0);
+    border-color: rgba(197, 160, 40, 0.3);
+    box-shadow: 0 10px 40px rgba(197, 160, 40, 0.15);
 }
 
 .thinking-step {
@@ -2517,6 +2529,10 @@ body.premium-mode .modal-title {
    PREMIUM MODE THEME (IVORY/WHITE & AURA)
    ============================================= */
 
+body.premium-mode {
+    color: var(--text-main);
+}
+
 body.premium-mode .mode-title {
     color: var(--gold-light);
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -2526,16 +2542,17 @@ body.premium-mode .mode-subtitle {
     color: #666;
 }
 
+/* 메인 메뉴 버튼 개편 */
 body.premium-mode .mode-btn {
-    background: rgba(255, 255, 255, 0.7);
-    border-color: rgba(197, 160, 40, 0.25);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(197, 160, 40, 0.3);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 body.premium-mode .mode-btn:hover {
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
     border-color: var(--gold);
-    box-shadow: 0 8px 25px rgba(197, 160, 40, 0.2);
+    box-shadow: 0 8px 25px rgba(197, 160, 40, 0.15);
 }
 
 body.premium-mode .mode-btn-title {
@@ -2546,6 +2563,116 @@ body.premium-mode .mode-btn-desc {
     color: #777;
 }
 
+/* 오늘의 카드 특별 버튼 프리미엄 대응 */
+body.premium-mode .daily-btn-special {
+    background: linear-gradient(135deg, white, #fdfaf0);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(197, 160, 40, 0.1);
+}
+
+body.premium-mode .daily-btn-glow {
+    background: radial-gradient(ellipse at 50% 50%, rgba(197, 160, 40, 0.1), transparent 70%);
+}
+
+body.premium-mode .daily-desc {
+    color: #888 !important;
+}
+
+/* 결과 화면 및 모달 UI 개편 */
+body.premium-mode .glass-panel {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-color: rgba(197, 160, 40, 0.4) !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.premium-mode .combined-desc-box,
+body.premium-mode .love-desc-box,
+body.premium-mode .money-desc-box,
+body.premium-mode .yesno-desc-box,
+body.premium-mode .daily-desc-box {
+    background: rgba(255, 255, 255, 0.5) !important;
+    border-color: rgba(197, 160, 40, 0.2) !important;
+    color: var(--text-main);
+}
+
+body.premium-mode .reading-section {
+    border-bottom-color: rgba(197, 160, 40, 0.15);
+}
+
+body.premium-mode .res-desc,
+body.premium-mode .love-meaning,
+body.premium-mode .money-meaning,
+body.premium-mode .yesno-meaning,
+body.premium-mode .daily-message,
+body.premium-mode .yesno-advice,
+body.premium-mode .daily-advice {
+    color: #444 !important;
+}
+
+body.premium-mode .love-advice-box,
+body.premium-mode .money-advice-box,
+body.premium-mode .yesno-advice-box,
+body.premium-mode .daily-advice-box {
+    background: rgba(197, 160, 40, 0.05);
+    border-color: rgba(197, 160, 40, 0.15);
+}
+
+body.premium-mode .love-advice,
+body.premium-mode .money-advice,
+body.premium-mode .daily-advice {
+    color: #555 !important;
+}
+
+/* Thinking 모드 (프리미엄 전용 서비스) UI 개편 */
+body.premium-mode .relation-btn {
+    background: white;
+    border-color: rgba(197, 160, 40, 0.2);
+    color: var(--text-main);
+}
+
+body.premium-mode .relation-btn:hover {
+    background: #fdfaf0;
+    border-color: var(--gold);
+    box-shadow: 0 5px 15px rgba(197, 160, 40, 0.1);
+}
+
+body.premium-mode .relation-btn small {
+    color: #888;
+}
+
+body.premium-mode .viz-container {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(197, 160, 40, 0.1);
+}
+
+body.premium-mode .viz-desc,
+body.premium-mode .tc-label {
+    color: #555;
+}
+
+body.premium-mode .energy-bar,
+body.premium-mode .day {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.premium-mode .energy-text {
+    color: var(--text-main);
+    text-shadow: none;
+}
+
+body.premium-mode .action-btn {
+    background: white;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #666;
+}
+
+body.premium-mode .action-btn.active {
+    background: rgba(197, 160, 40, 0.15);
+    border-color: var(--gold);
+    color: var(--gold-light);
+}
+
+/* 공통 버튼 및 헤더 보완 */
 body.premium-mode .app-header h1,
 body.premium-mode .app-header p {
     color: var(--text-main);
@@ -2553,14 +2680,14 @@ body.premium-mode .app-header p {
 }
 
 body.premium-mode .status-bar {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     border-color: rgba(197, 160, 40, 0.4);
     color: var(--gold-light);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 body.premium-mode .card-name-label {
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.94);
     color: var(--gold-light);
     text-shadow: none;
     border-top: 1px solid var(--gold);
@@ -2569,6 +2696,12 @@ body.premium-mode .card-name-label {
 
 body.premium-mode .premium-upgrade-banner {
     display: none !important;
+}
+
+body.premium-mode .lotto-home-btn {
+    background: white;
+    color: var(--gold-light);
+    border-color: var(--gold);
 }
 
 /* 프리미엄 전용 텍스트 레이아웃 */
@@ -2583,7 +2716,8 @@ body.premium-mode .premium-upgrade-banner {
 }
 
 body.premium-mode .premium-text-glow {
-    background: rgba(197, 160, 40, 0.04);
+    background: rgba(197, 160, 40, 0.05);
+    box-shadow: 0 4px 20px rgba(197, 160, 40, 0.08);
 }
 
 .premium-label {
@@ -2594,4 +2728,49 @@ body.premium-mode .premium-text-glow {
     letter-spacing: 0.1rem;
     display: block;
     text-transform: uppercase;
+}
+
+body.premium-mode .btn-primary {
+    background: linear-gradient(135deg, #c5a028, #8b6b10);
+    color: white;
+    box-shadow: 0 4px 15px rgba(197, 160, 40, 0.2);
+}
+
+body.premium-mode .day.active {
+    background: var(--gold);
+    color: white;
+    box-shadow: 0 0 15px rgba(197, 160, 40, 0.4);
+}
+
+/* 배지 스타일 */
+.daily-badge, .premium-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05rem;
+}
+
+.daily-badge {
+    background: #ff5252;
+    color: white;
+}
+
+.premium-badge {
+    background: linear-gradient(135deg, #d4af37, #f9f295);
+    color: #1a1a2e;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+body.premium-mode .daily-badge {
+    background: #e67e22;
+    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.2);
+}
+
+body.premium-mode .premium-badge {
+    background: linear-gradient(135deg, #c5a028, #fbe69e);
+    color: #3d3b38;
 }
