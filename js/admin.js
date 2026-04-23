@@ -60,39 +60,49 @@ function renderRoadmap() {
     `).join('');
 }
 
-// 4. 방문자 통계 초기화 (IP, 시간, 히트 카운트)
+// 4. 방문자 통계 초기화 및 로그 렌더링
 async function initVisitorStats() {
-    const ipLabel = document.getElementById('visitor-ip');
-    const timeLabel = document.getElementById('visitor-time');
     const hitLabel = document.getElementById('hit-counter');
+    const logBody = document.getElementById('access-log-body');
 
-    // 접속 일시 기록
-    const now = new Date();
-    timeLabel.innerText = now.toLocaleString('ko-KR');
-
-    // IP 주소 가져오기 (Public API 사용)
-    try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        ipLabel.innerText = data.ip;
-    } catch (err) {
-        ipLabel.innerText = "비공개 (차단됨)";
-    }
-
-    // 누적 방문자 수 (CountAPI 사용)
-    // ryuoin-github-io-tarot 네임스페이스를 사용하여 카운팅
+    // 1) 누적 방문자 수 (CountAPI)
     try {
         const response = await fetch('https://api.countapi.xyz/hit/ryuoin-github-io-tarot/visits');
         if (response.ok) {
             const data = await response.json();
             hitLabel.innerText = data.value.toLocaleString();
         } else {
-            // CountAPI가 응답하지 않을 경우 로컬 스토리지 기반 가상 카운트
-            hitLabel.innerText = "1,240+"; // 기본값
+            hitLabel.innerText = "1,240+"; 
         }
     } catch (err) {
         hitLabel.innerText = "1,240+";
     }
+
+    // 2) 접속 로그 렌더링 (현재는 로컬 가상 데이터, 향후 DB 연동 예정)
+    renderAccessLogs();
+}
+
+// 가상 접속 로그 데이터 (DB 연결 전 테스트용)
+function renderAccessLogs() {
+    const logBody = document.getElementById('access-log-body');
+    
+    // 이 데이터가 향후 Supabase나 Google Sheets에서 가져올 실제 기록이 됩니다.
+    const mockLogs = [
+        { no: 1, ip: "121.165.XX.XX", time: "2026.04.23 14:30:12", status: "Active" },
+        { no: 2, ip: "211.234.XX.XX", time: "2026.04.23 13:15:44", status: "Done" },
+        { no: 3, ip: "58.120.XX.XX", time: "2026.04.23 11:05:02", status: "Done" }
+    ];
+
+    if (!logBody) return;
+
+    logBody.innerHTML = mockLogs.map(log => `
+        <tr>
+            <td>${log.no}</td>
+            <td><code style="color: #f9f295;">${log.ip}</code></td>
+            <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
+            <td><span class="status-badge ${log.status === 'Active' ? 'status-ok' : 'status-build'}" style="font-size: 0.7rem;">${log.status}</span></td>
+        </tr>
+    `).join('');
 }
 
 // 5. 인수인계 문서 로드 (V2 고정)
