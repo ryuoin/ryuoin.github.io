@@ -2853,3 +2853,77 @@ body.premium-mode .premium-badge {
     background: linear-gradient(135deg, #c5a028, #fbe69e);
     color: #3d3b38;
 }
+
+/* Thinking 모드 요약 리포트 상세 스타일 */
+.recap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+.recap-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 1.2rem;
+    border-left: 3px solid rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+}
+
+body.premium-mode .recap-item {
+    background: rgba(197, 160, 40, 0.03);
+    border-color: var(--gold);
+}
+
+.recap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+body.premium-mode .recap-header {
+    border-bottom-color: rgba(197, 160, 40, 0.1);
+}
+
+.recap-pos-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 0.1rem;
+}
+
+.recap-card-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Hahmlet', serif;
+}
+
+body.premium-mode .recap-card-name {
+    color: var(--gold-light);
+}
+
+.recap-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+}
+
+body.premium-mode .recap-title {
+    color: #333;
+}
+
+.recap-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    word-break: keep-all;
+}
+
+body.premium-mode .recap-text {
+    color: #555;
+}
