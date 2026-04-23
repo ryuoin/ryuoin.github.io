@@ -24,6 +24,12 @@ const roadmapData = [
     { title: "프리미엄 전용 카드 이미지 추가 (22장)", status: "todo", tag: "Design" }
 ];
 
+// 접속 로그 GAS URL (공통 사용)
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxbHEkng8MTzisIyM4CZOrCXC90XWTE402Vi6tqWAft_2A1ePtG9SqBflvY6LGktBnL/exec';
+
+// 전역 로그 데이터 보관용
+let cachedLogs = [];
+
 // 3. 페이지 초기화
 document.addEventListener('DOMContentLoaded', () => {
     renderMenuStats();
@@ -61,34 +67,41 @@ function renderRoadmap() {
     `).join('');
 }
 
-// 4. 방문자 통계 초기화 (메인 화면 로딩 최적화)
+// 4. 방문자 통계 초기화 (Google Sheets 로그 기반으로 변경)
 async function initVisitorStats() {
     const hitLabel = document.getElementById('hit-counter');
 
-    // 누적 방문자 수만 먼저 가져옴 (빠른 응답)
     try {
-        const response = await fetch('https://api.countapi.xyz/hit/ryuoin-github-io-tarot/visits');
+        // 이미 구현된 구글 시트 로그 시스템에서 데이터를 읽어와 개수 파악
+        const response = await fetch(`${GAS_URL}?action=read`);
         if (response.ok) {
             const data = await response.json();
-            hitLabel.innerText = data.value.toLocaleString();
+            cachedLogs = data; // 초기화 시 미리 데이터 확보 (성능 최적화)
+            hitLabel.innerText = data.length.toLocaleString();
         } else {
             hitLabel.innerText = "0"; 
         }
     } catch (err) {
-        hitLabel.innerText = "0";
+        console.error('방문자 통계 로드 실패:', err);
+        hitLabel.innerText = "Error";
     }
 }
 
-// 전역 로그 데이터 보관용
-let cachedLogs = [];
+
 
 // 5. 로그 상세 팝업 열기
 async function openLogModal() {
     const modal = document.getElementById('log-modal');
     const logBody = document.getElementById('access-log-body');
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxbHEkng8MTzisIyM4CZOrCXC90XWTE402Vi6tqWAft_2A1ePtG9SqBflvY6LGktBnL/exec';
 
     modal.classList.add('active');
+    
+    // 이미 initVisitorStats에서 데이터를 가져왔다면 바로 표시
+    if (cachedLogs.length > 0) {
+        displayLogs();
+        return;
+    }
+
     logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">데이터를 불러오고 있습니다...</td></tr>`;
 
     try {
@@ -96,24 +109,29 @@ async function openLogModal() {
         if (!response.ok) throw new Error('조회 실패');
         
         cachedLogs = await response.json();
-
-        if (cachedLogs.length === 0) {
-            logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">기록된 로그가 없습니다.</td></tr>`;
-            return;
-        }
-
-        logBody.innerHTML = cachedLogs.map((log, index) => `
-            <tr>
-                <td>${cachedLogs.length - index}</td>
-                <td><code style="color: #f9f295;">${log.ip}</code></td>
-                <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
-                <td><span class="status-badge status-ok" style="font-size: 0.7rem; opacity: 0.8;">Visit</span></td>
-            </tr>
-        `).join('');
+        displayLogs();
 
     } catch (err) {
         logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: #ff6b6b;">데이터 로드에 실패했습니다. <br> 다시 시도해 주세요.</td></tr>`;
     }
+}
+
+// 로그 화면 표시 헬퍼
+function displayLogs() {
+    const logBody = document.getElementById('access-log-body');
+    if (cachedLogs.length === 0) {
+        logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">기록된 로그가 없습니다.</td></tr>`;
+        return;
+    }
+
+    logBody.innerHTML = cachedLogs.map((log, index) => `
+        <tr>
+            <td>${cachedLogs.length - index}</td>
+            <td><code style="color: #f9f295;">${log.ip}</code></td>
+            <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
+            <td><span class="status-badge status-ok" style="font-size: 0.7rem; opacity: 0.8;">Visit</span></td>
+        </tr>
+    `).join('');
 }
 
 // 6. 팝업 닫기
