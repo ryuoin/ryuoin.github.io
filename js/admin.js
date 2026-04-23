@@ -21,7 +21,7 @@ const roadmapData = [
     { title: "엑셀(CSV) 로그 다운로드 기능 구현", status: "done", tag: "Admin" },
     { title: "모바일 실기기 최종 검수 (레이아웃/스크롤)", status: "todo", tag: "Core" },
     { title: "PWA/TWA 상점 배포 점검", status: "todo", tag: "Deploy" },
-    { title: "프리미엄 전용 카드 이미지 추가 (22장)", status: "todo", tag: "Design" }
+    { title: "프리미엄 전용 카드 이미지 추가 (22장)", status: "done", tag: "Design" }
 ];
 
 // 접속 로그 GAS URL (공통 사용)
@@ -32,11 +32,18 @@ let cachedLogs = [];
 
 // 3. 페이지 초기화
 document.addEventListener('DOMContentLoaded', () => {
+    checkPremiumTheme();
     renderMenuStats();
     renderRoadmap();
     loadHandoverV2(); // V2 전용 로드
     initVisitorStats(); // 방문자 통계 초기화
 });
+
+function checkPremiumTheme() {
+    if (localStorage.getItem('isPremium') === 'true') {
+        document.body.classList.add('premium-mode');
+    }
+}
 
 // 메뉴 상태 렌더링
 function renderMenuStats() {
