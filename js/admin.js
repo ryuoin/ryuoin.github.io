@@ -63,7 +63,6 @@ function renderRoadmap() {
 // 4. 방문자 통계 초기화 및 로그 렌더링
 async function initVisitorStats() {
     const hitLabel = document.getElementById('hit-counter');
-    const logBody = document.getElementById('access-log-body');
 
     // 1) 누적 방문자 수 (CountAPI)
     try {
@@ -78,31 +77,42 @@ async function initVisitorStats() {
         hitLabel.innerText = "1,240+";
     }
 
-    // 2) 접속 로그 렌더링 (현재는 로컬 가상 데이터, 향후 DB 연동 예정)
-    renderAccessLogs();
+    // 2) 실제 구글 시트 접속 로그 렌더링
+    await fetchAndRenderLogs();
 }
 
-// 가상 접속 로그 데이터 (DB 연결 전 테스트용)
-function renderAccessLogs() {
+// 구글 시트에서 실제 로그 데이터 가져오기
+async function fetchAndRenderLogs() {
     const logBody = document.getElementById('access-log-body');
-    
-    // 이 데이터가 향후 Supabase나 Google Sheets에서 가져올 실제 기록이 됩니다.
-    const mockLogs = [
-        { no: 1, ip: "121.165.XX.XX", time: "2026.04.23 14:30:12", status: "Active" },
-        { no: 2, ip: "211.234.XX.XX", time: "2026.04.23 13:15:44", status: "Done" },
-        { no: 3, ip: "58.120.XX.XX", time: "2026.04.23 11:05:02", status: "Done" }
-    ];
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxbHEkng8MTzisIyM4CZOrCXC90XWTE402Vi6tqWAft_2A1ePtG9SqBflvY6LGktBnL/exec';
 
     if (!logBody) return;
 
-    logBody.innerHTML = mockLogs.map(log => `
-        <tr>
-            <td>${log.no}</td>
-            <td><code style="color: #f9f295;">${log.ip}</code></td>
-            <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
-            <td><span class="status-badge ${log.status === 'Active' ? 'status-ok' : 'status-build'}" style="font-size: 0.7rem;">${log.status}</span></td>
-        </tr>
-    `).join('');
+    try {
+        // GAS에 action=read 파라미터를 보내서 데이터를 가져옴
+        const response = await fetch(`${GAS_URL}?action=read`);
+        if (!response.ok) throw new Error('조회 실패');
+        
+        const logs = await response.json();
+
+        if (logs.length === 0) {
+            logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.3);">아직 기록된 로그가 없습니다.</td></tr>`;
+            return;
+        }
+
+        logBody.innerHTML = logs.map((log, index) => `
+            <tr>
+                <td>${logs.length - index}</td>
+                <td><code style="color: #f9f295;">${log.ip}</code></td>
+                <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
+                <td><span class="status-badge status-ok" style="font-size: 0.7rem; opacity: 0.8;">Visit</span></td>
+            </tr>
+        `).join('');
+
+    } catch (err) {
+        logBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: #ff6b6b;">로그를 불러올 수 없습니다.<br>(GAS 코드가 최신 버전인지 확인해 주세요.)</td></tr>`;
+        console.error('Fetch logs error:', err);
+    }
 }
 
 // 5. 인수인계 문서 로드 (V2 고정)
