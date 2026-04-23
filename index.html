@@ -39,8 +39,8 @@
             <div class="mode-divider"></div>
 
             <!-- 개발용 임시: 프리미엄 강제 전환 버튼 -->
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <button id="test-premium-toggle" class="btn-primary" style="font-size: 0.85rem; padding: 0.5rem 1rem; border-color: rgba(212,175,55,0.5); background-color: rgba(0,0,0,0.5); color: #ccc;" onclick="toggleTestPremium()">
+            <div class="test-toggle-container">
+                <button id="test-premium-toggle" class="test-premium-btn" onclick="toggleTestPremium()">
                     🔧 테스트: 프리미엄 모드 [OFF]
                 </button>
             </div>
@@ -511,10 +511,10 @@
         }
     </script>
     <!-- Footer for Privacy Policy -->
-    <footer style="text-align: center; padding: 20px; font-size: 0.8em; color: rgba(255,255,255,0.3); font-family: 'Noto Sans KR', sans-serif;">
-        &copy; 2026 메이저 타로 리딩 by <a href="about.html" style="color: rgba(212,175,55,0.6); text-decoration: none; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s;" onmouseover="this.style.color='rgba(212,175,55,1)';this.style.borderColor='rgba(212,175,55,0.8)'" onmouseout="this.style.color='rgba(212,175,55,0.6)';this.style.borderColor='rgba(212,175,55,0.3)'">Michael W.D.</a>
+    <footer class="app-footer-info">
+        &copy; 2026 메이저 타로 리딩 by <a href="about.html" class="footer-link-author">Michael W.D.</a>
         <br>
-        <a href="privacy-policy.html" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-top: 10px; display: inline-block;">개인정보 처리방침</a>
+        <a href="privacy-policy.html" class="footer-link-privacy">개인정보 처리방침</a>
     </footer>
 </body>
 
