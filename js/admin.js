@@ -72,10 +72,10 @@ async function initVisitorStats() {
             const data = await response.json();
             hitLabel.innerText = data.value.toLocaleString();
         } else {
-            hitLabel.innerText = "1,240+"; 
+            hitLabel.innerText = "0"; 
         }
     } catch (err) {
-        hitLabel.innerText = "1,240+";
+        hitLabel.innerText = "0";
     }
 }
 
