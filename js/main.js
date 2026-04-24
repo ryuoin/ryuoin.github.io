@@ -12,8 +12,8 @@ async function logVisit() {
     if (window.location.pathname.includes('admin.html')) return;
 
     try {
-        // IP 수집 제외 (접속 신호 및 브라우저 정보만 기록)
-        const targetUrl = `${GAS_URL}?type=ping&ua=${encodeURIComponent(navigator.userAgent)}`;
+        // IP 및 개인정보 수집 완전 제외 (최소한의 접속 신호만 기록)
+        const targetUrl = `${GAS_URL}?type=ping`;
         
         fetch(targetUrl, { mode: 'no-cors' });
     } catch (err) {
