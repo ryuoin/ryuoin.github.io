@@ -45,6 +45,23 @@
                 </button>
             </div>
 
+            <!-- 종목명 입력 모달 (주식 리딩 전용) -->
+    <div id="stock-input-modal" class="premium-info-modal hidden">
+        <div class="premium-info-content glass-panel" style="max-width: 400px;">
+            <div class="ritual-title" style="margin-bottom: 1rem;">📈 종목 분석 준비</div>
+            <p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-bottom:1.5rem;">
+                분석하고 싶은 주식이나 암호화폐의<br>종목명을 입력해 주세요.
+            </p>
+            <input type="text" id="stock-name-input" class="dream-input" placeholder="예: 삼성전자, 비트코인 등" maxlength="20" style="width: 80%; margin-bottom: 2rem;">
+            <div class="modal-btns" style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-back-mode" style="padding: 0.7rem 1.5rem; background: rgba(255,255,255,0.1);" onclick="closeStockInput()">취소</button>
+                <button class="btn-primary" style="padding: 0.7rem 1.5rem;" onclick="confirmStockMode()">분석 시작</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 프리미엄 결제 안내 팝업 -->
+
             <!-- 오늘의 카드 특별 버튼 -->
             <button id="btn-mode-daily" class="mode-btn daily-btn-special" data-mode="daily">
                 <span class="daily-btn-glow"></span>
@@ -86,6 +103,12 @@
                     <span class="mode-btn-icon">💭</span>
                     <span class="mode-btn-title">그 사람 지금 내 생각 할까?</span>
                     <span class="mode-btn-desc">그 사람의 마음과 연락 타이밍을 해독합니다</span>
+                    <span class="premium-badge">PREMIUM</span>
+                </button>
+                <button id="btn-mode-stock" class="mode-btn premium-only-btn" onclick="startStockMode()">
+                    <span class="mode-btn-icon">📈</span>
+                    <span class="mode-btn-title">이 주식 사야해?</span>
+                    <span class="mode-btn-desc">시장의 에너지와 종목의 향방을 분석합니다</span>
                     <span class="premium-badge">PREMIUM</span>
                 </button>
             </div>
@@ -136,6 +159,46 @@
                 <!-- 하나로 묶여진 해석 텍스트 -->
                 <div class="combined-desc-box">
                     <div id="res-desc-combined" class="res-desc combined-desc"></div>
+                </div>
+
+                <!-- 주식 타로 전용 상세 리딩 구역 (Stock Mode 전용) -->
+                <div id="stock-result-view" class="stock-result-area hidden">
+                    <div class="stock-disclaimer">
+                        ⚠️ 본 타로 리딩은 투자 조언이 아닙니다. 결과는 심리적 참고 도구이며, 모든 투자 결정과 책임은 본인에게 있습니다.
+                    </div>
+
+                    <!-- 1. 시장 에너지 (Card 1) -->
+                    <div class="stock-pos-item">
+                        <div class="stock-pos-header">
+                            <span class="stock-pos-label">시장 에너지 (Market)</span>
+                            <span id="stock-pos1-badge" class="stock-badge">강세</span>
+                        </div>
+                        <div id="stock-pos1-desc" class="stock-pos-text">시장 에너지에 대한 리딩이 표시됩니다.</div>
+                    </div>
+
+                    <!-- 2. 종목 에너지 (Card 2) -->
+                    <div class="stock-pos-item">
+                        <div class="stock-pos-header">
+                            <span class="stock-pos-label">종목 에너지 (Stock)</span>
+                            <span id="stock-pos2-temp-label" class="stock-temp-label">85°C</span>
+                        </div>
+                        <div class="thermometer-container">
+                            <div id="stock-pos2-thermometer" class="thermometer-bar"></div>
+                        </div>
+                        <div id="stock-pos2-desc" class="stock-pos-text">종목의 고유 에너지에 대한 리딩이 표시됩니다.</div>
+                    </div>
+
+                    <!-- 3. 투자자 심리 및 행동 (Card 3) -->
+                    <div class="stock-pos-item">
+                        <div class="stock-pos-header">
+                            <span class="stock-pos-label">투자자 심리 (Psychology)</span>
+                            <span id="stock-pos3-action" class="stock-action-badge">BUY</span>
+                        </div>
+                        <div class="gauge-container">
+                            <div id="stock-pos3-gauge" class="gauge-bar"></div>
+                        </div>
+                        <div id="stock-pos3-desc" class="stock-pos-text">당신의 투자 심리와 이번 주 행동 방향에 대한 리딩이 표시됩니다.</div>
+                    </div>
                 </div>
             </div>
 
@@ -513,6 +576,7 @@
     <script src="js/data/tarot_daily.js" defer></script>
     <script src="js/data/tarot_premium.js" defer></script>
     <script src="js/data/tarot_thinking.js" defer></script>
+    <script src="js/data/tarot_stock.js" defer></script>
     <script src="js/main.js" defer></script>
 
     <!-- PWA Service Worker Registration -->
