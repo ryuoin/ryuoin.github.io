@@ -384,3 +384,16 @@ body.premium-mode .handover-viewer {
     border-color: rgba(197, 160, 40, 0.2);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
+
+body.premium-mode .btn-back-mode {
+    background: #fff;
+    color: #8b6b10;
+    border: 1px solid #c5a028;
+    box-shadow: 0 4px 15px rgba(197, 160, 40, 0.1);
+    font-weight: 700;
+}
+
+body.premium-mode .btn-back-mode:hover {
+    background: #fdfaf0;
+    box-shadow: 0 6px 20px rgba(197, 160, 40, 0.2);
+}
