@@ -3275,3 +3275,69 @@ body.premium-mode .stock-disclaimer {
     transition: all 1.5s ease-out;
 }
 
+/* 최종 결론 영역 */
+.stock-final-verdict {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 255, 255, 0.02));
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    text-align: center;
+    animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.verdict-image-wrapper {
+    width: 150px; /* 사용자 피드백 반영: 컴팩트한 크기 */
+    height: 150px;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    border: 3px solid var(--gold);
+    background: #000;
+}
+
+.verdict-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.stock-verdict-main {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+}
+
+.stock-verdict-sub {
+    font-size: 1rem;
+    color: var(--text-main);
+    font-weight: 500;
+    word-break: keep-all;
+    opacity: 0.9;
+    max-width: 280px;
+    line-height: 1.6;
+}
+
+/* 액션별 전용 클래스 */
+.verdict-buy .stock-verdict-main { color: #00c853; text-shadow: 0 0 15px rgba(0, 200, 83, 0.4); }
+.verdict-sell .stock-verdict-main { color: #ff1744; text-shadow: 0 0 15px rgba(255, 23, 68, 0.4); }
+.verdict-hold .stock-verdict-main { color: #2979ff; text-shadow: 0 0 15px rgba(41, 121, 255, 0.4); }
+.verdict-wait .stock-verdict-main { color: #ffab00; text-shadow: 0 0 15px rgba(255, 171, 0, 0.4); }
+
+/* 모달 아우라 효과 클래스 */
+.glow-buy { box-shadow: 0 0 60px rgba(0, 200, 83, 0.15) !important; border-color: rgba(0, 200, 83, 0.3) !important; }
+.glow-sell { box-shadow: 0 0 60px rgba(255, 23, 68, 0.15) !important; border-color: rgba(255, 23, 68, 0.3) !important; }
+.glow-hold { box-shadow: 0 0 60px rgba(41, 121, 255, 0.1) !important; border-color: rgba(41, 121, 255, 0.2) !important; }
+.glow-wait { box-shadow: 0 0 60px rgba(255, 171, 0, 0.1) !important; border-color: rgba(255, 171, 0, 0.2) !important; }
+
+body.premium-mode .stock-final-verdict {
+    background: rgba(166, 124, 82, 0.03);
+    border-color: rgba(166, 124, 82, 0.15);
+}
+
