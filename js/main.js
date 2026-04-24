@@ -1176,7 +1176,35 @@ function startStockMode() {
         showPremiumInfo();
         return;
     }
-    openMode('stock');
+    
+    // 주식 타로 집중 의식 시작
+    const ritualModal = document.getElementById('stock-ritual-modal');
+    if (ritualModal) {
+        ritualModal.classList.add('active');
+        let count = 3;
+        const numEl = document.getElementById('stock-countdown-number');
+        const circle = document.getElementById('stock-circle');
+        
+        numEl.innerText = count;
+        if (circle) circle.style.strokeDashoffset = '0';
+        
+        setTimeout(() => {
+            if (circle) circle.style.strokeDashoffset = '339.292';
+        }, 50);
+
+        const intv = setInterval(() => {
+            count--;
+            if (count > 0) {
+                numEl.innerText = count;
+            } else {
+                clearInterval(intv);
+                ritualModal.classList.remove('active');
+                openMode('stock');
+            }
+        }, 1000);
+    } else {
+        openMode('stock');
+    }
 }
 
 function showStockResult() {
@@ -1203,17 +1231,27 @@ function showStockResult() {
         verdictArea.classList.remove('hidden');
         const action = data3.pos3.action || 'wait';
         
-        // 매핑 데이터
+        // 6단계 매핑 데이터 (STRONG_BUY, BUY, HOLD, WAIT, SELL, STRONG_SELL)
         const verdictMap = {
-            buy: {
+            strong_buy: {
                 main: "STRONG BUY",
                 sub: "지금이 황금의 문이 열리는 시간입니다. 우주의 기운이 당신의 포트폴리오를 향해 흐르고 있습니다.",
+                img: "images/stock_strong_buy.png"
+            },
+            buy: {
+                main: "BUY (매수)",
+                sub: "긍정적인 신호가 포착되었습니다. 철저한 분석 하에 진입을 고려하기 좋은 타이밍입니다.",
                 img: "images/stock_buy.png"
             },
             sell: {
+                main: "SELL (매도)",
+                sub: "하락의 전조가 보입니다. 수익을 실현하거나 리스크를 관리하며 현금을 확보할 때입니다.",
+                img: "images/stock_sell.png"
+            },
+            strong_sell: {
                 main: "STRONG SELL",
                 sub: "피의 폭풍이 오고 있습니다. 즉시 대피하여 자산을 보호하고 다음 기회를 노리세요.",
-                img: "images/stock_sell.png"
+                img: "images/stock_strong_sell.png"
             },
             hold: {
                 main: "STAY HOLD",
@@ -1236,11 +1274,12 @@ function showStockResult() {
             vImg.style.display = v.img ? 'block' : 'none';
         }
 
-        // 테마 및 글로우 적용
+        // 테마 및 글로우 적용 (기존 4개 + 신규 2개 대응)
+        const themes = ['strong_buy', 'buy', 'hold', 'wait', 'sell', 'strong_sell'];
         verdictArea.className = `stock-final-verdict verdict-${action}`;
         const modalContent = modal.querySelector('.modal-content');
         if (modalContent) {
-            modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
+            themes.forEach(t => modalContent.classList.remove(`glow-${t}`));
             modalContent.classList.add(`glow-${action}`);
         }
     }
