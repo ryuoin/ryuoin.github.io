@@ -130,12 +130,12 @@ function initModeSelect() {
     readingScreen.classList.add('hidden');
     updatePremiumTestButton();
 
-    document.getElementById('btn-mode-daily').addEventListener('click', () => startMode('daily'));
-    document.getElementById('btn-mode-weekly').addEventListener('click', () => startMode('weekly'));
-    document.getElementById('btn-mode-love').addEventListener('click', () => startMode('love'));
-    document.getElementById('btn-mode-money').addEventListener('click', () => startMode('money'));
-    document.getElementById('btn-mode-yesno').addEventListener('click', () => startMode('yesno'));
-    document.getElementById('btn-mode-lotto').addEventListener('click', () => startMode('lotto'));
+    document.getElementById('btn-mode-daily').addEventListener('click', () => openMode('daily'));
+    document.getElementById('btn-mode-weekly').addEventListener('click', () => openMode('weekly'));
+    document.getElementById('btn-mode-love').addEventListener('click', () => openMode('love'));
+    document.getElementById('btn-mode-money').addEventListener('click', () => openMode('money'));
+    document.getElementById('btn-mode-yesno').addEventListener('click', () => openMode('yesno'));
+    document.getElementById('btn-mode-lotto').addEventListener('click', () => openMode('lotto'));
 
     document.getElementById('btn-restart').addEventListener('click', restartGame);
     document.getElementById('btn-love-restart').addEventListener('click', restartGame);
