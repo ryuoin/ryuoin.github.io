@@ -168,6 +168,7 @@ function openMode(mode) {
     selectedCards = [];
 
     const modeScreen = document.getElementById('mode-select-screen');
+    selectedCards = []; // 모드 진입 시 선택된 카드 리스트 초기화 (모드 간 데이터 오염 방지)
 
     // 로또 모드
     if (mode === 'lotto') {
@@ -1242,11 +1243,18 @@ function showStockResult() {
     const modalTitle = modal.querySelector('.modal-title');
     if (modalTitle) modalTitle.textContent = `📈 이 주식 사야해? 리딩 결과`;
     
+    // 주식 결과 구역 강제 표시 (중요: display 속성을 명시적으로 block/flex로 설정)
     if (view) {
         view.classList.remove('hidden');
-        view.style.display = 'block';
+        view.style.setProperty('display', 'block', 'important');
     }
     
+    const verdictArea = document.getElementById('stock-final-verdict');
+    if (verdictArea) {
+        verdictArea.classList.remove('hidden');
+        verdictArea.style.setProperty('display', 'flex', 'important');
+    }
+
     if (banner) banner.style.display = 'none'; // 주식은 항상 프리미엄이므로 배너 숨김
 
     const card1Id = selectedCards[0];
