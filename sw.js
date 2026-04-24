@@ -1,4 +1,6 @@
-const CACHE_NAME = 'tarot-app-v10';
+const VERSION = 'v11';
+const CACHE_NAME = `tarot-cache-${VERSION}`;
+
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -8,6 +10,7 @@ const STATIC_ASSETS = [
   './js/data/tarot_daily.js',
   './js/data/tarot_premium.js',
   './js/data/tarot_thinking.js',
+  './js/data/tarot_stock.js',
   './manifest.json',
   './about.html',
   './privacy-policy.html',
