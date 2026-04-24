@@ -2548,63 +2548,64 @@ body.premium-mode #thinking-modal .thinking-panel {
 }
 
 /* =============================================
-   PREMIUM MODE THEME (IVORY/WHITE & AURA)
+   PREMIUM MODE THEME (ROSE IVORY & AURA) - 개편
    ============================================= */
 
 body.premium-mode {
-    color: var(--text-main);
+    background-color: #fff9f6 !important; /* 산뜻한 로즈 아이보리 */
+    color: #4a3535; /* 딥 로즈 브라운 */
 }
 
 body.premium-mode .mode-title {
-    color: var(--gold-light);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #a67c52; /* 로즈 골드 톤 */
+    text-shadow: 0 2px 10px rgba(166, 124, 82, 0.1);
 }
 
 body.premium-mode .mode-subtitle {
-    color: #666;
+    color: #8b7d7d;
 }
 
-/* 메인 메뉴 버튼 개편 */
+/* 메인 메뉴 버튼 개편 (로즈 테마) */
 body.premium-mode .mode-btn {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(197, 160, 40, 0.3);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 252, 250, 0.9);
+    border-color: rgba(166, 124, 82, 0.2);
+    box-shadow: 0 4px 15px rgba(166, 124, 82, 0.05);
 }
 
 body.premium-mode .mode-btn:hover {
     background: #ffffff;
-    border-color: var(--gold);
-    box-shadow: 0 8px 25px rgba(197, 160, 40, 0.15);
+    border-color: #a67c52;
+    box-shadow: 0 8px 25px rgba(166, 124, 82, 0.12);
 }
 
 body.premium-mode .mode-btn-title {
-    color: var(--gold-light);
+    color: #8b5e5e; /* 산뜻한 로즈 톤 */
 }
 
 body.premium-mode .mode-btn-desc {
-    color: #5d5b58; /* 가독성을 위해 더 진한 색상으로 조정 */
+    color: #6d5b5b;
 }
 
 /* 오늘의 카드 특별 버튼 프리미엄 대응 */
 body.premium-mode .daily-btn-special {
-    background: linear-gradient(135deg, white, #fdfaf0);
-    border-color: var(--gold);
-    box-shadow: 0 10px 30px rgba(197, 160, 40, 0.1);
+    background: linear-gradient(135deg, #ffffff, #fff5f2);
+    border-color: #d4a373;
+    box-shadow: 0 10px 30px rgba(212, 163, 115, 0.15);
 }
 
 body.premium-mode .daily-btn-glow {
-    background: radial-gradient(ellipse at 50% 50%, rgba(197, 160, 40, 0.1), transparent 70%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(212, 163, 115, 0.15), transparent 70%);
 }
 
 body.premium-mode .daily-desc {
-    color: #5d5b58 !important; /* 가독성 향상 */
+    color: #6d5b5b !important;
 }
 
-/* 결과 화면 및 모달 UI 개편 */
+/* 결과 화면 및 모달 UI 개편 (Rose Ivory) */
 body.premium-mode .glass-panel {
-    background: rgba(255, 255, 255, 0.92) !important;
-    border-color: rgba(197, 160, 40, 0.4) !important;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1) !important;
+    background: rgba(255, 253, 252, 0.95) !important;
+    border-color: rgba(212, 163, 115, 0.3) !important;
+    box-shadow: 0 15px 50px rgba(166, 124, 82, 0.1) !important;
 }
 
 body.premium-mode .combined-desc-box,
@@ -2612,13 +2613,9 @@ body.premium-mode .love-desc-box,
 body.premium-mode .money-desc-box,
 body.premium-mode .yesno-desc-box,
 body.premium-mode .daily-desc-box {
-    background: rgba(255, 255, 255, 0.5) !important;
-    border-color: rgba(197, 160, 40, 0.2) !important;
-    color: var(--text-main);
-}
-
-body.premium-mode .reading-section {
-    border-bottom-color: rgba(197, 160, 40, 0.15);
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-color: rgba(166, 124, 82, 0.15) !important;
+    color: #4a3535;
 }
 
 body.premium-mode .res-desc,
@@ -2626,147 +2623,99 @@ body.premium-mode .love-meaning,
 body.premium-mode .money-meaning,
 body.premium-mode .yesno-meaning,
 body.premium-mode .daily-message,
+body.premium-mode .love-advice, 
+body.premium-mode .money-advice, 
+body.premium-mode .daily-advice, 
 body.premium-mode .yesno-advice,
-body.premium-mode .daily-advice {
-    color: #333 !important; /* 더 진한 검은색으로 가독성 최적화 */
+body.premium-mode .premium-text-glow p,
+body.premium-mode .recap-text,
+body.premium-mode .viz-desc {
+    color: #2d1f1f !important; /* 더 선명한 가독성 */
 }
 
 body.premium-mode .love-advice-box,
 body.premium-mode .money-advice-box,
 body.premium-mode .yesno-advice-box,
 body.premium-mode .daily-advice-box {
-    background: rgba(197, 160, 40, 0.05);
-    border-color: rgba(197, 160, 40, 0.15);
+    background: rgba(212, 163, 115, 0.05);
+    border-color: rgba(212, 163, 115, 0.15);
 }
 
-body.premium-mode .love-advice,
-body.premium-mode .money-advice,
-body.premium-mode .daily-advice {
-    color: #444 !important;
-}
-
-/* Thinking 모드 (프리미엄 전용 서비스) UI 개편 */
+/* Thinking 모드 (Rose Ivory 테마) */
 body.premium-mode .relation-btn {
     background: white;
-    border-color: rgba(197, 160, 40, 0.2);
-    color: var(--text-main);
+    border-color: rgba(166, 124, 82, 0.15);
+    color: #4a3535;
 }
 
 body.premium-mode .relation-btn:hover {
-    background: #fdfaf0;
-    border-color: var(--gold);
-    box-shadow: 0 5px 15px rgba(197, 160, 40, 0.1);
-}
-
-body.premium-mode .relation-btn small {
-    color: #666; /* 가독성 향상 */
+    background: #fffafa;
+    border-color: #a67c52;
+    box-shadow: 0 5px 15px rgba(166, 124, 82, 0.1);
 }
 
 body.premium-mode .viz-container {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(197, 160, 40, 0.1);
-}
-
-body.premium-mode .viz-desc,
-body.premium-mode .tc-label {
-    color: #444;
-}
-
-body.premium-mode .energy-bar,
-body.premium-mode .day {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(166, 124, 82, 0.1);
 }
 
 body.premium-mode .energy-text {
-    color: var(--text-main);
-    text-shadow: none;
+    color: #4a3535;
 }
 
 body.premium-mode .action-btn {
     background: white;
-    border-color: rgba(0, 0, 0, 0.1);
-    color: #444;
+    box-shadow: 0 2px 8px rgba(166, 124, 82, 0.05);
 }
 
 body.premium-mode .action-btn.active {
-    background: rgba(197, 160, 40, 0.15);
-    border-color: var(--gold);
-    color: var(--gold-light);
+    background: rgba(166, 124, 82, 0.1);
+    border-color: #a67c52;
+    color: #8b5e5e;
 }
 
-/* 공통 버튼 및 헤더 보완 */
-body.premium-mode .app-header h1,
-body.premium-mode .app-header p {
-    color: var(--text-main);
-    text-shadow: none;
+/* 라벨 스타일 (로즈 골드) */
+body.premium-mode .premium-label,
+body.premium-mode .viz-title,
+body.premium-mode .recap-pos-label,
+body.premium-mode .recap-title {
+    color: #8b5e5e !important;
 }
 
+body.premium-mode .premium-text-glow {
+    background: rgba(212, 163, 115, 0.06);
+    border-left-color: #a67c52;
+}
+
+/* 처음으로 버튼 (로즈 테마) */
+body.premium-mode .btn-back-mode {
+    background: #fff;
+    color: #8b5e5e;
+    border: 1px solid #d4a373;
+    box-shadow: 0 2px 8px rgba(166, 124, 82, 0.1);
+}
+
+body.premium-mode .btn-back-mode:hover {
+    background: #fffafa;
+    border-color: #8b5e5e;
+}
+
+/* 푸터 및 상세 정보 */
+body.premium-mode .app-footer-info { color: #9a8a8a; }
+body.premium-mode .footer-link-author { color: #8b5e5e; border-color: rgba(139, 94, 94, 0.3); }
+body.premium-mode .footer-link-privacy { color: #6d5b5b; }
+
+/* 상태바 및 헤더 */
 body.premium-mode .status-bar {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(197, 160, 40, 0.4);
-    color: var(--gold-light);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background: rgba(255, 253, 252, 0.9);
+    border-color: rgba(166, 124, 82, 0.3);
+    color: #8b5e5e;
 }
 
 body.premium-mode .card-name-label {
-    background: rgba(255, 255, 255, 0.94);
-    color: var(--gold-light);
-    text-shadow: none;
-    border-top: 1px solid var(--gold);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-}
-
-body.premium-mode .premium-upgrade-banner {
-    display: none !important;
-}
-
-body.premium-mode .lotto-home-btn {
-    background: white;
-    color: var(--gold-light);
-    border-color: var(--gold);
-}
-
-/* 푸터 기본 스타일 (Dark) */
-.app-footer-info {
-    text-align: center;
-    padding: 30px 20px;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.3);
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.footer-link-author {
-    color: rgba(212, 175, 55, 0.6);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    transition: all 0.3s ease;
-}
-
-.footer-link-author:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-}
-
-.footer-link-privacy {
-    color: rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-    margin-top: 12px;
-    display: inline-block;
-}
-
-/* 프리미엄 모드 푸터 스타일 (Ivory) */
-body.premium-mode .app-footer-info {
-    color: #888;
-}
-
-body.premium-mode .footer-link-author {
-    color: #8b6b10;
-    border-color: rgba(139, 107, 16, 0.3);
-}
-
-body.premium-mode .footer-link-privacy {
-    color: #555;
-    font-weight: 500;
+    background: rgba(255, 255, 255, 0.96);
+    color: #8b5e5e;
+    border-top: 1px solid rgba(166, 124, 82, 0.5);
 }
 
 /* 프리미엄 전용 텍스트 레이아웃 */
