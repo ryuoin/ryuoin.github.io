@@ -1259,7 +1259,12 @@ function showStockResult() {
 
     const modalTitle = modal.querySelector('.modal-title');
     if (modalTitle) modalTitle.textContent = `📈 이 주식 사야해? 리딩 결과`;
-    document.getElementById('stock-result-view').classList.remove('hidden');
+    
+    if (view) {
+        view.classList.remove('hidden');
+        view.style.removeProperty('display');
+    }
+    
     if (banner) banner.style.display = 'none'; // 주식은 항상 프리미엄이므로 배너 숨김
 
     const card1Id = selectedCards[0];
@@ -1274,6 +1279,7 @@ function showStockResult() {
     const verdictArea = document.getElementById('stock-final-verdict');
     if (verdictArea) {
         verdictArea.classList.remove('hidden');
+        verdictArea.style.removeProperty('display');
         const action = data3.pos3.action || 'wait';
         
         // 매핑 데이터
