@@ -812,9 +812,6 @@ body.premium-mode .modal-title {
 
 .love-advice {
     color: #d0d0d0;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    font-style: italic;
 }
 
 .love-period-notice {
@@ -983,9 +980,6 @@ body.premium-mode .modal-title {
 
 .money-advice {
     color: #d0d0d0;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    font-style: italic;
 }
 
 .money-conclusion-text {
@@ -1105,8 +1099,6 @@ body.premium-mode .modal-title {
 
 .yesno-advice {
     color: #d0d0d0;
-    font-size: 0.95rem;
-    line-height: 1.7;
 }
 
 .yesno-conclusion-text {
@@ -1625,9 +1617,6 @@ body.premium-mode .modal-title {
 
 .daily-advice {
     color: #d0d0d0;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    font-style: italic;
 }
 
 .daily-conclusion-text {
@@ -1736,9 +1725,6 @@ body.premium-mode .modal-title {
     padding: 0.8rem 1rem;
     border-radius: 0 8px 8px 0;
     color: #ccc;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    font-style: italic;
 }
 
 .premium-sub-section {
@@ -2862,14 +2848,19 @@ body.premium-mode .premium-badge {
 .money-meaning, 
 .yesno-meaning, 
 .daily-message,
+.love-advice, 
+.money-advice, 
+.daily-advice, 
+.yesno-advice,
 .premium-text-glow p,
 .recap-text,
 .viz-desc {
-    font-size: 1.1rem !important; /* 기본보다 소폭 확대 */
+    font-size: 1.1rem !important; /* 전체 본문 크기 통일 */
     line-height: 1.8 !important;
     color: #e0e0e0;
     word-break: keep-all;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif !important;
+    font-style: normal !important; /* 기울임꼴 제거 */
 }
 
 /* 프리미엄 모드에서의 본문 색상 통합 */
@@ -2878,29 +2869,35 @@ body.premium-mode .love-meaning,
 body.premium-mode .money-meaning,
 body.premium-mode .yesno-meaning,
 body.premium-mode .daily-message,
+body.premium-mode .love-advice, 
+body.premium-mode .money-advice, 
+body.premium-mode .daily-advice, 
+body.premium-mode .yesno-advice,
 body.premium-mode .premium-text-glow p,
 body.premium-mode .recap-text,
 body.premium-mode .viz-desc {
-    color: #333 !important;
-    font-weight: 400;
+    color: #222 !important;
+    font-weight: 500;
 }
 
-/* 보조 조언 및 요약 텍스트 */
-.love-advice, 
-.money-advice, 
-.daily-advice, 
-.yesno-advice,
+/* 보조 정보 및 시스템 텍스트 */
 .thinking-bottom-desc,
-.restart-caution {
-    font-size: 1rem !important;
+.restart-caution,
+.love-period-notice {
+    font-size: 0.95rem !important;
     line-height: 1.7 !important;
+    font-style: normal !important;
+    color: rgba(255, 255, 255, 0.4);
 }
 
-body.premium-mode .love-advice,
-body.premium-mode .money-advice,
-body.premium-mode .daily-advice,
-body.premium-mode .yesno-advice {
-    color: #444 !important;
+body.premium-mode .thinking-bottom-desc,
+body.premium-mode .restart-caution {
+    color: #888 !important;
+}
+
+body.premium-mode .love-period-notice {
+    color: #8b6b10 !important;
+    opacity: 0.7;
 }
 
 /* 결과 헤더/라벨 스타일 통합 */
