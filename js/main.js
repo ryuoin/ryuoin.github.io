@@ -1208,22 +1208,22 @@ function showStockResult() {
             buy: {
                 main: "STRONG BUY",
                 sub: "지금이 황금의 문이 열리는 시간입니다. 우주의 기운이 당신의 포트폴리오를 향해 흐르고 있습니다.",
-                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_buy_verdict_1777013440993.png"
+                img: "images/stock_buy.png"
             },
             sell: {
                 main: "STRONG SELL",
                 sub: "피의 폭풍이 오고 있습니다. 즉시 대피하여 자산을 보호하고 다음 기회를 노리세요.",
-                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_sell_verdict_final_1777013584011.png"
+                img: "images/stock_sell.png"
             },
             hold: {
                 main: "STAY HOLD",
                 sub: "뿌린 씨앗이 결실을 맺을 때까지 인내하세요. 흔들리지 않는 마음이 수익으로 연결됩니다.",
-                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_hold_verdict_final_1777013611030.png"
+                img: "images/stock_hold.png"
             },
             wait: {
                 main: "JUST WAIT",
                 sub: "안개가 끼었을 때는 멈추는 것이 상책입니다. 우주가 보내는 명확한 신호를 기다리세요.",
-                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_wait_verdict_final_last_1777014542209.png"
+                img: "images/stock_wait.png"
             }
         };
 
