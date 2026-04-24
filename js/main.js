@@ -884,11 +884,12 @@ function checkPremiumAccess() {
 function startThinkingMode() {
     if (!checkPremiumAccess()) return;
     
-    // const today = new Date().toDateString();
-    // if (localStorage.getItem('thinkingLastUsed') === today) {
-    //     alert('이 집중 리딩은 하루 한 번만 에너지를 정확히 읽어낼 수 있습니다.\n내일 다시 찾아와 주세요.');
-    //     return; // 실서비스 배포 시 주석 해제하여 활성화
-    // }
+    // 테마 적용 (일반/프리미엄 분위기 맞춤)
+    if (isPremium()) {
+        document.body.classList.add('premium-mode');
+    } else {
+        document.body.classList.remove('premium-mode');
+    }
 
     thinkingRelation = '';
     thinkingCards = [];
@@ -933,7 +934,7 @@ function selectRelationship(type) {
 function startFocusRitual() {
     let count = 3;
     const numEl = document.getElementById('countdown-number');
-    const circle = document.querySelector('.countdown-circle');
+    const circle = document.getElementById('thinking-circle');
     
     numEl.innerText = count;
     circle.style.strokeDashoffset = '0';
