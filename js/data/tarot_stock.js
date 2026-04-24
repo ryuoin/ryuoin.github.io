@@ -41,7 +41,7 @@ const stockData = {
             state: "과감한 실행 에너지, 결단의 시간",
             gaugeMin: 75,
             gaugeMax: 95,
-            action: "buy",
+            action: "strong_buy",
             focusDays: [0, 1],
             text: "지금 당신은 오랫동안 준비해온 것을 실행에 옮길 적절한 심리 상태에 있습니다. 주 초반(월~화)에 에너지가 집중될 것으로 보입니다. 준비된 계획이 있다면 망설임보다 실행이 답일 수 있습니다."
         }
@@ -173,7 +173,7 @@ const stockData = {
             state: "공격적 돌진 심리, 승부 욕구",
             gaugeMin: 70,
             gaugeMax: 90,
-            action: "buy",
+            action: "strong_buy",
             focusDays: [0, 1, 2],
             text: "지금 당신의 투자 심리는 강한 승부 욕구와 돌진하고자 하는 에너지로 가득 차 있습니다. 다만 흥분 상태에서의 과도한 베팅은 위험할 수 있습니다. 계획한 비중 안에서 과감하게 실행해보세요."
         }
@@ -370,7 +370,7 @@ const stockData = {
             state: "공포와 패닉, 손절 충동의 심리",
             gaugeMin: 5,
             gaugeMax: 25,
-            action: "sell",
+            action: "strong_sell",
             focusDays: [0, 1, 2, 3, 4],
             text: "지금 당신은 강한 공포심에 흔들리고 있습니다. 패닉 셀링은 가장 나쁜 타이밍에 파는 것이지만, 무작정 버티는 것도 위험합니다. 이번 주 어느 시점에 손실 한도를 정하고 그 원칙에 따라 냉정하게 대응하세요."
         }
@@ -436,7 +436,7 @@ const stockData = {
             state: "강한 확신과 기쁨, 최고의 투자 심리",
             gaugeMin: 85,
             gaugeMax: 100,
-            action: "buy",
+            action: "strong_buy",
             focusDays: [0, 1],
             text: "지금 당신은 이 종목에 대한 강한 확신과 기쁨이 가득한 최고의 투자 심리 상태입니다. 이 찬란한 에너지가 지속되는 동안 주 초반의 흐름을 놓치지 마세요. 준비된 사람에게 태양의 에너지는 황금 가져다줍니다."
         }
