@@ -214,22 +214,91 @@ function startMode(mode) {
     const modeConfig = {
         weekly: { title: '당신의 이번주 운세', desc: '당신의 운명을 이끌어줄 3장의 카드를 선택하세요. 끌리는 카드를 골라보세요.', max: 3 },
         love:   { title: '당신의 연애운',      desc: '당신의 사랑을 비추어줄 카드 한 장이 당신을 기다립니다.',                  max: 1 },
-        yesno:  { title: '그래 결심했어~!',    desc: '명쾌한 해답을 원하나요? 마음이 이끌리는 카드 한 장을 선택하세요.',         max: 1 },
+        yesno:  { title: '그래 결심했어~!',    desc: '해답을 원하는 것에 집중해 보세요! 마음이 이끌리는 카드 한 장을 선택하세요.', max: 1 },
         money:  { title: '당신의 금전운',      desc: '재물과 풍요의 흐름을 비추어줄 카드를 한 장 선택하세요.',                  max: 1 },
         thinking: { title: '그 사람 지금 내 생각 할까?', desc: '당신과 그 사람을 이어줄 4장의 카드를 선택하세요.', max: 4 }
     };
+
+    // Yes or No 모드는 집중 의식(카운트다운) 거친 후 진입
+    if (mode === 'yesno') {
+        startYesNoRitual();
+        return;
+    }
+
+    startMode(mode);
+}
+
+/**
+ * 특정 모드 실제 시작 (헤더 설정 및 스프레드 출력)
+ */
+function startMode(mode) {
+    const modeConfig = {
+        weekly: { title: '당신의 이번주 운세', desc: '당신의 운명을 이끌어줄 3장의 카드를 선택하세요. 끌리는 카드를 골라보세요.', max: 3 },
+        love:   { title: '당신의 연애운',      desc: '당신의 사랑을 비추어줄 카드 한 장이 당신을 기다립니다.',                  max: 1 },
+        yesno:  { title: '그래 결심했어~!',    desc: '해답을 원하는 것에 집중해 보세요! 마음이 이끌리는 카드 한 장을 선택하세요.', max: 1 },
+        money:  { title: '당신의 금전운',      desc: '재물과 풍요의 흐름을 비추어줄 카드를 한 장 선택하세요.',                  max: 1 },
+        thinking: { title: '그 사람 지금 내 생각 할까?', desc: '당신과 그 사람을 이어줄 4장의 카드를 선택하세요.', max: 4 }
+    };
+
     const cfg = modeConfig[mode];
+    const modeScreen = document.getElementById('mode-screen');
+    const readingScreen = document.getElementById('reading-screen');
+
     document.getElementById('header-title').textContent = cfg.title;
     document.getElementById('header-desc').textContent  = cfg.desc;
     document.getElementById('max-count').textContent    = cfg.max;
     document.getElementById('select-count').textContent = '0';
 
-    // 모든 모드: 스프레드 UI 사용
+    // 배경 테마 적용 (프리미엄 여부에 따라 바디 클래스 설정)
+    if (isPremium()) {
+        document.body.classList.add('premium-mode');
+    } else {
+        document.body.classList.remove('premium-mode');
+    }
+
     document.getElementById('card-container').classList.add('hidden');
     document.getElementById('daily-spread-container').classList.remove('hidden');
     modeScreen.classList.add('hidden');
     readingScreen.classList.remove('hidden');
     initSpread(mode);
+}
+
+/**
+ * Yes or No 전용 집중 의식 애니메이션 (3, 2, 1)
+ */
+function startYesNoRitual() {
+    const modal = document.getElementById('yesno-ritual-modal');
+    
+    // 테마 적용 (집중 의식 단계에서도 배경색이 등급에 맞게 보이도록)
+    if (isPremium()) {
+        document.body.classList.add('premium-mode');
+    } else {
+        document.body.classList.remove('premium-mode');
+    }
+    
+    modal.classList.add('active');
+    
+    let count = 3;
+    const numEl = document.getElementById('yesno-countdown-number');
+    const circle = document.getElementById('yesno-circle');
+    
+    numEl.innerText = count;
+    circle.style.strokeDashoffset = '0';
+    
+    setTimeout(() => {
+        circle.style.strokeDashoffset = '339.292';
+    }, 50);
+
+    const intv = setInterval(() => {
+        count--;
+        if (count > 0) {
+            numEl.innerText = count;
+        } else {
+            clearInterval(intv);
+            modal.classList.remove('active');
+            startMode('yesno');
+        }
+    }, 1000);
 }
 
 // ========== 통합 스프레드 UI (모든 모드 공통) ==========
