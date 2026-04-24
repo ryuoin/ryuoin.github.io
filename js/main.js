@@ -168,12 +168,11 @@ function updateDailyBtnStatus() {
     }
 }
 
-function startMode(mode) {
+function openMode(mode) {
     currentMode = mode;
     selectedCards = [];
 
     const modeScreen = document.getElementById('mode-select-screen');
-    const readingScreen = document.getElementById('reading-screen');
 
     // 로또 모드
     if (mode === 'lotto') {
@@ -196,8 +195,9 @@ function startMode(mode) {
             return;
         }
 
-        // 새로 뽑기 → 스프레드 UI
+        // 새로 뽑기 → 스프레드 UI (startMode와 유사하지만 오늘의 카드 전용 세팅)
         modeScreen.classList.add('hidden');
+        const readingScreen = document.getElementById('reading-screen');
         readingScreen.classList.remove('hidden');
         document.getElementById('header-title').textContent = '🌟 오늘의 카드';
         document.getElementById('header-desc').textContent = '카드에 손을 가져다 대세요. 오늘의 에너지를 품은 카드가 당신을 기다립니다.';
@@ -209,15 +209,6 @@ function startMode(mode) {
         initDailySpread();
         return;
     }
-
-    // 일반 모드 텍스트 설정
-    const modeConfig = {
-        weekly: { title: '당신의 이번주 운세', desc: '당신의 운명을 이끌어줄 3장의 카드를 선택하세요. 끌리는 카드를 골라보세요.', max: 3 },
-        love:   { title: '당신의 연애운',      desc: '당신의 사랑을 비추어줄 카드 한 장이 당신을 기다립니다.',                  max: 1 },
-        yesno:  { title: '그래 결심했어~!',    desc: '해답을 원하는 것에 집중해 보세요! 마음이 이끌리는 카드 한 장을 선택하세요.', max: 1 },
-        money:  { title: '당신의 금전운',      desc: '재물과 풍요의 흐름을 비추어줄 카드를 한 장 선택하세요.',                  max: 1 },
-        thinking: { title: '그 사람 지금 내 생각 할까?', desc: '당신과 그 사람을 이어줄 4장의 카드를 선택하세요.', max: 4 }
-    };
 
     // Yes or No 모드는 집중 의식(카운트다운) 거친 후 진입
     if (mode === 'yesno') {
@@ -241,7 +232,7 @@ function startMode(mode) {
     };
 
     const cfg = modeConfig[mode];
-    const modeScreen = document.getElementById('mode-screen');
+    const modeScreen = document.getElementById('mode-select-screen');
     const readingScreen = document.getElementById('reading-screen');
 
     document.getElementById('header-title').textContent = cfg.title;
