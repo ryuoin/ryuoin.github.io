@@ -24,6 +24,7 @@ async function logVisit() {
 let selectedCards = [];
 let deck = [];
 let currentMode = null;
+let stockName = ""; // 주식 종목명 보관용
 
 // ========== 광고 카운터 (3회마다 1번) ==========
 function incrementReadingCount() {
@@ -145,6 +146,14 @@ function initModeSelect() {
 
     const lottoBtn = document.getElementById('btn-lotto-start');
     if (lottoBtn) lottoBtn.addEventListener('click', startLottoDraw);
+
+    // 종목명 엔터키 보정
+    const stockInput = document.getElementById('stock-name-input');
+    if (stockInput) {
+        stockInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') confirmStockMode();
+        });
+    }
 }
 
 // ========== 오늘의 카드 버튼 상태 업데이트 ==========
@@ -222,7 +231,8 @@ function startMode(mode) {
         love:   { title: '당신의 연애운',      desc: '당신의 사랑을 비추어줄 카드 한 장이 당신을 기다립니다.',                  max: 1 },
         yesno:  { title: '그래 결심했어~!',    desc: '해답을 원하는 것에 집중해 보세요! 마음이 이끌리는 카드 한 장을 선택하세요.', max: 1 },
         money:  { title: '당신의 금전운',      desc: '재물과 풍요의 흐름을 비추어줄 카드를 한 장 선택하세요.',                  max: 1 },
-        thinking: { title: '그 사람 지금 내 생각 할까?', desc: '당신과 그 사람을 이어줄 4장의 카드를 선택하세요.', max: 4 }
+        thinking: { title: '그 사람 지금 내 생각 할까?', desc: '당신과 그 사람을 이어줄 4장의 카드를 선택하세요.', max: 4 },
+        stock: { title: '📈 이 주식 사야해?', desc: '시장의 에너지와 종목 고유의 에너지를 해독합니다. 3장의 카드를 선택하세요.', max: 3 }
     };
 
     const cfg = modeConfig[mode];
@@ -365,7 +375,7 @@ function initSpread(mode) {
 function handleSpreadCardClick(cardEl, cardId, mode) {
     if (cardEl.classList.contains('selected') || cardEl.classList.contains('disabled')) return;
 
-    const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : (mode === 'thinking' ? 4 : 1));
+    const maxCards = mode === 'weekly' ? 3 : (mode === 'daily' ? 1 : (mode === 'thinking' ? 4 : (mode === 'stock' ? 3 : 1)));
 
     // daily: localStorage 저장
     if (mode === 'daily') {
@@ -404,6 +414,7 @@ function handleSpreadCardClick(cardEl, cardId, mode) {
         else if (mode === 'weekly') { showWeeklyResult();   }
         else if (mode === 'love')   { showLoveResult();     }
         else if (mode === 'yesno')  { showYesNoResult();    }
+        else if (mode === 'stock')  { showStockResult();    }
         else if (mode === 'thinking') { showThinkingResultSummary(); }
         else                        { showMoneyResult();    }
 
@@ -1162,18 +1173,103 @@ function showThinkingSummary() {
     localStorage.setItem('thinkingLastUsed', new Date().toDateString());
 }
 
-function shareThinkingResult() {
-    const el = document.getElementById('energy-value');
-    const textTarget = el ? el.innerText : '0';
-    const text = `오늘 타로가 감지한 우리 사이 연락 에너지: ${textTarget}%\n과연 그 사람도 내 생각을 하고 있을까? 지금 확인해보세요.`;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: '타로 - 그 사람 지금 내 생각 할까?',
-            text: text,
-            url: window.location.href,
-        }).catch(err => console.error('공유 실패:', err));
-    } else {
-        alert('현재 브라우저에서는 공유 기능을 지원하지 않습니다.\n\n' + text);
+// ========== 주식 타로 모드 (Stock Tarot) ==========
+function startStockMode() {
+    if (!isPremium()) {
+        showPremiumInfo();
+        return;
     }
+    const modal = document.getElementById('stock-input-modal');
+    const input = document.getElementById('stock-name-input');
+    if (input) input.value = "";
+    modal.classList.remove('hidden');
+    if (input) input.focus();
+}
+
+function closeStockInput() {
+    document.getElementById('stock-input-modal').classList.add('hidden');
+}
+
+function confirmStockMode() {
+    const input = document.getElementById('stock-name-input');
+    const val = input.value.trim();
+    if (!val) {
+        alert("분석할 종목명을 입력해 주세요.");
+        return;
+    }
+    stockName = val;
+    closeStockInput();
+    openMode('stock');
+}
+
+function showStockResult() {
+    const modal = document.getElementById('result-modal');
+    const view = document.getElementById('stock-result-view');
+    const banner = document.getElementById('banner-weekly'); // 주식도 결과 화면 베이스 공유
+
+    if (!view) return;
+    
+    // 결과 화면 초기화 작업
+    document.getElementById('header-title').textContent = `📈 ${stockName} 리딩 결과`;
+    document.getElementById('stock-result-view').classList.remove('hidden');
+    if (banner) banner.style.display = 'none'; // 주식은 항상 프리미엄이므로 배너 숨김
+
+    const card1Id = selectedCards[0];
+    const card2Id = selectedCards[1];
+    const card3Id = selectedCards[2];
+
+    const data1 = stockData[card1Id];
+    const data2 = stockData[card2Id];
+    const data3 = stockData[card3Id];
+
+    // 카드 이미지 렌더링 (상단 3개 슬롯 재사용)
+    renderCardImg(document.getElementById('res-card-past'), card1Id, tarotDataList.find(c => c.id === card1Id));
+    renderCardImg(document.getElementById('res-card-present'), card2Id, tarotDataList.find(c => c.id === card2Id));
+    renderCardImg(document.getElementById('res-card-future'), card3Id, tarotDataList.find(c => c.id === card3Id));
+
+    // 슬롯 제목 변경
+    document.querySelector('.reading-slot-mini:nth-child(1) .slot-title-mini').innerHTML = "시장 <span>(Market)</span>";
+    document.querySelector('.reading-slot-mini:nth-child(2) .slot-title-mini').innerHTML = "종목 <span>(Stock)</span>";
+    document.querySelector('.reading-slot-mini:nth-child(3) .slot-title-mini').innerHTML = "심리 <span>(Me)</span>";
+
+    // 텍스트 변환 헬퍼 (종목명 치환)
+    const processText = (txt) => {
+        return txt.replace(/이 종목/g, `<span class="stock-highlight">${stockName}</span>`)
+                  .replace(/종목/g, `<span class="stock-highlight">${stockName}</span>`);
+    };
+
+    // 1. 시장 에너지
+    const b1 = document.getElementById('stock-pos1-badge');
+    b1.innerText = data1.pos1.state.split(',')[0]; // 너무 길면 첫 토막만
+    b1.className = `stock-badge ${data1.pos1.badge}`;
+    document.getElementById('stock-pos1-desc').innerHTML = processText(data1.pos1.text);
+
+    // 2. 종목 에너지 (온도계)
+    document.getElementById('stock-pos2-temp-label').innerText = `${data2.pos2.temperature}°C`;
+    document.getElementById('stock-pos2-desc').innerHTML = processText(data2.pos2.text);
+    setTimeout(() => {
+        document.getElementById('stock-pos2-thermometer').style.width = `${data2.pos2.temperature}%`;
+    }, 500);
+
+    // 3. 투자자 심리 (게이지 & 액션)
+    const a3 = document.getElementById('stock-pos3-action');
+    a3.innerText = data3.pos3.action.toUpperCase();
+    a3.className = `stock-action-badge ${data3.pos3.action}`;
+    document.getElementById('stock-pos3-desc').innerHTML = processText(data3.pos3.text);
+    
+    // 게이지 랜덤값 (gaugeMin ~ gaugeMax 사이)
+    const targetGauge = Math.floor(Math.random() * (data3.pos3.gaugeMax - data3.pos3.gaugeMin + 1)) + data3.pos3.gaugeMin;
+    setTimeout(() => {
+        const bar = document.getElementById('stock-pos3-gauge');
+        bar.style.left = `${data3.pos3.gaugeMin}%`;
+        bar.style.width = `${data3.pos3.gaugeMax - data3.pos3.gaugeMin}%`;
+        // 추가로 중앙 포인터 효과를 위해 배경색을 좀 더 밝게 하거나 등을 할 수 있음
+    }, 800);
+
+    // 기존 텍스트 박스 숨김
+    const combinedBox = document.querySelector('.combined-desc-box');
+    if (combinedBox) combinedBox.style.display = 'none';
+
+    modal.scrollTop = 0;
+    modal.classList.add('active');
 }
