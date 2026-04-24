@@ -589,7 +589,17 @@ function showWeeklyResult() {
 
     // 주식 전용 UI 숨김 및 일반 텍스트 박스 표시 (UI 간섭 방지)
     const stockView = document.getElementById('stock-result-view');
-    if (stockView) stockView.classList.add('hidden');
+    if (stockView) {
+        stockView.classList.add('hidden');
+        stockView.style.display = 'none'; // 클래스가 작동하지 않을 경우를 대비한 2중 차단
+    }
+    
+    const stockVerdict = document.getElementById('stock-final-verdict');
+    if (stockVerdict) {
+        stockVerdict.classList.add('hidden');
+        stockVerdict.style.display = 'none';
+    }
+
     const combinedBox = document.querySelector('.combined-desc-box');
     if (combinedBox) combinedBox.style.display = 'block';
 
@@ -606,10 +616,6 @@ function showWeeklyResult() {
         slots[1].innerHTML = "현재 <span>(상황)</span>";
         slots[2].innerHTML = "미래 <span>(조언)</span>";
     }
-
-    // 주식 전용 최종 결론 섹션 숨김
-    const stockVerdict = document.getElementById('stock-final-verdict');
-    if (stockVerdict) stockVerdict.classList.add('hidden');
 
     const pastId = selectedCards[0], presentId = selectedCards[1], futureId = selectedCards[2];
     const pastData = tarotDataList.find(item => item.id === pastId);
