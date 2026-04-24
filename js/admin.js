@@ -136,7 +136,6 @@ function displayLogs() {
     logBody.innerHTML = cachedLogs.map((log, index) => `
         <tr>
             <td>${cachedLogs.length - index}</td>
-            <td><code style="color: #f9f295;">${log.ip}</code></td>
             <td style="font-size: 0.85rem; color: rgba(255,255,255,0.6);">${log.time}</td>
         </tr>
     `).join('');
@@ -156,12 +155,12 @@ function downloadLogs() {
 
     // CSV 헤더
     let csvContent = "\uFEFF"; // 한글 깨짐 방지 BOM
-    csvContent += "No,IP Address,Access Time,User Agent\n";
+    csvContent += "No,Access Time\n";
 
     // 데이터 변환
     cachedLogs.forEach((log, index) => {
         const rowNum = cachedLogs.length - index;
-        const row = `${rowNum},"${log.ip}","${log.time}","${(log.ua || '').replace(/"/g, '""')}"`;
+        const row = `${rowNum},"${log.time}"`;
         csvContent += row + "\n";
     });
 
