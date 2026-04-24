@@ -1,4 +1,4 @@
-/* 기본 설정 */
+/* 기본 ?�정 */
 :root {
     --bg-dark: #0a0514;
     --gold: #d4af37;
@@ -8,30 +8,30 @@
     --purple-deep: #1e0b2e;
     --purple-glow: rgba(147, 51, 234, 0.4);
     
-    /* 연애운 등급별 색상 */
-    --love-1: #00e676; /* 아주 좋다 */
+    /* ?�애???�급�??�상 */
+    --love-1: #00e676; /* ?�주 좋다 */
     --love-2: #42a5f5; /* 좋다 */
     --love-3: #fdd835; /* 보통 */
-    --love-4: #ff9800; /* 나쁘다 */
-    --love-5: #ef5350; /* 아주 나쁘다 */
+    --love-4: #ff9800; /* ?�쁘??*/
+    --love-5: #ef5350; /* ?�주 ?�쁘??*/
 
-    /* 금전운 등급별 색상 (골드/앰버 테마) */
-    --money-1: #ffea00; /* 아주 좋다 */
+    /* 금전???�급�??�상 (골드/?�버 ?�마) */
+    --money-1: #ffea00; /* ?�주 좋다 */
     --money-2: #ffd600; /* 좋다 */
     --money-3: #ffc400; /* 보통 */
     --money-4: #ffab00; /* 주의 */
-    --money-5: #ff9100; /* 위험 */
+    --money-5: #ff9100; /* ?�험 */
 
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* 프리미엄 모드 (아이보리/화이트 테마) 전역 변수 */
+/* ?�리미엄 모드 (?�이보리/?�이???�마) ?�역 변??*/
 body.premium-mode {
-    --bg-dark: #fbf9f4; /* 아이보리 베이스 */
-    --gold: #c5a028;    /* 조금 더 진한 골드 포인트 */
-    --gold-light: #8b6b10; /* 다크 골드 (텍스트용) */
-    --text-main: #3d3b38;  /* 다크 그레이 텍스트 */
-    --purple-deep: #ffffff; /* 순백색 */
+    --bg-dark: #fbf9f4; /* ?�이보리 베이??*/
+    --gold: #c5a028;    /* 조금 ??진한 골드 ?�인??*/
+    --gold-light: #8b6b10; /* ?�크 골드 (?�스?�용) */
+    --text-main: #3d3b38;  /* ?�크 그레???�스??*/
+    --purple-deep: #ffffff; /* ?�백??*/
     --purple-glow: rgba(197, 160, 40, 0.15);
 }
 
@@ -46,18 +46,18 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
-    overscroll-behavior-y: none; /* 안드로이드 당겨서 새로고침 방지 및 화면 깜빡임/떨림 개선 */
-    -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 파란색 테두리 깜빡임 제거 */
+    overscroll-behavior-y: none; /* ?�드로이???�겨???�로고침 방�? �??�면 깜빡???�림 개선 */
+    -webkit-tap-highlight-color: transparent; /* 모바???�치 ???��????�두�?깜빡???�거 */
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-/* 텍스트 폰트 지정 */
+/* ?�스???�트 지??*/
 h1, h2, .cinzel { font-family: 'Cinzel', serif; }
 h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
-/* 신비로운 우주/별 배경 애니메이션 */
+/* ?�비로운 ?�주/�?배경 ?�니메이??*/
 .stars, .twinkling {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -68,15 +68,15 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .stars {
     background: #000 url('https://www.transparenttextures.com/patterns/stardust.png') repeat top center;
     z-index: -2;
-    transform: translateZ(0); /* GPU 가속 활성화로 깜빡임 방지 */
+    transform: translateZ(0); /* GPU 가???�성?�로 깜빡??방�? */
 }
 .twinkling {
     background: transparent url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png') repeat top center;
     z-index: -1;
     animation: move-twink-back 200s linear infinite;
     opacity: 0.3;
-    will-change: background-position; /* 렌더링 성능 최적화 */
-    transform: translateZ(0); /* GPU 가속 강제 활성화 방지 깜빡임 개선 */
+    will-change: background-position; /* ?�더�??�능 최적??*/
+    transform: translateZ(0); /* GPU 가??강제 ?�성??방�? 깜빡??개선 */
 }
 
 @keyframes move-twink-back {
@@ -84,7 +84,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     to {background-position: -10000px 5000px;}
 }
 
-/* 프리미엄 은은한 빛의 오라 효과 */
+/* ?�리미엄 ?�?�??빛의 ?�라 ?�과 */
 .premium-aura {
     display: none;
     position: fixed;
@@ -130,7 +130,7 @@ body.premium-mode .twinkling {
 }
 
 /* =============================================
-   모드 선택 화면
+   모드 ?�택 ?�면
    ============================================= */
 .mode-select-screen {
     display: flex;
@@ -233,7 +233,7 @@ body.premium-mode .test-premium-btn:hover {
     }
 }
 
-/* 마지막 버튼이 혼자 남을 경우 중앙 배치 (PC/태블릿) */
+/* 마�?�?버튼???�자 ?�을 경우 중앙 배치 (PC/?�블�? */
 @media (min-width: 481px) {
     .mode-buttons .mode-btn:last-child:nth-child(odd) {
         grid-column: 1 / span 2;
@@ -295,7 +295,7 @@ body.premium-mode .test-premium-btn:hover {
 }
 
 /* =============================================
-   카드 선택 화면
+   카드 ?�택 ?�면
    ============================================= */
 .reading-screen {
     position: relative;
@@ -309,7 +309,7 @@ body.premium-mode .test-premium-btn:hover {
     display: none;
 }
 
-/* 헤더 영역 */
+/* ?�더 ?�역 */
 .app-header {
     text-align: center;
     padding: 2rem 1rem 1rem;
@@ -360,7 +360,7 @@ body.premium-mode .test-premium-btn:hover {
     box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
 }
 
-/* 카드 컨테이너 */
+/* 카드 컨테?�너 */
 .app-main {
     flex: 1;
     display: flex;
@@ -384,55 +384,43 @@ body.premium-mode .test-premium-btn:hover {
     }
 }
 
-/* ========== 스프레드 패턴 4종 ========== */
+/* ========== 스프레드 패턴 공통 적용 (Result & Spread) ========== */
 
 /* 1. Arc (아치형) */
-.card-container.pattern-arc {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-top: 50px;
-}
-.pattern-arc .tarot-card {
-    /* 중앙 11번째 카드를 기준으로 좌우 대칭 곡선 */
+.pattern-arc .tarot-card,
+.pattern-arc .daily-spread-card.deal-animate {
     --offset: calc(var(--i) - 10.5);
-    transform: translateY(calc(var(--offset) * var(--offset) * 1.5px)) rotate(calc(var(--offset) * 2deg));
-    margin: 0 -10px;
+    transform: translateY(calc(var(--offset) * var(--offset) * 1.2px)) rotate(calc(var(--offset) * 2deg));
+    margin: 0 -8px;
 }
 
 /* 2. Wave (물결형) */
-.card-container.pattern-wave {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.pattern-wave .tarot-card {
-    /* 사인파 형태의 높낮이 조절 */
-    transform: translateY(calc(sin(var(--i) * 0.5) * 25px)) rotate(calc(cos(var(--i) * 0.5) * 5deg));
+.pattern-wave .tarot-card,
+.pattern-wave .daily-spread-card.deal-animate {
+    transform: translateY(calc(sin(var(--i) * 0.5) * 20px)) rotate(calc(cos(var(--i) * 0.5) * 5deg));
+    margin: 5px;
 }
 
 /* 3. Fan (부채꼴형) */
-.card-container.pattern-fan {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-bottom: 40px;
-}
-.pattern-fan .tarot-card {
-    /* 아래쪽 중심을 기준으로 넓게 퍼짐 */
+.pattern-fan .tarot-card,
+.pattern-fan .daily-spread-card.deal-animate {
     --dist: calc(var(--i) - 10.5);
     transform: rotate(calc(var(--dist) * 3deg)) translateY(calc(abs(var(--dist)) * -2px));
     transform-origin: bottom center;
-    margin: 0 -5px;
+    margin: 0 -4px;
 }
 
-/* 4. Grid (기본 격자 - 기존 스타일 유지) */
+/* 4. Grid (격자형) */
+.pattern-grid .tarot-card,
+.pattern-grid .daily-spread-card.deal-animate {
+    margin: 5px;
+}
 .card-container.pattern-grid {
     display: grid;
-    /* 기존 스타일 활용 */
+    /* 기존 ?��????�용 */
 }
 
-/* 개별 카드 객체 (3D Flip 적용) */
+/* 개별 카드 객체 (3D Flip ?�용) */
 .tarot-card {
     background-color: transparent;
     aspect-ratio: 1 / 1.6;
@@ -464,7 +452,7 @@ body.premium-mode .test-premium-btn:hover {
     transform: rotateY(180deg);
 }
 
-/* 카드의 앞뒷면 공통 */
+/* 카드???�뒷�?공통 */
 .card-cover, .card-reveal {
     position: absolute;
     width: 100%;
@@ -477,7 +465,7 @@ body.premium-mode .test-premium-btn:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
-/* 카드 덮개 (뒷면 무늬) */
+/* 카드 ??�� (?�면 무늬) */
 .card-cover {
     background-image: url('../images/card-back.png');
     background-size: cover;
@@ -491,7 +479,7 @@ body.premium-mode .test-premium-btn:hover {
     content: "";
 }
 
-/* 카드 공개면 (타로 이미지) */
+/* 카드 공개�?(?��??��?지) */
 .card-reveal {
     background-color: #fcebd5;
     color: #333;
@@ -508,7 +496,7 @@ body.premium-mode .test-premium-btn:hover {
     object-fit: cover;
 }
 
-/* SF 홀로그램 네임 라벨 */
+/* SF ?�로그???�임 ?�벨 */
 .card-name-label {
     position: absolute;
     bottom: 0;
@@ -529,7 +517,7 @@ body.premium-mode .test-premium-btn:hover {
     box-sizing: border-box;
 }
 
-/* 이미지 로드 실패 시 나타나는 Fallback UI */
+/* ?��?지 로드 ?�패 ???��??�는 Fallback UI */
 .fallback-title {
     font-family: 'Hahmlet', serif;
     font-weight: bold;
@@ -541,7 +529,7 @@ body.premium-mode .test-premium-btn:hover {
 }
 
 /* =============================================
-   모달 공통 스타일 (Glassmorphism)
+   모달 공통 ?��???(Glassmorphism)
    ============================================= */
 .modal-overlay {
     position: fixed;
@@ -558,7 +546,7 @@ body.premium-mode .test-premium-btn:hover {
     pointer-events: none;
     transition: opacity 0.5s ease;
     overflow-y: auto;
-    transform: translateZ(0); /* 깜빡임 완화 */
+    transform: translateZ(0); /* 깜빡???�화 */
 }
 
 .modal-overlay.active {
@@ -577,7 +565,7 @@ body.premium-mode .test-premium-btn:hover {
     width: 100%;
     max-width: 900px;
     text-align: center;
-    transform: translateY(20px) translateZ(0); /* 깜빡임 완화를 위해 Z축 가속 추가 */
+    transform: translateY(20px) translateZ(0); /* 깜빡???�화�??�해 Z�?가??추�? */
     will-change: transform, opacity;
     transition: transform 0.5s ease;
     margin: auto;
@@ -586,7 +574,7 @@ body.premium-mode .test-premium-btn:hover {
 body.premium-mode .glass-panel {
     background: rgba(255, 255, 255, 0.88);
     border-color: rgba(197, 160, 40, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* 어두운 테마보다 부드러운 그림자 */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* ?�두???�마보다 부?�러??그림??*/
     color: var(--text-main);
 }
 
@@ -607,7 +595,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   이번주 운세 결과 모달
+   ?�번�??�세 결과 모달
    ============================================= */
 .reading-container {
     display: flex;
@@ -712,8 +700,8 @@ body.premium-mode .modal-title {
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     border: 1px solid var(--gold);
-    transform: translateZ(0); /* 이미지 렌더링 깜빡임 방지 */
-    backface-visibility: hidden; /* 이미지 렌더링 깜빡임 방지 */
+    transform: translateZ(0); /* ?��?지 ?�더�?깜빡??방�? */
+    backface-visibility: hidden; /* ?��?지 ?�더�?깜빡??방�? */
     -webkit-backface-visibility: hidden;
 }
 
@@ -752,7 +740,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   연애운 결과 모달
+   ?�애??결과 모달
    ============================================= */
 .love-modal-title {
     font-family: 'Hahmlet', serif;
@@ -766,7 +754,7 @@ body.premium-mode .modal-title {
     margin-bottom: 2rem;
 }
 
-/* 연애운 등급 배지 */
+/* ?�애???�급 배�? */
 .love-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -812,7 +800,7 @@ body.premium-mode .modal-title {
     border-color: var(--love-5);
 }
 
-/* 연애운 카드 (크게) */
+/* ?�애??카드 (?�게) */
 .love-card-large {
     width: 200px;
     height: 320px;
@@ -823,7 +811,7 @@ body.premium-mode .modal-title {
     justify-content: center;
 }
 
-/* 연애 해석 박스 */
+/* ?�애 ?�석 박스 */
 .love-desc-box {
     background: rgba(0, 0, 0, 0.4);
     padding: 1.8rem;
@@ -909,14 +897,14 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   유틸리티
+   ?�틸리티
    ============================================= */
 .hidden {
     display: none !important;
 }
 
 /* =============================================
-   모바일 반응형 (타이틀 한 줄 표시)
+   모바??반응??(?�?��? ??�??�시)
    ============================================= */
 @media (max-width: 480px) {
     .mode-title {
@@ -939,7 +927,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   금전운 결과 모달
+   금전??결과 모달
    ============================================= */
 .money-modal-title {
     font-family: 'Hahmlet', serif;
@@ -953,7 +941,7 @@ body.premium-mode .modal-title {
     margin-bottom: 2rem;
 }
 
-/* 금전운 등급 배지 */
+/* 금전???�급 배�? */
 .money-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -979,7 +967,7 @@ body.premium-mode .modal-title {
 .money-rating-badge.rating-4 { background: rgba(255, 171, 0, 0.15); color: var(--money-4); border-color: var(--money-4); }
 .money-rating-badge.rating-5 { background: rgba(255, 145, 0, 0.15); color: var(--money-5); border-color: var(--money-5); }
 
-/* 금전운 카드 (크게) */
+/* 금전??카드 (?�게) */
 .money-card-large {
     width: 200px;
     height: 320px;
@@ -991,7 +979,7 @@ body.premium-mode .modal-title {
     justify-content: center;
 }
 
-/* 금전 해석 박스 */
+/* 금전 ?�석 박스 */
 .money-desc-box {
     background: rgba(0, 0, 0, 0.4);
     padding: 1.8rem;
@@ -1166,7 +1154,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   로또 결과 모달 및 원통 애니메이션 (SF 테마)
+   로또 결과 모달 �??�통 ?�니메이??(SF ?�마)
    ============================================= */
 .lotto-panel {
     max-width: 800px;
@@ -1185,7 +1173,7 @@ body.premium-mode .modal-title {
     gap: 2rem;
 }
 
-/* 원통 머신 */
+/* ?�통 머신 */
 .lotto-machine {
     position: relative;
     width: 250px;
@@ -1234,7 +1222,7 @@ body.premium-mode .modal-title {
     to { transform: rotateZ(360deg); }
 }
 
-/* 개별 공 스타일 (원통 안에서 흩뿌려진 공들) */
+/* 개별 �??��???(?�통 ?�에???�뿌?�진 공들) */
 .lotto-balls-spinner .lotto-ball {
     width: 30px;
     height: 30px;
@@ -1244,7 +1232,7 @@ body.premium-mode .modal-title {
     transition: all 0.3s ease;
 }
 
-/* 실행 시 각 공들이 개별적으로 튀어 오르는 효과 */
+/* ?�행 ??�?공들??개별?�으�??�???�르???�과 */
 .lotto-balls-spinner.spinning .lotto-ball {
     animation: ballChaos var(--dur, 1s) infinite alternate ease-in-out;
     animation-delay: var(--delay, 0s);
@@ -1271,7 +1259,7 @@ body.premium-mode .modal-title {
     z-index: 5;
 }
 
-/* 추출 결과 컨테이너 */
+/* 추출 결과 컨테?�너 */
 .lotto-draw-results {
     display: flex;
     justify-content: center;
@@ -1281,7 +1269,7 @@ body.premium-mode .modal-title {
     padding: 10px;
 }
 
-/* 범용 위치 공 스타일 (SF 홀로그램 룩) */
+/* 범용 ?�치 �??��???(SF ?�로그??�? */
 .lotto-ball {
     display: flex;
     justify-content: center;
@@ -1299,14 +1287,14 @@ body.premium-mode .modal-title {
     box-shadow: 0 0 15px currentColor, inset 0 0 10px rgba(255,255,255,0.3);
 }
 
-/* 공 색상 그룹 (10단위) - 네온 효과 가미 */
+/* �??�상 그룹 (10?�위) - ?�온 ?�과 가�?*/
 .num-group-0 { color: #f1c40f; } /* 1~10: Yellow */
 .num-group-1 { color: #3498db; } /* 11~20: Blue */
 .num-group-2 { color: #e74c3c; } /* 21~30: Red */
 .num-group-3 { color: #aaaaaa; } /* 31~40: Gray/White */
 .num-group-4 { color: #2ecc71; } /* 41~45: Green */
 
-/* 추출되어 나타날 때 팝 애니메이션 */
+/* 추출?�어 ?��????????�니메이??*/
 .pop-out {
     animation: ballPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transform: scale(0);
@@ -1366,7 +1354,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   오늘의 카드 특별 버튼 (메인 화면 최상단)
+   ?�늘??카드 ?�별 버튼 (메인 ?�면 최상??
    ============================================= */
 .daily-btn-special {
     display: flex;
@@ -1465,90 +1453,44 @@ body.premium-mode .modal-title {
 
 
 /* =============================================
-   오늘의 카드 — 카드 선택 화면 스프레드 UI
-   (2줄; 각 줄 11장이 겹쳐서 부채꼴처럼 보임)
+   ?�늘??카드 ??카드 ?�택 ?�면 ?�프?�드 UI
+   (2�? �?�?11?�이 겹쳐??부채꼴처럼 보임)
    ============================================= */
 .daily-spread-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 1rem 1rem 3rem;
-}
-
-.daily-spread-row {
-    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-end;
-    position: relative;
+    align-content: center;
+    gap: 8px;
     width: 100%;
-    height: 140px;
+    max-width: 1000px;
+    min-height: 400px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
 }
 
 .daily-spread-card {
-    position: absolute;
+    position: relative;
     width: 70px;
     height: 112px;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, filter 0.3s ease;
     transform-origin: bottom center;
     will-change: transform;
+    z-index: 1;
 }
 
-/* 11장을 부채꼴로 배치 — nth-child 위치 계산 */
-.daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 325px); transform: rotate(-20deg); }
-.daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 275px); transform: rotate(-16deg); }
-.daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 225px); transform: rotate(-12deg); }
-.daily-spread-row .daily-spread-card:nth-child(4)  { left: calc(50% - 175px); transform: rotate(-8deg); }
-.daily-spread-row .daily-spread-card:nth-child(5)  { left: calc(50% - 125px); transform: rotate(-4deg); }
-.daily-spread-row .daily-spread-card:nth-child(6)  { left: calc(50% - 35px);  transform: rotate(0deg); }
-.daily-spread-row .daily-spread-card:nth-child(7)  { left: calc(50% + 15px);  transform: rotate(4deg); }
-.daily-spread-row .daily-spread-card:nth-child(8)  { left: calc(50% + 65px);  transform: rotate(8deg); }
-.daily-spread-row .daily-spread-card:nth-child(9)  { left: calc(50% + 115px); transform: rotate(12deg); }
-.daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 165px); transform: rotate(16deg); }
-.daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 215px); transform: rotate(20deg); }
-
-/* 호버시 카드가 위로 쏙 올라오는 효과 */
+/* 호버/선택 효과 */
 .daily-spread-card.hovered {
-    transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
-    filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
-    z-index: 50 !important;
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-}
-
-.daily-spread-card.selected {
-    transform: translateY(-40px) rotate(0deg) scale(1.15) !important;
-    filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
-    z-index: 60 !important;
-    cursor: default;
-}
-
-/* 이번주 운세에서 여러 장 선택 중일 때 — 이미 선택된 카드 표시 */
-.daily-spread-card.selected .daily-spread-cover {
-    border-color: var(--gold);
-    box-shadow: 0 0 18px rgba(212, 175, 55, 0.7), inset 0 0 8px rgba(212, 175, 55, 0.3);
-}
-
-.daily-spread-card.disabled {
-    pointer-events: none;
-    opacity: 0.4;
-}
-
-.daily-spread-card.flipping {
-    animation: cardFlip 0.8s ease forwards;
-}
-
+.daily-spread-card.hovered {
 @keyframes cardFlip {
     0% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
     50% { transform: translateY(-50px) rotateY(90deg) scale(1.2); }
     100% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
 }
 
-/* 카드 덮개 (뒷면) */
+/* 카드 ??�� (?�면) */
 .daily-spread-cover {
     width: 100%;
     height: 100%;
@@ -1589,7 +1531,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   오늘의 카드 결과 모달
+   ?�늘??카드 결과 모달
    ============================================= */
 .daily-modal-title {
     font-family: 'Hahmlet', serif;
@@ -1607,7 +1549,7 @@ body.premium-mode .modal-title {
     margin-bottom: 2rem;
 }
 
-/* 오늘의 카드 등급 배지 */
+/* ?�늘??카드 ?�급 배�? */
 .daily-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -1691,7 +1633,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   프리미엄 상세 해석 섹션
+   ?�리미엄 ?�세 ?�석 ?�션
    ============================================= */
 .premium-section {
     width: 100%;
@@ -1800,7 +1742,7 @@ body.premium-mode .modal-title {
 .premium-sub-section:last-child { border-bottom: none; }
 
 /* =============================================
-   광고 팝업 패널
+   광고 ?�업 ?�널
    ============================================= */
 .ad-panel {
     max-width: 360px;
@@ -1836,7 +1778,7 @@ body.premium-mode .modal-title {
 .ad-placeholder-text { color: #666; font-size: 0.85rem; }
 
 /* =============================================
-   프리미엄 안내 팝업 패널
+   ?�리미엄 ?�내 ?�업 ?�널
    ============================================= */
 .premium-info-panel {
     max-width: 380px;
@@ -2038,18 +1980,18 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   Card Spread Animation - 촤라락 펼쳐지는 효과
+   Card Spread Animation - 촤라???�쳐지???�과
    ============================================= */
 
-/* 초기 상태는 JS의 deal-init 클래스가 제어 */
+/* 초기 ?�태??JS??deal-init ?�래?��? ?�어 */
 
-/* 펼침 애니메이션 적용 클래스 */
+/* ?�침 ?�니메이???�용 ?�래??*/
 .daily-spread-card.deal-animate {
     opacity: 1;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* 각 카드가 제 위치로 돌아가는 것은 nth-child 기본 transform이 적용됨 */
+/* �?카드가 ???�치�??�아가??것�? nth-child 기본 transform???�용??*/
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(1)  { transform: rotate(-20deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(2)  { transform: rotate(-16deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(3)  { transform: rotate(-12deg); }
@@ -2062,7 +2004,7 @@ body.premium-mode .modal-title {
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(10) { transform: rotate(16deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(11) { transform: rotate(20deg); }
 
-/* 호버/선택 시에는 deal-animate의 transform을 오버라이드 */
+/* ?�버/?�택 ?�에??deal-animate??transform???�버?�이??*/
 .daily-spread-row .daily-spread-card.deal-animate.hovered {
     transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
@@ -2148,7 +2090,7 @@ body.premium-mode .modal-title {
    on tablets. Cards animate from a stacked position.
    ============================================= */
 
-/* deal-init/deal-animate 클래스로 JS가 직접 제어 */
+/* deal-init/deal-animate ?�래?�로 JS가 직접 ?�어 */
 
 /* New: JS adds 'deal-init' first (invisible center stack),
    then swaps to 'deal-animate' (fan position) */
@@ -2191,7 +2133,7 @@ body.premium-mode .modal-title {
 
 
 /* =============================================
-   프리미엄 카드 뒷면 이미지
+   ?�리미엄 카드 ?�면 ?��?지
    ============================================= */
 .premium-mode .daily-spread-cover {
     background-image: url('../images/card-back-premium.png') !important;
@@ -2209,10 +2151,10 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   모바일/태블릿 깜빡임 완전 제거 (결과 페이지 포함)
-   - backdrop-filter 제거 (모바일 GPU 과부하의 #1 원인)
-   - 무한 box-shadow 애니메이션 정지
-   - 결과 카드 이미지 GPU 레이어 고정
+   모바???�블�?깜빡???�전 ?�거 (결과 ?�이지 ?�함)
+   - backdrop-filter ?�거 (모바??GPU 과�??�의 #1 ?�인)
+   - 무한 box-shadow ?�니메이???��?
+   - 결과 카드 ?��?지 GPU ?�이??고정
    ============================================= */
 @media (max-width: 1024px) {
     .modal-overlay {
@@ -2271,7 +2213,7 @@ body.premium-mode .modal-title {
     }
 }
 
-/* ========== "그 사람 지금 내 생각 할까?" 프리미엄 모달 스타일 ========== */
+/* ========== "�??�람 지�????�각 ?�까?" ?�리미엄 모달 ?��???========== */
 #thinking-modal .thinking-panel,
 #yesno-ritual-modal .thinking-panel,
 #stock-ritual-modal .thinking-panel {
@@ -2309,7 +2251,7 @@ body.premium-mode #stock-ritual-modal .thinking-panel {
     display: flex;
 }
 
-/* STEP 1: 관계 선택 */
+/* STEP 1: 관�??�택 */
 .relation-grid {
     display: flex;
     flex-direction: column;
@@ -2344,7 +2286,7 @@ body.premium-mode #stock-ritual-modal .thinking-panel {
     margin-top: 5px;
 }
 
-/* STEP 2: 인트로 (카운트다운) */
+/* STEP 2: ?�트�?(카운?�다?? */
 .countdown-container {
     position: relative;
     width: 120px;
@@ -2389,7 +2331,7 @@ body.premium-mode #stock-countdown-number {
     text-shadow: 0 0 10px rgba(166, 124, 82, 0.2);
 }
 
-/* STEP 3: 카드 4장 2x2 그리드 */
+/* STEP 3: 카드 4??2x2 그리??*/
 .thinking-card-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2450,13 +2392,13 @@ body.premium-mode #stock-countdown-number {
     background-size: cover;
     background-position: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    background-color: #2a2a2a; /* 기본 배경색 (이미지 로딩 전 방어) */
+    background-color: #2a2a2a; /* 기본 배경??(?��?지 로딩 ??방어) */
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .thinking-card-front {
-    background-image: url('../images/card-back-premium.png'); /* 경로 수정: media -> images, 파일명 수정 */
-    background-size: 240%; /* 딱 카드 뒷모습만 나오도록 크롭 */
+    background-image: url('../images/card-back-premium.png'); /* 경로 ?�정: media -> images, ?�일�??�정 */
+    background-size: 240%; /* ??카드 ?�모?�만 ?�오?�록 ?�롭 */
     background-position: center;
 }
 
@@ -2472,7 +2414,7 @@ body.premium-mode #stock-countdown-number {
     white-space: nowrap;
 }
 
-/* 시각화 요소 컨테이너 */
+/* ?�각???�소 컨테?�너 */
 .viz-container {
     background: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
@@ -2496,7 +2438,7 @@ body.premium-mode #stock-countdown-number {
     line-height: 1.5;
 }
 
-/* 감정 온도계 */
+/* 감정 ?�도�?*/
 .temperature-gauge {
     width: 100%;
 }
@@ -2531,7 +2473,7 @@ body.premium-mode #stock-countdown-number {
     color: rgba(255,255,255,0.6);
 }
 
-/* 연락 에너지 게이지 */
+/* ?�락 ?�너지 게이지 */
 .energy-gauge {
     width: 100%;
     position: relative;
@@ -2562,7 +2504,7 @@ body.premium-mode #stock-countdown-number {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-/* 7일 타임라인 */
+/* 7???�?�라??*/
 .timeline-bar {
     display: flex;
     justify-content: space-between;
@@ -2591,7 +2533,7 @@ body.premium-mode #stock-countdown-number {
     transform: scale(1.1);
 }
 
-/* 행동 조언 */
+/* ?�동 조언 */
 .action-buttons {
     display: flex;
     gap: 10px;
@@ -2627,12 +2569,12 @@ body.premium-mode #stock-countdown-number {
    ============================================= */
 
 body.premium-mode {
-    background-color: #fff9f6 !important; /* 산뜻한 로즈 아이보리 */
-    color: #4a3535; /* 딥 로즈 브라운 */
+    background-color: #fff9f6 !important; /* ?�뜻??로즈 ?�이보리 */
+    color: #4a3535; /* ??로즈 브라??*/
 }
 
 body.premium-mode .mode-title {
-    color: #a67c52; /* 로즈 골드 톤 */
+    color: #a67c52; /* 로즈 골드 ??*/
     text-shadow: 0 2px 10px rgba(166, 124, 82, 0.1);
 }
 
@@ -2640,7 +2582,7 @@ body.premium-mode .mode-subtitle {
     color: #8b7d7d;
 }
 
-/* 메인 메뉴 버튼 개편 (로즈 테마) */
+/* 메인 메뉴 버튼 개편 (로즈 ?�마) */
 body.premium-mode .mode-btn {
     background: rgba(255, 252, 250, 0.9);
     border-color: rgba(166, 124, 82, 0.2);
@@ -2654,14 +2596,14 @@ body.premium-mode .mode-btn:hover {
 }
 
 body.premium-mode .mode-btn-title {
-    color: #8b5e5e; /* 산뜻한 로즈 톤 */
+    color: #8b5e5e; /* ?�뜻??로즈 ??*/
 }
 
 body.premium-mode .mode-btn-desc {
     color: #6d5b5b;
 }
 
-/* 오늘의 카드 특별 버튼 프리미엄 대응 */
+/* ?�늘??카드 ?�별 버튼 ?�리미엄 ?�??*/
 body.premium-mode .daily-btn-special {
     background: linear-gradient(135deg, #ffffff, #fff5f2);
     border-color: #d4a373;
@@ -2676,7 +2618,7 @@ body.premium-mode .daily-desc {
     color: #6d5b5b !important;
 }
 
-/* 결과 화면 및 모달 UI 개편 (Rose Ivory) */
+/* 결과 ?�면 �?모달 UI 개편 (Rose Ivory) */
 body.premium-mode .glass-panel {
     background: rgba(255, 253, 252, 0.95) !important;
     border-color: rgba(212, 163, 115, 0.3) !important;
@@ -2705,7 +2647,7 @@ body.premium-mode .yesno-advice,
 body.premium-mode .premium-text-glow p,
 body.premium-mode .recap-text,
 body.premium-mode .viz-desc {
-    color: #2d1f1f !important; /* 더 선명한 가독성 */
+    color: #2d1f1f !important; /* ???�명??가?�성 */
 }
 
 body.premium-mode .love-advice-box,
@@ -2716,7 +2658,7 @@ body.premium-mode .daily-advice-box {
     border-color: rgba(212, 163, 115, 0.15);
 }
 
-/* Thinking 모드 (Rose Ivory 테마) */
+/* Thinking 모드 (Rose Ivory ?�마) */
 body.premium-mode .relation-btn {
     background: white;
     border-color: rgba(166, 124, 82, 0.15);
@@ -2759,7 +2701,7 @@ body.premium-mode .action-btn.active {
     color: #8b5e5e;
 }
 
-/* 라벨 스타일 (로즈 골드) */
+/* ?�벨 ?��???(로즈 골드) */
 body.premium-mode .premium-label,
 body.premium-mode .viz-title,
 body.premium-mode .recap-pos-label,
@@ -2771,14 +2713,14 @@ body.premium-mode .daily-advice-label {
     color: #8b5e5e !important;
 }
 
-/* 프리미엄 모드 결론 및 하단 텍스트 가독성 보호 (노란색 계열 제거) */
+/* ?�리미엄 모드 결론 �??�단 ?�스??가?�성 보호 (?��???계열 ?�거) */
 body.premium-mode .conclusion-text,
 body.premium-mode .love-conclusion-text,
 body.premium-mode .money-conclusion-text,
 body.premium-mode .yesno-conclusion-text,
 body.premium-mode .daily-conclusion-text,
 body.premium-mode .lotto-conclusion-text {
-    color: #a67c52 !important; /* 가독성 높은 차분한 로즈 골드/브라운 */
+    color: #a67c52 !important; /* 가?�성 ?��? 차분??로즈 골드/브라??*/
     text-shadow: none !important;
 }
 
@@ -2787,7 +2729,7 @@ body.premium-mode .premium-text-glow {
     border-left-color: #a67c52;
 }
 
-/* 처음으로 버튼 (로즈 테마) */
+/* 처음?�로 버튼 (로즈 ?�마) */
 body.premium-mode .btn-back-mode {
     background: #fff;
     color: #8b5e5e;
@@ -2800,7 +2742,7 @@ body.premium-mode .btn-back-mode:hover {
     border-color: #8b5e5e;
 }
 
-/* 푸터 및 상세 정보 (중앙 정렬 및 가독성 강화) */
+/* ?�터 �??�세 ?�보 (중앙 ?�렬 �?가?�성 강화) */
 .app-footer-info {
     text-align: center;
     padding: 2.5rem 1rem 4rem;
@@ -2811,7 +2753,7 @@ body.premium-mode .btn-back-mode:hover {
 }
 
 .footer-link-author, .footer-link-privacy {
-    color: #a67c52; /* 선명한 로즈 골드 브라운 */
+    color: #a67c52; /* ?�명??로즈 골드 브라??*/
     text-decoration: none;
     border-bottom: 1px solid rgba(166, 124, 82, 0.3);
     transition: all 0.3s;
@@ -2830,7 +2772,7 @@ body.premium-mode .app-footer-info {
 body.premium-mode .footer-link-author { color: #8b5e5e; border-color: rgba(139, 94, 94, 0.3); }
 body.premium-mode .footer-link-privacy { color: #6d5b5b; }
 
-/* 상태바 및 헤더 */
+/* ?�태�?�??�더 */
 body.premium-mode .status-bar {
     background: rgba(255, 253, 252, 0.9);
     border-color: rgba(166, 124, 82, 0.3);
@@ -2843,7 +2785,7 @@ body.premium-mode .card-name-label {
     border-top: 1px solid rgba(166, 124, 82, 0.5);
 }
 
-/* 프리미엄 전용 텍스트 레이아웃 */
+/* ?�리미엄 ?�용 ?�스???�이?�웃 */
 .premium-text-glow {
     position: relative;
     padding: 1.2rem;
@@ -2881,7 +2823,7 @@ body.premium-mode .day.active {
     box-shadow: 0 0 15px rgba(197, 160, 40, 0.4);
 }
 
-/* 배지 스타일 */
+/* 배�? ?��???*/
 .daily-badge, .premium-badge {
     position: absolute;
     top: 10px;
@@ -2915,7 +2857,7 @@ body.premium-mode .premium-badge {
 }
 
 /* =============================================
-   결과 리딩 텍스트 스타일 통합 (Typography Standard)
+   결과 리딩 ?�스???��????�합 (Typography Standard)
    ============================================= */
 .res-desc, .res-desc *,
 .love-meaning, .love-meaning *,
@@ -2929,19 +2871,19 @@ body.premium-mode .premium-badge {
 .premium-text-glow p, .premium-text-glow p *,
 .recap-text, .recap-text *,
 .viz-desc, .viz-desc * {
-    font-size: 1.1rem !important; /* 전체 본문 크기 통일 */
+    font-size: 1.1rem !important; /* ?�체 본문 ?�기 ?�일 */
     line-height: 1.8 !important;
     word-break: keep-all;
     font-family: 'Noto Sans KR', sans-serif !important;
-    font-style: normal !important; /* 기울임꼴 완전 제거 */
+    font-style: normal !important; /* 기울?�꼴 ?�전 ?�거 */
 }
 
-/* 기본 이탤릭 태그 강제 초기화 */
+/* 기본 ?�탤�??�그 강제 초기??*/
 i, em, cite, address, dfn {
     font-style: normal !important;
 }
 
-/* 프리미엄 모드에서의 본문 색상 통합 */
+/* ?�리미엄 모드?�서??본문 ?�상 ?�합 */
 body.premium-mode .res-desc,
 body.premium-mode .love-meaning,
 body.premium-mode .money-meaning,
@@ -2958,7 +2900,7 @@ body.premium-mode .viz-desc {
     font-weight: 500;
 }
 
-/* 보조 정보 및 시스템 텍스트 */
+/* 보조 ?�보 �??�스???�스??*/
 .thinking-bottom-desc,
 .restart-caution,
 .love-period-notice {
@@ -2978,7 +2920,7 @@ body.premium-mode .love-period-notice {
     opacity: 0.7;
 }
 
-/* 결과 헤더/라벨 스타일 통합 */
+/* 결과 ?�더/?�벨 ?��????�합 */
 .premium-label,
 .viz-title,
 .recap-pos-label,
@@ -3002,7 +2944,7 @@ body.premium-mode .recap-title {
     color: #8b6b10 !important;
 }
 
-/* 카드 이름 스타일 통합 */
+/* 카드 ?�름 ?��????�합 */
 .love-card-name,
 .money-card-name,
 .yesno-card-name,
@@ -3022,7 +2964,7 @@ body.premium-mode .recap-card-name {
     color: #1a1a1a !important;
 }
 
-/* 기존 스타일들 하단 보완 */
+/* 기존 ?��??�들 ?�단 보완 */
 
 .recap-item {
     background: rgba(255, 255, 255, 0.03);
@@ -3090,7 +3032,7 @@ body.premium-mode .recap-text {
     color: #555;
 }
 
-/* 프리미엄 전용 해석 텍스트 가독성 최적화 (Ivory 테마) */
+/* ?�리미엄 ?�용 ?�석 ?�스??가?�성 최적??(Ivory ?�마) */
 body.premium-mode .premium-label {
     color: #8b6b10;
     font-weight: 800;
@@ -3108,28 +3050,28 @@ body.premium-mode .premium-text-glow p {
     line-height: 1.8;
 }
 
-/* 등급 배지 고대비 스타일 (Ivory 테마용) */
+/* ?�급 배�? 고�?�??��???(Ivory ?�마?? */
 body.premium-mode .love-rating-badge,
 body.premium-mode .money-rating-badge,
 body.premium-mode .yesno-rating-badge,
 body.premium-mode .daily-rating-badge {
     background: #fff !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
-    animation: none !important; /* 가독성을 위해 애니메이션 중지 */
+    animation: none !important; /* 가?�성???�해 ?�니메이??중�? */
 }
 
-/* 연애운/금전운/데일리 배지 색상 오버라이드 (1-5) */
+/* ?�애??금전???�일�?배�? ?�상 ?�버?�이??(1-5) */
 body.premium-mode .rating-1 { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
 body.premium-mode .rating-2 { color: #1976d2 !important; border-color: #1976d2 !important; background: rgba(25, 118, 210, 0.05) !important; }
 body.premium-mode .rating-3 { color: #8b6b10 !important; border-color: #8b6b10 !important; background: rgba(139, 107, 16, 0.05) !important; }
 body.premium-mode .rating-4 { color: #e65100 !important; border-color: #e65100 !important; background: rgba(230, 81, 0, 0.05) !important; }
 body.premium-mode .rating-5 { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
 
-/* Yes/No 전용 고대비 */
+/* Yes/No ?�용 고�?�?*/
 body.premium-mode .rating-yes { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
 body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
 
-/* 프리미엄 인라인 배지 (결과창 제목 옆) */
+/* ?�리미엄 ?�라??배�? (결과�??�목 ?? */
 .premium-inline-badge {
     display: inline-block;
     font-family: 'Cinzel', serif;
@@ -3153,7 +3095,7 @@ body.premium-mode .premium-inline-badge {
     box-shadow: 0 2px 6px rgba(166, 124, 82, 0.2);
 }
 
-/* 안내 문구 및 버튼 가독성 개선 (Rose Ivory 테마 대응) */
+/* ?�내 문구 �?버튼 가?�성 개선 (Rose Ivory ?�마 ?�?? */
 .thinking-bottom-desc {
     text-align: center;
     color: rgba(255, 255, 255, 0.4);
@@ -3167,7 +3109,7 @@ body.premium-mode .thinking-bottom-desc {
     font-weight: 500;
 }
 
-/* 프리미엄 모드 처음으로 버튼(btn-back-mode) 가독성 강화 */
+/* ?�리미엄 모드 처음?�로 버튼(btn-back-mode) 가?�성 강화 */
 body.premium-mode .btn-back-mode {
     background: #fff;
     color: #8b6b10;
@@ -3183,7 +3125,7 @@ body.premium-mode .btn-back-mode:hover {
     transform: translateY(-2px);
 }
 
-/* 기타 결과 모달의 주의사항 문구(restart-caution) 가독성 */
+/* 기�? 결과 모달??주의?�항 문구(restart-caution) 가?�성 */
 .restart-caution {
     color: rgba(255, 255, 255, 0.4);
     font-size: 0.8rem;
@@ -3196,7 +3138,7 @@ body.premium-mode .restart-caution {
 }
 
 /* ============================================================ */
-/* 주식 타로 리딩 전용 스타일 (Stock Tarot Reading) */
+/* 주식 ?��?리딩 ?�용 ?��???(Stock Tarot Reading) */
 /* ============================================================ */
 
 .stock-result-area {
@@ -3272,7 +3214,7 @@ body.premium-mode .stock-disclaimer {
     word-break: keep-all;
 }
 
-/* 1. 시장 에너지 - 배지 */
+/* 1. ?�장 ?�너지 - 배�? */
 .stock-badge {
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
@@ -3287,7 +3229,7 @@ body.premium-mode .stock-disclaimer {
 .stock-badge.yellow { background: linear-gradient(135deg, #ffab00, #ffd600); color: #333; }
 .stock-badge.gray { background: linear-gradient(135deg, #607d8b, #455a64); }
 
-/* 2. 종목 에너지 - 온도계 */
+/* 2. 종목 ?�너지 - ?�도�?*/
 .stock-temp-label {
     font-family: 'Cinzel', serif;
     font-size: 1.2rem;
@@ -3306,13 +3248,13 @@ body.premium-mode .stock-disclaimer {
 
 .thermometer-bar {
     height: 100%;
-    width: 0%; /* JS에서 동적 변경 */
+    width: 0%; /* JS?�서 ?�적 변�?*/
     background: linear-gradient(to right, #2979ff, #ffea00, #ff1744);
     border-radius: 10px;
     transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* 3. 투자자 심리 - 게이지 & 액션 */
+/* 3. ?�자???�리 - 게이지 & ?�션 */
 .stock-action-badge {
     padding: 0.4rem 1rem;
     border-radius: 4px;
@@ -3341,14 +3283,14 @@ body.premium-mode .stock-disclaimer {
 .gauge-bar {
     position: absolute;
     height: 100%;
-    left: 40%; width: 20%; /* JS에서 min/max 적용 */
+    left: 40%; width: 20%; /* JS?�서 min/max ?�용 */
     background: var(--gold);
     box-shadow: 0 0 10px var(--gold);
     border-radius: 5px;
     transition: all 1.5s ease-out;
 }
 
-/* 최종 결론 영역 */
+/* 최종 결론 ?�역 */
 .stock-final-verdict {
     display: flex;
     flex-direction: column;
@@ -3363,7 +3305,7 @@ body.premium-mode .stock-disclaimer {
 }
 
 .verdict-image-wrapper {
-    width: 225px; /* 1.5배 확대 조정 */
+    width: 225px; /* 1.5�??��? 조정 */
     height: 225px;
     margin-bottom: 1.5rem;
     border-radius: 50%;
@@ -3397,7 +3339,7 @@ body.premium-mode .stock-disclaimer {
     line-height: 1.6;
 }
 
-/* 액션별 전용 클래스 */
+/* ?�션�??�용 ?�래??*/
 .verdict-strong_buy .stock-verdict-main { color: #00e676; text-shadow: 0 0 20px rgba(0, 230, 118, 0.6); }
 .verdict-buy .stock-verdict-main { color: #00c853; text-shadow: 0 0 15px rgba(0, 200, 83, 0.4); }
 .verdict-strong_sell .stock-verdict-main { color: #ff1744; text-shadow: 0 0 20px rgba(255, 23, 68, 0.6); }
@@ -3405,7 +3347,7 @@ body.premium-mode .stock-disclaimer {
 .verdict-hold .stock-verdict-main { color: #2979ff; text-shadow: 0 0 15px rgba(41, 121, 255, 0.4); }
 .verdict-wait .stock-verdict-main { color: #ffab00; text-shadow: 0 0 15px rgba(255, 171, 0, 0.4); }
 
-/* 모달 아우라 효과 클래스 */
+/* 모달 ?�우???�과 ?�래??*/
 .glow-strong_buy { box-shadow: 0 0 80px rgba(0, 230, 118, 0.2) !important; border-color: rgba(0, 230, 118, 0.4) !important; }
 .glow-buy { box-shadow: 0 0 60px rgba(0, 200, 83, 0.15) !important; border-color: rgba(0, 200, 83, 0.3) !important; }
 .glow-strong_sell { box-shadow: 0 0 80px rgba(255, 23, 68, 0.2) !important; border-color: rgba(255, 23, 68, 0.4) !important; }
