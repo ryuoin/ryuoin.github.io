@@ -587,6 +587,18 @@ function showWeeklyResult() {
     const modalTitle = modal.querySelector('.modal-title');
     if (modalTitle) modalTitle.textContent = '당신의 이번주 운세';
 
+    // 주식 전용 UI 숨김 및 일반 텍스트 박스 표시 (UI 간섭 방지)
+    const stockView = document.getElementById('stock-result-view');
+    if (stockView) stockView.classList.add('hidden');
+    const combinedBox = document.querySelector('.combined-desc-box');
+    if (combinedBox) combinedBox.style.display = 'block';
+
+    // 주식 전용 글로우 효과 제거
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
+    }
+
     const pastId = selectedCards[0], presentId = selectedCards[1], futureId = selectedCards[2];
     const pastData = tarotDataList.find(item => item.id === pastId);
     const presentData = tarotDataList.find(item => item.id === presentId);
@@ -794,6 +806,19 @@ function restartGame() {
     selectedCards = [];
     currentMode = null;
     if (typeof lottoInterval !== 'undefined' && lottoInterval) clearInterval(lottoInterval);
+
+    // 주식 전용 UI 및 글로우 효과 초기화
+    const stockView = document.getElementById('stock-result-view');
+    if (stockView) stockView.classList.add('hidden');
+    const resultModal = document.getElementById('result-modal');
+    if (resultModal) {
+        const modalContent = resultModal.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
+        }
+    }
+    const combinedBox = document.querySelector('.combined-desc-box');
+    if (combinedBox) combinedBox.style.display = 'block';
 
     // 카드 컨테이너 복구
     document.getElementById('card-container').classList.remove('hidden');
