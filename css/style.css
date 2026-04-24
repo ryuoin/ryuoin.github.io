@@ -1178,13 +1178,12 @@ body.premium-mode .modal-title {
 }
 
 .lotto-balls-spinner.spinning {
-    animation: spinCylinder 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    animation: slowDrift 8s linear infinite;
 }
 
-@keyframes spinCylinder {
-    0% { transform: rotateZ(0deg) rotateX(10deg); }
-    50% { transform: rotateZ(180deg) rotateX(20deg); }
-    100% { transform: rotateZ(360deg) rotateX(10deg); }
+@keyframes slowDrift {
+    from { transform: rotateZ(0deg); }
+    to { transform: rotateZ(360deg); }
 }
 
 /* 개별 공 스타일 (원통 안에서 흩뿌려진 공들) */
@@ -1193,13 +1192,21 @@ body.premium-mode .modal-title {
     height: 30px;
     font-size: 0.8rem;
     box-shadow: 0 0 10px currentColor, inset 0 0 5px rgba(255,255,255,0.5);
-    opacity: 0.7;
-    animation: jitter 0.2s infinite alternate;
+    opacity: 0.8;
+    transition: all 0.3s ease;
 }
 
-@keyframes jitter {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(3px, -3px) scale(1.1); }
+/* 실행 시 각 공들이 개별적으로 튀어 오르는 효과 */
+.lotto-balls-spinner.spinning .lotto-ball {
+    animation: ballChaos var(--dur, 1s) infinite alternate ease-in-out;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes ballChaos {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33% { transform: translate(var(--tx1), var(--ty1)) rotate(120deg) scale(1.1); }
+    66% { transform: translate(var(--tx2), var(--ty2)) rotate(240deg) scale(0.9); }
+    100% { transform: translate(var(--tx3), var(--ty3)) rotate(360deg) scale(1); }
 }
 
 .lotto-dispenser {
