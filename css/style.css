@@ -2698,8 +2698,23 @@ body.premium-mode .action-btn.active {
 body.premium-mode .premium-label,
 body.premium-mode .viz-title,
 body.premium-mode .recap-pos-label,
-body.premium-mode .recap-title {
+body.premium-mode .recap-title,
+body.premium-mode .love-advice-label,
+body.premium-mode .money-advice-label,
+body.premium-mode .yesno-advice-label,
+body.premium-mode .daily-advice-label {
     color: #8b5e5e !important;
+}
+
+/* 프리미엄 모드 결론 및 하단 텍스트 가독성 보호 (노란색 계열 제거) */
+body.premium-mode .conclusion-text,
+body.premium-mode .love-conclusion-text,
+body.premium-mode .money-conclusion-text,
+body.premium-mode .yesno-conclusion-text,
+body.premium-mode .daily-conclusion-text,
+body.premium-mode .lotto-conclusion-text {
+    color: #a67c52 !important; /* 가독성 높은 차분한 로즈 골드/브라운 */
+    text-shadow: none !important;
 }
 
 body.premium-mode .premium-text-glow {
