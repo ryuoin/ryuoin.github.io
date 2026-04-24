@@ -298,76 +298,70 @@ function startYesNoRitual() {
 // ========== 통합 스프레드 UI (모든 모드 공통) ==========
 function initSpread(mode) {
     const container = document.getElementById('daily-spread-container');
+    if (!container) return;
     container.innerHTML = '';
     
-    // 프리미엄 상태에 따라 클래스 토글 (프리미엄 전용 뒷면 이미지 적용을 위함)
+    // 프리미엄 상태에 따라 테마 적용
     if (isPremium()) {
         document.body.classList.add('premium-mode');
     } else {
         document.body.classList.remove('premium-mode');
     }
 
+    // 4가지 스프레드 패턴 중 랜덤 선택하여 컨테이너에 부여
+    const patterns = ['pattern-grid', 'pattern-arc', 'pattern-wave', 'pattern-fan'];
+    const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    patterns.forEach(p => container.classList.remove(p));
+    container.classList.add(selectedPattern);
+
     const deckAll = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deckAll);
 
-    const row1 = deckAll.slice(0, 11);
-    const row2 = deckAll.slice(11, 22);
+    // 22장의 카드를 행(row) 구분 없이 직접 컨테이너에 배치
+    deckAll.forEach((cardId, index) => {
+        const card = document.createElement('div');
+        card.className = 'daily-spread-card';
+        card.dataset.id = cardId;
+        card.style.setProperty('--i', index); // CSS 배치를 위한 인덱스 변수
 
-    [row1, row2].forEach((rowCards, rowIdx) => {
-        const rowEl = document.createElement('div');
-        rowEl.className = 'daily-spread-row';
+        const cover = document.createElement('div');
+        cover.className = 'daily-spread-cover';
+        const num = document.createElement('span');
+        num.className = 'daily-spread-num';
+        num.textContent = index + 1;
+        cover.appendChild(num);
+        card.appendChild(cover);
 
-        rowCards.forEach((cardId, i) => {
-            const card = document.createElement('div');
-            card.className = 'daily-spread-card';
-            card.dataset.id = cardId;
-
-            const cover = document.createElement('div');
-            cover.className = 'daily-spread-cover';
-            const num = document.createElement('span');
-            num.className = 'daily-spread-num';
-            num.textContent = rowIdx * 11 + i + 1;
-            cover.appendChild(num);
-            card.appendChild(cover);
-
-            card.addEventListener('mouseenter', () => {
-                if (!card.classList.contains('selected') && !card.classList.contains('disabled')) {
-                    card.classList.add('hovered');
-                }
-            });
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('hovered');
-            });
-            card.addEventListener('touchstart', () => {
-                if (!card.classList.contains('disabled')) card.classList.add('hovered');
-            }, {passive: true});
-            card.addEventListener('touchend', () => {
-                card.classList.remove('hovered');
-            }, {passive: true});
-
-            card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
-            rowEl.appendChild(card);
-
-            // 카드 딜링 애니메이션: deal-init(중앙 스택) → deal-animate(부채꼴)
-            // rAF 이중 중첩으로 브라우저가 초기 상태를 먼저 페인트한 뒤 트랜지션 시작
-            const baseDelay = rowIdx * 600; // 두 번째 줄은 첫 줄 끝난 뒤 시작
-            const cardDelay = baseDelay + (i * 45); // 카드마다 45ms 간격
-
-            // 즉시 deal-init 클래스 추가 (DOM 삽입 직후 opacity:0, 중앙 위치)
-            card.classList.add('deal-init');
-
-            setTimeout(() => {
-                // rAF 두 번 중첩: 첫 번째 rAF에서 레이아웃 계산, 두 번째 rAF에서 클래스 교체
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        card.classList.remove('deal-init');
-                        card.classList.add('deal-animate');
-                    });
-                });
-            }, cardDelay);
+        // 이벤트 리스너 설정
+        card.addEventListener('mouseenter', () => {
+            if (!card.classList.contains('selected') && !card.classList.contains('disabled')) {
+                card.classList.add('hovered');
+            }
         });
+        card.addEventListener('mouseleave', () => {
+            card.classList.remove('hovered');
+        });
+        card.addEventListener('touchstart', () => {
+            if (!card.classList.contains('disabled')) card.classList.add('hovered');
+        }, {passive: true});
+        card.addEventListener('touchend', () => {
+            card.classList.remove('hovered');
+        }, {passive: true});
 
-        container.appendChild(rowEl);
+        card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
+        
+        container.appendChild(card);
+
+        // 딜링 애니메이션 로직
+        card.classList.add('deal-init');
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    card.classList.remove('deal-init');
+                    card.classList.add('deal-animate');
+                });
+            });
+        }, index * 40);
     });
 }
 
