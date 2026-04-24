@@ -3296,8 +3296,8 @@ body.premium-mode .stock-disclaimer {
 }
 
 .verdict-image-wrapper {
-    width: 150px; /* 사용자 피드백 반영: 컴팩트한 크기 */
-    height: 150px;
+    width: 225px; /* 1.5배 확대 조정 */
+    height: 225px;
     margin-bottom: 1.5rem;
     border-radius: 50%;
     overflow: hidden;
