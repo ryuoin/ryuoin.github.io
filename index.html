@@ -154,7 +154,7 @@
 
                 <!-- 주식 타로 전용 상세 리딩 구역 (Stock Mode 전용) -->
                 <div id="stock-result-view" class="stock-result-area hidden">
-                    <div class="stock-disclaimer">
+                    <div class="stock-disclaimer important-disclaimer">
                         ⚠️ 본 타로 리딩은 투자 조언이 아닙니다. 결과는 심리적 참고 도구이며, 모든 투자 결정과 책임은 본인에게 있습니다.
                     </div>
 
@@ -456,6 +456,17 @@
                     <svg class="countdown-svg"><circle class="countdown-circle" id="thinking-circle" cx="60" cy="60" r="54"></circle></svg>
                     <div id="countdown-number">3</div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 주식 타로 집중 의식 모달 ========== -->
+    <div id="stock-ritual-modal" class="modal-overlay" style="z-index: 150;">
+        <div class="thinking-panel glass-panel">
+            <h2 class="modal-title">어떤 종목인가요?</h2>
+            <div class="countdown-container">
+                <svg class="countdown-svg"><circle class="countdown-circle" id="stock-circle" cx="60" cy="60" r="54"></circle></svg>
+                <div id="stock-countdown-number">3</div>
             </div>
         </div>
     </div>
