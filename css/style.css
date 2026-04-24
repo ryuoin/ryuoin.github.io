@@ -1,4 +1,4 @@
-/* 기본 ?�정 */
+/* 기본 설정 */
 :root {
     --bg-dark: #0a0514;
     --gold: #d4af37;
@@ -8,30 +8,30 @@
     --purple-deep: #1e0b2e;
     --purple-glow: rgba(147, 51, 234, 0.4);
     
-    /* ?�애???�급�??�상 */
-    --love-1: #00e676; /* ?�주 좋다 */
+    /* 연애운 등급별 색상 */
+    --love-1: #00e676; /* 매우 좋다 */
     --love-2: #42a5f5; /* 좋다 */
     --love-3: #fdd835; /* 보통 */
-    --love-4: #ff9800; /* ?�쁘??*/
-    --love-5: #ef5350; /* ?�주 ?�쁘??*/
+    --love-4: #ff9800; /* 나쁘다 */
+    --love-5: #ef5350; /* 매우 나쁘다 */
 
-    /* 금전???�급�??�상 (골드/?�버 ?�마) */
-    --money-1: #ffea00; /* ?�주 좋다 */
+    /* 금전운 등급별 색상 (골드/실버 테마) */
+    --money-1: #ffea00; /* 매우 좋다 */
     --money-2: #ffd600; /* 좋다 */
     --money-3: #ffc400; /* 보통 */
     --money-4: #ffab00; /* 주의 */
-    --money-5: #ff9100; /* ?�험 */
+    --money-5: #ff9100; /* 위험 */
 
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* ?�리미엄 모드 (?�이보리/?�이???�마) ?�역 변??*/
+/* 프리미엄 모드 (아이보리/화이트 테마) 전역 변수 */
 body.premium-mode {
-    --bg-dark: #fbf9f4; /* ?�이보리 베이??*/
-    --gold: #c5a028;    /* 조금 ??진한 골드 ?�인??*/
-    --gold-light: #8b6b10; /* ?�크 골드 (?�스?�용) */
-    --text-main: #3d3b38;  /* ?�크 그레???�스??*/
-    --purple-deep: #ffffff; /* ?�백??*/
+    --bg-dark: #fbf9f4; /* 아이보리 베이스 */
+    --gold: #c5a028;    /* 조금 더 진한 골드 포인트 */
+    --gold-light: #8b6b10; /* 다크 골드 (텍스트용) */
+    --text-main: #3d3b38;  /* 다크 그레이 텍스트 */
+    --purple-deep: #ffffff; /* 순백색 */
     --purple-glow: rgba(197, 160, 40, 0.15);
 }
 
@@ -46,18 +46,20 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
-    overscroll-behavior-y: none; /* ?�드로이???�겨???�로고침 방�? �??�면 깜빡???�림 개선 */
-    -webkit-tap-highlight-color: transparent; /* 모바???�치 ???��????�두�?깜빡???�거 */
+    overscroll-behavior-y: none; /* 안드로이드 당겨서 새로고침 방지 및 화면 깜빡임 개선 */
+    -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 발생하는 테두리 깜빡임 제거 */
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-/* ?�스???�트 지??*/
+}
+
+/* 텍스트 폰트 지정 */
 h1, h2, .cinzel { font-family: 'Cinzel', serif; }
 h3, .hahmlet { font-family: 'Hahmlet', serif; }
 
-/* ?�비로운 ?�주/�?배경 ?�니메이??*/
+/* 신비로운 우주/별 배경 애니메이션 */
 .stars, .twinkling {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -68,15 +70,15 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 .stars {
     background: #000 url('https://www.transparenttextures.com/patterns/stardust.png') repeat top center;
     z-index: -2;
-    transform: translateZ(0); /* GPU 가???�성?�로 깜빡??방�? */
+    transform: translateZ(0); /* GPU 가속 활성화로 깜빡임 방지 */
 }
 .twinkling {
     background: transparent url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png') repeat top center;
     z-index: -1;
     animation: move-twink-back 200s linear infinite;
     opacity: 0.3;
-    will-change: background-position; /* ?�더�??�능 최적??*/
-    transform: translateZ(0); /* GPU 가??강제 ?�성??방�? 깜빡??개선 */
+    will-change: background-position; /* 렌더링 성능 최적화 */
+    transform: translateZ(0); /* GPU 가속 강제 활성화로 깜빡임 개선 */
 }
 
 @keyframes move-twink-back {
@@ -84,7 +86,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     to {background-position: -10000px 5000px;}
 }
 
-/* ?�리미엄 ?�?�??빛의 ?�라 ?�과 */
+/* 프리미엄 배경: 빛의 아우라 효과 */
 .premium-aura {
     display: none;
     position: fixed;
@@ -130,7 +132,7 @@ body.premium-mode .twinkling {
 }
 
 /* =============================================
-   모드 ?�택 ?�면
+   모드 선택 화면
    ============================================= */
 .mode-select-screen {
     display: flex;
@@ -175,65 +177,7 @@ body.premium-mode .twinkling {
     margin-bottom: 1.5rem;
 }
 
-.test-toggle-container {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.test-premium-btn {
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    background: rgba(0, 0, 0, 0.3);
-    color: #bbb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.test-premium-btn:hover {
-    background: rgba(212, 175, 55, 0.1);
-    color: #fff;
-    border-color: var(--gold);
-}
-
-body.premium-mode .test-premium-btn {
-    background: rgba(255, 255, 255, 0.8);
-    color: #888;
-    border-color: rgba(197, 160, 40, 0.3);
-}
-
-body.premium-mode .test-premium-btn:hover {
-    background: #fff;
-    color: var(--gold-light);
-    border-color: var(--gold);
-}
-
-.mode-divider {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    margin: 1.5rem auto 2rem;
-    opacity: 0.6;
-}
-
-
-.mode-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-
-@media (max-width: 480px) {
-    .mode-buttons {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* 마�?�?버튼???�자 ?�을 경우 중앙 배치 (PC/?�블�? */
+/* 마지막 버튼이 혼자 있을 경우 중앙 배치 (PC/태블릿) */
 @media (min-width: 481px) {
     .mode-buttons .mode-btn:last-child:nth-child(odd) {
         grid-column: 1 / span 2;
@@ -256,111 +200,7 @@ body.premium-mode .test-premium-btn:hover {
     overflow: hidden;
 }
 
-.mode-btn::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
-    transition: left 0.6s ease;
-}
-
-.mode-btn:hover::before {
-    left: 100%;
-}
-
-.mode-btn:hover {
-    border-color: var(--gold);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2), 0 0 15px var(--purple-glow);
-}
-
-.mode-btn-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.15rem;
-}
-
-.mode-btn-title {
-    font-family: 'Hahmlet', serif;
-    color: var(--gold-light);
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.04rem;
-}
-
-.mode-btn-desc {
-    color: #999;
-    font-size: 0.78rem;
-    letter-spacing: 0.01rem;
-}
-
-/* =============================================
-   카드 ?�택 ?�면
-   ============================================= */
-.reading-screen {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.reading-screen.hidden {
-    display: none;
-}
-
-/* ?�더 ?�역 */
-.app-header {
-    text-align: center;
-    padding: 2rem 1rem 1rem;
-}
-
-.app-header h1 {
-    color: var(--gold);
-    font-size: 2.5rem;
-    letter-spacing: 0.2rem;
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-    margin-bottom: 0.5rem;
-}
-
-.app-header p {
-    font-size: 1rem;
-    color: #b3b3b3;
-    margin-bottom: 1rem;
-}
-
-.status-bar {
-    display: inline-flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 0.5rem 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 20px;
-    font-weight: bold;
-    color: var(--gold-light);
-    box-shadow: 0 0 10px var(--purple-glow);
-}
-
-.btn-back-mode {
-    background: transparent;
-    color: #ffd700;
-    border: 1px solid rgba(255, 215, 0, 0.5);
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-family: 'Hahmlet', serif;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-back-mode:hover {
-    background: rgba(255, 215, 0, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
-}
-
-/* 카드 컨테?�너 */
+/* 카드 컨테이너 */
 .app-main {
     flex: 1;
     display: flex;
@@ -417,21 +257,8 @@ body.premium-mode .test-premium-btn:hover {
 }
 .card-container.pattern-grid {
     display: grid;
-    /* 기존 ?��????�용 */
+    /* 기존 스타일 활용 */
 }
-
-/* 개별 카드 객체 (3D Flip ?�용) */
-.tarot-card {
-    background-color: transparent;
-    aspect-ratio: 1 / 1.6;
-    perspective: 1000px;
-    cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.tarot-card:hover {
-    transform: translateY(-5px);
-    filter: drop-shadow(0 5px 15px var(--gold));
 }
 
 .tarot-card.disabled {
@@ -452,7 +279,7 @@ body.premium-mode .test-premium-btn:hover {
     transform: rotateY(180deg);
 }
 
-/* 카드???�뒷�?공통 */
+/* 카드의 앞뒷면 공통 */
 .card-cover, .card-reveal {
     position: absolute;
     width: 100%;
@@ -465,7 +292,7 @@ body.premium-mode .test-premium-btn:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
 
-/* 카드 ??�� (?�면 무늬) */
+/* 카드 덮개 (뒷면 무늬) */
 .card-cover {
     background-image: url('../images/card-back.png');
     background-size: cover;
@@ -479,7 +306,7 @@ body.premium-mode .test-premium-btn:hover {
     content: "";
 }
 
-/* 카드 공개�?(?��??��?지) */
+/* 카드 공개면 (타로 이미지) */
 .card-reveal {
     background-color: #fcebd5;
     color: #333;
@@ -496,7 +323,7 @@ body.premium-mode .test-premium-btn:hover {
     object-fit: cover;
 }
 
-/* SF ?�로그???�임 ?�벨 */
+/* SF 홀로그램 네임 라벨 */
 .card-name-label {
     position: absolute;
     bottom: 0;
@@ -517,7 +344,7 @@ body.premium-mode .test-premium-btn:hover {
     box-sizing: border-box;
 }
 
-/* ?��?지 로드 ?�패 ???��??�는 Fallback UI */
+/* 이미지 로드 실패 시 나타나는 Fallback UI */
 .fallback-title {
     font-family: 'Hahmlet', serif;
     font-weight: bold;
@@ -529,7 +356,7 @@ body.premium-mode .test-premium-btn:hover {
 }
 
 /* =============================================
-   모달 공통 ?��???(Glassmorphism)
+   모달 공통 스타일 (Glassmorphism)
    ============================================= */
 .modal-overlay {
     position: fixed;
@@ -546,7 +373,7 @@ body.premium-mode .test-premium-btn:hover {
     pointer-events: none;
     transition: opacity 0.5s ease;
     overflow-y: auto;
-    transform: translateZ(0); /* 깜빡???�화 */
+    transform: translateZ(0); /* 깜빡임 완화 */
 }
 
 .modal-overlay.active {
@@ -565,22 +392,10 @@ body.premium-mode .test-premium-btn:hover {
     width: 100%;
     max-width: 900px;
     text-align: center;
-    transform: translateY(20px) translateZ(0); /* 깜빡???�화�??�해 Z�?가??추�? */
+    transform: translateY(20px) translateZ(0); /* 깜빡임 완화를 위해 Z축 가속 추가 */
     will-change: transform, opacity;
     transition: transform 0.5s ease;
     margin: auto;
-}
-
-body.premium-mode .glass-panel {
-    background: rgba(255, 255, 255, 0.88);
-    border-color: rgba(197, 160, 40, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* ?�두???�마보다 부?�러??그림??*/
-    color: var(--text-main);
-}
-
-body.premium-mode .modal-title {
-    color: var(--gold-light);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .modal-overlay.active .glass-panel {
@@ -595,7 +410,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   ?�번�??�세 결과 모달
+   이번주 운세 결과 모달
    ============================================= */
 .reading-container {
     display: flex;
@@ -700,8 +515,8 @@ body.premium-mode .modal-title {
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     border: 1px solid var(--gold);
-    transform: translateZ(0); /* ?��?지 ?�더�?깜빡??방�? */
-    backface-visibility: hidden; /* ?��?지 ?�더�?깜빡??방�? */
+    transform: translateZ(0); /* 이미지 렌더링 깜빡임 방지 */
+    backface-visibility: hidden; /* 이미지 렌더링 깜빡임 방지 */
     -webkit-backface-visibility: hidden;
 }
 
@@ -740,7 +555,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   ?�애??결과 모달
+   연애운 결과 모달
    ============================================= */
 .love-modal-title {
     font-family: 'Hahmlet', serif;
@@ -754,7 +569,7 @@ body.premium-mode .modal-title {
     margin-bottom: 2rem;
 }
 
-/* ?�애???�급 배�? */
+/* 연애운 등급 배지 */
 .love-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -800,7 +615,7 @@ body.premium-mode .modal-title {
     border-color: var(--love-5);
 }
 
-/* ?�애??카드 (?�게) */
+/* 연애운 카드 (크게) */
 .love-card-large {
     width: 200px;
     height: 320px;
@@ -811,7 +626,7 @@ body.premium-mode .modal-title {
     justify-content: center;
 }
 
-/* ?�애 ?�석 박스 */
+/* 연애 해석 박스 */
 .love-desc-box {
     background: rgba(0, 0, 0, 0.4);
     padding: 1.8rem;
@@ -855,13 +670,16 @@ body.premium-mode .modal-title {
 
 .love-advice {
     color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-style: italic;
 }
 
 .love-period-notice {
     margin-top: 0.9rem;
     font-size: 0.82rem;
     color: rgba(212, 175, 55, 0.6);
-    font-style: normal;
+    font-style: italic;
     letter-spacing: 0.02rem;
     text-align: center;
 }
@@ -897,14 +715,14 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   ?�틸리티
+   유틸리티
    ============================================= */
 .hidden {
     display: none !important;
 }
 
 /* =============================================
-   모바??반응??(?�?��? ??�??�시)
+   모바일 반응형 (타이틀 한 줄 표시)
    ============================================= */
 @media (max-width: 480px) {
     .mode-title {
@@ -927,7 +745,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   금전??결과 모달
+   금전운 결과 모달
    ============================================= */
 .money-modal-title {
     font-family: 'Hahmlet', serif;
@@ -941,7 +759,7 @@ body.premium-mode .modal-title {
     margin-bottom: 2rem;
 }
 
-/* 금전???�급 배�? */
+/* 금전운 등급 배지 */
 .money-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -967,7 +785,7 @@ body.premium-mode .modal-title {
 .money-rating-badge.rating-4 { background: rgba(255, 171, 0, 0.15); color: var(--money-4); border-color: var(--money-4); }
 .money-rating-badge.rating-5 { background: rgba(255, 145, 0, 0.15); color: var(--money-5); border-color: var(--money-5); }
 
-/* 금전??카드 (?�게) */
+/* 금전운 카드 (크게) */
 .money-card-large {
     width: 200px;
     height: 320px;
@@ -979,7 +797,7 @@ body.premium-mode .modal-title {
     justify-content: center;
 }
 
-/* 금전 ?�석 박스 */
+/* 금전 해석 박스 */
 .money-desc-box {
     background: rgba(0, 0, 0, 0.4);
     padding: 1.8rem;
@@ -1023,6 +841,9 @@ body.premium-mode .modal-title {
 
 .money-advice {
     color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-style: italic;
 }
 
 .money-conclusion-text {
@@ -1142,6 +963,8 @@ body.premium-mode .modal-title {
 
 .yesno-advice {
     color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.7;
 }
 
 .yesno-conclusion-text {
@@ -1154,7 +977,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   로또 결과 모달 �??�통 ?�니메이??(SF ?�마)
+   로또 결과 모달 및 원통 애니메이션 (SF 테마)
    ============================================= */
 .lotto-panel {
     max-width: 800px;
@@ -1173,7 +996,7 @@ body.premium-mode .modal-title {
     gap: 2rem;
 }
 
-/* ?�통 머신 */
+/* 원통 머신 */
 .lotto-machine {
     position: relative;
     width: 250px;
@@ -1214,35 +1037,28 @@ body.premium-mode .modal-title {
 }
 
 .lotto-balls-spinner.spinning {
-    animation: slowDrift 8s linear infinite;
+    animation: spinCylinder 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 }
 
-@keyframes slowDrift {
-    from { transform: rotateZ(0deg); }
-    to { transform: rotateZ(360deg); }
+@keyframes spinCylinder {
+    0% { transform: rotateZ(0deg) rotateX(10deg); }
+    50% { transform: rotateZ(180deg) rotateX(20deg); }
+    100% { transform: rotateZ(360deg) rotateX(10deg); }
 }
 
-/* 개별 �??��???(?�통 ?�에???�뿌?�진 공들) */
+/* 개별 공 스타일 (원통 안에서 흩뿌려진 공들) */
 .lotto-balls-spinner .lotto-ball {
     width: 30px;
     height: 30px;
     font-size: 0.8rem;
     box-shadow: 0 0 10px currentColor, inset 0 0 5px rgba(255,255,255,0.5);
-    opacity: 0.8;
-    transition: all 0.3s ease;
+    opacity: 0.7;
+    animation: jitter 0.2s infinite alternate;
 }
 
-/* ?�행 ??�?공들??개별?�으�??�???�르???�과 */
-.lotto-balls-spinner.spinning .lotto-ball {
-    animation: ballChaos var(--dur, 1s) infinite alternate ease-in-out;
-    animation-delay: var(--delay, 0s);
-}
-
-@keyframes ballChaos {
-    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-    33% { transform: translate(var(--tx1), var(--ty1)) rotate(120deg) scale(1.1); }
-    66% { transform: translate(var(--tx2), var(--ty2)) rotate(240deg) scale(0.9); }
-    100% { transform: translate(var(--tx3), var(--ty3)) rotate(360deg) scale(1); }
+@keyframes jitter {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(3px, -3px) scale(1.1); }
 }
 
 .lotto-dispenser {
@@ -1259,7 +1075,7 @@ body.premium-mode .modal-title {
     z-index: 5;
 }
 
-/* 추출 결과 컨테?�너 */
+/* 추출 결과 컨테이너 */
 .lotto-draw-results {
     display: flex;
     justify-content: center;
@@ -1269,7 +1085,7 @@ body.premium-mode .modal-title {
     padding: 10px;
 }
 
-/* 범용 ?�치 �??��???(SF ?�로그??�? */
+/* 범용 위치 공 스타일 (SF 홀로그램 룩) */
 .lotto-ball {
     display: flex;
     justify-content: center;
@@ -1287,14 +1103,14 @@ body.premium-mode .modal-title {
     box-shadow: 0 0 15px currentColor, inset 0 0 10px rgba(255,255,255,0.3);
 }
 
-/* �??�상 그룹 (10?�위) - ?�온 ?�과 가�?*/
+/* 공 색상 그룹 (10단위) - 네온 효과 가미 */
 .num-group-0 { color: #f1c40f; } /* 1~10: Yellow */
 .num-group-1 { color: #3498db; } /* 11~20: Blue */
 .num-group-2 { color: #e74c3c; } /* 21~30: Red */
 .num-group-3 { color: #aaaaaa; } /* 31~40: Gray/White */
 .num-group-4 { color: #2ecc71; } /* 41~45: Green */
 
-/* 추출?�어 ?��????????�니메이??*/
+/* 추출되어 나타날 때 팝 애니메이션 */
 .pop-out {
     animation: ballPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transform: scale(0);
@@ -1354,7 +1170,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   ?�늘??카드 ?�별 버튼 (메인 ?�면 최상??
+   오늘의 카드 특별 버튼 (메인 화면 최상단)
    ============================================= */
 .daily-btn-special {
     display: flex;
@@ -1453,44 +1269,90 @@ body.premium-mode .modal-title {
 
 
 /* =============================================
-   ?�늘??카드 ??카드 ?�택 ?�면 ?�프?�드 UI
-   (2�? �?�?11?�이 겹쳐??부채꼴처럼 보임)
+   오늘의 카드 — 카드 선택 화면 스프레드 UI
+   (2줄; 각 줄 11장이 겹쳐서 부채꼴처럼 보임)
    ============================================= */
 .daily-spread-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
     width: 100%;
-    max-width: 1000px;
-    min-height: 400px;
+    max-width: 700px;
     margin: 0 auto;
-    padding: 2rem 1rem 4rem;
+    padding: 1rem 1rem 3rem;
+}
+
+.daily-spread-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    width: 100%;
+    height: 140px;
 }
 
 .daily-spread-card {
-    position: relative;
+    position: absolute;
     width: 70px;
     height: 112px;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, filter 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease, box-shadow 0.3s ease;
     transform-origin: bottom center;
     will-change: transform;
-    z-index: 1;
 }
 
-/* 호버/선택 효과 */
+/* 11장을 부채꼴로 배치 — nth-child 위치 계산 */
+.daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 325px); transform: rotate(-20deg); }
+.daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 275px); transform: rotate(-16deg); }
+.daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 225px); transform: rotate(-12deg); }
+.daily-spread-row .daily-spread-card:nth-child(4)  { left: calc(50% - 175px); transform: rotate(-8deg); }
+.daily-spread-row .daily-spread-card:nth-child(5)  { left: calc(50% - 125px); transform: rotate(-4deg); }
+.daily-spread-row .daily-spread-card:nth-child(6)  { left: calc(50% - 35px);  transform: rotate(0deg); }
+.daily-spread-row .daily-spread-card:nth-child(7)  { left: calc(50% + 15px);  transform: rotate(4deg); }
+.daily-spread-row .daily-spread-card:nth-child(8)  { left: calc(50% + 65px);  transform: rotate(8deg); }
+.daily-spread-row .daily-spread-card:nth-child(9)  { left: calc(50% + 115px); transform: rotate(12deg); }
+.daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 165px); transform: rotate(16deg); }
+.daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 215px); transform: rotate(20deg); }
+
+/* 호버시 카드가 위로 쏙 올라오는 효과 */
 .daily-spread-card.hovered {
-.daily-spread-card.hovered {
+    transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
+    filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
+    z-index: 50 !important;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+.daily-spread-card.selected {
+    transform: translateY(-40px) rotate(0deg) scale(1.15) !important;
+    filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
+    z-index: 60 !important;
+    cursor: default;
+}
+
+/* 이번주 운세에서 여러 장 선택 중일 때 — 이미 선택된 카드 표시 */
+.daily-spread-card.selected .daily-spread-cover {
+    border-color: var(--gold);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.7), inset 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.daily-spread-card.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.daily-spread-card.flipping {
+    animation: cardFlip 0.8s ease forwards;
+}
+
 @keyframes cardFlip {
     0% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
     50% { transform: translateY(-50px) rotateY(90deg) scale(1.2); }
     100% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
 }
 
-/* 카드 ??�� (?�면) */
+/* 카드 덮개 (뒷면) */
 .daily-spread-cover {
     width: 100%;
     height: 100%;
@@ -1531,7 +1393,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   ?�늘??카드 결과 모달
+   오늘의 카드 결과 모달
    ============================================= */
 .daily-modal-title {
     font-family: 'Hahmlet', serif;
@@ -1549,7 +1411,7 @@ body.premium-mode .modal-title {
     margin-bottom: 2rem;
 }
 
-/* ?�늘??카드 ?�급 배�? */
+/* 오늘의 카드 등급 배지 */
 .daily-rating-badge {
     display: inline-flex;
     align-items: center;
@@ -1621,6 +1483,9 @@ body.premium-mode .modal-title {
 
 .daily-advice {
     color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-style: italic;
 }
 
 .daily-conclusion-text {
@@ -1633,7 +1498,7 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   ?�리미엄 ?�세 ?�석 ?�션
+   프리미엄 상세 해석 섹션
    ============================================= */
 .premium-section {
     width: 100%;
@@ -1729,6 +1594,9 @@ body.premium-mode .modal-title {
     padding: 0.8rem 1rem;
     border-radius: 0 8px 8px 0;
     color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    font-style: italic;
 }
 
 .premium-sub-section {
@@ -1742,7 +1610,7 @@ body.premium-mode .modal-title {
 .premium-sub-section:last-child { border-bottom: none; }
 
 /* =============================================
-   광고 ?�업 ?�널
+   광고 팝업 패널
    ============================================= */
 .ad-panel {
     max-width: 360px;
@@ -1778,7 +1646,7 @@ body.premium-mode .modal-title {
 .ad-placeholder-text { color: #666; font-size: 0.85rem; }
 
 /* =============================================
-   ?�리미엄 ?�내 ?�업 ?�널
+   프리미엄 안내 팝업 패널
    ============================================= */
 .premium-info-panel {
     max-width: 380px;
@@ -1980,18 +1848,18 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   Card Spread Animation - 촤라???�쳐지???�과
+   Card Spread Animation - 촤라락 펼쳐지는 효과
    ============================================= */
 
-/* 초기 ?�태??JS??deal-init ?�래?��? ?�어 */
+/* 초기 상태는 JS의 deal-init 클래스가 제어 */
 
-/* ?�침 ?�니메이???�용 ?�래??*/
+/* 펼침 애니메이션 적용 클래스 */
 .daily-spread-card.deal-animate {
     opacity: 1;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* �?카드가 ???�치�??�아가??것�? nth-child 기본 transform???�용??*/
+/* 각 카드가 제 위치로 돌아가는 것은 nth-child 기본 transform이 적용됨 */
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(1)  { transform: rotate(-20deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(2)  { transform: rotate(-16deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(3)  { transform: rotate(-12deg); }
@@ -2004,7 +1872,7 @@ body.premium-mode .modal-title {
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(10) { transform: rotate(16deg); }
 .daily-spread-row .daily-spread-card.deal-animate:nth-child(11) { transform: rotate(20deg); }
 
-/* ?�버/?�택 ?�에??deal-animate??transform???�버?�이??*/
+/* 호버/선택 시에는 deal-animate의 transform을 오버라이드 */
 .daily-spread-row .daily-spread-card.deal-animate.hovered {
     transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
@@ -2090,7 +1958,7 @@ body.premium-mode .modal-title {
    on tablets. Cards animate from a stacked position.
    ============================================= */
 
-/* deal-init/deal-animate ?�래?�로 JS가 직접 ?�어 */
+/* deal-init/deal-animate 클래스로 JS가 직접 제어 */
 
 /* New: JS adds 'deal-init' first (invisible center stack),
    then swaps to 'deal-animate' (fan position) */
@@ -2133,7 +2001,7 @@ body.premium-mode .modal-title {
 
 
 /* =============================================
-   ?�리미엄 카드 ?�면 ?��?지
+   프리미엄 카드 뒷면 이미지
    ============================================= */
 .premium-mode .daily-spread-cover {
     background-image: url('../images/card-back-premium.png') !important;
@@ -2151,10 +2019,10 @@ body.premium-mode .modal-title {
 }
 
 /* =============================================
-   모바???�블�?깜빡???�전 ?�거 (결과 ?�이지 ?�함)
-   - backdrop-filter ?�거 (모바??GPU 과�??�의 #1 ?�인)
-   - 무한 box-shadow ?�니메이???��?
-   - 결과 카드 ?��?지 GPU ?�이??고정
+   모바일/태블릿 깜빡임 완전 제거 (결과 페이지 포함)
+   - backdrop-filter 제거 (모바일 GPU 과부하의 #1 원인)
+   - 무한 box-shadow 애니메이션 정지
+   - 결과 카드 이미지 GPU 레이어 고정
    ============================================= */
 @media (max-width: 1024px) {
     .modal-overlay {
@@ -2167,16 +2035,10 @@ body.premium-mode .modal-title {
         -webkit-backdrop-filter: none !important;
         background: rgba(30, 11, 46, 0.95) !important;
     }
-    body.premium-mode .glass-panel {
-        background: rgba(255, 255, 255, 0.98) !important;
-    }
     .mode-btn {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         background: rgba(30, 11, 46, 0.8) !important;
-    }
-    body.premium-mode .mode-btn {
-        background: rgba(255, 255, 255, 0.9) !important;
     }
     .love-rating-badge,
     .money-rating-badge,
@@ -2213,10 +2075,8 @@ body.premium-mode .modal-title {
     }
 }
 
-/* ========== "�??�람 지�????�각 ?�까?" ?�리미엄 모달 ?��???========== */
-#thinking-modal .thinking-panel,
-#yesno-ritual-modal .thinking-panel,
-#stock-ritual-modal .thinking-panel {
+/* ========== "참 이 주식 사야해?" 분석 전용 스타일 ========== */
+#thinking-modal .thinking-panel {
     width: 90%;
     max-width: 480px;
     background: linear-gradient(135deg, rgba(20, 10, 30, 0.95), rgba(40, 20, 50, 0.95));
@@ -2231,14 +2091,6 @@ body.premium-mode .modal-title {
     overflow: hidden;
 }
 
-body.premium-mode #thinking-modal .thinking-panel,
-body.premium-mode #yesno-ritual-modal .thinking-panel,
-body.premium-mode #stock-ritual-modal .thinking-panel {
-    background: linear-gradient(135deg, #ffffff, #fdfaf0);
-    border-color: rgba(197, 160, 40, 0.3);
-    box-shadow: 0 10px 40px rgba(197, 160, 40, 0.15);
-}
-
 .thinking-step {
     display: none;
     width: 100%;
@@ -2251,7 +2103,7 @@ body.premium-mode #stock-ritual-modal .thinking-panel {
     display: flex;
 }
 
-/* STEP 1: 관�??�택 */
+/* STEP 1: 관계 선택 */
 .relation-grid {
     display: flex;
     flex-direction: column;
@@ -2286,7 +2138,7 @@ body.premium-mode #stock-ritual-modal .thinking-panel {
     margin-top: 5px;
 }
 
-/* STEP 2: ?�트�?(카운?�다?? */
+/* STEP 2: 아우라 (카운트다운) */
 .countdown-container {
     position: relative;
     width: 120px;
@@ -2315,23 +2167,14 @@ body.premium-mode #stock-ritual-modal .thinking-panel {
     transition: stroke-dashoffset 1s linear;
 }
 
-#countdown-number,
-#yesno-countdown-number,
-#stock-countdown-number {
+#countdown-number {
     font-size: 3rem;
     color: var(--text-light);
     font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 180, 200, 0.5);
 }
 
-body.premium-mode #countdown-number,
-body.premium-mode #yesno-countdown-number,
-body.premium-mode #stock-countdown-number {
-    color: #8b5e5e;
-    text-shadow: 0 0 10px rgba(166, 124, 82, 0.2);
-}
-
-/* STEP 3: 카드 4??2x2 그리??*/
+/* STEP 3: 카드 4장 2x2 그리드 */
 .thinking-card-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2392,13 +2235,13 @@ body.premium-mode #stock-countdown-number {
     background-size: cover;
     background-position: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    background-color: #2a2a2a; /* 기본 배경??(?��?지 로딩 ??방어) */
+    background-color: #2a2a2a; /* 기본 배경색 (이미지 로딩 전 방어) */
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .thinking-card-front {
-    background-image: url('../images/card-back-premium.png'); /* 경로 ?�정: media -> images, ?�일�??�정 */
-    background-size: 240%; /* ??카드 ?�모?�만 ?�오?�록 ?�롭 */
+    background-image: url('../images/card-back-premium.png'); /* 경로 수정: media -> images, 파일명 수정 */
+    background-size: 240%; /* 딱 카드 뒷모습만 나오도록 크롭 */
     background-position: center;
 }
 
@@ -2414,7 +2257,7 @@ body.premium-mode #stock-countdown-number {
     white-space: nowrap;
 }
 
-/* ?�각???�소 컨테?�너 */
+/* 시각화 컨테이너 */
 .viz-container {
     background: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
@@ -2438,7 +2281,7 @@ body.premium-mode #stock-countdown-number {
     line-height: 1.5;
 }
 
-/* 감정 ?�도�?*/
+/* 마음 온도 */
 .temperature-gauge {
     width: 100%;
 }
@@ -2473,7 +2316,7 @@ body.premium-mode #stock-countdown-number {
     color: rgba(255,255,255,0.6);
 }
 
-/* ?�락 ?�너지 게이지 */
+/* 에너지 게이지 */
 .energy-gauge {
     width: 100%;
     position: relative;
@@ -2504,7 +2347,7 @@ body.premium-mode #stock-countdown-number {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
-/* 7???�?�라??*/
+/* 7일 타임라인 */
 .timeline-bar {
     display: flex;
     justify-content: space-between;
@@ -2533,7 +2376,7 @@ body.premium-mode #stock-countdown-number {
     transform: scale(1.1);
 }
 
-/* ?�동 조언 */
+/* 행동 조언 */
 .action-buttons {
     display: flex;
     gap: 10px;
@@ -2563,800 +2406,3 @@ body.premium-mode #stock-countdown-number {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* =============================================
-   PREMIUM MODE THEME (ROSE IVORY & AURA) - 개편
-   ============================================= */
-
-body.premium-mode {
-    background-color: #fff9f6 !important; /* ?�뜻??로즈 ?�이보리 */
-    color: #4a3535; /* ??로즈 브라??*/
-}
-
-body.premium-mode .mode-title {
-    color: #a67c52; /* 로즈 골드 ??*/
-    text-shadow: 0 2px 10px rgba(166, 124, 82, 0.1);
-}
-
-body.premium-mode .mode-subtitle {
-    color: #8b7d7d;
-}
-
-/* 메인 메뉴 버튼 개편 (로즈 ?�마) */
-body.premium-mode .mode-btn {
-    background: rgba(255, 252, 250, 0.9);
-    border-color: rgba(166, 124, 82, 0.2);
-    box-shadow: 0 4px 15px rgba(166, 124, 82, 0.05);
-}
-
-body.premium-mode .mode-btn:hover {
-    background: #ffffff;
-    border-color: #a67c52;
-    box-shadow: 0 8px 25px rgba(166, 124, 82, 0.12);
-}
-
-body.premium-mode .mode-btn-title {
-    color: #8b5e5e; /* ?�뜻??로즈 ??*/
-}
-
-body.premium-mode .mode-btn-desc {
-    color: #6d5b5b;
-}
-
-/* ?�늘??카드 ?�별 버튼 ?�리미엄 ?�??*/
-body.premium-mode .daily-btn-special {
-    background: linear-gradient(135deg, #ffffff, #fff5f2);
-    border-color: #d4a373;
-    box-shadow: 0 10px 30px rgba(212, 163, 115, 0.15);
-}
-
-body.premium-mode .daily-btn-glow {
-    background: radial-gradient(ellipse at 50% 50%, rgba(212, 163, 115, 0.15), transparent 70%);
-}
-
-body.premium-mode .daily-desc {
-    color: #6d5b5b !important;
-}
-
-/* 결과 ?�면 �?모달 UI 개편 (Rose Ivory) */
-body.premium-mode .glass-panel {
-    background: rgba(255, 253, 252, 0.95) !important;
-    border-color: rgba(212, 163, 115, 0.3) !important;
-    box-shadow: 0 15px 50px rgba(166, 124, 82, 0.1) !important;
-}
-
-body.premium-mode .combined-desc-box,
-body.premium-mode .love-desc-box,
-body.premium-mode .money-desc-box,
-body.premium-mode .yesno-desc-box,
-body.premium-mode .daily-desc-box {
-    background: rgba(255, 255, 255, 0.6) !important;
-    border-color: rgba(166, 124, 82, 0.15) !important;
-    color: #4a3535;
-}
-
-body.premium-mode .res-desc,
-body.premium-mode .love-meaning,
-body.premium-mode .money-meaning,
-body.premium-mode .yesno-meaning,
-body.premium-mode .daily-message,
-body.premium-mode .love-advice, 
-body.premium-mode .money-advice, 
-body.premium-mode .daily-advice, 
-body.premium-mode .yesno-advice,
-body.premium-mode .premium-text-glow p,
-body.premium-mode .recap-text,
-body.premium-mode .viz-desc {
-    color: #2d1f1f !important; /* ???�명??가?�성 */
-}
-
-body.premium-mode .love-advice-box,
-body.premium-mode .money-advice-box,
-body.premium-mode .yesno-advice-box,
-body.premium-mode .daily-advice-box {
-    background: rgba(212, 163, 115, 0.05);
-    border-color: rgba(212, 163, 115, 0.15);
-}
-
-/* Thinking 모드 (Rose Ivory ?�마) */
-body.premium-mode .relation-btn {
-    background: white;
-    border-color: rgba(166, 124, 82, 0.15);
-    color: #4a3535;
-}
-
-body.premium-mode .relation-btn small {
-    color: #8b7d7d;
-}
-
-body.premium-mode .relation-btn:hover {
-    background: #fffafa;
-    border-color: #a67c52;
-    box-shadow: 0 5px 15px rgba(166, 124, 82, 0.1);
-}
-
-body.premium-mode .viz-container {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(166, 124, 82, 0.1);
-}
-
-body.premium-mode .viz-desc,
-body.premium-mode .temp-labels,
-body.premium-mode .tc-label {
-    color: #6d5b5b;
-}
-
-body.premium-mode .energy-text {
-    color: #4a3535;
-}
-
-body.premium-mode .action-btn {
-    background: white;
-    box-shadow: 0 2px 8px rgba(166, 124, 82, 0.05);
-}
-
-body.premium-mode .action-btn.active {
-    background: rgba(166, 124, 82, 0.1);
-    border-color: #a67c52;
-    color: #8b5e5e;
-}
-
-/* ?�벨 ?��???(로즈 골드) */
-body.premium-mode .premium-label,
-body.premium-mode .viz-title,
-body.premium-mode .recap-pos-label,
-body.premium-mode .recap-title,
-body.premium-mode .love-advice-label,
-body.premium-mode .money-advice-label,
-body.premium-mode .yesno-advice-label,
-body.premium-mode .daily-advice-label {
-    color: #8b5e5e !important;
-}
-
-/* ?�리미엄 모드 결론 �??�단 ?�스??가?�성 보호 (?��???계열 ?�거) */
-body.premium-mode .conclusion-text,
-body.premium-mode .love-conclusion-text,
-body.premium-mode .money-conclusion-text,
-body.premium-mode .yesno-conclusion-text,
-body.premium-mode .daily-conclusion-text,
-body.premium-mode .lotto-conclusion-text {
-    color: #a67c52 !important; /* 가?�성 ?��? 차분??로즈 골드/브라??*/
-    text-shadow: none !important;
-}
-
-body.premium-mode .premium-text-glow {
-    background: rgba(212, 163, 115, 0.06);
-    border-left-color: #a67c52;
-}
-
-/* 처음?�로 버튼 (로즈 ?�마) */
-body.premium-mode .btn-back-mode {
-    background: #fff;
-    color: #8b5e5e;
-    border: 1px solid #d4a373;
-    box-shadow: 0 2px 8px rgba(166, 124, 82, 0.1);
-}
-
-body.premium-mode .btn-back-mode:hover {
-    background: #fffafa;
-    border-color: #8b5e5e;
-}
-
-/* ?�터 �??�세 ?�보 (중앙 ?�렬 �?가?�성 강화) */
-.app-footer-info {
-    text-align: center;
-    padding: 2.5rem 1rem 4rem;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.85rem;
-    line-height: 1.6;
-    width: 100%;
-}
-
-.footer-link-author, .footer-link-privacy {
-    color: #a67c52; /* ?�명??로즈 골드 브라??*/
-    text-decoration: none;
-    border-bottom: 1px solid rgba(166, 124, 82, 0.3);
-    transition: all 0.3s;
-    margin: 0 5px;
-}
-
-.footer-link-author:hover, .footer-link-privacy:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-}
-
-body.premium-mode .app-footer-info { 
-    color: #9a8a8a; 
-    text-align: center;
-}
-body.premium-mode .footer-link-author { color: #8b5e5e; border-color: rgba(139, 94, 94, 0.3); }
-body.premium-mode .footer-link-privacy { color: #6d5b5b; }
-
-/* ?�태�?�??�더 */
-body.premium-mode .status-bar {
-    background: rgba(255, 253, 252, 0.9);
-    border-color: rgba(166, 124, 82, 0.3);
-    color: #8b5e5e;
-}
-
-body.premium-mode .card-name-label {
-    background: rgba(255, 255, 255, 0.96);
-    color: #8b5e5e;
-    border-top: 1px solid rgba(166, 124, 82, 0.5);
-}
-
-/* ?�리미엄 ?�용 ?�스???�이?�웃 */
-.premium-text-glow {
-    position: relative;
-    padding: 1.2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border-left: 4px solid var(--gold);
-    margin: 1.2rem 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-body.premium-mode .premium-text-glow {
-    background: rgba(197, 160, 40, 0.05);
-    box-shadow: 0 4px 20px rgba(197, 160, 40, 0.08);
-}
-
-.premium-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.1rem;
-    display: block;
-    text-transform: uppercase;
-}
-
-body.premium-mode .btn-primary {
-    background: linear-gradient(135deg, #c5a028, #8b6b10);
-    color: white;
-    box-shadow: 0 4px 15px rgba(197, 160, 40, 0.2);
-}
-
-body.premium-mode .day.active {
-    background: var(--gold);
-    color: white;
-    box-shadow: 0 0 15px rgba(197, 160, 40, 0.4);
-}
-
-/* 배�? ?��???*/
-.daily-badge, .premium-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 4px;
-    letter-spacing: 0.05rem;
-}
-
-.daily-badge {
-    background: #ff5252;
-    color: white;
-}
-
-.premium-badge {
-    background: linear-gradient(135deg, #d4af37, #f9f295);
-    color: #1a1a2e;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
-
-body.premium-mode .daily-badge {
-    background: #e67e22;
-    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.2);
-}
-
-body.premium-mode .premium-badge {
-    background: linear-gradient(135deg, #c5a028, #fbe69e);
-    color: #3d3b38;
-}
-
-/* =============================================
-   결과 리딩 ?�스???��????�합 (Typography Standard)
-   ============================================= */
-.res-desc, .res-desc *,
-.love-meaning, .love-meaning *,
-.money-meaning, .money-meaning *,
-.yesno-meaning, .yesno-meaning *,
-.daily-message, .daily-message *,
-.love-advice, .love-advice *,
-.money-advice, .money-advice *,
-.daily-advice, .daily-advice *,
-.yesno-advice, .yesno-advice *,
-.premium-text-glow p, .premium-text-glow p *,
-.recap-text, .recap-text *,
-.viz-desc, .viz-desc * {
-    font-size: 1.1rem !important; /* ?�체 본문 ?�기 ?�일 */
-    line-height: 1.8 !important;
-    word-break: keep-all;
-    font-family: 'Noto Sans KR', sans-serif !important;
-    font-style: normal !important; /* 기울?�꼴 ?�전 ?�거 */
-}
-
-/* 기본 ?�탤�??�그 강제 초기??*/
-i, em, cite, address, dfn {
-    font-style: normal !important;
-}
-
-/* ?�리미엄 모드?�서??본문 ?�상 ?�합 */
-body.premium-mode .res-desc,
-body.premium-mode .love-meaning,
-body.premium-mode .money-meaning,
-body.premium-mode .yesno-meaning,
-body.premium-mode .daily-message,
-body.premium-mode .love-advice, 
-body.premium-mode .money-advice, 
-body.premium-mode .daily-advice, 
-body.premium-mode .yesno-advice,
-body.premium-mode .premium-text-glow p,
-body.premium-mode .recap-text,
-body.premium-mode .viz-desc {
-    color: #222 !important;
-    font-weight: 500;
-}
-
-/* 보조 ?�보 �??�스???�스??*/
-.thinking-bottom-desc,
-.restart-caution,
-.love-period-notice {
-    font-size: 0.95rem !important;
-    line-height: 1.7 !important;
-    font-style: normal !important;
-    color: rgba(255, 255, 255, 0.4);
-}
-
-body.premium-mode .thinking-bottom-desc,
-body.premium-mode .restart-caution {
-    color: #888 !important;
-}
-
-body.premium-mode .love-period-notice {
-    color: #8b6b10 !important;
-    opacity: 0.7;
-}
-
-/* 결과 ?�더/?�벨 ?��????�합 */
-.premium-label,
-.viz-title,
-.recap-pos-label,
-.recap-title,
-.love-advice-label,
-.money-advice-label,
-.yesno-advice-label,
-.daily-advice-label {
-    font-size: 0.85rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.1rem;
-    margin-bottom: 0.8rem;
-    display: block;
-    text-transform: uppercase;
-}
-
-body.premium-mode .premium-label,
-body.premium-mode .viz-title,
-body.premium-mode .recap-pos-label,
-body.premium-mode .recap-title {
-    color: #8b6b10 !important;
-}
-
-/* 카드 ?�름 ?��????�합 */
-.love-card-name,
-.money-card-name,
-.yesno-card-name,
-.daily-card-name,
-.recap-card-name {
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-    font-family: 'Hahmlet', serif;
-    margin-bottom: 1rem;
-}
-
-body.premium-mode .love-card-name,
-body.premium-mode .money-card-name,
-body.premium-mode .yesno-card-name,
-body.premium-mode .daily-card-name,
-body.premium-mode .recap-card-name {
-    color: #1a1a1a !important;
-}
-
-/* 기존 ?��??�들 ?�단 보완 */
-
-.recap-item {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    padding: 1.2rem;
-    border-left: 3px solid rgba(212, 175, 55, 0.4);
-    transition: all 0.3s ease;
-}
-
-body.premium-mode .recap-item {
-    background: rgba(197, 160, 40, 0.03);
-    border-color: var(--gold);
-}
-
-.recap-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
-}
-
-body.premium-mode .recap-header {
-    border-bottom-color: rgba(197, 160, 40, 0.1);
-}
-
-.recap-pos-label {
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: var(--gold);
-    letter-spacing: 0.1rem;
-}
-
-.recap-card-name {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #fff;
-    font-family: 'Hahmlet', serif;
-}
-
-body.premium-mode .recap-card-name {
-    color: var(--gold-light);
-}
-
-.recap-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--gold-light);
-    margin-bottom: 0.6rem;
-}
-
-body.premium-mode .recap-title {
-    color: #333;
-}
-
-.recap-text {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
-    word-break: keep-all;
-}
-
-body.premium-mode .recap-text {
-    color: #555;
-}
-
-/* ?�리미엄 ?�용 ?�석 ?�스??가?�성 최적??(Ivory ?�마) */
-body.premium-mode .premium-label {
-    color: #8b6b10;
-    font-weight: 800;
-    text-shadow: none;
-}
-
-body.premium-mode .premium-text-glow {
-    background: rgba(197, 160, 40, 0.08);
-    border-left-color: #8b6b10;
-}
-
-body.premium-mode .premium-text-glow p {
-    color: #222 !important;
-    font-weight: 500;
-    line-height: 1.8;
-}
-
-/* ?�급 배�? 고�?�??��???(Ivory ?�마?? */
-body.premium-mode .love-rating-badge,
-body.premium-mode .money-rating-badge,
-body.premium-mode .yesno-rating-badge,
-body.premium-mode .daily-rating-badge {
-    background: #fff !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
-    animation: none !important; /* 가?�성???�해 ?�니메이??중�? */
-}
-
-/* ?�애??금전???�일�?배�? ?�상 ?�버?�이??(1-5) */
-body.premium-mode .rating-1 { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
-body.premium-mode .rating-2 { color: #1976d2 !important; border-color: #1976d2 !important; background: rgba(25, 118, 210, 0.05) !important; }
-body.premium-mode .rating-3 { color: #8b6b10 !important; border-color: #8b6b10 !important; background: rgba(139, 107, 16, 0.05) !important; }
-body.premium-mode .rating-4 { color: #e65100 !important; border-color: #e65100 !important; background: rgba(230, 81, 0, 0.05) !important; }
-body.premium-mode .rating-5 { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
-
-/* Yes/No ?�용 고�?�?*/
-body.premium-mode .rating-yes { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
-body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
-
-/* ?�리미엄 ?�라??배�? (결과�??�목 ?? */
-.premium-inline-badge {
-    display: inline-block;
-    font-family: 'Cinzel', serif;
-    font-size: 0.6rem;
-    font-weight: 800;
-    padding: 1px 6px;
-    border-radius: 4px;
-    background: linear-gradient(135deg, #d4af37, #f9f295);
-    color: #1a1a2e;
-    margin-left: 8px;
-    vertical-align: middle;
-    letter-spacing: 0.05rem;
-    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-    pointer-events: none;
-    line-height: normal;
-}
-
-body.premium-mode .premium-inline-badge {
-    background: linear-gradient(135deg, #a67c52, #e6c89c);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(166, 124, 82, 0.2);
-}
-
-/* ?�내 문구 �?버튼 가?�성 개선 (Rose Ivory ?�마 ?�?? */
-.thinking-bottom-desc {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.85rem;
-    margin-top: 25px;
-    word-break: keep-all;
-}
-
-body.premium-mode .thinking-bottom-desc {
-    color: #888;
-    font-weight: 500;
-}
-
-/* ?�리미엄 모드 처음?�로 버튼(btn-back-mode) 가?�성 강화 */
-body.premium-mode .btn-back-mode {
-    background: #fff;
-    color: #8b6b10;
-    border: 1px solid #c5a028;
-    box-shadow: 0 2px 8px rgba(197, 160, 40, 0.1);
-    font-weight: 700;
-}
-
-body.premium-mode .btn-back-mode:hover {
-    background: #fdfaf0;
-    border-color: #8b6b10;
-    box-shadow: 0 4px 12px rgba(197, 160, 40, 0.2);
-    transform: translateY(-2px);
-}
-
-/* 기�? 결과 모달??주의?�항 문구(restart-caution) 가?�성 */
-.restart-caution {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.8rem;
-    line-height: 1.6;
-    margin-top: 1.5rem;
-}
-
-body.premium-mode .restart-caution {
-    color: #999;
-}
-
-/* ============================================================ */
-/* 주식 ?��?리딩 ?�용 ?��???(Stock Tarot Reading) */
-/* ============================================================ */
-
-.stock-result-area {
-    margin-top: 2.5rem;
-    padding: 1.5rem;
-    background: rgba(20, 25, 45, 0.6);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 16px;
-    animation: fade-in-up 1s ease-out forwards;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-body.premium-mode .stock-result-area {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(197, 160, 40, 0.2);
-    box-shadow: 0 10px 30px rgba(197, 160, 40, 0.1);
-}
-
-.stock-disclaimer {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    padding: 0.8rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    color: #ffab91;
-    margin-bottom: 2rem;
-    text-align: center;
-    border: 1px dashed rgba(255, 171, 145, 0.4);
-}
-
-
-
-
-
-body.premium-mode .stock-disclaimer {
-    background: #fff5f2;
-    color: #d84315;
-    border: 1px dashed #ffab91;
-}
-
-
-
-.stock-pos-item {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.stock-pos-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.stock-pos-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.stock-pos-label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--gold);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-
-.stock-pos-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-main);
-    word-break: keep-all;
-}
-
-/* 1. ?�장 ?�너지 - 배�? */
-.stock-badge {
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.stock-badge.green { background: linear-gradient(135deg, #00c853, #64dd17); box-shadow: 0 0 10px rgba(0, 200, 83, 0.3); }
-.stock-badge.red { background: linear-gradient(135deg, #ff1744, #d50000); box-shadow: 0 0 10px rgba(255, 23, 68, 0.3); }
-.stock-badge.yellow { background: linear-gradient(135deg, #ffab00, #ffd600); color: #333; }
-.stock-badge.gray { background: linear-gradient(135deg, #607d8b, #455a64); }
-
-/* 2. 종목 ?�너지 - ?�도�?*/
-.stock-temp-label {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--gold);
-}
-
-.thermometer-container {
-    height: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.thermometer-bar {
-    height: 100%;
-    width: 0%; /* JS?�서 ?�적 변�?*/
-    background: linear-gradient(to right, #2979ff, #ffea00, #ff1744);
-    border-radius: 10px;
-    transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* 3. ?�자???�리 - 게이지 & ?�션 */
-.stock-action-badge {
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: 1px;
-}
-
-.stock-action-badge.strong_buy { background: #00e676; box-shadow: 0 0 15px rgba(0, 230, 118, 0.6); }
-.stock-action-badge.buy { background: #00c853; box-shadow: 0 0 15px rgba(0, 200, 83, 0.5); }
-.stock-action-badge.strong_sell { background: #ff1744; box-shadow: 0 0 15px rgba(255, 23, 68, 0.6); }
-.stock-action-badge.sell { background: #ef5350; box-shadow: 0 0 15px rgba(239, 83, 80, 0.5); }
-.stock-action-badge.hold { background: #2979ff; box-shadow: 0 0 15px rgba(41, 121, 255, 0.5); }
-.stock-action-badge.wait { background: #ffea00; color: #333; box-shadow: 0 0 15px rgba(255, 234, 0, 0.5); }
-
-.gauge-container {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    position: relative;
-}
-
-.gauge-bar {
-    position: absolute;
-    height: 100%;
-    left: 40%; width: 20%; /* JS?�서 min/max ?�용 */
-    background: var(--gold);
-    box-shadow: 0 0 10px var(--gold);
-    border-radius: 5px;
-    transition: all 1.5s ease-out;
-}
-
-/* 최종 결론 ?�역 */
-.stock-final-verdict {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 255, 255, 0.02));
-    border-radius: 20px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    text-align: center;
-    animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.verdict-image-wrapper {
-    width: 225px; /* 1.5�??��? 조정 */
-    height: 225px;
-    margin-bottom: 1.5rem;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    border: 3px solid var(--gold);
-    background: #000;
-}
-
-.verdict-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.stock-verdict-main {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-    letter-spacing: 3px;
-}
-
-.stock-verdict-sub {
-    font-size: 1rem;
-    color: var(--text-main);
-    font-weight: 500;
-    word-break: keep-all;
-    opacity: 0.9;
-    max-width: 280px;
-    line-height: 1.6;
-}
-
-/* ?�션�??�용 ?�래??*/
-.verdict-strong_buy .stock-verdict-main { color: #00e676; text-shadow: 0 0 20px rgba(0, 230, 118, 0.6); }
-.verdict-buy .stock-verdict-main { color: #00c853; text-shadow: 0 0 15px rgba(0, 200, 83, 0.4); }
-.verdict-strong_sell .stock-verdict-main { color: #ff1744; text-shadow: 0 0 20px rgba(255, 23, 68, 0.6); }
-.verdict-sell .stock-verdict-main { color: #ef5350; text-shadow: 0 0 15px rgba(239, 83, 80, 0.4); }
-.verdict-hold .stock-verdict-main { color: #2979ff; text-shadow: 0 0 15px rgba(41, 121, 255, 0.4); }
-.verdict-wait .stock-verdict-main { color: #ffab00; text-shadow: 0 0 15px rgba(255, 171, 0, 0.4); }
-
-/* 모달 ?�우???�과 ?�래??*/
-.glow-strong_buy { box-shadow: 0 0 80px rgba(0, 230, 118, 0.2) !important; border-color: rgba(0, 230, 118, 0.4) !important; }
-.glow-buy { box-shadow: 0 0 60px rgba(0, 200, 83, 0.15) !important; border-color: rgba(0, 200, 83, 0.3) !important; }
-.glow-strong_sell { box-shadow: 0 0 80px rgba(255, 23, 68, 0.2) !important; border-color: rgba(255, 23, 68, 0.4) !important; }
-.glow-sell { box-shadow: 0 0 60px rgba(239, 83, 80, 0.15) !important; border-color: rgba(239, 83, 80, 0.3) !important; }
-.glow-hold { box-shadow: 0 0 60px rgba(41, 121, 255, 0.1) !important; border-color: rgba(41, 121, 255, 0.2) !important; }
-.glow-wait { box-shadow: 0 0 60px rgba(255, 171, 0, 0.1) !important; border-color: rgba(255, 171, 0, 0.2) !important; }
-
-body.premium-mode .stock-final-verdict {
-    background: rgba(166, 124, 82, 0.03);
-    border-color: rgba(166, 124, 82, 0.15);
-}
-
