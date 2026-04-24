@@ -833,8 +833,21 @@ function initLotto() {
         for (let i = 1; i <= 45; i++) {
             const ball = createLottoBall(i);
             ball.style.position = 'absolute';
+            
+            // 초기 위치 무작위 설정
             ball.style.left = (Math.random() * 80 + 10) + '%';
             ball.style.top = (Math.random() * 80 + 10) + '%';
+            
+            // 개별 애니메이션 변수 설정 (각 공이 다르게 움직이도록)
+            ball.style.setProperty('--tx1', (Math.random() * 60 - 30) + 'px');
+            ball.style.setProperty('--ty1', (Math.random() * 60 - 30) + 'px');
+            ball.style.setProperty('--tx2', (Math.random() * 60 - 30) + 'px');
+            ball.style.setProperty('--ty2', (Math.random() * 60 - 30) + 'px');
+            ball.style.setProperty('--tx3', (Math.random() * 60 - 30) + 'px');
+            ball.style.setProperty('--ty3', (Math.random() * 60 - 30) + 'px');
+            ball.style.setProperty('--dur', (0.6 + Math.random() * 0.8) + 's');
+            ball.style.setProperty('--delay', (Math.random() * 0.5) + 's');
+            
             spinner.appendChild(ball);
         }
     }
