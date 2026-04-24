@@ -12,15 +12,9 @@ async function logVisit() {
     if (window.location.pathname.includes('admin.html')) return;
 
     try {
-        // 1. IP 가져오기
-        const ipRes = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipRes.json();
-        const visitorIp = ipData.ip;
-
-        // 2. 구글 시트로 전송 (no-cors 모드 사용 - 응답은 못 받지만 기록은 됨)
-        const targetUrl = `${GAS_URL}?ip=${encodeURIComponent(visitorIp)}&ua=${encodeURIComponent(navigator.userAgent)}`;
+        // IP 수집 제외 (접속 신호 및 브라우저 정보만 기록)
+        const targetUrl = `${GAS_URL}?type=ping&ua=${encodeURIComponent(navigator.userAgent)}`;
         
-        // fetch (no-cors 는 보안상 기록만 가능하고 결과값 확인은 제한적이지만 시트에 기록은 잘 됨)
         fetch(targetUrl, { mode: 'no-cors' });
     } catch (err) {
         console.log('Logging failed:', err);
