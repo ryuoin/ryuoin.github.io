@@ -599,6 +599,18 @@ function showWeeklyResult() {
         modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
     }
 
+    // 카드 슬롯 타이틀 초기화 (주식 모드에서 변경된 타이틀 복구)
+    const slots = modal.querySelectorAll('.reading-slot-mini .slot-title-mini');
+    if (slots.length >= 3) {
+        slots[0].innerHTML = "과거 <span>(원인)</span>";
+        slots[1].innerHTML = "현재 <span>(상황)</span>";
+        slots[2].innerHTML = "미래 <span>(조언)</span>";
+    }
+
+    // 주식 전용 최종 결론 섹션 숨김
+    const stockVerdict = document.getElementById('stock-final-verdict');
+    if (stockVerdict) stockVerdict.classList.add('hidden');
+
     const pastId = selectedCards[0], presentId = selectedCards[1], futureId = selectedCards[2];
     const pastData = tarotDataList.find(item => item.id === pastId);
     const presentData = tarotDataList.find(item => item.id === presentId);
@@ -819,6 +831,18 @@ function restartGame() {
     }
     const combinedBox = document.querySelector('.combined-desc-box');
     if (combinedBox) combinedBox.style.display = 'block';
+
+    // 카드 슬롯 타이틀 초기화 (과거/현재/미래로 복구)
+    const slots = document.querySelectorAll('.reading-slot-mini .slot-title-mini');
+    if (slots.length >= 3) {
+        slots[0].innerHTML = "과거 <span>(원인)</span>";
+        slots[1].innerHTML = "현재 <span>(상황)</span>";
+        slots[2].innerHTML = "미래 <span>(조언)</span>";
+    }
+
+    // 주식 전용 최종 결론 섹션 숨김
+    const stockVerdict = document.getElementById('stock-final-verdict');
+    if (stockVerdict) stockVerdict.classList.add('hidden');
 
     // 카드 컨테이너 복구
     document.getElementById('card-container').classList.remove('hidden');
