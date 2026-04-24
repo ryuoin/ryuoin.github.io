@@ -4,6 +4,7 @@
     --gold: #d4af37;
     --gold-light: #fbe69e;
     --text-main: #e2e2e2;
+    --text-light: #ffffff;
     --purple-deep: #1e0b2e;
     --purple-glow: rgba(147, 51, 234, 0.4);
     
@@ -2657,6 +2658,10 @@ body.premium-mode .relation-btn {
     color: #4a3535;
 }
 
+body.premium-mode .relation-btn small {
+    color: #8b7d7d;
+}
+
 body.premium-mode .relation-btn:hover {
     background: #fffafa;
     border-color: #a67c52;
@@ -2666,6 +2671,12 @@ body.premium-mode .relation-btn:hover {
 body.premium-mode .viz-container {
     background: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(166, 124, 82, 0.1);
+}
+
+body.premium-mode .viz-desc,
+body.premium-mode .temp-labels,
+body.premium-mode .tc-label {
+    color: #6d5b5b;
 }
 
 body.premium-mode .energy-text {
