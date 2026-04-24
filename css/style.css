@@ -384,6 +384,54 @@ body.premium-mode .test-premium-btn:hover {
     }
 }
 
+/* ========== 스프레드 패턴 4종 ========== */
+
+/* 1. Arc (아치형) */
+.card-container.pattern-arc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 50px;
+}
+.pattern-arc .tarot-card {
+    /* 중앙 11번째 카드를 기준으로 좌우 대칭 곡선 */
+    --offset: calc(var(--i) - 10.5);
+    transform: translateY(calc(var(--offset) * var(--offset) * 1.5px)) rotate(calc(var(--offset) * 2deg));
+    margin: 0 -10px;
+}
+
+/* 2. Wave (물결형) */
+.card-container.pattern-wave {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.pattern-wave .tarot-card {
+    /* 사인파 형태의 높낮이 조절 */
+    transform: translateY(calc(sin(var(--i) * 0.5) * 25px)) rotate(calc(cos(var(--i) * 0.5) * 5deg));
+}
+
+/* 3. Fan (부채꼴형) */
+.card-container.pattern-fan {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+.pattern-fan .tarot-card {
+    /* 아래쪽 중심을 기준으로 넓게 퍼짐 */
+    --dist: calc(var(--i) - 10.5);
+    transform: rotate(calc(var(--dist) * 3deg)) translateY(calc(abs(var(--dist)) * -2px));
+    transform-origin: bottom center;
+    margin: 0 -5px;
+}
+
+/* 4. Grid (기본 격자 - 기존 스타일 유지) */
+.card-container.pattern-grid {
+    display: grid;
+    /* 기존 스타일 활용 */
+}
+
 /* 개별 카드 객체 (3D Flip 적용) */
 .tarot-card {
     background-color: transparent;
