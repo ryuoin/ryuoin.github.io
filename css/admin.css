@@ -318,82 +318,80 @@
     transform: translateY(-2px);
 }
 
-/* 프리미엄 모드 (어드민 페이지 대응) */
+/* 프리미엄 모드 (어드민 페이지 대응 - Rose Ivory 개편) */
 body.premium-mode {
-    background-color: #fbf9f4; /* 아이보리 베이스 */
+    background-color: #fff9f6 !important; /* 산뜻한 로즈 아이보리 */
 }
 
 body.premium-mode .admin-container {
-    color: #3d3b38;
+    color: #4a3535;
 }
 
 body.premium-mode .admin-title {
-    background: linear-gradient(to right, #c5a028, #8b6b10, #c5a028);
+    background: linear-gradient(to right, #a67c52, #8b5e5e, #a67c52);
     -webkit-background-clip: text;
     background-clip: text;
+    color: transparent;
 }
 
 body.premium-mode .admin-subtitle {
-    color: #666;
+    color: #8b7d7d;
 }
 
 body.premium-mode .section-title {
-    color: #8b6b10;
-    border-color: #c5a028;
+    color: #8b5e5e;
+    border-color: rgba(166, 124, 82, 0.3);
 }
 
 body.premium-mode .admin-table th {
-    background: rgba(0, 0, 0, 0.03);
-    color: #444;
+    background: rgba(166, 124, 82, 0.05);
+    color: #4a3535;
 }
 
 body.premium-mode .admin-table td {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    color: #3d3b38;
+    border-bottom: 1px solid rgba(166, 124, 82, 0.1);
+    color: #4a3535;
 }
 
 body.premium-mode .analytics-item {
     background: #ffffff;
-    border-color: rgba(0, 0, 0, 0.05);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    border-color: rgba(166, 124, 82, 0.1);
+    box-shadow: 0 4px 15px rgba(166, 124, 82, 0.05);
 }
 
 body.premium-mode .analytics-label {
-    color: #888;
+    color: #8b7d7d;
 }
 
 body.premium-mode .analytics-value {
-    color: #8b6b10;
+    color: #8b5e5e;
 }
 
 body.premium-mode .roadmap-text {
-    color: #3d3b38;
-}
-
-body.premium-mode .roadmap-text.text-dim {
-    color: #aaa;
+    color: #4a3535;
 }
 
 body.premium-mode .handover-text {
-    color: #444;
+    color: #333;
 }
 
 body.premium-mode .glass-panel,
 body.premium-mode .handover-viewer {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(197, 160, 40, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 253, 252, 0.95);
+    border-color: rgba(166, 124, 82, 0.25);
+    box-shadow: 0 4px 25px rgba(166, 124, 82, 0.08);
 }
 
 body.premium-mode .btn-back-mode {
     background: #fff;
-    color: #8b6b10;
-    border: 1px solid #c5a028;
-    box-shadow: 0 4px 15px rgba(197, 160, 40, 0.1);
+    color: #8b5e5e;
+    border: 1px solid #d4a373;
+    box-shadow: 0 4px 15px rgba(166, 124, 82, 0.1);
     font-weight: 700;
 }
 
 body.premium-mode .btn-back-mode:hover {
-    background: #fdfaf0;
-    box-shadow: 0 6px 20px rgba(197, 160, 40, 0.2);
+    background: #fffafa;
+    border-color: #8b5e5e;
+    box-shadow: 0 6px 20px rgba(166, 124, 82, 0.15);
 }
