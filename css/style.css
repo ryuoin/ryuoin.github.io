@@ -231,7 +231,13 @@ body.premium-mode .test-premium-btn:hover {
     .mode-buttons {
         grid-template-columns: 1fr;
     }
+}
 
+/* 마지막 버튼이 혼자 남을 경우 중앙 배치 (PC/태블릿) */
+@media (min-width: 481px) {
+    .mode-buttons .mode-btn:last-child:nth-child(odd) {
+        grid-column: 1 / span 2;
+    }
 }
 
 .mode-btn {
