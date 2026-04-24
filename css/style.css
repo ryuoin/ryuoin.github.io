@@ -3000,7 +3000,31 @@ body.premium-mode .rating-5 { color: #c62828 !important; border-color: #c62828 !
 body.premium-mode .rating-yes { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
 body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
 
-/* 안내 문구 및 버튼 가독성 개선 (Ivory 테마 대응) */
+/* 프리미엄 인라인 배지 (결과창 제목 옆) */
+.premium-inline-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #d4af37, #f9f295);
+    color: #1a1a2e;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.05rem;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+    pointer-events: none;
+    line-height: normal;
+}
+
+body.premium-mode .premium-inline-badge {
+    background: linear-gradient(135deg, #a67c52, #e6c89c);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(166, 124, 82, 0.2);
+}
+
+/* 안내 문구 및 버튼 가독성 개선 (Rose Ivory 테마 대응) */
 .thinking-bottom-desc {
     text-align: center;
     color: rgba(255, 255, 255, 0.4);
