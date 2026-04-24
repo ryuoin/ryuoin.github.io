@@ -2927,3 +2927,45 @@ body.premium-mode .recap-title {
 body.premium-mode .recap-text {
     color: #555;
 }
+
+/* 안내 문구 및 버튼 가독성 개선 (Ivory 테마 대응) */
+.thinking-bottom-desc {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    margin-top: 25px;
+    word-break: keep-all;
+}
+
+body.premium-mode .thinking-bottom-desc {
+    color: #888;
+    font-weight: 500;
+}
+
+/* 프리미엄 모드 처음으로 버튼(btn-back-mode) 가독성 강화 */
+body.premium-mode .btn-back-mode {
+    background: #fff;
+    color: #8b6b10;
+    border: 1px solid #c5a028;
+    box-shadow: 0 2px 8px rgba(197, 160, 40, 0.1);
+    font-weight: 700;
+}
+
+body.premium-mode .btn-back-mode:hover {
+    background: #fdfaf0;
+    border-color: #8b6b10;
+    box-shadow: 0 4px 12px rgba(197, 160, 40, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 기타 결과 모달의 주의사항 문구(restart-caution) 가독성 */
+.restart-caution {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+}
+
+body.premium-mode .restart-caution {
+    color: #999;
+}
