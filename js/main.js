@@ -24,7 +24,6 @@ async function logVisit() {
 let selectedCards = [];
 let deck = [];
 let currentMode = null;
-let stockName = ""; // 주식 종목명 보관용
 
 // ========== 광고 카운터 (3회마다 1번) ==========
 function incrementReadingCount() {
@@ -147,13 +146,6 @@ function initModeSelect() {
     const lottoBtn = document.getElementById('btn-lotto-start');
     if (lottoBtn) lottoBtn.addEventListener('click', startLottoDraw);
 
-    // 종목명 엔터키 보정
-    const stockInput = document.getElementById('stock-name-input');
-    if (stockInput) {
-        stockInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') confirmStockMode();
-        });
-    }
 }
 
 // ========== 오늘의 카드 버튼 상태 업데이트 ==========
@@ -1179,26 +1171,6 @@ function startStockMode() {
         showPremiumInfo();
         return;
     }
-    const modal = document.getElementById('stock-input-modal');
-    const input = document.getElementById('stock-name-input');
-    if (input) input.value = "";
-    modal.classList.remove('hidden');
-    if (input) input.focus();
-}
-
-function closeStockInput() {
-    document.getElementById('stock-input-modal').classList.add('hidden');
-}
-
-function confirmStockMode() {
-    const input = document.getElementById('stock-name-input');
-    const val = input.value.trim();
-    if (!val) {
-        alert("분석할 종목명을 입력해 주세요.");
-        return;
-    }
-    stockName = val;
-    closeStockInput();
     openMode('stock');
 }
 
@@ -1210,7 +1182,7 @@ function showStockResult() {
     if (!view) return;
     
     // 결과 화면 초기화 작업
-    document.getElementById('header-title').textContent = `📈 ${stockName} 리딩 결과`;
+    document.getElementById('header-title').textContent = `📈 이 주식 사야해? 리딩 결과`;
     document.getElementById('stock-result-view').classList.remove('hidden');
     if (banner) banner.style.display = 'none'; // 주식은 항상 프리미엄이므로 배너 숨김
 
@@ -1232,21 +1204,15 @@ function showStockResult() {
     document.querySelector('.reading-slot-mini:nth-child(2) .slot-title-mini').innerHTML = "종목 <span>(Stock)</span>";
     document.querySelector('.reading-slot-mini:nth-child(3) .slot-title-mini').innerHTML = "심리 <span>(Me)</span>";
 
-    // 텍스트 변환 헬퍼 (종목명 치환)
-    const processText = (txt) => {
-        return txt.replace(/이 종목/g, `<span class="stock-highlight">${stockName}</span>`)
-                  .replace(/종목/g, `<span class="stock-highlight">${stockName}</span>`);
-    };
-
     // 1. 시장 에너지
     const b1 = document.getElementById('stock-pos1-badge');
-    b1.innerText = data1.pos1.state.split(',')[0]; // 너무 길면 첫 토막만
+    b1.innerText = data1.pos1.state.split(',')[0]; 
     b1.className = `stock-badge ${data1.pos1.badge}`;
-    document.getElementById('stock-pos1-desc').innerHTML = processText(data1.pos1.text);
+    document.getElementById('stock-pos1-desc').innerHTML = data1.pos1.text;
 
     // 2. 종목 에너지 (온도계)
     document.getElementById('stock-pos2-temp-label').innerText = `${data2.pos2.temperature}°C`;
-    document.getElementById('stock-pos2-desc').innerHTML = processText(data2.pos2.text);
+    document.getElementById('stock-pos2-desc').innerHTML = data2.pos2.text;
     setTimeout(() => {
         document.getElementById('stock-pos2-thermometer').style.width = `${data2.pos2.temperature}%`;
     }, 500);
@@ -1255,15 +1221,14 @@ function showStockResult() {
     const a3 = document.getElementById('stock-pos3-action');
     a3.innerText = data3.pos3.action.toUpperCase();
     a3.className = `stock-action-badge ${data3.pos3.action}`;
-    document.getElementById('stock-pos3-desc').innerHTML = processText(data3.pos3.text);
+    document.getElementById('stock-pos3-desc').innerHTML = data3.pos3.text;
     
-    // 게이지 랜덤값 (gaugeMin ~ gaugeMax 사이)
+    // 게이지 랜덤값
     const targetGauge = Math.floor(Math.random() * (data3.pos3.gaugeMax - data3.pos3.gaugeMin + 1)) + data3.pos3.gaugeMin;
     setTimeout(() => {
         const bar = document.getElementById('stock-pos3-gauge');
         bar.style.left = `${data3.pos3.gaugeMin}%`;
         bar.style.width = `${data3.pos3.gaugeMax - data3.pos3.gaugeMin}%`;
-        // 추가로 중앙 포인터 효과를 위해 배경색을 좀 더 밝게 하거나 등을 할 수 있음
     }, 800);
 
     // 기존 텍스트 박스 숨김
