@@ -3168,10 +3168,26 @@ body.premium-mode .stock-result-area {
     border: 1px dashed rgba(255, 171, 145, 0.4);
 }
 
+.important-disclaimer {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    color: #ff5252 !important;
+    background: rgba(255, 82, 82, 0.1) !important;
+    border: 2px solid rgba(255, 82, 82, 0.5) !important;
+    padding: 1.2rem !important;
+    box-shadow: 0 0 15px rgba(255, 82, 82, 0.2);
+}
+
 body.premium-mode .stock-disclaimer {
     background: #fff5f2;
     color: #d84315;
     border: 1px dashed #ffab91;
+}
+
+body.premium-mode .important-disclaimer {
+    background: #fff5f2 !important;
+    color: #d32f2f !important;
+    border: 2px solid #ef5350 !important;
 }
 
 .stock-pos-item {
@@ -3257,8 +3273,10 @@ body.premium-mode .stock-disclaimer {
     letter-spacing: 1px;
 }
 
+.stock-action-badge.strong_buy { background: #00e676; box-shadow: 0 0 15px rgba(0, 230, 118, 0.6); }
 .stock-action-badge.buy { background: #00c853; box-shadow: 0 0 15px rgba(0, 200, 83, 0.5); }
-.stock-action-badge.sell { background: #ff1744; box-shadow: 0 0 15px rgba(255, 23, 68, 0.5); }
+.stock-action-badge.strong_sell { background: #ff1744; box-shadow: 0 0 15px rgba(255, 23, 68, 0.6); }
+.stock-action-badge.sell { background: #ef5350; box-shadow: 0 0 15px rgba(239, 83, 80, 0.5); }
 .stock-action-badge.hold { background: #2979ff; box-shadow: 0 0 15px rgba(41, 121, 255, 0.5); }
 .stock-action-badge.wait { background: #ffea00; color: #333; box-shadow: 0 0 15px rgba(255, 234, 0, 0.5); }
 
@@ -3331,14 +3349,18 @@ body.premium-mode .stock-disclaimer {
 }
 
 /* 액션별 전용 클래스 */
+.verdict-strong_buy .stock-verdict-main { color: #00e676; text-shadow: 0 0 20px rgba(0, 230, 118, 0.6); }
 .verdict-buy .stock-verdict-main { color: #00c853; text-shadow: 0 0 15px rgba(0, 200, 83, 0.4); }
-.verdict-sell .stock-verdict-main { color: #ff1744; text-shadow: 0 0 15px rgba(255, 23, 68, 0.4); }
+.verdict-strong_sell .stock-verdict-main { color: #ff1744; text-shadow: 0 0 20px rgba(255, 23, 68, 0.6); }
+.verdict-sell .stock-verdict-main { color: #ef5350; text-shadow: 0 0 15px rgba(239, 83, 80, 0.4); }
 .verdict-hold .stock-verdict-main { color: #2979ff; text-shadow: 0 0 15px rgba(41, 121, 255, 0.4); }
 .verdict-wait .stock-verdict-main { color: #ffab00; text-shadow: 0 0 15px rgba(255, 171, 0, 0.4); }
 
 /* 모달 아우라 효과 클래스 */
+.glow-strong_buy { box-shadow: 0 0 80px rgba(0, 230, 118, 0.2) !important; border-color: rgba(0, 230, 118, 0.4) !important; }
 .glow-buy { box-shadow: 0 0 60px rgba(0, 200, 83, 0.15) !important; border-color: rgba(0, 200, 83, 0.3) !important; }
-.glow-sell { box-shadow: 0 0 60px rgba(255, 23, 68, 0.15) !important; border-color: rgba(255, 23, 68, 0.3) !important; }
+.glow-strong_sell { box-shadow: 0 0 80px rgba(255, 23, 68, 0.2) !important; border-color: rgba(255, 23, 68, 0.4) !important; }
+.glow-sell { box-shadow: 0 0 60px rgba(239, 83, 80, 0.15) !important; border-color: rgba(239, 83, 80, 0.3) !important; }
 .glow-hold { box-shadow: 0 0 60px rgba(41, 121, 255, 0.1) !important; border-color: rgba(41, 121, 255, 0.2) !important; }
 .glow-wait { box-shadow: 0 0 60px rgba(255, 171, 0, 0.1) !important; border-color: rgba(255, 171, 0, 0.2) !important; }
 
