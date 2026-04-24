@@ -131,13 +131,6 @@ function initModeSelect() {
     document.getElementById('btn-mode-yesno').addEventListener('click', () => openMode('yesno'));
     document.getElementById('btn-mode-lotto').addEventListener('click', () => openMode('lotto'));
 
-    // 프리미엄 전용 모드 리스너
-    const btnStock = document.getElementById('btn-mode-stock');
-    if (btnStock) btnStock.addEventListener('click', startStockMode);
-
-    const btnThinking = document.getElementById('btn-mode-thinking');
-    if (btnThinking) btnThinking.addEventListener('click', startThinkingMode);
-
     document.getElementById('btn-restart').addEventListener('click', restartGame);
     document.getElementById('btn-love-restart').addEventListener('click', restartGame);
     document.getElementById('btn-money-restart').addEventListener('click', restartGame);
@@ -298,70 +291,76 @@ function startYesNoRitual() {
 // ========== 통합 스프레드 UI (모든 모드 공통) ==========
 function initSpread(mode) {
     const container = document.getElementById('daily-spread-container');
-    if (!container) return;
     container.innerHTML = '';
     
-    // 프리미엄 상태에 따라 테마 적용
+    // 프리미엄 상태에 따라 클래스 토글 (프리미엄 전용 뒷면 이미지 적용을 위함)
     if (isPremium()) {
         document.body.classList.add('premium-mode');
     } else {
         document.body.classList.remove('premium-mode');
     }
 
-    // 4가지 스프레드 패턴 중 랜덤 선택하여 컨테이너에 부여
-    const patterns = ['pattern-grid', 'pattern-arc', 'pattern-wave', 'pattern-fan'];
-    const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
-    patterns.forEach(p => container.classList.remove(p));
-    container.classList.add(selectedPattern);
-
     const deckAll = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deckAll);
 
-    // 22장의 카드를 행(row) 구분 없이 직접 컨테이너에 배치
-    deckAll.forEach((cardId, index) => {
-        const card = document.createElement('div');
-        card.className = 'daily-spread-card';
-        card.dataset.id = cardId;
-        card.style.setProperty('--i', index); // CSS 배치를 위한 인덱스 변수
+    const row1 = deckAll.slice(0, 11);
+    const row2 = deckAll.slice(11, 22);
 
-        const cover = document.createElement('div');
-        cover.className = 'daily-spread-cover';
-        const num = document.createElement('span');
-        num.className = 'daily-spread-num';
-        num.textContent = index + 1;
-        cover.appendChild(num);
-        card.appendChild(cover);
+    [row1, row2].forEach((rowCards, rowIdx) => {
+        const rowEl = document.createElement('div');
+        rowEl.className = 'daily-spread-row';
 
-        // 이벤트 리스너 설정
-        card.addEventListener('mouseenter', () => {
-            if (!card.classList.contains('selected') && !card.classList.contains('disabled')) {
-                card.classList.add('hovered');
-            }
-        });
-        card.addEventListener('mouseleave', () => {
-            card.classList.remove('hovered');
-        });
-        card.addEventListener('touchstart', () => {
-            if (!card.classList.contains('disabled')) card.classList.add('hovered');
-        }, {passive: true});
-        card.addEventListener('touchend', () => {
-            card.classList.remove('hovered');
-        }, {passive: true});
+        rowCards.forEach((cardId, i) => {
+            const card = document.createElement('div');
+            card.className = 'daily-spread-card';
+            card.dataset.id = cardId;
 
-        card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
-        
-        container.appendChild(card);
+            const cover = document.createElement('div');
+            cover.className = 'daily-spread-cover';
+            const num = document.createElement('span');
+            num.className = 'daily-spread-num';
+            num.textContent = rowIdx * 11 + i + 1;
+            cover.appendChild(num);
+            card.appendChild(cover);
 
-        // 딜링 애니메이션 로직
-        card.classList.add('deal-init');
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    card.classList.remove('deal-init');
-                    card.classList.add('deal-animate');
-                });
+            card.addEventListener('mouseenter', () => {
+                if (!card.classList.contains('selected') && !card.classList.contains('disabled')) {
+                    card.classList.add('hovered');
+                }
             });
-        }, index * 40);
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('hovered');
+            });
+            card.addEventListener('touchstart', () => {
+                if (!card.classList.contains('disabled')) card.classList.add('hovered');
+            }, {passive: true});
+            card.addEventListener('touchend', () => {
+                card.classList.remove('hovered');
+            }, {passive: true});
+
+            card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
+            rowEl.appendChild(card);
+
+            // 카드 딜링 애니메이션: deal-init(중앙 스택) → deal-animate(부채꼴)
+            // rAF 이중 중첩으로 브라우저가 초기 상태를 먼저 페인트한 뒤 트랜지션 시작
+            const baseDelay = rowIdx * 600; // 두 번째 줄은 첫 줄 끝난 뒤 시작
+            const cardDelay = baseDelay + (i * 45); // 카드마다 45ms 간격
+
+            // 즉시 deal-init 클래스 추가 (DOM 삽입 직후 opacity:0, 중앙 위치)
+            card.classList.add('deal-init');
+
+            setTimeout(() => {
+                // rAF 두 번 중첩: 첫 번째 rAF에서 레이아웃 계산, 두 번째 rAF에서 클래스 교체
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        card.classList.remove('deal-init');
+                        card.classList.add('deal-animate');
+                    });
+                });
+            }, cardDelay);
+        });
+
+        container.appendChild(rowEl);
     });
 }
 
@@ -428,22 +427,11 @@ function initDeck() {
 
 function renderCards() {
     const container = document.getElementById('card-container');
-    if (!container) return;
     container.innerHTML = '';
-    
-    // 4가지 스프레드 패턴 중 랜덤 선택
-    const patterns = ['pattern-grid', 'pattern-arc', 'pattern-wave', 'pattern-fan'];
-    const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
-    
-    // 기존 패턴 클래스 제거 후 새 클래스 추가
-    patterns.forEach(p => container.classList.remove(p));
-    container.classList.add(selectedPattern);
-
     deck.forEach((cardId, index) => {
         const cardElem = document.createElement('div');
         cardElem.className = 'tarot-card';
         cardElem.dataset.id = cardId;
-        cardElem.style.setProperty('--i', index); // CSS 배치를 위한 인덱스 변수
 
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
@@ -459,8 +447,10 @@ function renderCards() {
         };
         img.onerror = () => {
             if (img.src.includes('images/premium/') && img.src.endsWith('.png')) {
+                // 프리미엄 경로에서 png 실패 시 jpg 시도
                 img.src = img.src.replace('.png', '.jpg');
             } else if (img.src.includes('images/premium/')) {
+                // 프리미엄 경로에서 모두 실패 시 일반 경로 시도
                 img.src = `images/${cardId}.png`;
             } else if (img.src.endsWith('.png')) {
                 tryLoadImage('jpg');
@@ -836,21 +826,8 @@ function initLotto() {
         for (let i = 1; i <= 45; i++) {
             const ball = createLottoBall(i);
             ball.style.position = 'absolute';
-            
-            // 초기 위치 무작위 설정
             ball.style.left = (Math.random() * 80 + 10) + '%';
             ball.style.top = (Math.random() * 80 + 10) + '%';
-            
-            // 개별 애니메이션 변수 설정 (각 공이 다르게 움직이도록)
-            ball.style.setProperty('--tx1', (Math.random() * 60 - 30) + 'px');
-            ball.style.setProperty('--ty1', (Math.random() * 60 - 30) + 'px');
-            ball.style.setProperty('--tx2', (Math.random() * 60 - 30) + 'px');
-            ball.style.setProperty('--ty2', (Math.random() * 60 - 30) + 'px');
-            ball.style.setProperty('--tx3', (Math.random() * 60 - 30) + 'px');
-            ball.style.setProperty('--ty3', (Math.random() * 60 - 30) + 'px');
-            ball.style.setProperty('--dur', (0.6 + Math.random() * 0.8) + 's');
-            ball.style.setProperty('--delay', (Math.random() * 0.5) + 's');
-            
             spinner.appendChild(ball);
         }
     }
@@ -1199,58 +1176,7 @@ function startStockMode() {
         showPremiumInfo();
         return;
     }
-    
-    const ritualModal = document.getElementById('stock-ritual-modal');
-    if (ritualModal) {
-        ritualModal.style.display = 'flex'; // 강제 표시
-        ritualModal.classList.add('active');
-        
-        let count = 3;
-        const numEl = document.getElementById('stock-countdown-number');
-        const circle = document.getElementById('stock-circle');
-        
-        if (numEl) numEl.innerText = count;
-        if (circle) {
-            circle.style.transition = 'none';
-            circle.style.strokeDashoffset = '0';
-            setTimeout(() => {
-                circle.style.transition = 'stroke-dashoffset 3s linear';
-                circle.style.strokeDashoffset = '339.292';
-            }, 50);
-        }
-
-        const intv = setInterval(() => {
-            count--;
-            if (count > 0) {
-                if (numEl) numEl.innerText = count;
-            } else {
-                clearInterval(intv);
-                ritualModal.classList.remove('active');
-                setTimeout(() => {
-                    ritualModal.style.display = 'none';
-                    openMode('stock');
-                }, 500);
-            }
-        }, 1000);
-    } else {
-        openMode('stock');
-    }
-}
-
-function startThinkingMode() {
-    if (!isPremium()) {
-        showPremiumInfo();
-        return;
-    }
-    
-    // "그 사람" 모드 진입 (관계 선택 모달 표시)
-    const modal = document.getElementById('thinking-modal');
-    if (modal) {
-        modal.classList.add('active');
-        // STEP 1으로 초기화
-        document.getElementById('thinking-step-1').classList.add('active');
-        document.getElementById('thinking-step-2').classList.remove('active');
-    }
+    openMode('stock');
 }
 
 function showStockResult() {
@@ -1277,27 +1203,17 @@ function showStockResult() {
         verdictArea.classList.remove('hidden');
         const action = data3.pos3.action || 'wait';
         
-        // 6단계 매핑 데이터 (STRONG_BUY, BUY, HOLD, WAIT, SELL, STRONG_SELL)
+        // 매핑 데이터
         const verdictMap = {
-            strong_buy: {
+            buy: {
                 main: "STRONG BUY",
                 sub: "지금이 황금의 문이 열리는 시간입니다. 우주의 기운이 당신의 포트폴리오를 향해 흐르고 있습니다.",
-                img: "images/stock_strong_buy.png"
-            },
-            buy: {
-                main: "BUY (매수)",
-                sub: "긍정적인 신호가 포착되었습니다. 철저한 분석 하에 진입을 고려하기 좋은 타이밍입니다.",
                 img: "images/stock_buy.png"
             },
             sell: {
-                main: "SELL (매도)",
-                sub: "하락의 전조가 보입니다. 수익을 실현하거나 리스크를 관리하며 현금을 확보할 때입니다.",
-                img: "images/stock_sell.png"
-            },
-            strong_sell: {
                 main: "STRONG SELL",
                 sub: "피의 폭풍이 오고 있습니다. 즉시 대피하여 자산을 보호하고 다음 기회를 노리세요.",
-                img: "images/stock_strong_sell.png"
+                img: "images/stock_sell.png"
             },
             hold: {
                 main: "STAY HOLD",
@@ -1320,12 +1236,11 @@ function showStockResult() {
             vImg.style.display = v.img ? 'block' : 'none';
         }
 
-        // 테마 및 글로우 적용 (기존 4개 + 신규 2개 대응)
-        const themes = ['strong_buy', 'buy', 'hold', 'wait', 'sell', 'strong_sell'];
+        // 테마 및 글로우 적용
         verdictArea.className = `stock-final-verdict verdict-${action}`;
         const modalContent = modal.querySelector('.modal-content');
         if (modalContent) {
-            themes.forEach(t => modalContent.classList.remove(`glow-${t}`));
+            modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
             modalContent.classList.add(`glow-${action}`);
         }
     }
