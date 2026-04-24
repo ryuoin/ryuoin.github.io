@@ -818,7 +818,7 @@ body.premium-mode .modal-title {
     margin-top: 0.9rem;
     font-size: 0.82rem;
     color: rgba(212, 175, 55, 0.6);
-    font-style: italic;
+    font-style: normal;
     letter-spacing: 0.02rem;
     text-align: center;
 }
@@ -2792,24 +2792,28 @@ body.premium-mode .premium-badge {
 /* =============================================
    결과 리딩 텍스트 스타일 통합 (Typography Standard)
    ============================================= */
-.res-desc, 
-.love-meaning, 
-.money-meaning, 
-.yesno-meaning, 
-.daily-message,
-.love-advice, 
-.money-advice, 
-.daily-advice, 
-.yesno-advice,
-.premium-text-glow p,
-.recap-text,
-.viz-desc {
+.res-desc, .res-desc *,
+.love-meaning, .love-meaning *,
+.money-meaning, .money-meaning *,
+.yesno-meaning, .yesno-meaning *,
+.daily-message, .daily-message *,
+.love-advice, .love-advice *,
+.money-advice, .money-advice *,
+.daily-advice, .daily-advice *,
+.yesno-advice, .yesno-advice *,
+.premium-text-glow p, .premium-text-glow p *,
+.recap-text, .recap-text *,
+.viz-desc, .viz-desc * {
     font-size: 1.1rem !important; /* 전체 본문 크기 통일 */
     line-height: 1.8 !important;
-    color: #e0e0e0;
     word-break: keep-all;
     font-family: 'Noto Sans KR', sans-serif !important;
-    font-style: normal !important; /* 기울임꼴 제거 */
+    font-style: normal !important; /* 기울임꼴 완전 제거 */
+}
+
+/* 기본 이탤릭 태그 강제 초기화 */
+i, em, cite, address, dfn {
+    font-style: normal !important;
 }
 
 /* 프리미엄 모드에서의 본문 색상 통합 */
