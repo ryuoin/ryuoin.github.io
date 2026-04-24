@@ -2928,6 +2928,45 @@ body.premium-mode .recap-text {
     color: #555;
 }
 
+/* 프리미엄 전용 해석 텍스트 가독성 최적화 (Ivory 테마) */
+body.premium-mode .premium-label {
+    color: #8b6b10;
+    font-weight: 800;
+    text-shadow: none;
+}
+
+body.premium-mode .premium-text-glow {
+    background: rgba(197, 160, 40, 0.08);
+    border-left-color: #8b6b10;
+}
+
+body.premium-mode .premium-text-glow p {
+    color: #222 !important;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+/* 등급 배지 고대비 스타일 (Ivory 테마용) */
+body.premium-mode .love-rating-badge,
+body.premium-mode .money-rating-badge,
+body.premium-mode .yesno-rating-badge,
+body.premium-mode .daily-rating-badge {
+    background: #fff !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    animation: none !important; /* 가독성을 위해 애니메이션 중지 */
+}
+
+/* 연애운/금전운/데일리 배지 색상 오버라이드 (1-5) */
+body.premium-mode .rating-1 { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
+body.premium-mode .rating-2 { color: #1976d2 !important; border-color: #1976d2 !important; background: rgba(25, 118, 210, 0.05) !important; }
+body.premium-mode .rating-3 { color: #8b6b10 !important; border-color: #8b6b10 !important; background: rgba(139, 107, 16, 0.05) !important; }
+body.premium-mode .rating-4 { color: #e65100 !important; border-color: #e65100 !important; background: rgba(230, 81, 0, 0.05) !important; }
+body.premium-mode .rating-5 { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
+
+/* Yes/No 전용 고대비 */
+body.premium-mode .rating-yes { color: #008a4c !important; border-color: #008a4c !important; background: rgba(0, 138, 76, 0.05) !important; }
+body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828 !important; background: rgba(198, 40, 40, 0.05) !important; }
+
 /* 안내 문구 및 버튼 가독성 개선 (Ivory 테마 대응) */
 .thinking-bottom-desc {
     text-align: center;
