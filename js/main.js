@@ -582,6 +582,11 @@ function showDailyResult(cardId) {
 // ========== 이번주 운세 결과 ==========
 function showWeeklyResult() {
     const modal = document.getElementById('result-modal');
+    
+    // 결과 모달 타이틀 초기화 (주식 모드와 공유하므로 매번 설정)
+    const modalTitle = modal.querySelector('.modal-title');
+    if (modalTitle) modalTitle.textContent = '당신의 이번주 운세';
+
     const pastId = selectedCards[0], presentId = selectedCards[1], futureId = selectedCards[2];
     const pastData = tarotDataList.find(item => item.id === pastId);
     const presentData = tarotDataList.find(item => item.id === presentId);
@@ -1182,7 +1187,8 @@ function showStockResult() {
     if (!view) return;
     
     // 결과 화면 초기화 작업
-    document.getElementById('header-title').textContent = `📈 이 주식 사야해? 리딩 결과`;
+    const modalTitle = modal.querySelector('.modal-title');
+    if (modalTitle) modalTitle.textContent = `📈 이 주식 사야해? 리딩 결과`;
     document.getElementById('stock-result-view').classList.remove('hidden');
     if (banner) banner.style.display = 'none'; // 주식은 항상 프리미엄이므로 배너 숨김
 
