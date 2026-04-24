@@ -1184,9 +1184,6 @@ function showStockResult() {
     const view = document.getElementById('stock-result-view');
     const banner = document.getElementById('banner-weekly'); // 주식도 결과 화면 베이스 공유
 
-    if (!view) return;
-    
-    // 결과 화면 초기화 작업
     const modalTitle = modal.querySelector('.modal-title');
     if (modalTitle) modalTitle.textContent = `📈 이 주식 사야해? 리딩 결과`;
     document.getElementById('stock-result-view').classList.remove('hidden');
@@ -1199,6 +1196,54 @@ function showStockResult() {
     const data1 = stockData[card1Id];
     const data2 = stockData[card2Id];
     const data3 = stockData[card3Id];
+
+    // 최종 결론(Final Verdict) 렌더링
+    const verdictArea = document.getElementById('stock-final-verdict');
+    if (verdictArea) {
+        verdictArea.classList.remove('hidden');
+        const action = data3.pos3.action || 'wait';
+        
+        // 매핑 데이터
+        const verdictMap = {
+            buy: {
+                main: "STRONG BUY",
+                sub: "지금이 황금의 문이 열리는 시간입니다. 우주의 기운이 당신의 포트폴리오를 향해 흐르고 있습니다.",
+                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_buy_verdict_1777013440993.png"
+            },
+            sell: {
+                main: "STRONG SELL",
+                sub: "피의 폭풍이 오고 있습니다. 즉시 대피하여 자산을 보호하고 다음 기회를 노리세요.",
+                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_sell_verdict_final_1777013584011.png"
+            },
+            hold: {
+                main: "STAY HOLD",
+                sub: "뿌린 씨앗이 결실을 맺을 때까지 인내하세요. 흔들리지 않는 마음이 수익으로 연결됩니다.",
+                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_hold_verdict_final_1777013611030.png"
+            },
+            wait: {
+                main: "JUST WAIT",
+                sub: "안개가 끼었을 때는 멈추는 것이 상책입니다. 우주가 보내는 명확한 신호를 기다리세요.",
+                img: "C:/Users/user/.gemini/antigravity/brain/d9dc12b3-00fe-492e-a185-733df0a92ad6/stock_wait_verdict_final_last_1777014542209.png"
+            }
+        };
+
+        const v = verdictMap[action] || verdictMap.wait;
+        document.getElementById('stock-verdict-main').innerText = v.main;
+        document.getElementById('stock-verdict-sub').innerText = v.sub;
+        const vImg = document.getElementById('img-stock-verdict');
+        if (vImg) {
+            vImg.src = v.img || 'images/card-back.png';
+            vImg.style.display = v.img ? 'block' : 'none';
+        }
+
+        // 테마 및 글로우 적용
+        verdictArea.className = `stock-final-verdict verdict-${action}`;
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
+            modalContent.classList.add(`glow-${action}`);
+        }
+    }
 
     // 카드 이미지 렌더링 (상단 3개 슬롯 재사용)
     renderCardImg(document.getElementById('res-card-past'), card1Id, tarotDataList.find(c => c.id === card1Id));
