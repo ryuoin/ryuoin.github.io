@@ -61,13 +61,13 @@
 
             <div class="mode-buttons">
                 <!-- 프리미엄 메뉴 상단 배치 -->
-                <button id="btn-mode-stock" class="mode-btn premium-only-btn">
+                <button id="btn-mode-stock" class="mode-btn premium-only-btn" onclick="startStockMode()">
                     <span class="mode-btn-icon">📈</span>
                     <span class="mode-btn-title">이 주식 사야해?</span>
                     <span class="mode-btn-desc">시장의 에너지와 종목의 향방을 분석합니다</span>
                     <span class="premium-badge">PREMIUM</span>
                 </button>
-                <button id="btn-mode-thinking" class="mode-btn premium-only-btn">
+                <button id="btn-mode-thinking" class="mode-btn premium-only-btn" onclick="startThinkingMode()">
                     <span class="mode-btn-icon">💭</span>
                     <span class="mode-btn-title">그 사람 지금 내 생각 할까?</span>
                     <span class="mode-btn-desc">그 사람의 마음과 연락 타이밍을 해독합니다</span>
@@ -456,17 +456,6 @@
                     <svg class="countdown-svg"><circle class="countdown-circle" id="thinking-circle" cx="60" cy="60" r="54"></circle></svg>
                     <div id="countdown-number">3</div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== 주식 타로 집중 의식 모달 ========== -->
-    <div id="stock-ritual-modal" class="modal-overlay" style="z-index: 150;">
-        <div class="thinking-panel glass-panel">
-            <h2 class="modal-title">어떤 종목인가요?</h2>
-            <div class="countdown-container">
-                <svg class="countdown-svg"><circle class="countdown-circle" id="stock-circle" cx="60" cy="60" r="54"></circle></svg>
-                <div id="stock-countdown-number">3</div>
             </div>
         </div>
     </div>
