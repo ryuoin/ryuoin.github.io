@@ -2735,8 +2735,33 @@ body.premium-mode .btn-back-mode:hover {
     border-color: #8b5e5e;
 }
 
-/* 푸터 및 상세 정보 */
-body.premium-mode .app-footer-info { color: #9a8a8a; }
+/* 푸터 및 상세 정보 (중앙 정렬 및 가독성 강화) */
+.app-footer-info {
+    text-align: center;
+    padding: 2.5rem 1rem 4rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    width: 100%;
+}
+
+.footer-link-author, .footer-link-privacy {
+    color: #a67c52; /* 선명한 로즈 골드 브라운 */
+    text-decoration: none;
+    border-bottom: 1px solid rgba(166, 124, 82, 0.3);
+    transition: all 0.3s;
+    margin: 0 5px;
+}
+
+.footer-link-author:hover, .footer-link-privacy:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+body.premium-mode .app-footer-info { 
+    color: #9a8a8a; 
+    text-align: center;
+}
 body.premium-mode .footer-link-author { color: #8b5e5e; border-color: rgba(139, 94, 94, 0.3); }
 body.premium-mode .footer-link-privacy { color: #6d5b5b; }
 
