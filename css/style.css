@@ -3172,25 +3172,9 @@ body.premium-mode .stock-result-area {
     border: 1px dashed rgba(255, 171, 145, 0.4);
 }
 
-.important-disclaimer {
-    font-size: 1.2rem !important;
-    font-weight: 800 !important;
-    color: #ffffff !important;
-    background: linear-gradient(135deg, #ff1744, #d50000) !important;
-    border: 3px solid #ff1744 !important;
-    padding: 1.5rem !important;
-    box-shadow: 0 0 25px rgba(255, 23, 68, 0.4);
-    border-radius: 12px !important;
-    margin-bottom: 2.5rem !important;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    animation: pulse-red 2s infinite;
-}
 
-@keyframes pulse-red {
-    0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 23, 68, 0.4); }
-    50% { transform: scale(1.02); box-shadow: 0 0 35px rgba(255, 23, 68, 0.6); }
-    100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 23, 68, 0.4); }
-}
+
+
 
 body.premium-mode .stock-disclaimer {
     background: #fff5f2;
@@ -3198,11 +3182,7 @@ body.premium-mode .stock-disclaimer {
     border: 1px dashed #ffab91;
 }
 
-body.premium-mode .important-disclaimer {
-    background: linear-gradient(135deg, #d32f2f, #b71c1c) !important;
-    color: #ffffff !important;
-    border-color: #b71c1c !important;
-}
+
 
 .stock-pos-item {
     margin-bottom: 2.5rem;
