@@ -17,7 +17,7 @@ const menuStats = [
 // 2. 향후 개발 로드맵 데이터
 const roadmapData = [
     { title: "관리자 대시보드 & 접속 로그 시스템 구축", status: "done", tag: "v2.3" },
-    { title: "콘텐츠 보강 및 데이터 윤문 (tarotData.js)", status: "done", tag: "Data" },
+    { title: "데이터 구조 모듈화 및 하위 파일 분리 (js/data/)", status: "done", tag: "Arch" },
     { title: "엑셀(CSV) 로그 다운로드 기능 구현", status: "done", tag: "Admin" },
     { title: "모바일 실기기 최종 검수 (레이아웃/스크롤)", status: "todo", tag: "Core" },
     { title: "PWA/TWA 상점 배포 점검", status: "todo", tag: "Deploy" },
