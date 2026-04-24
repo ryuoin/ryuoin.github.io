@@ -169,7 +169,6 @@ function openMode(mode) {
     selectedCards = [];
 
     const modeScreen = document.getElementById('mode-select-screen');
-    selectedCards = []; // 모드 진입 시 선택된 카드 리스트 초기화 (모드 간 데이터 오염 방지)
 
     // 로또 모드
     if (mode === 'lotto') {
@@ -863,10 +862,6 @@ function restartGame() {
         slots[1].innerHTML = "현재 <span>(상황)</span>";
         slots[2].innerHTML = "미래 <span>(조언)</span>";
     }
-
-    // 주식 전용 최종 결론 섹션 숨김
-    const stockVerdict = document.getElementById('stock-final-verdict');
-    if (stockVerdict) stockVerdict.classList.add('hidden');
 
     // 카드 컨테이너 복구
     document.getElementById('card-container').classList.remove('hidden');
