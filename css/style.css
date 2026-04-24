@@ -2854,13 +2854,100 @@ body.premium-mode .premium-badge {
     color: #3d3b38;
 }
 
-/* Thinking 모드 요약 리포트 상세 스타일 */
-.recap-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 0.5rem 0;
+/* =============================================
+   결과 리딩 텍스트 스타일 통합 (Typography Standard)
+   ============================================= */
+.res-desc, 
+.love-meaning, 
+.money-meaning, 
+.yesno-meaning, 
+.daily-message,
+.premium-text-glow p,
+.recap-text,
+.viz-desc {
+    font-size: 1.1rem !important; /* 기본보다 소폭 확대 */
+    line-height: 1.8 !important;
+    color: #e0e0e0;
+    word-break: keep-all;
+    font-family: 'Noto Sans KR', sans-serif;
 }
+
+/* 프리미엄 모드에서의 본문 색상 통합 */
+body.premium-mode .res-desc,
+body.premium-mode .love-meaning,
+body.premium-mode .money-meaning,
+body.premium-mode .yesno-meaning,
+body.premium-mode .daily-message,
+body.premium-mode .premium-text-glow p,
+body.premium-mode .recap-text,
+body.premium-mode .viz-desc {
+    color: #333 !important;
+    font-weight: 400;
+}
+
+/* 보조 조언 및 요약 텍스트 */
+.love-advice, 
+.money-advice, 
+.daily-advice, 
+.yesno-advice,
+.thinking-bottom-desc,
+.restart-caution {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+}
+
+body.premium-mode .love-advice,
+body.premium-mode .money-advice,
+body.premium-mode .daily-advice,
+body.premium-mode .yesno-advice {
+    color: #444 !important;
+}
+
+/* 결과 헤더/라벨 스타일 통합 */
+.premium-label,
+.viz-title,
+.recap-pos-label,
+.recap-title,
+.love-advice-label,
+.money-advice-label,
+.yesno-advice-label,
+.daily-advice-label {
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.8rem;
+    display: block;
+    text-transform: uppercase;
+}
+
+body.premium-mode .premium-label,
+body.premium-mode .viz-title,
+body.premium-mode .recap-pos-label,
+body.premium-mode .recap-title {
+    color: #8b6b10 !important;
+}
+
+/* 카드 이름 스타일 통합 */
+.love-card-name,
+.money-card-name,
+.yesno-card-name,
+.daily-card-name,
+.recap-card-name {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    font-family: 'Hahmlet', serif;
+    margin-bottom: 1rem;
+}
+
+body.premium-mode .love-card-name,
+body.premium-mode .money-card-name,
+body.premium-mode .yesno-card-name,
+body.premium-mode .daily-card-name,
+body.premium-mode .recap-card-name {
+    color: #1a1a1a !important;
+}
+
+/* 기존 스타일들 하단 보완 */
 
 .recap-item {
     background: rgba(255, 255, 255, 0.03);
