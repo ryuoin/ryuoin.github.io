@@ -131,6 +131,13 @@ function initModeSelect() {
     document.getElementById('btn-mode-yesno').addEventListener('click', () => openMode('yesno'));
     document.getElementById('btn-mode-lotto').addEventListener('click', () => openMode('lotto'));
 
+    // 프리미엄 전용 모드 리스너
+    const btnStock = document.getElementById('btn-mode-stock');
+    if (btnStock) btnStock.addEventListener('click', startStockMode);
+
+    const btnThinking = document.getElementById('btn-mode-thinking');
+    if (btnThinking) btnThinking.addEventListener('click', startThinkingMode);
+
     document.getElementById('btn-restart').addEventListener('click', restartGame);
     document.getElementById('btn-love-restart').addEventListener('click', restartGame);
     document.getElementById('btn-money-restart').addEventListener('click', restartGame);
@@ -1177,33 +1184,56 @@ function startStockMode() {
         return;
     }
     
-    // 주식 타로 집중 의식 시작
     const ritualModal = document.getElementById('stock-ritual-modal');
     if (ritualModal) {
+        ritualModal.style.display = 'flex'; // 강제 표시
         ritualModal.classList.add('active');
+        
         let count = 3;
         const numEl = document.getElementById('stock-countdown-number');
         const circle = document.getElementById('stock-circle');
         
-        numEl.innerText = count;
-        if (circle) circle.style.strokeDashoffset = '0';
-        
-        setTimeout(() => {
-            if (circle) circle.style.strokeDashoffset = '339.292';
-        }, 50);
+        if (numEl) numEl.innerText = count;
+        if (circle) {
+            circle.style.transition = 'none';
+            circle.style.strokeDashoffset = '0';
+            setTimeout(() => {
+                circle.style.transition = 'stroke-dashoffset 3s linear';
+                circle.style.strokeDashoffset = '339.292';
+            }, 50);
+        }
 
         const intv = setInterval(() => {
             count--;
             if (count > 0) {
-                numEl.innerText = count;
+                if (numEl) numEl.innerText = count;
             } else {
                 clearInterval(intv);
                 ritualModal.classList.remove('active');
-                openMode('stock');
+                setTimeout(() => {
+                    ritualModal.style.display = 'none';
+                    openMode('stock');
+                }, 500);
             }
         }, 1000);
     } else {
         openMode('stock');
+    }
+}
+
+function startThinkingMode() {
+    if (!isPremium()) {
+        showPremiumInfo();
+        return;
+    }
+    
+    // "그 사람" 모드 진입 (관계 선택 모달 표시)
+    const modal = document.getElementById('thinking-modal');
+    if (modal) {
+        modal.classList.add('active');
+        // STEP 1으로 초기화
+        document.getElementById('thinking-step-1').classList.add('active');
+        document.getElementById('thinking-step-2').classList.remove('active');
     }
 }
 
