@@ -3275,27 +3275,3 @@ body.premium-mode .stock-disclaimer {
     transition: all 1.5s ease-out;
 }
 
-/* 종목명 입력을 위한 인풋 스타일 커스텀 */
-#stock-name-input {
-    text-align: center;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    color: var(--gold);
-    background: rgba(255,255,255,0.05);
-    border: none;
-    border-bottom: 2px solid var(--gold);
-    padding: 10px;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-#stock-name-input:focus {
-    background: rgba(255,255,255,0.08);
-    border-bottom-color: var(--gold-light);
-}
-
-.stock-highlight {
-    color: var(--gold);
-    font-weight: bold;
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
-}
