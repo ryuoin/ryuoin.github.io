@@ -120,32 +120,33 @@ function shuffleArray(array) {
 function initModeSelect() {
     const modeScreen = document.getElementById('mode-select-screen');
     const readingScreen = document.getElementById('reading-screen');
-    modeScreen.classList.remove('hidden');
-    readingScreen.classList.add('hidden');
+    if (modeScreen) modeScreen.classList.remove('hidden');
+    if (readingScreen) readingScreen.classList.add('hidden');
     updatePremiumTestButton();
 
-    document.getElementById('btn-mode-daily').addEventListener('click', () => openMode('daily'));
-    document.getElementById('btn-mode-weekly').addEventListener('click', () => openMode('weekly'));
-    document.getElementById('btn-mode-love').addEventListener('click', () => openMode('love'));
-    document.getElementById('btn-mode-money').addEventListener('click', () => openMode('money'));
-    document.getElementById('btn-mode-yesno').addEventListener('click', () => openMode('yesno'));
-    document.getElementById('btn-mode-lotto').addEventListener('click', () => openMode('lotto'));
+    const safeAddListener = (id, callback) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('click', callback);
+    };
 
-    document.getElementById('btn-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-love-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-money-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-yesno-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-lotto-restart').addEventListener('click', restartGame);
-    document.getElementById('btn-lotto-home').addEventListener('click', restartGame);
-    document.getElementById('btn-back-to-mode').addEventListener('click', restartGame);
-    document.getElementById('btn-daily-restart').addEventListener('click', restartGame);
+    safeAddListener('btn-mode-daily', () => openMode('daily'));
+    safeAddListener('btn-mode-weekly', () => openMode('weekly'));
+    safeAddListener('btn-mode-love', () => openMode('love'));
+    safeAddListener('btn-mode-money', () => openMode('money'));
+    safeAddListener('btn-mode-yesno', () => openMode('yesno'));
+    safeAddListener('btn-mode-lotto', () => openMode('lotto'));
+
+    safeAddListener('btn-restart', restartGame);
+    safeAddListener('btn-love-restart', restartGame);
+    safeAddListener('btn-money-restart', restartGame);
+    safeAddListener('btn-yesno-restart', restartGame);
+    safeAddListener('btn-lotto-restart', restartGame);
+    safeAddListener('btn-lotto-home', restartGame);
+    safeAddListener('btn-back-to-mode', restartGame);
+    safeAddListener('btn-daily-restart', restartGame);
     
-    const thinkingRestartBtn = document.getElementById('btn-thinking-restart');
-    if (thinkingRestartBtn) thinkingRestartBtn.addEventListener('click', restartGame);
-
-    const lottoBtn = document.getElementById('btn-lotto-start');
-    if (lottoBtn) lottoBtn.addEventListener('click', startLottoDraw);
-
+    safeAddListener('btn-thinking-restart', restartGame);
+    safeAddListener('btn-lotto-start', startLottoDraw);
 }
 
 // ========== 오늘의 카드 버튼 상태 업데이트 ==========
@@ -587,6 +588,36 @@ function showWeeklyResult() {
     const modalTitle = modal.querySelector('.modal-title');
     if (modalTitle) modalTitle.textContent = '당신의 이번주 운세';
 
+    // 주식 전용 UI 숨김 및 일반 텍스트 박스 표시 (UI 간섭 방지)
+    const stockView = document.getElementById('stock-result-view');
+    if (stockView) {
+        stockView.classList.add('hidden');
+        stockView.style.setProperty('display', 'none', 'important');
+    }
+    
+    const stockVerdict = document.getElementById('stock-final-verdict');
+    if (stockVerdict) {
+        stockVerdict.classList.add('hidden');
+        stockVerdict.style.setProperty('display', 'none', 'important');
+    }
+
+    const combinedBox = document.querySelector('.combined-desc-box');
+    if (combinedBox) combinedBox.style.display = 'block';
+
+    // 주식 전용 글로우 효과 제거
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
+    }
+
+    // 카드 슬롯 타이틀 초기화 (주식 모드에서 변경된 타이틀 복구)
+    const slots = modal.querySelectorAll('.reading-slot-mini .slot-title-mini');
+    if (slots.length >= 3) {
+        slots[0].innerHTML = "과거 <span>(원인)</span>";
+        slots[1].innerHTML = "현재 <span>(상황)</span>";
+        slots[2].innerHTML = "미래 <span>(조언)</span>";
+    }
+
     const pastId = selectedCards[0], presentId = selectedCards[1], futureId = selectedCards[2];
     const pastData = tarotDataList.find(item => item.id === pastId);
     const presentData = tarotDataList.find(item => item.id === presentId);
@@ -789,17 +820,59 @@ function showYesNoResult() {
 function restartGame() {
     ['result-modal','love-result-modal','money-result-modal','yesno-result-modal','lotto-result-modal','daily-result-modal','thinking-result-modal'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.classList.remove('active');
+        if (el) {
+            el.classList.remove('active');
+            el.style.removeProperty('display'); // 인라인 스타일 초기화
+            el.style.display = '';
+        }
     });
     selectedCards = [];
     currentMode = null;
     if (typeof lottoInterval !== 'undefined' && lottoInterval) clearInterval(lottoInterval);
 
+    // 주식 전용 UI 및 글로우 효과 초기화
+    const stockView = document.getElementById('stock-result-view');
+    if (stockView) {
+        stockView.classList.add('hidden');
+        stockView.style.removeProperty('display');
+        stockView.style.display = 'none';
+    }
+    
+    const stockVerdict = document.getElementById('stock-final-verdict');
+    if (stockVerdict) {
+        stockVerdict.classList.add('hidden');
+        stockVerdict.style.removeProperty('display');
+        stockVerdict.style.display = 'none';
+    }
+
+    const resultModal = document.getElementById('result-modal');
+    if (resultModal) {
+        const modalContent = resultModal.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.classList.remove('glow-buy', 'glow-sell', 'glow-hold', 'glow-wait');
+        }
+    }
+    const combinedBox = document.querySelector('.combined-desc-box');
+    if (combinedBox) combinedBox.style.display = 'block';
+
+    // 카드 슬롯 타이틀 초기화 (과거/현재/미래로 복구)
+    const slots = document.querySelectorAll('.reading-slot-mini .slot-title-mini');
+    if (slots.length >= 3) {
+        slots[0].innerHTML = "과거 <span>(원인)</span>";
+        slots[1].innerHTML = "현재 <span>(상황)</span>";
+        slots[2].innerHTML = "미래 <span>(조언)</span>";
+    }
+
     // 카드 컨테이너 복구
-    document.getElementById('card-container').classList.remove('hidden');
-    document.getElementById('daily-spread-container').classList.add('hidden');
-    document.getElementById('reading-screen').classList.add('hidden');
-    document.getElementById('mode-select-screen').classList.remove('hidden');
+    const cardCont = document.getElementById('card-container');
+    if (cardCont) cardCont.classList.remove('hidden');
+    const dailyCont = document.getElementById('daily-spread-container');
+    if (dailyCont) dailyCont.classList.add('hidden');
+    const readingScreen = document.getElementById('reading-screen');
+    if (readingScreen) readingScreen.classList.add('hidden');
+    const modeScreen = document.getElementById('mode-select-screen');
+    if (modeScreen) modeScreen.classList.remove('hidden');
+    
     updateDailyBtnStatus();
 }
 
