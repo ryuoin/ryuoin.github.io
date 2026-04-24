@@ -4,24 +4,26 @@
 
 // 1. 메뉴 상태 데이터
 const menuStats = [
-    { name: "🌟 오늘의 카드", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
-    { name: "🔮 이번주 운세", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
-    { name: "⚖️ 그래 결심했어~! (Yes/No)", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
-    { name: "💫 당신의 연애운", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
+    { name: "🌟 오늘의 카드", update: "2026.04.24 (v2.7)", status: "정상", type: "Standard" },
+    { name: "🔮 이번주 운세", update: "2026.04.24 (v2.7)", status: "정상", type: "Standard" },
+    { name: "📈 이 주식 사야해?", update: "2026.04.24 (v2.7)", status: "정상", type: "Premium" },
+    { name: "💭 그 사람 지금 내 생각 할까?", update: "2026.04.24 (v2.7)", status: "정상", type: "Premium" },
     { name: "💰 당신의 금전운", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
-    { name: "🍀 이번주 행운 번호 (Lotto)", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
-    { name: "💭 그 사람 지금 내 생각 할까?", update: "2026.04.23 (v2.3)", status: "정상", type: "Premium" },
-    { name: "🛠️ 관리자 대시보드 (Logs)", update: "2026.04.23 (v2.3)", status: "정상", type: "Admin" }
+    { name: "💫 당신의 연애운", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
+    { name: "⚖️ 그래 결심했어~! (Yes/No)", update: "2026.04.23 (v2.3)", status: "정상", type: "Standard" },
+    { name: "🍀 이번주 행운 번호 (Lotto)", update: "2026.04.24 (v2.7)", status: "정상", type: "Standard" },
+    { name: "🛠️ 관리자 대시보드 (Logs)", update: "2026.04.24 (v2.7)", status: "정상", type: "Admin" }
 ];
 
 // 2. 향후 개발 로드맵 데이터
 const roadmapData = [
+    { title: "주식 타로(Stock Tarot) 프리미엄 기능 구현", status: "done", tag: "v2.7" },
+    { title: "프리미엄 결과 시각적 연출 강화 (Images/Aura/Verdict)", status: "done", tag: "v2.7" },
+    { title: "메인 메뉴 전략적 재배치 (프리미엄 우선순위)", status: "done", tag: "v2.7" },
     { title: "관리자 대시보드 & 접속 로그 시스템 구축", status: "done", tag: "v2.3" },
     { title: "데이터 구조 모듈화 및 하위 파일 분리 (js/data/)", status: "done", tag: "Arch" },
-    { title: "엑셀(CSV) 로그 다운로드 기능 구현", status: "done", tag: "Admin" },
     { title: "모바일 실기기 최종 검수 (레이아웃/스크롤)", status: "todo", tag: "Core" },
-    { title: "PWA/TWA 상점 배포 점검", status: "todo", tag: "Deploy" },
-    { title: "프리미엄 전용 카드 이미지 추가 (22장)", status: "done", tag: "Design" }
+    { title: "PWA/TWA 상점 배포 점검", status: "todo", tag: "Deploy" }
 ];
 
 // 접속 로그 GAS URL (공통 사용)
