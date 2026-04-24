@@ -578,7 +578,7 @@ function showDailyResult(cardId) {
     
     document.getElementById('daily-conclusion').innerHTML = ratingInfo.conclusion;
     handlePremiumBanner('banner-daily');
-
+    modal.scrollTop = 0;
     modal.classList.add('active');
 }
 
@@ -652,6 +652,7 @@ function showWeeklyResult() {
         }
     }
     handlePremiumBanner('banner-weekly');
+    modal.scrollTop = 0;
     modal.classList.add('active');
 }
 
@@ -680,7 +681,7 @@ function showLoveResult() {
     }
     document.getElementById('love-conclusion').innerHTML = ratingInfo.conclusion;
     handlePremiumBanner('banner-love');
-
+    modal.scrollTop = 0;
     modal.classList.add('active');
 }
 
@@ -720,7 +721,7 @@ function showMoneyResult() {
     }
     document.getElementById('money-conclusion').innerHTML = ratingInfo.conclusion;
     handlePremiumBanner('banner-money');
-
+    modal.scrollTop = 0;
     modal.classList.add('active');
 }
 
@@ -778,6 +779,7 @@ function showYesNoResult() {
     }
 
     handlePremiumBanner('banner-yesno');
+    modal.scrollTop = 0;
     modal.classList.add('active');
 }
 
@@ -1015,6 +1017,7 @@ function showThinkingResultSummary() {
     }
     
     incrementReadingCount();
+    modal.scrollTop = 0;
     modal.classList.add('active');
 }
 
