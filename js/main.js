@@ -434,11 +434,22 @@ function initDeck() {
 
 function renderCards() {
     const container = document.getElementById('card-container');
+    if (!container) return;
     container.innerHTML = '';
+    
+    // 4가지 스프레드 패턴 중 랜덤 선택
+    const patterns = ['pattern-grid', 'pattern-arc', 'pattern-wave', 'pattern-fan'];
+    const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    
+    // 기존 패턴 클래스 제거 후 새 클래스 추가
+    patterns.forEach(p => container.classList.remove(p));
+    container.classList.add(selectedPattern);
+
     deck.forEach((cardId, index) => {
         const cardElem = document.createElement('div');
         cardElem.className = 'tarot-card';
         cardElem.dataset.id = cardId;
+        cardElem.style.setProperty('--i', index); // CSS 배치를 위한 인덱스 변수
 
         const cardInner = document.createElement('div');
         cardInner.className = 'card-inner';
@@ -454,10 +465,8 @@ function renderCards() {
         };
         img.onerror = () => {
             if (img.src.includes('images/premium/') && img.src.endsWith('.png')) {
-                // 프리미엄 경로에서 png 실패 시 jpg 시도
                 img.src = img.src.replace('.png', '.jpg');
             } else if (img.src.includes('images/premium/')) {
-                // 프리미엄 경로에서 모두 실패 시 일반 경로 시도
                 img.src = `images/${cardId}.png`;
             } else if (img.src.endsWith('.png')) {
                 tryLoadImage('jpg');
