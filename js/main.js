@@ -509,7 +509,7 @@ function showDailyResult(cardId) {
     const prem = (typeof premiumData !== 'undefined') ? premiumData[cardId] : null;
 
     if (isPremium() && prem && prem.daily) {
-        document.getElementById('daily-message').innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 프리미엄 심층 에너지 분석</div><p>${prem.daily.message.replace(/\n/g, '<br>')}</p></div>`;
+        document.getElementById('daily-message').innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 프리미엄 심층 운세 분석 <span class="premium-inline-badge">PREMIUM</span></div><p>${prem.daily.message.replace(/\n/g, '<br>')}</p></div>`;
         document.getElementById('daily-advice').textContent = prem.daily.advice;
     } else {
         document.getElementById('daily-message').textContent = daily.message;
@@ -547,15 +547,15 @@ function showWeeklyResult() {
         if (isPremium() && prem0 && prem1 && prem2) {
              combinedDescDiv.innerHTML = `
                  <div class="reading-section">
-                     <p><div class="premium-label">💎 과거의 흐름 심층 해석</div><strong><span class="card-name-highlight">${pastData.name}</span></strong></p>
+                     <p><div class="premium-label">💎 과거의 흐름 심층 해석 <span class="premium-inline-badge">PREMIUM</span></div><strong><span class="card-name-highlight">${pastData.name}</span></strong></p>
                      <div class="premium-text-glow"><p>${prem0.weekly.past.replace(/\n/g, '<br>')}</p></div>
                  </div>
                  <div class="reading-section">
-                     <p><div class="premium-label">💎 현재의 상황 심층 해석</div><strong><span class="card-name-highlight">${presentData.name}</span></strong></p>
+                     <p><div class="premium-label">💎 현재의 상황 심층 해석 <span class="premium-inline-badge">PREMIUM</span></div><strong><span class="card-name-highlight">${presentData.name}</span></strong></p>
                      <div class="premium-text-glow"><p>${prem1.weekly.present.replace(/\n/g, '<br>')}</p></div>
                  </div>
                  <div class="reading-section" style="border-bottom:none;">
-                     <p><div class="premium-label">💎 미래의 조언 심층 해석</div><strong><span class="card-name-highlight">${futureData.name}</span></strong></p>
+                     <p><div class="premium-label">💎 미래의 조언 심층 해석 <span class="premium-inline-badge">PREMIUM</span></div><strong><span class="card-name-highlight">${futureData.name}</span></strong></p>
                      <div class="premium-text-glow"><p>${prem2.weekly.future.replace(/\n/g, '<br>')}</p></div>
                  </div>
                  <div class="conclusion-image-wrapper">
@@ -612,7 +612,7 @@ function showLoveResult() {
     const prem = (typeof premiumData !== 'undefined') ? premiumData[cardId] : null;
     
     if (isPremium() && prem && prem.love) {
-        document.getElementById('love-meaning').innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 프리미엄 심층 연애 해석</div><p>${prem.love.meaning.replace(/\n/g, '<br>')}</p></div>`;
+        document.getElementById('love-meaning').innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 프리미엄 심층 연애 해석 <span class="premium-inline-badge">PREMIUM</span></div><p>${prem.love.meaning.replace(/\n/g, '<br>')}</p></div>`;
         document.getElementById('love-advice').textContent = prem.love.advice;
     } else {
         document.getElementById('love-meaning').textContent = cardData.loveMeaning;
@@ -652,7 +652,7 @@ function showMoneyResult() {
     const prem = (typeof premiumData !== 'undefined') ? premiumData[cardId] : null;
     
     if (isPremium() && prem && prem.money) {
-        document.getElementById('money-meaning').innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 프리미엄 심층 금전 해석</div><p>${prem.money.meaning.replace(/\n/g, '<br>')}</p></div>`;
+        document.getElementById('money-meaning').innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 프리미엄 심층 금전 해석 <span class="premium-inline-badge">PREMIUM</span></div><p>${prem.money.meaning.replace(/\n/g, '<br>')}</p></div>`;
         document.getElementById('money-advice').textContent = prem.money.advice;
     } else {
         document.getElementById('money-meaning').textContent = cardData.moneyMeaning;
@@ -709,7 +709,7 @@ function showYesNoResult() {
         const yesnoText = isYes ? prem.weekly.future : prem.weekly.past;
         const premContainer = document.getElementById('yesno-premium-content');
         if (premContainer) {
-            premContainer.innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 심층 우주 조언</div><p>${yesnoText.replace(/\n/g, '<br>')}</p></div>`;
+            premContainer.innerHTML = `<div class="premium-text-glow"><div class="premium-label">💎 심층 우주 조언 <span class="premium-inline-badge">PREMIUM</span></div><p>${yesnoText.replace(/\n/g, '<br>')}</p></div>`;
             premContainer.style.display = 'block';
         }
     } else {
@@ -1088,7 +1088,7 @@ function showThinkingSummary() {
             item.className = 'recap-item';
             item.innerHTML = `
                 <div class="recap-header">
-                    <span class="recap-pos-label">STEP 0${idx+1}</span>
+                    <div class="recap-pos-label">STEP 0${idx+1} <span class="premium-inline-badge">PREMIUM</span></div>
                     <span class="recap-card-name">${cardName}</span>
                 </div>
                 <div class="recap-title">${pos.title}</div>
