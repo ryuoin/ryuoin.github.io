@@ -60,30 +60,12 @@
             </button>
 
             <div class="mode-buttons">
-                <button id="btn-mode-weekly" class="mode-btn" data-mode="weekly">
-                    <span class="mode-btn-icon">🔮</span>
-                    <span class="mode-btn-title">당신의 이번주 운세</span>
-                    <span class="mode-btn-desc">3장의 카드로 과거·현재·미래를 읽습니다</span>
-                </button>
-                <button id="btn-mode-yesno" class="mode-btn" data-mode="yesno">
-                    <span class="mode-btn-icon">⚖️</span>
-                    <span class="mode-btn-title">그래 결심했어~!</span>
-                    <span class="mode-btn-desc">명쾌한 Yes or No 해답을 얻습니다</span>
-                </button>
-                <button id="btn-mode-love" class="mode-btn" data-mode="love">
-                    <span class="mode-btn-icon">💫</span>
-                    <span class="mode-btn-title">당신의 연애운</span>
-                    <span class="mode-btn-desc">당신의 사랑 주파수를 감지합니다</span>
-                </button>
-                <button id="btn-mode-money" class="mode-btn" data-mode="money">
-                    <span class="mode-btn-icon">💰</span>
-                    <span class="mode-btn-title">당신의 금전운</span>
-                    <span class="mode-btn-desc">당신의 재물과 풍요의 흐름을 읽습니다</span>
-                </button>
-                <button id="btn-mode-lotto" class="mode-btn" data-mode="lotto">
-                    <span class="mode-btn-icon">🍀</span>
-                    <span class="mode-btn-title">이번주 행운 번호~!!</span>
-                    <span class="mode-btn-desc">우주의 기운이 담긴 6개의 번호를 뽑습니다</span>
+                <!-- 프리미엄 메뉴 상단 배치 -->
+                <button id="btn-mode-stock" class="mode-btn premium-only-btn" onclick="startStockMode()">
+                    <span class="mode-btn-icon">📈</span>
+                    <span class="mode-btn-title">이 주식 사야해?</span>
+                    <span class="mode-btn-desc">시장의 에너지와 종목의 향방을 분석합니다</span>
+                    <span class="premium-badge">PREMIUM</span>
                 </button>
                 <button id="btn-mode-thinking" class="mode-btn premium-only-btn" onclick="startThinkingMode()">
                     <span class="mode-btn-icon">💭</span>
@@ -91,11 +73,34 @@
                     <span class="mode-btn-desc">그 사람의 마음과 연락 타이밍을 해독합니다</span>
                     <span class="premium-badge">PREMIUM</span>
                 </button>
-                <button id="btn-mode-stock" class="mode-btn premium-only-btn" onclick="startStockMode()">
-                    <span class="mode-btn-icon">📈</span>
-                    <span class="mode-btn-title">이 주식 사야해?</span>
-                    <span class="mode-btn-desc">시장의 에너지와 종목의 향방을 분석합니다</span>
-                    <span class="premium-badge">PREMIUM</span>
+
+                <!-- 일반 메뉴 -->
+                <button id="btn-mode-weekly" class="mode-btn" data-mode="weekly">
+                    <span class="mode-btn-icon">🔮</span>
+                    <span class="mode-btn-title">당신의 이번주 운세</span>
+                    <span class="mode-btn-desc">3장의 카드로 과거·현재·미래를 읽습니다</span>
+                </button>
+                <button id="btn-mode-money" class="mode-btn" data-mode="money">
+                    <span class="mode-btn-icon">💰</span>
+                    <span class="mode-btn-title">당신의 금전운</span>
+                    <span class="mode-btn-desc">당신의 재물과 풍요의 흐름을 읽습니다</span>
+                </button>
+                <button id="btn-mode-love" class="mode-btn" data-mode="love">
+                    <span class="mode-btn-icon">💫</span>
+                    <span class="mode-btn-title">당신의 연애운</span>
+                    <span class="mode-btn-desc">당신의 사랑 주파수를 감지합니다</span>
+                </button>
+                <button id="btn-mode-yesno" class="mode-btn" data-mode="yesno">
+                    <span class="mode-btn-icon">⚖️</span>
+                    <span class="mode-btn-title">그래 결심했어~!</span>
+                    <span class="mode-btn-desc">명쾌한 Yes or No 해답을 얻습니다</span>
+                </button>
+
+                <!-- 행운 번호 (마지막) -->
+                <button id="btn-mode-lotto" class="mode-btn" data-mode="lotto">
+                    <span class="mode-btn-icon">🍀</span>
+                    <span class="mode-btn-title">이번주 행운 번호~!!</span>
+                    <span class="mode-btn-desc">우주의 기운이 담긴 6개의 번호를 뽑습니다</span>
                 </button>
             </div>
         </div>
