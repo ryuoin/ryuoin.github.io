@@ -2218,7 +2218,8 @@ body.premium-mode .modal-title {
 
 /* ========== "그 사람 지금 내 생각 할까?" 프리미엄 모달 스타일 ========== */
 #thinking-modal .thinking-panel,
-#yesno-ritual-modal .thinking-panel {
+#yesno-ritual-modal .thinking-panel,
+#stock-ritual-modal .thinking-panel {
     width: 90%;
     max-width: 480px;
     background: linear-gradient(135deg, rgba(20, 10, 30, 0.95), rgba(40, 20, 50, 0.95));
@@ -2234,7 +2235,8 @@ body.premium-mode .modal-title {
 }
 
 body.premium-mode #thinking-modal .thinking-panel,
-body.premium-mode #yesno-ritual-modal .thinking-panel {
+body.premium-mode #yesno-ritual-modal .thinking-panel,
+body.premium-mode #stock-ritual-modal .thinking-panel {
     background: linear-gradient(135deg, #ffffff, #fdfaf0);
     border-color: rgba(197, 160, 40, 0.3);
     box-shadow: 0 10px 40px rgba(197, 160, 40, 0.15);
@@ -2317,7 +2319,8 @@ body.premium-mode #yesno-ritual-modal .thinking-panel {
 }
 
 #countdown-number,
-#yesno-countdown-number {
+#yesno-countdown-number,
+#stock-countdown-number {
     font-size: 3rem;
     color: var(--text-light);
     font-weight: bold;
@@ -2325,7 +2328,8 @@ body.premium-mode #yesno-ritual-modal .thinking-panel {
 }
 
 body.premium-mode #countdown-number,
-body.premium-mode #yesno-countdown-number {
+body.premium-mode #yesno-countdown-number,
+body.premium-mode #stock-countdown-number {
     color: #8b5e5e;
     text-shadow: 0 0 10px rgba(166, 124, 82, 0.2);
 }
