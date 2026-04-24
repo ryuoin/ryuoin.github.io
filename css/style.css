@@ -41,10 +41,6 @@ body.premium-mode {
     padding: 0;
 }
 
-.hidden {
-    display: none !important;
-}
-
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
