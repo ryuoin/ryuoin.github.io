@@ -899,13 +899,14 @@ function initLotto() {
         for (let i = 1; i <= 45; i++) {
             const ball = createLottoBall(i);
             ball.style.position = 'absolute';
-            ball.style.left = (Math.random() * 70 + 15) + '%';
-            ball.style.top  = (Math.random() * 70 + 15) + '%';
+            // 배치 범위를 원통 전체로 더 넓힘
+            ball.style.left = (Math.random() * 85 + 7) + '%';
+            ball.style.top  = (Math.random() * 85 + 7) + '%';
             
-            // 개별 애니메이션 변수 설정
-            const delay = (Math.random() * 1.5).toFixed(2);
-            const duration = (0.5 + Math.random() * 0.7).toFixed(2);
-            ball.style.setProperty('--delay', `${delay}s`);
+            // 더 빠르고 불규칙한 애니메이션 변수 설정
+            const delay = (Math.random() * 1.2).toFixed(2);
+            const duration = (0.4 + Math.random() * 0.5).toFixed(2); 
+            ball.style.setProperty('--delay', `-${delay}s`); // 음수 delay로 즉시 시작 효과
             ball.style.setProperty('--dur', `${duration}s`);
             
             spinner.appendChild(ball);
