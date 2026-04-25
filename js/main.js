@@ -899,8 +899,15 @@ function initLotto() {
         for (let i = 1; i <= 45; i++) {
             const ball = createLottoBall(i);
             ball.style.position = 'absolute';
-            ball.style.left = (Math.random() * 80 + 10) + '%';
-            ball.style.top = (Math.random() * 80 + 10) + '%';
+            ball.style.left = (Math.random() * 70 + 15) + '%';
+            ball.style.top  = (Math.random() * 70 + 15) + '%';
+            
+            // 개별 애니메이션 변수 설정
+            const delay = (Math.random() * 1.5).toFixed(2);
+            const duration = (0.5 + Math.random() * 0.7).toFixed(2);
+            ball.style.setProperty('--delay', `${delay}s`);
+            ball.style.setProperty('--dur', `${duration}s`);
+            
             spinner.appendChild(ball);
         }
     }
