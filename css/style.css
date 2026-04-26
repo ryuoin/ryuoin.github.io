@@ -69,16 +69,16 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
 }
 .stars {
     position: fixed;
-    top: -10%; /* 주소창 변화에 대응하기 위한 버퍼 */
+    top: 0;
     left: 0;
     width: 100%;
-    height: 120%; /* 뷰포트보다 크게 설정하여 리사이징 떨림 방지 */
+    height: 100%;
+    min-height: -webkit-fill-available; /* iOS/모바일 브라우저 주소창 대응 */
     z-index: -2;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0); /* GPU 가속 및 레이어 분리 강제 */
     backface-visibility: hidden;
     perspective: 1000px;
-    will-change: transform;
-    pointer-events: none; /* 스크롤 간섭 방지 */
+    pointer-events: none;
 }
 .twinkling {
     background: transparent url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png') repeat top center;
@@ -174,12 +174,23 @@ body.premium-mode .premium-aura {
     margin-bottom: 0.8rem;
 }
 
+/* 프리미엄 모드 제목 가독성 강화 */
+body.premium-mode .mode-title {
+    color: #4a3728 !important; /* 깊이감 있는 앤틱 커피 색상 */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+}
+
 .mode-subtitle {
     font-family: 'Hahmlet', serif;
     color: #b3b3b3;
     font-size: 1.1rem;
     letter-spacing: 0.1rem;
     margin-bottom: 1.5rem;
+}
+
+body.premium-mode .mode-subtitle {
+    color: #6d5a4a !important;
+    font-weight: 700;
 }
 
 .test-toggle-container {
