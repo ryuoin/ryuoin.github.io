@@ -199,7 +199,7 @@
 
 .handover-viewer {
     padding: 25px !important;
-    max-height: 500px;
+    height: 500px; /* 높이를 고정하여 탭 전환 시 레이아웃 흔들림 방지 */
     overflow-y: auto;
 }
 
