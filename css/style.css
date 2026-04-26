@@ -591,10 +591,11 @@ body.premium-mode .modal-title {
 
 @media (max-width: 480px) {
     .cards-display {
-        gap: 6px;
+        gap: 2vw;
         padding: 0;
         width: 100%;
-        justify-content: space-around;
+        justify-content: center;
+        box-sizing: border-box;
     }
 }
 
@@ -706,9 +707,9 @@ body.premium-mode .modal-title {
 
 @media (max-width: 480px) {
     .res-card-wrapper {
-        width: 100px;
-        height: 160px;
-        margin-bottom: 1rem;
+        width: 27vw; /* 3장 배열 시 화면 너비에 맞춰 유동적으로 조절 */
+        height: calc(27vw * 1.6);
+        margin-bottom: 0.8rem;
     }
 }
 
