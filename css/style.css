@@ -1231,18 +1231,30 @@ body.premium-mode .modal-title {
     100% { transform: rotateZ(360deg); }
 }
 
-/* 개별 공 스타일 (원통 안에서 흩뿌려진 공들) */
+/* 범용 위치 공 스타일 (3D 구체 질감) */
+.lotto-ball {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    /* 차분하고 깊이감 있는 구체 질감 */
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+    backface-visibility: hidden;
+}
+
+/* 원통 안에서 흩뿌려진 작은 공들 전용 */
 .lotto-balls-spinner .lotto-ball {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
-    /* 발광 효과 완전 제거 및 매트한 질감 적용 */
-    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.1);
-    filter: none;
-    opacity: 1;
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
     position: absolute;
-    /* 기본 상태에서는 떨림 효과만 유지 */
-    animation: jitter 0.2s infinite alternate;
+    animation: jitter 0.25s infinite alternate;
 }
 
 /* 회전 중일 때 개별 공의 역동적인 움직임 */
@@ -1251,10 +1263,52 @@ body.premium-mode .modal-title {
     animation-delay: var(--delay, 0s);
 }
 
-@keyframes ballPop {
-    0% { transform: scale(0) translateY(-50px); opacity: 0; }
-    50% { transform: scale(1.2) translateY(10px); opacity: 1; }
-    100% { transform: scale(1) translateY(0); opacity: 1; }
+@keyframes jitter {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(2px, -2px); }
+}
+
+.lotto-dispenser {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: #000;
+    border: 2px solid #00f3ff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 20px rgba(0, 243, 255, 0.3);
+    z-index: 5;
+}
+
+/* 추출 결과 컨테이너의 큰 공들 */
+.lotto-draw-results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    min-height: 85px;
+    padding: 10px;
+}
+
+.lotto-draw-results .lotto-ball {
+    width: 58px;
+    height: 58px;
+    font-size: 1.4rem;
+}
+
+/* 공 색상 그룹 (번호별 색상 포인트) */
+.num-group-0 { color: #f1c40f !important; } 
+.num-group-1 { color: #3498db !important; } 
+.num-group-2 { color: #e74c3c !important; } 
+.num-group-3 { color: #ecf0f1 !important; } 
+.num-group-4 { color: #2ecc71 !important; }
+
+/* 추출 팝업 애니메이션 */
+.pop-out {
+    animation: ballPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform: scale(0);
 }
 
 /* 로또 공 내부 셔플링 미세 조정 (더 골고루 퍼지도록) */
