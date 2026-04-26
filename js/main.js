@@ -191,9 +191,13 @@ function openMode(mode) {
         return;
     }
 
-    // Yes or No 모드는 집중 의식(카운트다운) 거친 후 진입
+    // 집중 의식이 필요한 모드들
     if (mode === 'yesno') {
-        startYesNoRitual();
+        startRitual(mode, '해답을 원하는 것에<br>집중해 보세요~!');
+        return;
+    }
+    if (mode === 'stock') {
+        startRitual(mode, '시장과 종목의 흐름에<br>정신을 집중하세요');
         return;
     }
 
@@ -237,12 +241,16 @@ function startMode(mode) {
 }
 
 /**
- * Yes or No 전용 집중 의식 애니메이션 (3, 2, 1)
+ * 통합 집중 의식 애니메이션 (3, 2, 1)
+ * @param {string} mode - 진입할 모드
+ * @param {string} titleHTML - 표시할 제목 (HTML 허용)
  */
-function startYesNoRitual() {
+function startRitual(mode, titleHTML) {
     const modal = document.getElementById('yesno-ritual-modal');
+    const titleEl = modal.querySelector('.modal-title');
+    if (titleEl) titleEl.innerHTML = titleHTML;
     
-    // 테마 적용 (집중 의식 단계에서도 배경색이 등급에 맞게 보이도록)
+    // 테마 적용
     if (isPremium()) {
         document.body.classList.add('premium-mode');
     } else {
@@ -269,7 +277,7 @@ function startYesNoRitual() {
         } else {
             clearInterval(intv);
             modal.classList.remove('active');
-            startMode('yesno');
+            startMode(mode);
         }
     }, 1000);
 }
