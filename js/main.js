@@ -580,6 +580,44 @@ function handleCardClick(cardElem, cardId) {
     }
 }
 
+/**
+ * 주식 시장 개장 여부 확인 (주말 판별)
+ */
+function isMarketClosed() {
+    const today = new Date();
+    const day = today.getDay(); 
+    return day === 0 || day === 6; // 0:일, 6:토
+}
+
+function showStockResult(cardId) {
+    const modal = document.getElementById('reading-modal');
+    const title = document.getElementById('reading-title');
+    const content = document.getElementById('reading-content');
+    
+    title.textContent = "이 주식 사야해? (Stock Tarot)";
+    
+    // 주말일 경우 '휴장' 배지 추가
+    if (isMarketClosed()) {
+        const closedBadge = document.createElement('span');
+        closedBadge.className = 'market-closed-badge';
+        closedBadge.textContent = '오늘은 휴장!';
+        title.appendChild(closedBadge);
+    }
+    
+    const cardData = tarotData[cardId];
+    const stockInfo = cardData.stock;
+    
+    let html = `
+        <div class="stock-result-area">
+            <div class="stock-disclaimer">
+                ${isMarketClosed() 
+                    ? "현재 시장은 휴장 중입니다. 결과는 다음 개장일의 에너지를 투영한 것으로 참고해 주세요." 
+                    : "본 결과는 타로 카드의 에너지를 해석한 것이며, 실제 투자 결과는 본인의 책임입니다."}
+            </div>
+        </div>`;
+    content.innerHTML = html;
+}
+
 // ========== 카드 이미지 렌더 헬퍼 ==========
 function renderCardImg(wrapper, cardId, data) {
     wrapper.innerHTML = '';
