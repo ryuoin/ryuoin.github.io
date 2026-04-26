@@ -72,11 +72,12 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    min-height: -webkit-fill-available; /* iOS/모바일 브라우저 주소창 대응 */
+    height: 100%; /* JS가 없을 때의 대비책 */
     z-index: -2;
-    transform: translate3d(0, 0, 0); /* GPU 가속 및 레이어 분리 강제 */
+    transform: translate3d(0, 0, 0); 
+    -webkit-transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     perspective: 1000px;
     pointer-events: none;
 }
