@@ -3105,18 +3105,6 @@ body.premium-mode .premium-text-glow p {
     line-height: 1.8;
 }
 
-/* 메인 메뉴용 배지 위치 조정 (잘림 방지 및 사이즈 최적화) */
-.main-menu-badge {
-    position: absolute;
-    top: -2px; /* 잘림 방지를 위해 안쪽으로 조정 */
-    left: -2px;
-    margin-left: 0 !important;
-    font-size: 0.78rem !important; /* 메인 메뉴 버튼용 80% 사이즈 */
-    padding: 2px 8px !important;
-    transform: rotate(-4deg); /* 회전 각도 미세 조정 */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
 /* 등급 배지 고대비 스타일 (Ivory 테마용) */
 body.premium-mode .love-rating-badge,
 body.premium-mode .money-rating-badge,
@@ -3156,11 +3144,11 @@ body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828
     line-height: normal;
 }
 
-/* 주말 휴장 안내 배지 (주식 타로 전용 - 최적화 버전) */
+/* 주말 휴장 안내 배지 (주식 타로 전용 - 고가시성 및 사이즈 최적화) */
 .market-closed-badge {
     display: inline-block;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.88rem; /* 기존 1.1rem의 80% 수준 */
+    font-size: 0.85rem; /* 기존 1.1rem에서 약 80% 축소 */
     font-weight: 900;
     padding: 3px 10px;
     border-radius: 5px;
@@ -3182,16 +3170,16 @@ body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828
     to { opacity: 1; transform: scale(1.1); filter: brightness(1.2); }
 }
 
-/* 메인 메뉴용 배지 위치 조정 (프리미엄 배지 반대편) */
+/* 메인 메뉴용 배지 위치 조정 (버튼 안쪽으로 안착) */
 .main-menu-badge {
     position: absolute;
-    top: -10px; /* 버튼 밖으로 살짝 튀어나오게 하여 배너 느낌 강조 */
-    left: -10px;
+    top: 5px; /* 안쪽으로 배치하여 잘림 방지 */
+    left: 5px;
     margin-left: 0 !important;
-    font-size: 0.95rem !important; /* 버튼 내 가독성 확보를 위한 사이즈 */
-    padding: 3px 10px !important;
-    transform: rotate(-5deg); /* 약간 회전시켜 배너 느낌 부여 */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    font-size: 0.75rem !important; /* 기존 0.95rem에서 약 80% 축소 */
+    padding: 2px 8px !important;
+    transform: rotate(-3deg); /* 회전 각도도 살짝 완화 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 body.premium-mode .premium-inline-badge {
