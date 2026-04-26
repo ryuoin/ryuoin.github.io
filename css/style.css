@@ -1541,23 +1541,29 @@ body.premium-mode .modal-title {
     height: 112px;
     border-radius: 8px;
     cursor: pointer;
-    /* 위치 및 변수 시스템 초기화 */
+    
+    /* [핵심] 위치 및 변수 시스템 초기화 */
     --y-offset: 0px;
     --card-scale: 1;
     left: var(--card-left, 50%);
-    /* 트랜스폼은 여기서 한 번만 정의하여 위치 유실을 원천 차단 */
-    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) + var(--y-offset))) rotate(var(--card-rot, 0deg)) scale(var(--card-scale));
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease, box-shadow 0.3s ease;
+    
+    /* [필독] 트랜스폼 속성을 여기서 !important로 봉인하여 위치 유실을 원천 차단합니다. 
+       상태 변화는 오직 --y-offset과 --card-scale 변수 변경으로만 수행됩니다. */
+    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) + var(--y-offset))) 
+               rotate(var(--card-rot, 0deg)) 
+               scale(var(--card-scale)) !important;
+               
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease, box-shadow 0.3s ease;
     transform-origin: bottom center;
     will-change: transform;
+    z-index: 10;
 }
 
 .daily-spread-card.deal-animate {
-    /* 초기 애니메이션 완료 후 상태 */
     opacity: 1;
 }
 
-/* 호버시 제자리에서 위로만 쏙 올라오는 효과 */
+/* 호버 시: 트랜스폼을 바꾸지 않고 변수값만 변경하여 제자리 상승 구현 */
 .daily-spread-card.hovered {
     --y-offset: -35px;
     --card-scale: 1.1;
@@ -1566,7 +1572,7 @@ body.premium-mode .modal-title {
 }
 
 .daily-spread-card.selected {
-    /* 선택시 제자리에서 조금 더 위로 고정 */
+    /* 선택 시: 제자리에서 더 높이 상승 및 고정 */
     --y-offset: -55px;
     --card-scale: 1.15;
     filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
@@ -1590,10 +1596,10 @@ body.premium-mode .modal-title {
 }
 
 @keyframes cardFlip {
-    /* 애니메이션 중에도 동일한 변수 시스템을 사용하여 위치 점프 방지 */
-    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
-    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(90deg) scale(1.2); }
-    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
+    /* 애니메이션 도중에도 변수 기반 시스템을 유지하여 절대 위치 이탈 방지 */
+    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15) !important; }
+    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(90deg) scale(1.2) !important; }
+    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15) !important; }
 }
 
 /* 카드 덮개 (뒷면) */
