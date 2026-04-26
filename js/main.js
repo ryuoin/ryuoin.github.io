@@ -477,7 +477,7 @@ function handleSpreadCardClick(cardEl, cardId, mode) {
 
     setTimeout(() => {
         document.getElementById('reading-screen').classList.add('hidden');
-        document.getElementById('card-container').classList.remove('hidden');
+        document.getElementById('card-container').classList.add('hidden');
         document.getElementById('daily-spread-container').classList.add('hidden');
 
         if (mode === 'daily')  { showDailyResult(cardId);   }
@@ -968,7 +968,11 @@ function initLotto() {
     const homeBtn = document.getElementById('btn-lotto-home');
     startBtn.classList.remove('hidden');
     startBtn.disabled = false;
+    startBtn.style.opacity = '1';
+    startBtn.style.pointerEvents = 'auto';
     homeBtn.classList.remove('hidden');
+    homeBtn.style.opacity = '1';
+    homeBtn.style.pointerEvents = 'auto';
     const spinner = document.getElementById('lotto-balls-spinner');
     if (spinner) {
         spinner.innerHTML = '';
@@ -1002,13 +1006,19 @@ function createLottoBall(num) {
 }
 
 function startLottoDraw() {
-    document.getElementById('btn-lotto-start').disabled = true;
-    document.getElementById('btn-lotto-start').classList.add('hidden');
-    document.getElementById('btn-lotto-home').classList.add('hidden');
+    const startBtn = document.getElementById('btn-lotto-start');
+    const homeBtn = document.getElementById('btn-lotto-home');
+    startBtn.disabled = true;
+    startBtn.style.opacity = '0';
+    startBtn.style.pointerEvents = 'none';
+    homeBtn.style.opacity = '0';
+    homeBtn.style.pointerEvents = 'none';
+    
     let nums = [];
     for (let i = 1; i <= 45; i++) nums.push(i);
     shuffleArray(nums);
     lottoNumbers = nums.slice(0, 6).sort((a, b) => a - b);
+    
     const spinner = document.getElementById('lotto-balls-spinner');
     if (spinner) spinner.classList.add('spinning');
     let drawCount = 0;
