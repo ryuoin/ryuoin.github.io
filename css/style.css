@@ -3105,6 +3105,18 @@ body.premium-mode .premium-text-glow p {
     line-height: 1.8;
 }
 
+/* 메인 메뉴용 배지 위치 조정 (잘림 방지 및 사이즈 최적화) */
+.main-menu-badge {
+    position: absolute;
+    top: -2px; /* 잘림 방지를 위해 안쪽으로 조정 */
+    left: -2px;
+    margin-left: 0 !important;
+    font-size: 0.78rem !important; /* 메인 메뉴 버튼용 80% 사이즈 */
+    padding: 2px 8px !important;
+    transform: rotate(-4deg); /* 회전 각도 미세 조정 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
 /* 등급 배지 고대비 스타일 (Ivory 테마용) */
 body.premium-mode .love-rating-badge,
 body.premium-mode .money-rating-badge,
@@ -3144,21 +3156,21 @@ body.premium-mode .rating-no  { color: #c62828 !important; border-color: #c62828
     line-height: normal;
 }
 
-/* 주말 휴장 안내 배지 (주식 타로 전용 - 고가시성 버전) */
+/* 주말 휴장 안내 배지 (주식 타로 전용 - 최적화 버전) */
 .market-closed-badge {
     display: inline-block;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.1rem; /* 약 2배 확대 */
+    font-size: 0.88rem; /* 기존 1.1rem의 80% 수준 */
     font-weight: 900;
-    padding: 4px 14px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b); /* 더 강렬한 레드 */
+    padding: 3px 10px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: #fff;
     margin-left: 8px;
     vertical-align: middle;
-    letter-spacing: -0.03rem;
-    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.6), inset 0 0 10px rgba(255,255,255,0.3);
-    border: 2px solid #fff;
+    letter-spacing: -0.02rem;
+    box-shadow: 0 3px 10px rgba(255, 75, 43, 0.5), inset 0 0 8px rgba(255,255,255,0.3);
+    border: 1.5px solid #fff;
     pointer-events: none;
     line-height: 1.2;
     animation: marketPulse 1.5s infinite alternate ease-in-out;
