@@ -17,13 +17,14 @@ const menuStats = [
 
 // 2. 향후 개발 로드맵 데이터
 const roadmapData = [
-    { title: "주식 타로(Stock Tarot) 프리미엄 기능 구현", status: "done", tag: "v2.7" },
-    { title: "프리미엄 결과 시각적 연출 강화 (Images/Aura/Verdict)", status: "done", tag: "v2.7" },
-    { title: "메인 메뉴 전략적 재배치 (프리미엄 우선순위)", status: "done", tag: "v2.7" },
-    { title: "관리자 대시보드 & 접속 로그 시스템 구축", status: "done", tag: "v2.3" },
-    { title: "데이터 구조 모듈화 및 하위 파일 분리 (js/data/)", status: "done", tag: "Arch" },
-    { title: "모바일 실기기 최종 검수 (레이아웃/스크롤)", status: "todo", tag: "Core" },
-    { title: "PWA/TWA 상점 배포 점검", status: "todo", tag: "Deploy" }
+    { title: "로또 3D 애니메이션 고도화 (무광/개별 튕김)", status: "done", tag: "v3.1" },
+    { title: "광고 전면 제거 및 클린 UI/UX 적용", status: "done", tag: "v3.2" },
+    { title: "디자인 시스템 및 프로젝트 문서 체계화 (s2/)", status: "done", tag: "Arch" },
+    { title: "구글 플레이 스토어 등록 및 심사 준비", status: "todo", tag: "Deploy" },
+    { title: "월 단위 정기 결제 시스템(In-app Billing) 구축", status: "todo", tag: "Pay" },
+    { title: "신규 메뉴: 배우자 스프레드/미니 캘틱 추가", status: "todo", tag: "Content" },
+    { title: "신규 메뉴: 펫 타로(일반용) 추가", status: "todo", tag: "Content" },
+    { title: "모바일 실기기 UI/UX 최종 폴리싱", status: "todo", tag: "Design" }
 ];
 
 // 접속 로그 GAS URL (공통 사용)
