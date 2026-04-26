@@ -434,6 +434,14 @@ function getSpreadPattern(type, i, rowIdx, isMob) {
     };
 }
 
+/**
+ * 카드의 현재 오프셋 변수를 업데이트하는 헬퍼
+ */
+function updateCardOffset(card, y, scale) {
+    card.style.setProperty('--y-offset', y);
+    card.style.setProperty('--card-scale', scale);
+}
+
 function handleSpreadCardClick(cardEl, cardId, mode) {
     if (cardEl.classList.contains('selected') || cardEl.classList.contains('disabled')) return;
 
