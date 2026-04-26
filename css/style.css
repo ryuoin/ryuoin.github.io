@@ -2087,39 +2087,7 @@ body.premium-mode .modal-title {
     box-shadow: inset 0 0 40px rgba(0,0,0,0.6), 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(79, 172, 254, 0.15) !important;
 }
 
-/* =============================================
-   Card Spread Animation - 촤라락 펼쳐지는 효과
-   ============================================= */
-
-/* 초기 상태는 JS의 deal-init 클래스가 제어 */
-
-/* 펼침 애니메이션 적용 클래스 */
-.daily-spread-card.deal-animate {
-    opacity: 1;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* 각 카드가 제 위치로 돌아가는 것은 nth-child 기본 transform이 적용됨 */
-/* 각 카드의 위치는 JS 동적 변수를 통해 제어됨 */
-
-/* 호버/선택 시에는 deal-animate의 transform을 오버라이드 */
-.daily-spread-row .daily-spread-card.deal-animate.hovered {
-    transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
-    filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
-    z-index: 50 !important;
-}
-
-.daily-spread-row .daily-spread-card.deal-animate.selected {
-    transform: translateY(-40px) rotate(0deg) scale(1.15) !important;
-    filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
-    z-index: 60 !important;
-}
-
-@media (max-width: 480px) {
-    /* 모바일 위치는 JS 동적 변수로 제어됨 */
-    
-    .daily-spread-row .daily-spread-card.deal-animate.hovered { transform: translateY(-25px) rotate(0deg) scale(1.1) !important; }
-}
+/* 레거시 중복 스타일 제거됨 */
 
 /* =============================================
    PERFORMANCE FIX: Replace external texture URLs
