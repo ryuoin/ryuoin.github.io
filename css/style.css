@@ -1292,20 +1292,25 @@ body.premium-mode .modal-title {
     z-index: 5;
 }
 
-/* 추출 결과 컨테이너의 큰 공들 */
+/* 추출 결과 컨테이너 (결과 공들이 가로로 정렬되도록 강제) */
 .lotto-draw-results {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-    min-height: 85px;
-    padding: 10px;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px;
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .lotto-draw-results .lotto-ball {
-    width: 58px;
-    height: 58px;
-    font-size: 1.4rem;
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.2rem !important;
+    margin: 5px;
 }
 
 /* 공 색상 그룹 (스타일 중복 제거 및 가독성 확보) */
