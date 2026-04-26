@@ -68,11 +68,30 @@
                 </div>
             </section>
 
-            <!-- 4. 프로젝트 인수인계 문서 -->
+            <!-- 4. 프로젝트 개발 문서 및 소스 정보 -->
             <section class="admin-section">
-                <h2 class="section-title">📝 프로젝트 인수인계 문서 (Handover V2)</h2>
-                <div class="glass-panel handover-viewer" style="margin-top: 15px;">
-                    <pre id="handover-content" class="handover-text">문서를 불러오는 중...</pre>
+                <h2 class="section-title">📂 프로젝트 개발 리포트</h2>
+                <div class="handover-tabs">
+                    <button class="tab-btn active" onclick="switchAdminTab('sd')">앱 개요 (SD)</button>
+                    <button class="tab-btn" onclick="switchAdminTab('hd2')">작업 계획 (HD2)</button>
+                    <button class="tab-btn" onclick="switchAdminTab('zip')">최종 소스 (ZIP)</button>
+                </div>
+                <div class="glass-panel handover-viewer">
+                    <div id="handover-content-container">
+                        <pre id="handover-content" class="handover-text">문서를 불러오는 중...</pre>
+                    </div>
+                    <div id="zip-info-container" style="display:none;">
+                        <div class="zip-info-box">
+                            <h3 style="color:var(--gold); margin-bottom:15px;">📦 최신 소스 코드 패키지</h3>
+                            <table class="admin-table">
+                                <tr><td>파일명</td><td id="zip-filename">tarot_app_20260426.zip</td></tr>
+                                <tr><td>위치</td><td>s2/</td></tr>
+                                <tr><td>백업 날짜</td><td>2026-04-26</td></tr>
+                                <tr><td>버전 비고</td><td>광고 제거 및 프리미엄 클린 컨셉 적용 완료본</td></tr>
+                            </table>
+                            <p style="margin-top:20px; color:rgba(255,255,255,0.5); font-size:0.85rem;">* 본 파일은 s2 폴더 내에 물리적으로 저장되어 있습니다.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
