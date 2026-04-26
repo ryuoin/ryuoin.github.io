@@ -1541,27 +1541,34 @@ body.premium-mode .modal-title {
     height: 112px;
     border-radius: 8px;
     cursor: pointer;
+    /* 위치 및 변수 시스템 초기화 */
+    --y-offset: 0px;
+    --card-scale: 1;
+    left: var(--card-left, 50%);
+    /* 트랜스폼은 여기서 한 번만 정의하여 위치 유실을 원천 차단 */
+    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) + var(--y-offset))) rotate(var(--card-rot, 0deg)) scale(var(--card-scale));
     transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease, box-shadow 0.3s ease;
     transform-origin: bottom center;
     will-change: transform;
 }
 
-/* 11장을 부채꼴로 배치 — JS 동적 계산 시스템으로 전환됨 */
 .daily-spread-card.deal-animate {
-    left: var(--card-left, 50%);
-    transform: translate(var(--card-x, 0px), var(--card-y, 0px)) rotate(var(--card-rot, 0deg));
+    /* 초기 애니메이션 완료 후 상태 */
+    opacity: 1;
 }
 
-/* 호버시 카드가 위로 쏙 올라오는 효과 */
+/* 호버시 제자리에서 위로만 쏙 올라오는 효과 */
 .daily-spread-card.hovered {
-    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 35px)) rotate(var(--card-rot, 0deg)) scale(1.1) !important;
+    --y-offset: -35px;
+    --card-scale: 1.1;
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
     z-index: 50 !important;
 }
 
 .daily-spread-card.selected {
-    /* 선택된 위치에서 수평좌표(x)와 회전(rot)은 유지하고 수직(y)으로만 50px 더 위로 이동 */
-    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important;
+    /* 선택시 제자리에서 조금 더 위로 고정 */
+    --y-offset: -55px;
+    --card-scale: 1.15;
     filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
     z-index: 60 !important;
     cursor: default;
@@ -1583,10 +1590,10 @@ body.premium-mode .modal-title {
 }
 
 @keyframes cardFlip {
-    /* 애니메이션 모든 단계에서 원래의 x좌표와 회전값을 유지해야 중앙으로 튀지 않음 */
-    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
-    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) rotateY(90deg) scale(1.2); }
-    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
+    /* 애니메이션 중에도 동일한 변수 시스템을 사용하여 위치 점프 방지 */
+    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
+    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(90deg) scale(1.2); }
+    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 55px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
 }
 
 /* 카드 덮개 (뒷면) */
@@ -1621,8 +1628,8 @@ body.premium-mode .modal-title {
         left: var(--card-left, 50%);
         transform: translate(var(--card-x, 0px), var(--card-y, 0px)) rotate(var(--card-rot, 0deg));
     }
-    .daily-spread-card.hovered { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 25px)) rotate(var(--card-rot, 0deg)) scale(1.1) !important; }
-    .daily-spread-card.selected { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 35px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important; }
+    .daily-spread-card.hovered { --y-offset: -25px; --card-scale: 1.1; }
+    .daily-spread-card.selected { --y-offset: -35px; --card-scale: 1.15; }
 }
 
 /* =============================================
