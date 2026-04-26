@@ -1,4 +1,4 @@
-# 타로 앱 스타일 관리 (td2.md) - v1.0
+# 타로 앱 스타일 관리 (sd.md) - v1.1
 
 이 문서는 앱의 시각적 아이덴티티와 스타일 시스템을 정의합니다. 최종 목표인 **앱 출시(일반/프리미엄)**를 위한 디자인 일관성을 유지하는 데 목적이 있습니다.
 
@@ -7,12 +7,13 @@
 ## 1. 디자인 시스템 (Design Tokens)
 
 ### 🎨 색상 팔레트 (Color Palette)
-- **Primary (Gold)**: `#d4af37` / `#ffd700` (고급스러운 타로 테마)
-- **Background**: `#0d0f1b` (신비로운 밤하늘/우주)
+- **Primary (Gold)**: `--gold: #d4af37` / `--gold-light: #fbe69e`
+- **Background (Dark)**: `--bg-dark: #0a0514` (신비로운 밤하늘/우주)
 - **SF Theme (Lotto)**: `#00f3ff` (네온 사이언, 미래지향적)
-- **Premium (Rose Ivory)**: `#fff5f5` / `rgba(255, 182, 193, 0.2)` (부드럽고 고급스러운 분홍빛 아이보리)
-- **Error/No**: `#ef5350` (Red)
-- **Success/Yes**: `#00e676` (Green)
+- **Premium (Ivory)**: `--bg-dark: #fbf9f4` / `--gold: #c5a028` (차분하고 세련된 프리미엄 아이보리)
+- **Status Colors**: 
+  - Yes/Success: `#00e676` (Green)
+  - No/Error: `#ef5350` (Red)
 
 ### ✍️ 타이포그래피 (Typography)
 - **Cinzel**: 영문 및 숫자 (신비롭고 고전적인 느낌)
@@ -46,8 +47,12 @@
 - **속도**: 2.0s ~ 4.0s 사이의 랜덤 duration으로 묵직한 물리감 구현
 
 ### ✨ Premium Aura (프리미엄 효과)
-- 배경에 흐르는 듯한 유체(Fluid) 애니메이션 레이어
-- 프리미엄 전용 메뉴 진입 시 활성화
+- 배경에 흐르는 듯한 유체(Fluid) 애니메이션 레이어 (`aura-glow`)
+- 프리미엄 전용 메뉴 진입 시 활성화 (`body.premium-mode`)
+
+### 🧘 집중 의식 (3-2-1 Ritual)
+- **대상 모드**: Yes/No, 그 사람의 속마음(Thinking), 주식 타로(Stock)
+- **효과**: 원형 게이지가 줄어들며 3, 2, 1 카운트다운. 사용자의 집중을 유도하여 프리미엄 경험 강화.
 
 ---
 
@@ -62,4 +67,4 @@
 | **해석 깊이** | 기본 키워드 및 흐름 분석 | 상세 데이터 기반 AI 심층 조언 |
 
 ---
-**Last Updated**: 2026-04-26 by Antigravity
+**Last Updated**: 2026-04-26 13:46 by Antigravity
