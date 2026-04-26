@@ -1240,13 +1240,23 @@ body.premium-mode .modal-title {
     font-family: 'Cinzel', serif;
     font-weight: bold;
     color: #fff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    /* 차분하고 깊이감 있는 구체 질감 */
-    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
-    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6), 0 4px 10px rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.05);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    /* 구체 질감 강화: 더 밝고 선명한 그라데이션 */
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, rgba(0,0,0,0.6) 100%);
+    background-color: #444; /* 기본 배경색 */
+    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.2), 0 5px 15px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
     backface-visibility: hidden;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
 }
+
+/* 번호대별 선명한 배경색 적용 */
+.lotto-ball.num-group-0 { background-color: #f1c40f; color: #000; text-shadow: none; } /* 1-10: Yellow */
+.lotto-ball.num-group-1 { background-color: #3498db; } /* 11-20: Blue */
+.lotto-ball.num-group-2 { background-color: #e74c3c; } /* 21-30: Red */
+.lotto-ball.num-group-3 { background-color: #95a5a6; } /* 31-40: Gray */
+.lotto-ball.num-group-4 { background-color: #2ecc71; } /* 41-45: Green */
 
 /* 원통 안에서 흩뿌려진 작은 공들 전용 */
 .lotto-balls-spinner .lotto-ball {
@@ -1298,12 +1308,9 @@ body.premium-mode .modal-title {
     font-size: 1.4rem;
 }
 
-/* 공 색상 그룹 (번호별 색상 포인트) */
-.num-group-0 { color: #f1c40f !important; } 
-.num-group-1 { color: #3498db !important; } 
-.num-group-2 { color: #e74c3c !important; } 
-.num-group-3 { color: #ecf0f1 !important; } 
-.num-group-4 { color: #2ecc71 !important; }
+/* 공 색상 그룹 (스타일 중복 제거 및 가독성 확보) */
+.num-group-0 { color: #000 !important; }
+.num-group-1, .num-group-2, .num-group-3, .num-group-4 { color: #fff !important; }
 
 /* 추출 팝업 애니메이션 */
 .pop-out {
@@ -1515,11 +1522,10 @@ body.premium-mode .modal-title {
     transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 35px)) rotate(var(--card-rot, 0deg)) scale(1.1) !important;
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
     z-index: 50 !important;
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
 }
 
 .daily-spread-card.selected {
-    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 45px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important;
+    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important;
     filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
     z-index: 60 !important;
     cursor: default;
@@ -1541,9 +1547,9 @@ body.premium-mode .modal-title {
 }
 
 @keyframes cardFlip {
-    0% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
-    50% { transform: translateY(-50px) rotateY(90deg) scale(1.2); }
-    100% { transform: translateY(-50px) rotateY(0deg) scale(1.2); }
+    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotateY(0deg) scale(1.15); }
+    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotateY(90deg) scale(1.2); }
+    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotateY(0deg) scale(1.15); }
 }
 
 /* 카드 덮개 (뒷면) */
