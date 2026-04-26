@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkPremiumTheme();
     renderMenuStats();
     renderRoadmap();
-    loadHandoverV2(); // V2 전용 로드
+    switchAdminTab('sd'); // 초기 탭 설정
     initVisitorStats(); // 방문자 통계 초기화
 });
 
@@ -180,18 +180,40 @@ function downloadLogs() {
     document.body.removeChild(link);
 }
 
-// 5. 인수인계 문서 로드 (V2 고정)
-async function loadHandoverV2() {
+// 8. 문서 및 소스 탭 전환 로직
+async function switchAdminTab(type) {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contentContainer = document.getElementById('handover-content-container');
+    const zipContainer = document.getElementById('zip-info-container');
     const contentArea = document.getElementById('handover-content');
-    if (!contentArea) return;
+
+    // 탭 활성화 UI 처리
+    tabs.forEach(tab => {
+        const tabText = tab.innerText.toLowerCase();
+        if (tabText.includes(type)) tab.classList.add('active');
+        else tab.classList.remove('active');
+    });
+
+    // ZIP 정보 탭인 경우
+    if (type === 'zip') {
+        contentContainer.style.display = 'none';
+        zipContainer.style.display = 'block';
+        return;
+    }
+
+    // 문서 탭인 경우
+    contentContainer.style.display = 'block';
+    zipContainer.style.display = 'none';
+
+    const filePath = type === 'sd' ? 's2/sd.md' : 's2/hd2.md';
     
     try {
-        contentArea.innerText = "최신 인수인계 데이터를 불러오는 중...";
-        const response = await fetch('handover_context_V2.md');
+        contentArea.innerText = `${type.toUpperCase()} 데이터를 불러오는 중...`;
+        const response = await fetch(filePath);
         if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
         const text = await response.text();
         contentArea.innerText = text;
     } catch (err) {
-        contentArea.innerText = `에러: ${err.message}\n(handover_context_V2.md 파일이 서버에 있는지 확인해 주세요.)`;
+        contentArea.innerText = `에러: ${err.message}\n(${filePath} 파일이 서버에 있는지 확인해 주세요.)`;
     }
 }
