@@ -905,7 +905,7 @@ function initLotto() {
             
             // 더 빠르고 불규칙한 애니메이션 변수 설정
             const delay = (Math.random() * 1.2).toFixed(2);
-            const duration = (0.4 + Math.random() * 0.5).toFixed(2); 
+            const duration = (0.8 + Math.random() * 1.0).toFixed(2); 
             ball.style.setProperty('--delay', `-${delay}s`); // 음수 delay로 즉시 시작 효과
             ball.style.setProperty('--dur', `${duration}s`);
             
