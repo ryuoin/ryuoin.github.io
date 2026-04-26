@@ -297,10 +297,11 @@ function initSpread(mode) {
     const deckAll = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deckAll);
 
-    const row1 = deckAll.slice(0, 11);
-    const row2 = deckAll.slice(11, 22);
+    // 0: Classic, 1: Ribbon, 2: Arc, 3: Wave, 4: Staircase
+    const patternType = Math.floor(Math.random() * 5);
+    const isMob = window.innerWidth <= 480;
 
-    [row1, row2].forEach((rowCards, rowIdx) => {
+    [deckAll.slice(0, 11), deckAll.slice(11, 22)].forEach((rowCards, rowIdx) => {
         const rowEl = document.createElement('div');
         rowEl.className = 'daily-spread-row';
 
@@ -308,6 +309,13 @@ function initSpread(mode) {
             const card = document.createElement('div');
             card.className = 'daily-spread-card';
             card.dataset.id = cardId;
+
+            // 패턴별 좌표 계산
+            const pos = getSpreadPattern(patternType, i, rowIdx, isMob);
+            card.style.setProperty('--card-left', pos.left);
+            card.style.setProperty('--card-x', pos.x);
+            card.style.setProperty('--card-y', pos.y);
+            card.style.setProperty('--card-rot', pos.rot);
 
             const cover = document.createElement('div');
             cover.className = 'daily-spread-cover';
@@ -335,16 +343,11 @@ function initSpread(mode) {
             card.addEventListener('click', () => handleSpreadCardClick(card, cardId, mode));
             rowEl.appendChild(card);
 
-            // 카드 딜링 애니메이션: deal-init(중앙 스택) → deal-animate(부채꼴)
-            // rAF 이중 중첩으로 브라우저가 초기 상태를 먼저 페인트한 뒤 트랜지션 시작
-            const baseDelay = rowIdx * 600; // 두 번째 줄은 첫 줄 끝난 뒤 시작
-            const cardDelay = baseDelay + (i * 45); // 카드마다 45ms 간격
+            const baseDelay = rowIdx * 600;
+            const cardDelay = baseDelay + (i * 45);
 
-            // 즉시 deal-init 클래스 추가 (DOM 삽입 직후 opacity:0, 중앙 위치)
             card.classList.add('deal-init');
-
             setTimeout(() => {
-                // rAF 두 번 중첩: 첫 번째 rAF에서 레이아웃 계산, 두 번째 rAF에서 클래스 교체
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         card.classList.remove('deal-init');
@@ -356,6 +359,60 @@ function initSpread(mode) {
 
         container.appendChild(rowEl);
     });
+}
+
+/**
+ * 5가지 스프레드 패턴 좌표 계산 엔진
+ */
+function getSpreadPattern(type, i, rowIdx, isMob) {
+    let left = '50%';
+    let x = 0, y = 0, rot = 0;
+
+    const baseStep = isMob ? 25 : 50; // 기본 간격
+    const centerIdx = 5; // 11장 중 가운데
+
+    switch(type) {
+        case 0: // Classic Double Fan
+            x = (i - centerIdx) * (isMob ? 25 : 50) + (isMob ? -10 : -35);
+            rot = (i - centerIdx) * 4;
+            break;
+
+        case 1: // Unified Ribbon (촘촘한 리본)
+            x = (i - centerIdx) * (isMob ? 18 : 35);
+            rot = (i - centerIdx) * 1.5;
+            y = Math.abs(i - centerIdx) * 2;
+            break;
+
+        case 2: // Rising Arc (중앙이 솟은 아치)
+            x = (i - centerIdx) * (isMob ? 22 : 45);
+            y = -Math.pow(i - centerIdx, 2) * (isMob ? 0.8 : 1.5);
+            rot = (i - centerIdx) * 6;
+            break;
+
+        case 3: // Gentle Wave (부드러운 물결)
+            x = (i - centerIdx) * (isMob ? 24 : 48);
+            y = Math.sin(i * 0.8) * (isMob ? 8 : 15);
+            rot = Math.cos(i * 0.8) * 5;
+            break;
+
+        case 4: // Offset Staircase (계단형 엇갈림)
+            const rowOffset = rowIdx === 0 ? -15 : 15;
+            x = (i - centerIdx) * (isMob ? 25 : 50) + rowOffset;
+            y = (i - centerIdx) * (isMob ? 2 : 4);
+            rot = rowIdx === 0 ? -2 : 2;
+            break;
+
+        default:
+            x = (i - centerIdx) * baseStep;
+            rot = (i - centerIdx) * 4;
+    }
+
+    return { 
+        left: left, 
+        x: x + 'px', 
+        y: y + 'px', 
+        rot: rot + 'deg' 
+    };
 }
 
 function handleSpreadCardClick(cardEl, cardId, mode) {
