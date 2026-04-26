@@ -73,6 +73,7 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     width: 100%; height: 100%;
     z-index: -2;
     transform: translateZ(0);
+    will-change: transform; /* 모바일 스크롤 성능 및 고정 안정성 강화 */
 }
 .twinkling {
     background: transparent url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png') repeat top center;
@@ -2107,15 +2108,15 @@ body.premium-mode .modal-title {
                       radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
     background-size: cover !important;
     background-position: center !important;
-    background-attachment: fixed !important;
-    background-blend-mode: screen; /* 문양들이 신비롭게 빛나도록 합성 */
+    background-attachment: scroll !important; /* 모바일 호환성을 위해 fixed 대신 scroll 사용 (요소가 이미 fixed임) */
+    background-blend-mode: screen; 
     animation: none !important;
-    opacity: 0.7 !important; /* 가느다란 선의 가시성을 위해 투명도 상향 */
+    opacity: 0.7 !important;
 }
 
 /* 프리미엄 모드: 고결한 아이보리 & 골드 신성 기하학 우주 배경 (완전 강제 모드) */
 body.premium-mode .stars {
-    background: #fdfaf0 url('../images/art-nouveau-bg-premium.png') no-repeat center center / cover fixed !important;
+    background: #fdfaf0 url('../images/art-nouveau-bg-premium.png') no-repeat center center / cover scroll !important;
     background-image: url('../images/art-nouveau-bg-premium.png'),
                       radial-gradient(at 50% 100%, #fdfaf0 0%, #ffffff 100%) !important;
     background-blend-mode: normal !important; 
