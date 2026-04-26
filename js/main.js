@@ -297,8 +297,8 @@ function initSpread(mode) {
     const deckAll = Array.from({length: 22}, (_, i) => i);
     shuffleArray(deckAll);
 
-    // 0: Classic, 1: Ribbon, 2: Arc, 3: Wave, 4: Staircase
-    const patternType = Math.floor(Math.random() * 5);
+    // 0~7: 총 8가지 패턴 중 랜덤 선택
+    const patternType = Math.floor(Math.random() * 8);
     const isMob = window.innerWidth <= 480;
 
     [deckAll.slice(0, 11), deckAll.slice(11, 22)].forEach((rowCards, rowIdx) => {
@@ -400,6 +400,25 @@ function getSpreadPattern(type, i, rowIdx, isMob) {
             x = (i - centerIdx) * (isMob ? 25 : 50) + rowOffset;
             y = (i - centerIdx) * (isMob ? 2 : 4);
             rot = rowIdx === 0 ? -2 : 2;
+            break;
+
+        case 5: // Double Semi-Circle (두 개의 반원)
+            x = (i - centerIdx) * (isMob ? 22 : 45);
+            y = -Math.sqrt(Math.max(0, Math.pow(centerIdx, 2) - Math.pow(i - centerIdx, 2))) * (isMob ? 10 : 20);
+            rot = (i - centerIdx) * 8;
+            break;
+
+        case 6: // Grand Arc (웅장한 대형 아치 - 두 줄이 이어지는 느낌)
+            const grandOffset = (rowIdx === 0 ? -1 : 1) * 15;
+            x = (i - centerIdx) * (isMob ? 24 : 48) + grandOffset;
+            y = -Math.pow(i - centerIdx, 2) * (isMob ? 0.5 : 1.2) + (rowIdx * 30);
+            rot = (i - centerIdx) * 5 + (rowIdx * 2);
+            break;
+
+        case 7: // Extreme Fan (넓게 펼쳐진 부채꼴)
+            x = (i - centerIdx) * (isMob ? 28 : 55);
+            y = Math.abs(i - centerIdx) * (isMob ? 4 : 8);
+            rot = (i - centerIdx) * 12;
             break;
 
         default:
