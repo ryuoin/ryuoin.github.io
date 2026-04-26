@@ -1258,11 +1258,11 @@ body.premium-mode .modal-title {
 .lotto-ball.num-group-3 { background-color: #95a5a6; } /* 31-40: Gray */
 .lotto-ball.num-group-4 { background-color: #2ecc71; } /* 41-45: Green */
 
-/* 원통 안에서 흩뿌려진 작은 공들 전용 */
+/* 원통 안에서 흩뿌려진 작은 공들 전용 (사이즈 축소) */
 .lotto-balls-spinner .lotto-ball {
-    width: 28px;
-    height: 28px;
-    font-size: 0.75rem;
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.6rem !important;
     position: absolute;
     animation: jitter 0.25s infinite alternate;
 }
@@ -1310,7 +1310,7 @@ body.premium-mode .modal-title {
     overflow: visible !important;
 }
 
-/* 범용 위치 공 스타일 (3D 구체 질감 강화) */
+/* 범용 위치 공 스타일 (3D 구체 질감 강화 및 사이즈 최적화) */
 .lotto-ball {
     display: flex !important;
     justify-content: center !important;
@@ -1320,11 +1320,11 @@ body.premium-mode .modal-title {
     font-weight: bold;
     color: #fff !important;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-    width: 54px !important;
-    height: 54px !important;
+    width: 46px !important;
+    height: 46px !important;
     background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.6) 100%);
     background-color: #444; 
-    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.6);
+    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.6);
     border: 2px solid rgba(255,255,255,0.3) !important;
     flex-shrink: 0 !important;
     z-index: 10;
