@@ -1299,19 +1299,43 @@ body.premium-mode .modal-title {
     justify-content: center !important;
     align-items: center !important;
     flex-wrap: wrap !important;
-    gap: 10px;
-    width: 100%;
-    min-height: 100px;
-    padding: 15px;
+    gap: 12px !important;
+    width: 100% !important;
+    min-height: 120px !important; /* 높이 확보 */
+    margin: 20px 0 !important;
+    padding: 10px !important;
+    background: rgba(255, 255, 255, 0.05); /* 위치 확인용 살짝 밝은 배경 */
+    border-radius: 15px;
     box-sizing: border-box;
+    overflow: visible !important;
 }
 
-.lotto-draw-results .lotto-ball {
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 1.2rem !important;
-    margin: 5px;
+/* 범용 위치 공 스타일 (3D 구체 질감 강화) */
+.lotto-ball {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    color: #fff !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    width: 54px !important;
+    height: 54px !important;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.6) 100%);
+    background-color: #444; 
+    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.6);
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    flex-shrink: 0 !important;
+    z-index: 10;
 }
+
+/* 번호대별 선명한 배경색 강제 적용 */
+.lotto-ball.num-group-0 { background-color: #f1c40f !important; color: #000 !important; }
+.lotto-ball.num-group-1 { background-color: #3498db !important; }
+.lotto-ball.num-group-2 { background-color: #e74c3c !important; }
+.lotto-ball.num-group-3 { background-color: #95a5a6 !important; }
+.lotto-ball.num-group-4 { background-color: #2ecc71 !important; }
 
 /* 공 색상 그룹 (스타일 중복 제거 및 가독성 확보) */
 .num-group-0 { color: #000 !important; }
@@ -1321,6 +1345,12 @@ body.premium-mode .modal-title {
 .pop-out {
     animation: ballPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transform: scale(0);
+}
+
+@keyframes ballPop {
+    0% { transform: scale(0) translateY(-50px); opacity: 0; }
+    50% { transform: scale(1.1) translateY(10px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
 /* 로또 공 내부 셔플링 미세 조정 (더 골고루 퍼지도록) */
