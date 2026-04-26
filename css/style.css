@@ -97,15 +97,12 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     transition: opacity 1.5s ease;
 }
 
+/* 레거시 오라 효과 비활성화 (아르누보 배경으로 통합) */
 body.premium-mode .premium-aura {
-    display: block;
-    opacity: 1;
-}
-
-body.premium-mode .stars,
-body.premium-mode .twinkling {
     display: none;
 }
+
+/* 레거시 배경 숨김 코드 삭제 (아르누보 배경 적용을 위해 해제) */
 
 .aura-layer {
     position: absolute;
