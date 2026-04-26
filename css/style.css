@@ -1301,10 +1301,10 @@ body.premium-mode .modal-title {
     flex-wrap: wrap !important;
     gap: 12px !important;
     width: 100% !important;
-    min-height: 120px !important; /* 높이 확보 */
-    margin: 20px 0 !important;
+    min-height: 120px !important; /* 높이 미리 확보하여 흔들림 방지 */
+    margin: 10px 0 !important;
     padding: 10px !important;
-    background: rgba(255, 255, 255, 0.05); /* 위치 확인용 살짝 밝은 배경 */
+    background: rgba(255, 255, 255, 0.03); 
     border-radius: 15px;
     box-sizing: border-box;
     overflow: visible !important;
@@ -1389,7 +1389,10 @@ body.premium-mode .modal-title {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    align-items: center;
     width: 100%;
+    min-height: 60px; /* 버튼 공간 고정하여 흔들림 방지 */
+    transition: opacity 0.5s ease;
 }
 
 .lotto-home-btn {
