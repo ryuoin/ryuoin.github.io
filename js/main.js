@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initModeSelect();
     updateDailyBtnStatus();
+    checkMarketStatus(); // 주식 시장 휴장 여부 체크
     logVisit(); // 접속 로그 기록 호출
 });
 
@@ -146,6 +147,21 @@ function updateDailyBtnStatus() {
         if (desc) desc.textContent = '오늘의 카드를 이미 뽑았습니다 · 다시 보기';
         const badge = btn.querySelector('.daily-badge');
         if (badge) { badge.textContent = 'DONE'; badge.style.background = 'rgba(100,100,100,0.6)'; }
+    }
+}
+
+/**
+ * 메인 메뉴의 주식 타로 버튼에 휴장 배지 표시
+ */
+function checkMarketStatus() {
+    if (isMarketClosed()) {
+        const stockBtn = document.getElementById('btn-mode-stock');
+        if (stockBtn && !stockBtn.querySelector('.market-closed-badge')) {
+            const badge = document.createElement('span');
+            badge.className = 'market-closed-badge main-menu-badge';
+            badge.textContent = '오늘은 휴장!';
+            stockBtn.appendChild(badge);
+        }
     }
 }
 
