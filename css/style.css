@@ -535,6 +535,13 @@ body.premium-mode .test-premium-btn:hover {
     margin: auto;
 }
 
+@media (max-width: 480px) {
+    .glass-panel {
+        padding: 1.2rem 1rem;
+        width: 95%;
+    }
+}
+
 body.premium-mode .glass-panel {
     background: rgba(255, 255, 255, 0.88);
     border-color: rgba(197, 160, 40, 0.3);
@@ -556,6 +563,14 @@ body.premium-mode .modal-title {
     font-size: 2rem;
     margin-bottom: 2rem;
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    word-break: keep-all;
+}
+
+@media (max-width: 480px) {
+    .modal-title {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+    }
 }
 
 /* =============================================
@@ -572,6 +587,15 @@ body.premium-mode .modal-title {
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+@media (max-width: 480px) {
+    .cards-display {
+        gap: 6px;
+        padding: 0;
+        width: 100%;
+        justify-content: space-around;
+    }
 }
 
 @media (min-width: 768px) {
@@ -599,6 +623,17 @@ body.premium-mode .modal-title {
     font-size: 0.85rem;
     color: #aaa;
     font-weight: normal;
+}
+
+@media (max-width: 480px) {
+    .slot-title-mini {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+    .slot-title-mini span {
+        font-size: 0.7rem;
+        display: block;
+    }
 }
 
 .combined-desc-box {
@@ -667,6 +702,14 @@ body.premium-mode .modal-title {
     transform: translateZ(0); /* 이미지 렌더링 깜빡임 방지 */
     backface-visibility: hidden; /* 이미지 렌더링 깜빡임 방지 */
     -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 480px) {
+    .res-card-wrapper {
+        width: 100px;
+        height: 160px;
+        margin-bottom: 1rem;
+    }
 }
 
 .res-card-wrapper img {
@@ -1543,20 +1586,21 @@ body.premium-mode .modal-title {
 }
 
 @media (max-width: 480px) {
-    .daily-spread-row { height: 100px; }
-    .daily-spread-card { width: 50px; height: 80px; }
-    .daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 230px); transform: rotate(-20deg); }
-    .daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 195px); transform: rotate(-16deg); }
-    .daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 160px); transform: rotate(-12deg); }
-    .daily-spread-row .daily-spread-card:nth-child(4)  { left: calc(50% - 125px); transform: rotate(-8deg); }
-    .daily-spread-row .daily-spread-card:nth-child(5)  { left: calc(50% - 90px);  transform: rotate(-4deg); }
-    .daily-spread-row .daily-spread-card:nth-child(6)  { left: calc(50% - 25px);  transform: rotate(0deg); }
-    .daily-spread-row .daily-spread-card:nth-child(7)  { left: calc(50% + 10px);  transform: rotate(4deg); }
-    .daily-spread-row .daily-spread-card:nth-child(8)  { left: calc(50% + 45px);  transform: rotate(8deg); }
-    .daily-spread-row .daily-spread-card:nth-child(9)  { left: calc(50% + 80px);  transform: rotate(12deg); }
-    .daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 115px); transform: rotate(16deg); }
-    .daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 150px); transform: rotate(20deg); }
-    .daily-spread-card.hovered { transform: translateY(-25px) rotate(0deg) scale(1.1) !important; }
+    .daily-spread-row { height: 90px; }
+    .daily-spread-card { width: 45px; height: 72px; }
+    /* 모바일에서는 겹침 간격을 더 좁게 (약 22px 간격) */
+    .daily-spread-row .daily-spread-card:nth-child(1)  { left: calc(50% - 135px); transform: rotate(-20deg); }
+    .daily-spread-row .daily-spread-card:nth-child(2)  { left: calc(50% - 110px); transform: rotate(-16deg); }
+    .daily-spread-row .daily-spread-card:nth-child(3)  { left: calc(50% - 85px); transform: rotate(-12deg); }
+    .daily-spread-row .daily-spread-card:nth-child(4)  { left: calc(50% - 60px); transform: rotate(-8deg); }
+    .daily-spread-row .daily-spread-card:nth-child(5)  { left: calc(50% - 35px); transform: rotate(-4deg); }
+    .daily-spread-row .daily-spread-card:nth-child(6)  { left: calc(50% - 10px); transform: rotate(0deg); }
+    .daily-spread-row .daily-spread-card:nth-child(7)  { left: calc(50% + 15px); transform: rotate(4deg); }
+    .daily-spread-row .daily-spread-card:nth-child(8)  { left: calc(50% + 40px); transform: rotate(8deg); }
+    .daily-spread-row .daily-spread-card:nth-child(9)  { left: calc(50% + 65px); transform: rotate(12deg); }
+    .daily-spread-row .daily-spread-card:nth-child(10) { left: calc(50% + 90px); transform: rotate(16deg); }
+    .daily-spread-row .daily-spread-card:nth-child(11) { left: calc(50% + 115px); transform: rotate(20deg); }
+    .daily-spread-card.hovered { transform: translateY(-20px) rotate(0deg) scale(1.1) !important; }
 }
 
 /* =============================================
