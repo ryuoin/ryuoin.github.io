@@ -2099,10 +2099,28 @@ body.premium-mode .modal-title {
    ============================================= */
 
 /* Override previous stars/twinkling styles */
+/* Override previous stars/twinkling styles */
 .stars {
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
-    background-image: none !important;
+    /* 고차원 레이어링: 기본 우주 그라데이션 + 아르누보 패턴 블렌딩 */
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%),
+                url('../images/art-nouveau-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    background-blend-mode: multiply; /* 패턴을 어둡고 은은하게 합성 */
     animation: none !important;
+    opacity: 0.6 !important; /* 메인 콘텐츠 부각을 위해 살짝 투명도 조절 */
+}
+
+/* 프리미엄 모드: 고결한 아이보리 & 골드 아르누보 배경 */
+body.premium-mode .stars {
+    background: radial-gradient(ellipse at bottom, #fdfaf0 0%, #fff 100%),
+                url('../images/art-nouveau-bg-premium.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    background-blend-mode: soft-light !important;
+    opacity: 0.8 !important;
 }
 
 .twinkling {
