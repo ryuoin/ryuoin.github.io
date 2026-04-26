@@ -2115,12 +2115,13 @@ body.premium-mode .modal-title {
 /* 프리미엄 모드: 고결한 아이보리 & 골드 아르누보 배경 */
 body.premium-mode .stars {
     background-image: url('../images/art-nouveau-bg-premium.png'),
-                      radial-gradient(ellipse at bottom, #fdfaf0 0%, #fff 100%) !important;
+                      radial-gradient(ellipse at bottom, #f9f5e8 0%, #ffffff 100%) !important;
     background-size: cover !important;
     background-position: center !important;
     background-attachment: fixed !important;
-    background-blend-mode: overlay !important;
-    opacity: 0.8 !important;
+    background-blend-mode: multiply !important; /* 아이보리 바탕에 패턴이 선명하게 녹아들도록 설정 */
+    opacity: 0.85 !important;
+    filter: sepia(0.1); /* 미세한 빈티지 질감 추가 */
 }
 
 .twinkling {
