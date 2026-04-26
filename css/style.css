@@ -66,9 +66,11 @@ h3, .hahmlet { font-family: 'Hahmlet', serif; }
     z-index: -2;
 }
 .stars {
-    background: #000 url('https://www.transparenttextures.com/patterns/stardust.png') repeat top center;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
     z-index: -2;
-    transform: translateZ(0); /* GPU 가속 활성화로 깜빡임 방지 */
+    transform: translateZ(0);
 }
 .twinkling {
     background: transparent url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png') repeat top center;
@@ -2109,16 +2111,16 @@ body.premium-mode .modal-title {
     opacity: 0.5 !important;
 }
 
-/* 프리미엄 모드: 고결한 아이보리 & 골드 아르누보 배경 */
+/* 프리미엄 모드: 고결한 아이보리 & 골드 신성 기하학 우주 배경 */
 body.premium-mode .stars {
     background-image: url('../images/art-nouveau-bg-premium.png'),
                       radial-gradient(ellipse at bottom, #f9f5e8 0%, #ffffff 100%) !important;
     background-size: cover !important;
     background-position: center !important;
     background-attachment: fixed !important;
-    background-blend-mode: multiply !important; /* 아이보리 바탕에 패턴이 선명하게 녹아들도록 설정 */
-    opacity: 0.85 !important;
-    filter: sepia(0.1); /* 미세한 빈티지 질감 추가 */
+    background-blend-mode: multiply !important;
+    opacity: 0.9 !important; /* 가느다란 기하학 선들을 위해 투명도 소폭 상향 */
+    filter: sepia(0.05) contrast(1.05); /* 선명도와 따뜻한 톤 강화 */
 }
 
 .twinkling {
