@@ -1192,10 +1192,10 @@ body.premium-mode .modal-title {
     width: 32px;
     height: 32px;
     font-size: 0.8rem;
-    /* 발광 효과 강화: 그림자 반경을 키우고 필터 추가 */
-    box-shadow: 0 0 20px currentColor, inset 0 0 8px rgba(255,255,255,0.8);
-    filter: brightness(1.2) drop-shadow(0 0 5px currentColor);
-    opacity: 0.95;
+    /* 발광 효과 완전 제거 및 매트한 질감 적용 */
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.1);
+    filter: none;
+    opacity: 1;
     position: absolute;
     /* 기본 상태에서는 떨림 효과만 유지 */
     animation: jitter 0.2s infinite alternate;
@@ -1259,13 +1259,14 @@ body.premium-mode .modal-title {
     font-family: 'Cinzel', serif;
     font-weight: bold;
     font-size: 1.5rem;
-    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 25%, rgba(0,0,0,0.6) 85%, rgba(0,0,0,0.9) 100%);
+    /* 반짝임이 없는 매트한 구체 질감 */
+    background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.8) 100%);
     color: #fff;
-    text-shadow: 0 0 8px rgba(0,0,0,0.9);
-    border: 2px solid rgba(255,255,255,0.4);
-    /* 외부 발광 효과 추가 */
-    box-shadow: 0 0 25px currentColor, 0 5px 15px rgba(0,0,0,0.5), inset -4px -4px 10px rgba(0,0,0,0.6), inset 4px 4px 10px rgba(255,255,255,0.3);
-    filter: brightness(1.1);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+    /* 외부 발광 제거, 차분한 그림자만 유지 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset -3px -3px 8px rgba(0,0,0,0.6);
+    filter: none;
     backface-visibility: hidden;
 }
 
