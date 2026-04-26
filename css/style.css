@@ -1560,6 +1560,7 @@ body.premium-mode .modal-title {
 }
 
 .daily-spread-card.selected {
+    /* 선택된 위치에서 수평좌표(x)와 회전(rot)은 유지하고 수직(y)으로만 50px 더 위로 이동 */
     transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important;
     filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
     z-index: 60 !important;
@@ -1582,9 +1583,10 @@ body.premium-mode .modal-title {
 }
 
 @keyframes cardFlip {
-    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotateY(0deg) scale(1.15); }
-    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotateY(90deg) scale(1.2); }
-    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotateY(0deg) scale(1.15); }
+    /* 애니메이션 모든 단계에서 원래의 x좌표와 회전값을 유지해야 중앙으로 튀지 않음 */
+    0% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
+    50% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) rotateY(90deg) scale(1.2); }
+    100% { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 50px)) rotate(var(--card-rot, 0deg)) rotateY(0deg) scale(1.15); }
 }
 
 /* 카드 덮개 (뒷면) */
