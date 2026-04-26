@@ -1,6 +1,7 @@
 /* 기본 설정 */
 :root {
     --bg-dark: #0a0514;
+    --bg-darker: #05060a;
     --gold: #d4af37;
     --gold-light: #fbe69e;
     --text-main: #e2e2e2;
@@ -27,12 +28,13 @@
 
 /* 프리미엄 모드 (아이보리/화이트 테마) 전역 변수 */
 body.premium-mode {
-    --bg-dark: #fbf9f4; /* 아이보리 베이스 */
-    --gold: #c5a028;    /* 조금 더 진한 골드 포인트 */
-    --gold-light: #8b6b10; /* 다크 골드 (텍스트용) */
-    --text-main: #3d3b38;  /* 다크 그레이 텍스트 */
-    --purple-deep: #ffffff; /* 순백색 */
+    --bg-dark: #fdfaf0; /* 확실한 아이보리 베이스 */
+    --gold: #c5a028;    
+    --gold-light: #8b6b10; 
+    --text-main: #3d3b38;  
+    --purple-deep: #ffffff; 
     --purple-glow: rgba(197, 160, 40, 0.15);
+    background-color: #fdfaf0 !important; /* 배경색 강제 고정 */
 }
 
 * {
@@ -2111,16 +2113,14 @@ body.premium-mode .modal-title {
     opacity: 0.5 !important;
 }
 
-/* 프리미엄 모드: 고결한 아이보리 & 골드 신성 기하학 우주 배경 */
+/* 프리미엄 모드: 고결한 아이보리 & 골드 신성 기하학 우주 배경 (완전 강제 모드) */
 body.premium-mode .stars {
+    background: #fdfaf0 url('../images/art-nouveau-bg-premium.png') no-repeat center center / cover fixed !important;
     background-image: url('../images/art-nouveau-bg-premium.png'),
-                      radial-gradient(ellipse at bottom, #f9f5e8 0%, #ffffff 100%) !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    background-blend-mode: multiply !important;
-    opacity: 0.9 !important; /* 가느다란 기하학 선들을 위해 투명도 소폭 상향 */
-    filter: sepia(0.05) contrast(1.05); /* 선명도와 따뜻한 톤 강화 */
+                      radial-gradient(at 50% 100%, #fdfaf0 0%, #ffffff 100%) !important;
+    background-blend-mode: normal !important; 
+    opacity: 1 !important; 
+    filter: brightness(1.02) contrast(1.05) !important;
 }
 
 .twinkling {
