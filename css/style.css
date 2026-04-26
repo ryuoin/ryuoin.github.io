@@ -1458,14 +1458,14 @@ body.premium-mode .modal-title {
 
 /* 호버시 카드가 위로 쏙 올라오는 효과 */
 .daily-spread-card.hovered {
-    transform: translateY(-35px) rotate(0deg) scale(1.1) !important;
+    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 35px)) rotate(var(--card-rot, 0deg)) scale(1.1) !important;
     filter: drop-shadow(0 10px 20px rgba(212, 175, 55, 0.7));
     z-index: 50 !important;
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
 }
 
 .daily-spread-card.selected {
-    transform: translateY(-40px) rotate(0deg) scale(1.15) !important;
+    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 45px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important;
     filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.85));
     z-index: 60 !important;
     cursor: default;
@@ -1524,7 +1524,8 @@ body.premium-mode .modal-title {
         left: var(--card-left, 50%);
         transform: translate(var(--card-x, 0px), var(--card-y, 0px)) rotate(var(--card-rot, 0deg));
     }
-    .daily-spread-card.hovered { transform: translateY(-20px) rotate(0deg) scale(1.1) !important; }
+    .daily-spread-card.hovered { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 25px)) rotate(var(--card-rot, 0deg)) scale(1.1) !important; }
+    .daily-spread-card.selected { transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 35px)) rotate(var(--card-rot, 0deg)) scale(1.15) !important; }
 }
 
 /* =============================================
