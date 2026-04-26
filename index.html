@@ -573,19 +573,39 @@
     <script src="js/data/tarot_stock.js" defer></script>
     <script src="js/main.js" defer></script>
 
-    <!-- PWA Service Worker Registration -->
+    <!-- PWA Service Worker Registration & Mobile Background Fix -->
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
+        // 모바일 배경 울렁임 원천 차단: 높이를 px 단위로 고정
+        function fixMobileBg() {
+            const stars = document.querySelector('.stars');
+            if (stars) {
+                // 현재 뷰포트 높이에 여유분(100px)을 더해 고정
+                const fixedHeight = window.innerHeight + 100;
+                stars.style.height = fixedHeight + 'px';
+                stars.style.top = '-50px'; // 상하 버퍼
+                console.log('[MobileBg] Fixed height applied:', fixedHeight);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            fixMobileBg();
+            
+            // PWA SW
+            if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('./sw.js')
                     .then(registration => {
-                        console.log('[ServiceWorker] registration successful with scope: ', registration.scope);
+                        console.log('[ServiceWorker] registration successful');
                     })
                     .catch(err => {
                         console.log('[ServiceWorker] registration failed: ', err);
                     });
-            });
-        }
+            }
+        });
+
+        // 화면 회전 시에만 높이 재계산
+        window.addEventListener('orientationchange', () => {
+            setTimeout(fixMobileBg, 500);
+        });
     </script>
     <!-- Footer for Privacy Policy -->
     <footer class="app-footer-info">
