@@ -25,27 +25,12 @@ let selectedCards = [];
 let deck = [];
 let currentMode = null;
 
-// ========== 광고 카운터 (3회마다 1번) ==========
+// ========== 독서 횟수 카운터 (통계용 등으로 유지 가능하나 광고 제거) ==========
 function incrementReadingCount() {
     let count = parseInt(localStorage.getItem('readingCount') || '0') + 1;
     localStorage.setItem('readingCount', count);
-    if (count % 3 === 0) {
-        if (!isPremium()) {
-            setTimeout(() => showAdOverlay(), 800);
-        }
-    }
+    // 광고 노출 로직 일체 삭제
 }
-
-function showAdOverlay() {
-    const overlay = document.getElementById('ad-overlay');
-    if (overlay) overlay.classList.add('active');
-}
-
-document.addEventListener('click', (e) => {
-    if (e.target.id === 'btn-ad-close') {
-        document.getElementById('ad-overlay').classList.remove('active');
-    }
-});
 
 // ========== 프리미엄 시스템 ==========
 function isPremium() {
